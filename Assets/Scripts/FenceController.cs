@@ -10,7 +10,7 @@ public class FenceController : MonoBehaviour
 
     private void Awake()
     {
-        
+        _rigidbody = GetComponent<Rigidbody2D>();
         _currentHp = maxHp;
     }
 

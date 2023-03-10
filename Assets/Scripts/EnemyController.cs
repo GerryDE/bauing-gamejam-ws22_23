@@ -8,6 +8,11 @@ public class EnemyController : MonoBehaviour
 
     private Rigidbody2D _rigidbody;
     
+    private void Awake()
+    {
+        _rigidbody = GetComponent<Rigidbody2D>();
+    }
+    
     private void FixedUpdate()
     {
         _rigidbody.velocity = new Vector2(moveSpeed * Time.deltaTime, _rigidbody.velocity.y);
