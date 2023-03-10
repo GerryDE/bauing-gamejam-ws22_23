@@ -27,6 +27,6 @@ jobs:
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.1
         with:
-          branch: development # The branch the action should deploy to.
+          branch: webgl-build # The branch the action should deploy to.
           folder: build/WebGL/WebGL
           target-folder: ${{ env.RELEASE_VERSION }}
