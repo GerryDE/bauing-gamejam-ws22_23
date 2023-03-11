@@ -96,49 +96,42 @@ public class PlayerController : MonoBehaviour
         }
 
         // Handle interactions with objects
-        if (_isInteracting)
+        if (_isCollidingWithStatue)
         {
-            if (_isCollidingWithStatue)
+            _currentCooldown++;
+            if (_currentCooldown > statueInteractionCooldown)
             {
-                _currentCooldown++;
-                if (_currentCooldown > statueInteractionCooldown)
-                {
-                    DecreaseAge();
-                    OnPlayerAgeChanged?.Invoke(currentAge);
-                    _currentCooldown = 0;
-                }
+                DecreaseAge();
+                OnPlayerAgeChanged?.Invoke(currentAge);
+                _currentCooldown = 0;
             }
-            else if (_isCollidingWithFence)
+        }
+        else if (_isCollidingWithFence)
+        {
+            _currentCooldown++;
+            if (_currentCooldown > coolDownTime)
             {
-                _currentCooldown++;
-                if (_currentCooldown > coolDownTime)
-                {
-                    onPlayerFenceInteraction?.Invoke();
-                    _currentCooldown = 0;
-                }
+                onPlayerFenceInteraction?.Invoke();
+                _currentCooldown = 0;
             }
-            else if (_isCollidingWithTree)
+        }
+        else if (_isCollidingWithTree)
+        {
+            _currentCooldown++;
+            if (_currentCooldown > coolDownTime)
             {
-                _currentCooldown++;
-                if (_currentCooldown > coolDownTime)
-                {
-                    woodCount++;
-                    OnPlayerTreeInteraction?.Invoke(woodCount);
-                    _currentCooldown = 0;
-                }
+                woodCount++;
+                OnPlayerTreeInteraction?.Invoke(woodCount);
+                _currentCooldown = 0;
             }
-            else if (_isCollidingWithStoneQuarry)
+        }
+        else if (_isCollidingWithStoneQuarry)
+        {
+            _currentCooldown++;
+            if (_currentCooldown > coolDownTime)
             {
-                _currentCooldown++;
-                if (_currentCooldown > coolDownTime)
-                {
-                    stoneCount++;
-                    OnPlayerStoneQuarryInteraction?.Invoke(stoneCount);
-                    _currentCooldown = 0;
-                }
-            }
-            else
-            {
+                stoneCount++;
+                OnPlayerStoneQuarryInteraction?.Invoke(stoneCount);
                 _currentCooldown = 0;
             }
         }

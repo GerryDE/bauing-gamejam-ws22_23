@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 public class UIController : MonoBehaviour
 {
     // In welcher Welle befinden wir uns
-    [SerializeField] int welle;
+    [SerializeField] int welle = 1;
     // In Welcher Generation befinden wir uns, ggf. als Pop-Up
     [FormerlySerializedAs("generation")] [SerializeField] int alter;
     //Holz, und Steinvorrat
@@ -30,6 +30,7 @@ public class UIController : MonoBehaviour
         PlayerController.OnPlayerTreeInteraction += UpdateHolzVorrat;
         PlayerController.OnPlayerStoneQuarryInteraction += UpdateSteinVorrat;
         PlayerController.OnPlayerAgeChanged += UpdateAlter;
+        BossComponent.OnBossDestroyed += UpdateWelle;
         InitTexteUndWerte();
     }
 
