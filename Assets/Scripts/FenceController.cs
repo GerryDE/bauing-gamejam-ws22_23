@@ -22,7 +22,7 @@ public class FenceController : MonoBehaviour
 
     private void Heal()
     {
-        currentHp = Math.Max(currentHp + 1, maxHp);
+        currentHp = Math.Min(currentHp + 1, maxHp);
     }
 
     private void OnCollisionEnter2D(Collision2D col)
