@@ -31,6 +31,11 @@ public class UIController : MonoBehaviour
         InitTexteUndWerte();
     }
 
+    private void Update()
+    {
+        InitTexteUndWerte();
+    }
+
     private void InitTexteUndWerte()
     {
         int index = 0;
@@ -70,13 +75,13 @@ public class UIController : MonoBehaviour
         welle++;
     }
 
-    public void UpdateHolzVorrat(int addHolz)
+    public void UpdateHolzVorrat(int setHolz)
     {
-        anzahlHolz += addHolz;
+        anzahlHolz = setHolz;
     }
 
-    public void UpdateSteinVorrat(int addStein)
+    public void UpdateSteinVorrat(int setStein)
     {
-        anzahlStein += addStein;
+        anzahlStein = setStein;
     }
 }

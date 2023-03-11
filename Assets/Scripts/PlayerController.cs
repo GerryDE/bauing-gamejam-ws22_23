@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private int _currentCooldown;
 
     [SerializeField] private int woodCount;
+    [SerializeField] private int stoneCount;
 
     public delegate void OnPlayerFenceInteraction();
 
@@ -75,7 +76,7 @@ public class PlayerController : MonoBehaviour
                 if (_currentCooldown >= coolDownTime)
                 {
                     woodCount++;
-                    OnPlayerTreeInteraction?.Invoke(1);
+                    OnPlayerTreeInteraction?.Invoke(woodCount);
                     _currentCooldown = 0;
                 }
             }
@@ -84,7 +85,8 @@ public class PlayerController : MonoBehaviour
                 _currentCooldown++;
                 if (_currentCooldown >= coolDownTime)
                 {
-                    OnPlayerStoneQuarryInteraction?.Invoke(1);
+                    stoneCount++;
+                    OnPlayerStoneQuarryInteraction?.Invoke(stoneCount);
                     _currentCooldown = 0;
                 }
             }
@@ -153,7 +155,7 @@ public class PlayerController : MonoBehaviour
                 return;
             }
 
-            _rigidbody.AddForce(new Vector2(throwBackForce.x * (isFacingLeft ? 1f : -1f), throwBackForce.y));
+            _rigidbody.AddForce(throwBackForce);
         }
     }
 }
