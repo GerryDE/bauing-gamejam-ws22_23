@@ -41,3 +41,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 3773064857
+    locked: 0
+  - name: Tilemap
+    uniqueID: 578132587
+    locked: 0
+  - name: Interactable
+    uniqueID: 2104640249
+    locked: 0
+  - name: Entity
+    uniqueID: 1217068275
+    locked: 0
+  - name: Overlay
+    uniqueID: 1010560663
+    locked: 0
+  - name: UI
+    uniqueID: 1320368621
+    locked: 0
