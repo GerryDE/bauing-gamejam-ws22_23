@@ -218,7 +218,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76ce812ccb94f1f028e70757b4982c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHp: 100
   moveSpeed: 300
+  coolDownTime: 60
+  throwBackForce: {x: 100, y: 0}
+  isFacingLeft: 1
+  currentHp: 0
+  woodCount: 0
+  stoneCount: 0
+  minAge: 20
+  currentAge: 0
+  maxAge: 100
+  yearDuration: 60
+  statueHealAmount: 20
+  statueInteractionCooldown: 300
 --- !u!114 &352142433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,7 +448,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -888,7 +901,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
