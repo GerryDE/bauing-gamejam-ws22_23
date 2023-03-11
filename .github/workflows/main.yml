@@ -1,34 +1,28 @@
-name: Build WebGL Version
-on: [ push ]
+name: Unity WebGL Build
+
+on:
+  push:
+    branches:
+      - development
+
 jobs:
-  build-game:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-          lfs: true
-      - uses: actions/cache@v2
-        with:
-          path: Library
-          key: Library-${{ matrix.targetPlatform }}
-          restore-keys: Library-
-      - uses: game-ci/unity-builder@v2
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-        with:
-          targetPlatform: WebGL
-      - uses: actions/upload-artifact@v2
-        with:
-          name: Build
-          path: build
-      - name: Set env
-        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.1
-        with:
-          branch: webgl-build # The branch the action should deploy to.
-          folder: build/WebGL/WebGL
-          target-folder: ${{ env.RELEASE_VERSION }}
+    - uses: actions/checkout@v2
+    - name: Set up Unity
+      uses: webbertakken/unity-actions@v2
+      with:
+        unityVersion: '2021.3.20f1'
+    - name: Build WebGL
+      run: |
+        /opt/Unity/Editor/Unity \
+        -quit \
+        -batchmode \
+        -executeMethod WebGLBuilder.Build \
+        -projectPath ${{ github.workspace }}
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@3.12.0
+      with:
+        branch: gh-pages
+        folder: Build
