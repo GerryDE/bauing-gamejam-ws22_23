@@ -17,7 +17,7 @@
                 {
                     "name": "Interact",
                     "type": "Button",
-                    "id": "3d8fa2f8-65cc-427d-82b4-b4032545927a",
+                    "id": "ea3419f8-2b87-48c8-89ed-050f21abd968",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press(behavior=2)",
@@ -60,7 +60,7 @@
                 },
                 {
                     "name": "",
-                    "id": "92b57a50-f8a8-4b59-93a0-d637e579adff",
+                    "id": "eb493e65-9030-4ff3-ab52-b23841b395b1",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",

@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class FenceController : MonoBehaviour
@@ -9,12 +8,11 @@ public class FenceController : MonoBehaviour
 
     private Rigidbody2D _rigidbody;
 
-    [FormerlySerializedAs("_currentHp")] [SerializeField]
-    private int currentHp;
+    [SerializeField] private int currentHp;
 
     private void Awake()
     {
-        PlayerController.onPlayerFenceInteraction += Heal;
+        FencePlayerInteractionListener.onHealFence += Heal;
 
         _rigidbody = GetComponent<Rigidbody2D>();
         currentHp = maxHp;
