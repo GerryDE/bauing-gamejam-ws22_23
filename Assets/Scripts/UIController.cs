@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.Serialization;
 
 public class UIController : MonoBehaviour
 {
     // In welcher Welle befinden wir uns
     [SerializeField] int welle;
     // In Welcher Generation befinden wir uns, ggf. als Pop-Up
-    [SerializeField] int generation;
+    [FormerlySerializedAs("generation")] [SerializeField] int alter;
     //Holz, und Steinvorrat
     [SerializeField] int anzahlStein;
     [SerializeField] int anzahlHolz;
@@ -28,6 +29,7 @@ public class UIController : MonoBehaviour
     {
         PlayerController.OnPlayerTreeInteraction += UpdateHolzVorrat;
         PlayerController.OnPlayerStoneQuarryInteraction += UpdateSteinVorrat;
+        PlayerController.OnPlayerAgeChanged += UpdateAlter;
         InitTexteUndWerte();
     }
 
@@ -44,7 +46,7 @@ public class UIController : MonoBehaviour
             switch (index)
             {
                 case 0:
-                    item.text = texte[index] + ": " + generation;
+                    item.text = texte[index] + ": " + alter;
                     index++;
                     break;
                 case 1:
@@ -65,9 +67,9 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void UpdateGeneration()
+    public void UpdateAlter(int setAlter)
     {
-        generation++;
+        alter = setAlter;
     }
 
     public void UpdateWelle()
