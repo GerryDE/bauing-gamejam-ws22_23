@@ -26,6 +26,7 @@ public class UIController : MonoBehaviour
 
     private void Awake()
     {
+        PlayerController.OnPlayerTreeInteraction += UpdateHolzVorrat;
         InitTexteUndWerte();
     }
 
