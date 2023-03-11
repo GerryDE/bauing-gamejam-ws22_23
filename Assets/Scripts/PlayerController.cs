@@ -13,22 +13,30 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private float _velocity;
     private bool _isCollidingWithFence;
+    private bool _isCollidingWithTree;
+    private bool _isCollidingWithStoneQuarry;
     private bool _isInteracting;
-    [SerializeField] private int _currentHp;
+    [SerializeField] private int currentHp;
     private int _currentCooldown;
+
+    [SerializeField] private int woodCount;
 
     public delegate void OnPlayerFenceInteraction();
 
-    public static OnPlayerFenceInteraction onPlayerFenceInteraction;
-
     public delegate void PlayerMove(float xVelocity);
 
+    public delegate void PlayerTreeInteraction(int woodCount);
+    public delegate void PlayerStoneQuarryInteraction(int stoneCount);
+
+    public static OnPlayerFenceInteraction onPlayerFenceInteraction;
     public static PlayerMove OnPlayerMove;
+    public static PlayerTreeInteraction OnPlayerTreeInteraction;
+    public static PlayerStoneQuarryInteraction OnPlayerStoneQuarryInteraction;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _currentHp = maxHp;
+        currentHp = maxHp;
     }
 
     private void FixedUpdate()
@@ -61,6 +69,25 @@ public class PlayerController : MonoBehaviour
                     _currentCooldown = 0;
                 }
             }
+            else if (_isCollidingWithTree)
+            {
+                _currentCooldown++;
+                if (_currentCooldown >= coolDownTime)
+                {
+                    woodCount++;
+                    OnPlayerTreeInteraction?.Invoke(1);
+                    _currentCooldown = 0;
+                }
+            }
+            else if (_isCollidingWithStoneQuarry)
+            {
+                _currentCooldown++;
+                if (_currentCooldown >= coolDownTime)
+                {
+                    OnPlayerStoneQuarryInteraction?.Invoke(1);
+                    _currentCooldown = 0;
+                }
+            }
         }
         else
         {
@@ -84,6 +111,16 @@ public class PlayerController : MonoBehaviour
         {
             _isCollidingWithFence = true;
         }
+
+        if (col.gameObject.layer.Equals(LayerMask.NameToLayer("Tree")))
+        {
+            _isCollidingWithTree = true;
+        }
+        
+        if (col.gameObject.layer.Equals(LayerMask.NameToLayer("Stone")))
+        {
+            _isCollidingWithStoneQuarry = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -92,15 +129,25 @@ public class PlayerController : MonoBehaviour
         {
             _isCollidingWithFence = false;
         }
+
+        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Tree")))
+        {
+            _isCollidingWithTree = false;
+        }
+        
+        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Stone")))
+        {
+            _isCollidingWithStoneQuarry = false;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.layer.Equals(LayerMask.NameToLayer("Enemy")))
         {
-            _currentHp--;
+            currentHp--;
 
-            if (_currentHp <= 0)
+            if (currentHp <= 0)
             {
                 Debug.Log("GAME OVER!");
                 return;
