@@ -6,7 +6,7 @@ public class FencePlayerInteractionListener : MonoBehaviour
 
     public static OnHealFence onHealFence;
 
-    void Awake()
+    void Start()
     {
         PlayerController.onPlayerFenceInteraction += PlayerFenceInteractionTriggered;
     }
