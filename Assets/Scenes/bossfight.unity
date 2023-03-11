@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc4dbf85d61547848ace60fbc6255f4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  welle: 0
+  welle: 1
   alter: 0
   anzahlStein: 0
   anzahlHolz: 0
@@ -2569,6 +2569,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5856693080496111643, guid: e462d0429dea4debebe3c42844e6d476, type: 3}
+      propertyPath: maxHp
+      value: 10000
+      objectReference: {fileID: 0}
     - target: {fileID: 5856693080496111652, guid: e462d0429dea4debebe3c42844e6d476, type: 3}
       propertyPath: m_RootOrder
       value: 7

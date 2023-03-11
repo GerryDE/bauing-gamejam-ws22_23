@@ -9,6 +9,11 @@ public class EnemyController : MonoBehaviour
 
     private Rigidbody2D _rigidbody;
     [SerializeField] private int currentHp;
+    private bool _shallBeDestroyed;
+    
+    public delegate void EnemyDestroyed(int objectId);
+
+    public static EnemyDestroyed OnEnemyDestroyed;
 
     private void Awake()
     {
@@ -18,6 +23,11 @@ public class EnemyController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (_shallBeDestroyed)
+        {
+            Destroy(gameObject);
+            return;
+        }
         _rigidbody.velocity = new Vector2(moveSpeed * Time.deltaTime, _rigidbody.velocity.y);
     }
 
@@ -31,9 +41,10 @@ public class EnemyController : MonoBehaviour
         if (col.gameObject.layer.Equals(LayerMask.NameToLayer("Player")))
         {
             currentHp--;
-            if (currentHp <= 0)
+            if (currentHp <= 0 && !_shallBeDestroyed)
             {
-                Destroy(gameObject);
+                _shallBeDestroyed = true;
+                OnEnemyDestroyed?.Invoke(gameObject.GetInstanceID());
                 return;
             }
 
