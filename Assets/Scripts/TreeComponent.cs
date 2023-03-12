@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
 using static TreeComponent.State;
 using Random = UnityEngine.Random;
 
@@ -36,8 +35,7 @@ public class TreeComponent : MonoBehaviour
     [SerializeField] private State state = Spawning;
     [SerializeField] private List<StateData> data;
 
-    [FormerlySerializedAs("stateChangeDuration")] [SerializeField]
-    private int defaultStateChangeDuration;
+    [SerializeField] private int defaultStateChangeDuration;
 
     [SerializeField] private float stateChangeDurationVariance;
 
@@ -45,7 +43,6 @@ public class TreeComponent : MonoBehaviour
     private int _stateChangeDuration;
     private int _elapsedStateChangeTime;
     private int _elapsedMiningTime;
-    private bool _isRespawning = true;
 
     private SpriteRenderer _renderer;
 
@@ -74,7 +71,6 @@ public class TreeComponent : MonoBehaviour
     {
         state = Spawning;
         _renderer.sprite = null;
-        _isRespawning = true;
         SetSpawnPosition();
         CalculateStateChangeDuration();
     }
@@ -98,7 +94,7 @@ public class TreeComponent : MonoBehaviour
             _renderer.sprite = GetDataByCurrentState()?.sprite;
             CalculateStateChangeDuration();
         }
-        
+
         if (!Spawning.Equals(state) && _isGettingMined)
         {
             _elapsedMiningTime++;
@@ -160,17 +156,4 @@ public class TreeComponent : MonoBehaviour
         _stateChangeDuration = (int)Random.Range(defaultStateChangeDuration * (1f - stateChangeDurationVariance),
             defaultStateChangeDuration * (1f + stateChangeDurationVariance));
     }
-
-    // private void OnTriggerStay2D(Collider2D col)
-    // {
-    //     if (!_isRespawning) return;
-    //     if (col.gameObject.layer.Equals(LayerMask.NameToLayer("Tree")))
-    //     {
-    //         Respawn();
-    //     }
-    //     else
-    //     {
-    //         _isRespawning = false;
-    //     }
-    // }
 }
