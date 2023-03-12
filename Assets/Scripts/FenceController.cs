@@ -1,26 +1,25 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class FenceController : MonoBehaviour
 {
     [Range(0, 1000)] public int maxHp = 100;
 
-    private Rigidbody2D _rigidbody;
+    public int MaxHp => maxHp;
+    public int CurrentHp => currentHp;
 
     [SerializeField] private int currentHp;
 
     private void Awake()
     {
-        FencePlayerInteractionListener.onHealFence += Heal;
+        FenceRepairComponent.OnRepairFence += OnRepairFence;
 
-        _rigidbody = GetComponent<Rigidbody2D>();
         currentHp = maxHp;
     }
 
-    private void Heal()
+    private void OnRepairFence(int amount)
     {
-        currentHp = Math.Min(currentHp + 1, maxHp);
+        currentHp = Math.Min(currentHp + amount, maxHp);
     }
 
     private void OnCollisionEnter2D(Collision2D col)

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4610381315560898660}
   - component: {fileID: 4610381315560898658}
-  - component: {fileID: 4610381315560898661}
+  - component: {fileID: 505910263}
   m_Layer: 9
   m_Name: fence_player_interaction
   m_TagString: Untagged
@@ -46,7 +46,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.73}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -59,7 +59,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4610381315560898661
+--- !u!114 &505910263
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -68,9 +68,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4610381315560898663}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a7272c7227d512348e871e3c1307dfb, type: 3}
+  m_Script: {fileID: 11500000, guid: 09c534cbd8c64f629e895f778e783190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data:
+  - woodCost: 2
+    stoneCost: 1
+    healAmount: 5
 --- !u!1 &4610381316174552466
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,7 +103,7 @@ Transform:
   m_GameObject: {fileID: 4610381316174552466}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4, y: -0.5, z: 0}
-  m_LocalScale: {x: 0.25, y: 1.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4610381316622984947}
@@ -125,7 +129,7 @@ Rigidbody2D:
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!61 &4610381316174552464
@@ -141,7 +145,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.7}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -241,8 +245,8 @@ SpriteRenderer:
   m_SortingLayerID: 2104640249
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.6509434, g: 0.36217687, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: ca6ea48ab375a97958a53ec1d9369214, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -11,7 +11,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private float _velocity;
     private bool _isCollidingWithFence;
-    private bool _isInteracting;
+    private bool _interactionButton1Holding;
+
+    public delegate void InteractionButton1Hold();
+
+    public delegate void InteractionButton1Released();
+
+    public delegate void InteractionButton1Pressed();
 
     public delegate void OnPlayerFenceInteraction();
 
@@ -29,6 +35,9 @@ public class PlayerController : MonoBehaviour
 
     public delegate void PlayerPrayingStatueStop(int instanceId);
 
+    public static InteractionButton1Hold OnInteractionButton1Hold;
+    public static InteractionButton1Released OnInteractionButton1Released;
+    public static InteractionButton1Pressed OnInteractionButton1Pressed;
     public static OnPlayerFenceInteraction onPlayerFenceInteraction;
     public static PlayerMove OnPlayerMove;
     public static PlayerMiningWoodStart OnPlayerMiningWoodStart;
@@ -65,14 +74,33 @@ public class PlayerController : MonoBehaviour
         _velocity = value.Get<float>();
     }
 
-    public void OnInteract(InputValue value)
+    public void OnInteract1Hold(InputValue value)
     {
-        _isInteracting = value.Get<float>() > 0f;
+        var floatValue = value.Get<float>();
+        Debug.Log("Hold: " + floatValue);
+        _interactionButton1Holding = floatValue > 0f;
+        if (floatValue > 0f)
+        {
+            OnInteractionButton1Hold?.Invoke();
+        }
+        else
+        {
+            OnInteractionButton1Released?.Invoke();
+        }
+    }
+
+    public void OnInteract1Press(InputValue value)
+    {
+        var floatValue = value.Get<float>();
+        if (floatValue > 0f)
+        {
+            OnInteractionButton1Pressed?.Invoke();
+        }
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Tree")) && _isInteracting)
+        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Tree")) && _interactionButton1Holding)
         {
             OnPlayerMiningWoodStart?.Invoke(other.gameObject.GetInstanceID());
         }
@@ -81,7 +109,7 @@ public class PlayerController : MonoBehaviour
             OnPlayerMiningWoodStop?.Invoke(other.gameObject.GetInstanceID());
         }
 
-        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Stone")) && _isInteracting)
+        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Stone")) && _interactionButton1Holding)
         {
             OnPlayerMiningStoneStart?.Invoke(other.gameObject.GetInstanceID());
         }
@@ -90,7 +118,7 @@ public class PlayerController : MonoBehaviour
             OnPlayerMiningStoneStop?.Invoke(other.gameObject.GetInstanceID());
         }
 
-        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Statue")) && _isInteracting)
+        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Statue")) && _interactionButton1Holding)
         {
             OnPlayerPrayingStatueStart?.Invoke(other.gameObject.GetInstanceID());
         }
