@@ -4,27 +4,34 @@ using UnityEngine;
 
 public class TreeLogicScript : MonoBehaviour
 {
-    // Status des Baums (wie groß)
+    // Status des Baums (wie groï¿½)
     private Sprite currentSprite;
     // Anfangs-Sprite
     [SerializeField] Sprite startSprite;
     // Liste aller Sprites um darauf zuzugreifen
     [SerializeField] Sprite[] spriteListTrees;
-    // X Positionen der Bäume
+    // X Positionen der Bï¿½ume
     [SerializeField] float[] xPositionTrees;
-    // Y Positionen der Bäume
+    // Y Positionen der Bï¿½ume
     [SerializeField] float[] yPositionTrees;
-    // Wie schnell soll der Baum über die Zeit wachsen
+    // Wie schnell soll der Baum ï¿½ber die Zeit wachsen
     [SerializeField] float growingSpeed;
-    // Wieviele Bäume sollen zunächste gespawnt werden
+    // Wieviele Bï¿½ume sollen zunï¿½chste gespawnt werden
     [SerializeField] int treesToSpawn;
-    // Prefab für Bäume mit SpriteRenderer Component bisher
+    // Prefab fï¿½r Bï¿½ume mit SpriteRenderer Component bisher
     [SerializeField] GameObject prefabTree;
 
-    //Liste der Instanziierten Bäume, um einfacher darauf zuzugreifen
+    //Liste der Instanziierten Bï¿½ume, um einfacher darauf zuzugreifen
     private List<GameObject> trees = new List<GameObject>();
     // Um die Wachstumsrate variabel zu halten
     private float randomFloatExtraTime;
+
+    private Dictionary<int, TreeComponent.State> _states = new Dictionary<int, TreeComponent.State>()
+    {
+        { 0, TreeComponent.State.Small },
+        { 1, TreeComponent.State.Medium },
+        { 2, TreeComponent.State.Large }
+    };
 
 
     // Start is called before the first frame update
@@ -33,9 +40,9 @@ public class TreeLogicScript : MonoBehaviour
         SpawnTree(treesToSpawn, xPositionTrees, yPositionTrees);
     }
 
-    // Coroutine um das Wachsen der Bäume zu steuern 
+    // Coroutine um das Wachsen der Bï¿½ume zu steuern 
     IEnumerator TreeGrow(float timeBetweenStatus, GameObject tree,
-        SpriteRenderer spriteRendererTree, Sprite[] spritesTreesList)
+        SpriteRenderer spriteRendererTree, Sprite[] spritesTreesList, TreeComponent treeComponent)
     {
         Debug.Log("Gameobject" + tree + "Extra Zeit" + randomFloatExtraTime);
         for (int i = 0; i < spritesTreesList.Length; i++)
@@ -43,11 +50,12 @@ public class TreeLogicScript : MonoBehaviour
             randomFloatExtraTime = Random.Range(0, 10f);
             yield return new WaitForSeconds(timeBetweenStatus + randomFloatExtraTime);
             spriteRendererTree.sprite = spritesTreesList[i];
+            treeComponent.SetState(_states[i]);
         }
         yield break;
     }
 
-    // Methode um die Bäume zu spawnen
+    // Methode um die Bï¿½ume zu spawnen
     private void SpawnTree(int numberOfTrees, float[] x, float[] y)
     {
         for (int i = 0; i < numberOfTrees; i++)
@@ -56,7 +64,7 @@ public class TreeLogicScript : MonoBehaviour
             SpriteRenderer spriteRenderer = tree.GetComponent<SpriteRenderer>();
             spriteRenderer.sprite = startSprite;
             trees.Add(tree);
-            StartCoroutine(TreeGrow(growingSpeed, tree, spriteRenderer, spriteListTrees));
+            StartCoroutine(TreeGrow(growingSpeed, tree, spriteRenderer, spriteListTrees, tree.GetComponent<TreeComponent>()));
         }
     }
 }

@@ -40,6 +40,10 @@ public class PlayerController : MonoBehaviour
 
     public delegate void PlayerTreeInteraction(int woodCount);
 
+    public delegate void PlayerMiningWoodStart(int instanceId);
+    
+    public delegate void PlayerMiningWoodStop(int instanceId);
+
     public delegate void PlayerStoneQuarryInteraction(int stoneCount);
 
     public delegate void PlayerStatueInteraction(int age);
@@ -47,6 +51,8 @@ public class PlayerController : MonoBehaviour
     public static OnPlayerFenceInteraction onPlayerFenceInteraction;
     public static PlayerMove OnPlayerMove;
     public static PlayerTreeInteraction OnPlayerTreeInteraction;
+    public static PlayerMiningWoodStart OnPlayerMiningWoodStart;
+    public static PlayerMiningWoodStop OnPlayerMiningWoodStop;
     public static PlayerStoneQuarryInteraction OnPlayerStoneQuarryInteraction;
     public static PlayerStatueInteraction OnPlayerAgeChanged;
 
@@ -92,9 +98,9 @@ public class PlayerController : MonoBehaviour
             Debug.Log("GAME OVER!");
         }
         
+        // Handle interactions with objects
         if (_isInteracting)
         {
-            // Handle interactions with objects
             if (_isCollidingWithStatue)
             {
                 _currentCooldown++;
@@ -111,16 +117,6 @@ public class PlayerController : MonoBehaviour
                 if (_currentCooldown > coolDownTime)
                 {
                     onPlayerFenceInteraction?.Invoke();
-                    _currentCooldown = 0;
-                }
-            }
-            else if (_isCollidingWithTree)
-            {
-                _currentCooldown++;
-                if (_currentCooldown > coolDownTime)
-                {
-                    woodCount++;
-                    OnPlayerTreeInteraction?.Invoke(woodCount);
                     _currentCooldown = 0;
                 }
             }
@@ -156,51 +152,63 @@ public class PlayerController : MonoBehaviour
         currentAge = Math.Max(minAge, currentAge - statueHealAmount);
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerStay2D(Collider2D other)
     {
-        if (col.gameObject.layer.Equals(LayerMask.NameToLayer("FenceTrigger")))
+        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Tree")) && _isInteracting)
         {
-            _isCollidingWithFence = true;
+            OnPlayerMiningWoodStart?.Invoke(other.gameObject.GetInstanceID());
         }
-
-        if (col.gameObject.layer.Equals(LayerMask.NameToLayer("Tree")))
+        else
         {
-            _isCollidingWithTree = true;
-        }
-
-        if (col.gameObject.layer.Equals(LayerMask.NameToLayer("Stone")))
-        {
-            _isCollidingWithStoneQuarry = true;
-        }
-
-        if (col.gameObject.layer.Equals(LayerMask.NameToLayer("Statue")))
-        {
-            _isCollidingWithStatue = true;
+            OnPlayerMiningWoodStop?.Invoke(other.gameObject.GetInstanceID());
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("FenceTrigger")))
-        {
-            _isCollidingWithFence = false;
-        }
-
-        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Tree")))
-        {
-            _isCollidingWithTree = false;
-        }
-
-        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Stone")))
-        {
-            _isCollidingWithStoneQuarry = false;
-        }
-
-        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Statue")))
-        {
-            _isCollidingWithStatue = false;
-        }
-    }
+    // private void OnTriggerEnter2D(Collider2D col)
+    // {
+    //     if (col.gameObject.layer.Equals(LayerMask.NameToLayer("FenceTrigger")))
+    //     {
+    //         _isCollidingWithFence = true;
+    //     }
+    //
+    //     if (col.gameObject.layer.Equals(LayerMask.NameToLayer("Tree")))
+    //     {
+    //         _isCollidingWithTree = true;
+    //     }
+    //
+    //     if (col.gameObject.layer.Equals(LayerMask.NameToLayer("Stone")))
+    //     {
+    //         _isCollidingWithStoneQuarry = true;
+    //     }
+    //
+    //     if (col.gameObject.layer.Equals(LayerMask.NameToLayer("Statue")))
+    //     {
+    //         _isCollidingWithStatue = true;
+    //     }
+    // }
+    //
+    // private void OnTriggerExit2D(Collider2D other)
+    // {
+    //     if (other.gameObject.layer.Equals(LayerMask.NameToLayer("FenceTrigger")))
+    //     {
+    //         _isCollidingWithFence = false;
+    //     }
+    //
+    //     if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Tree")))
+    //     {
+    //         _isCollidingWithTree = false;
+    //     }
+    //
+    //     if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Stone")))
+    //     {
+    //         _isCollidingWithStoneQuarry = false;
+    //     }
+    //
+    //     if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Statue")))
+    //     {
+    //         _isCollidingWithStatue = false;
+    //     }
+    // }
 
     private void OnCollisionEnter2D(Collision2D col)
     {

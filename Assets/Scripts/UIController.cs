@@ -27,7 +27,7 @@ public class UIController : MonoBehaviour
 
     private void Awake()
     {
-        PlayerController.OnPlayerTreeInteraction += UpdateHolzVorrat;
+        DataHandlerComponent.OnWoodAmountChanged += UpdateHolzVorrat;
         PlayerController.OnPlayerStoneQuarryInteraction += UpdateSteinVorrat;
         PlayerController.OnPlayerAgeChanged += UpdateAlter;
         BossComponent.OnBossDestroyed += UpdateWelle;

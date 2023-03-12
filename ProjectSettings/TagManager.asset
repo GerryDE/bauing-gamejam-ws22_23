@@ -18,8 +18,8 @@ TagManager:
   - Tree
   - Stone
   - Statue
-  - 
-  - 
+  - TreeWithTreeCollision
+  - Tilemap
   - 
   - 
   - 
