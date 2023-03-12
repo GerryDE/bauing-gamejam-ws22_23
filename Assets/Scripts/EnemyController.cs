@@ -3,17 +3,21 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyController : MonoBehaviour
 {
-    public int maxHp = 10;
-    public float moveSpeed = 100f;
-    public Vector2 throwBackForce = new Vector2(-100f, 0f);
+    [SerializeField] private int maxHp = 10;
+    [SerializeField] private float moveSpeed = 100f;
+    [SerializeField] private int damageOutput = 30;
+    [SerializeField] private Vector2 throwBackForce = new Vector2(-100f, 0f);
 
     private Rigidbody2D _rigidbody;
     [SerializeField] private int currentHp;
     private bool _shallBeDestroyed;
-    
+
     public delegate void EnemyDestroyed(int objectId);
 
+    public delegate void ReducePlayerLifetime(int amount);
+
     public static EnemyDestroyed OnEnemyDestroyed;
+    public static ReducePlayerLifetime OnReducePlayerLifetime;
 
     private void Awake()
     {
@@ -28,6 +32,7 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         _rigidbody.velocity = new Vector2(moveSpeed * Time.deltaTime, _rigidbody.velocity.y);
     }
 
@@ -40,6 +45,8 @@ public class EnemyController : MonoBehaviour
 
         if (col.gameObject.layer.Equals(LayerMask.NameToLayer("Player")))
         {
+            OnReducePlayerLifetime?.Invoke(damageOutput);
+
             currentHp--;
             if (currentHp <= 0 && !_shallBeDestroyed)
             {

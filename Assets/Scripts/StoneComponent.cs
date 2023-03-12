@@ -27,13 +27,12 @@ public class StoneComponent : MonoBehaviour
         if (!_isGettingMined) return;
 
         _elapsedMiningTime++;
-        if (_elapsedMiningTime > _miningDuration)
-        {
-            OnStoneDrop?.Invoke(1);
-            _elapsedMiningTime = 0;
-            _minedStonesCount++;
-            _miningDuration = CalculateMiningDuration();
-        }
+        if (_elapsedMiningTime <= _miningDuration) return;
+        
+        OnStoneDrop?.Invoke(1);
+        _elapsedMiningTime = 0;
+        _minedStonesCount++;
+        _miningDuration = CalculateMiningDuration();
     }
 
     private void OnPlayerMiningStoneStart(int instanceId)

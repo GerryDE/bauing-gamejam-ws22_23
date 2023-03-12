@@ -10,7 +10,7 @@ public class UIController : MonoBehaviour
     // In welcher Welle befinden wir uns
     [SerializeField] int welle = 1;
     // In Welcher Generation befinden wir uns, ggf. als Pop-Up
-    [FormerlySerializedAs("generation")] [SerializeField] int alter;
+    [FormerlySerializedAs("alter")] [FormerlySerializedAs("generation")] [SerializeField] int remainingYears;
     //Holz, und Steinvorrat
     [SerializeField] int anzahlStein;
     [SerializeField] int anzahlHolz;
@@ -28,8 +28,8 @@ public class UIController : MonoBehaviour
     private void Awake()
     {
         DataHandlerComponent.OnWoodAmountChanged += UpdateHolzVorrat;
-        PlayerController.OnPlayerStoneQuarryInteraction += UpdateSteinVorrat;
-        PlayerController.OnPlayerAgeChanged += UpdateAlter;
+        DataHandlerComponent.OnStoneAmountChanged += UpdateSteinVorrat;
+        DataHandlerComponent.OnRemainingYearsChanged += UpdateRemainingYears;
         BossComponent.OnBossDestroyed += UpdateWelle;
         InitTexteUndWerte();
     }
@@ -47,7 +47,7 @@ public class UIController : MonoBehaviour
             switch (index)
             {
                 case 0:
-                    item.text = texte[index] + ": " + alter;
+                    item.text = texte[index] + ": " + remainingYears;
                     index++;
                     break;
                 case 1:
@@ -68,23 +68,31 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void UpdateAlter(int setAlter)
+    private void UpdateRemainingYears(int newValue)
     {
-        alter = setAlter;
+        remainingYears = newValue;
     }
 
-    public void UpdateWelle()
+    private void UpdateWelle()
     {
         welle++;
     }
 
-    public void UpdateHolzVorrat(int setHolz)
+    private void UpdateHolzVorrat(int setHolz)
     {
         anzahlHolz = setHolz;
     }
 
-    public void UpdateSteinVorrat(int setStein)
+    private void UpdateSteinVorrat(int setStein)
     {
         anzahlStein = setStein;
+    }
+
+    private void OnDestroy()
+    {
+        DataHandlerComponent.OnWoodAmountChanged -= UpdateHolzVorrat;
+        DataHandlerComponent.OnStoneAmountChanged -= UpdateSteinVorrat;
+        DataHandlerComponent.OnRemainingYearsChanged += UpdateRemainingYears;
+        BossComponent.OnBossDestroyed -= UpdateWelle;
     }
 }

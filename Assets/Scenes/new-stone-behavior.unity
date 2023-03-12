@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   welle: 1
-  alter: 0
+  remainingYears: 0
   anzahlStein: 0
   anzahlHolz: 0
   listTexte:
@@ -162,10 +162,10 @@ MonoBehaviour:
   - {fileID: 258840210}
   - {fileID: 128531208}
   texte:
-  - Alter
-  - Welle
-  - Holz
-  - Stein
+  - Remaining years
+  - Wave
+  - Wood
+  - Stone
 --- !u!4 &24761872
 Transform:
   m_ObjectHideFlags: 0
@@ -240,7 +240,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &107904528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1168,6 +1168,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9b416c53f8243739b12c5046021d06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  remainingYears: 50
+  maxRemainingYears: 50
+  wave: 1
+  woodAmount: 0
+  stoneAmount: 0
 --- !u!1 &957759720
 GameObject:
   m_ObjectHideFlags: 0
@@ -1482,6 +1487,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e92927aced3982498d8700c9f15374b, type: 3}
+--- !u!1 &1229299687 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5078483185614107012, guid: 843bec4df2bff618a900c3232cba76d4, type: 3}
+  m_PrefabInstance: {fileID: 5078483184145308466}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1229299690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229299687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e0df30c3593442f82d3a62438f7ff8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingPrayingDuration: 60
+  prayingDurationMultiplicator: 0.9
 --- !u!1 &1263193124
 GameObject:
   m_ObjectHideFlags: 0
@@ -1798,6 +1822,51 @@ Transform:
   - {fileID: 137849576}
   m_Father: {fileID: 0}
   m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1579088437
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1579088439}
+  - component: {fileID: 1579088438}
+  m_Layer: 0
+  m_Name: PassingTime
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1579088438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579088437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bced930af2749d6992f2e7d77a2ff17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yearPassedDuration: 30
+--- !u!4 &1579088439
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579088437}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1614248516
 PrefabInstance:
@@ -3220,6 +3289,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5856693080496111652, guid: e462d0429dea4debebe3c42844e6d476, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5856693080496111653, guid: e462d0429dea4debebe3c42844e6d476, type: 3}
+      propertyPath: m_SleepingMode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5856693080496111655, guid: e462d0429dea4debebe3c42844e6d476, type: 3}
