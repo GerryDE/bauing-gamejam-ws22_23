@@ -42,4 +42,11 @@ public class InteractableBaseComponent : MonoBehaviour
             _interaction1Enabled = false;
         }
     }
+
+    protected virtual void OnDestroy()
+    {
+        PlayerController.OnInteractionButton1Hold -= OnInteractionButton1Hold;
+        PlayerController.OnInteractionButton1Released -= OnInteractionButton1Released;
+        PlayerController.OnInteractionButton1Pressed -= OnInteractionButton1Pressed;
+    }
 }

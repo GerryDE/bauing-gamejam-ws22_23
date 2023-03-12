@@ -6,7 +6,7 @@ using static TreeComponent.State;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class TreeComponent : MonoBehaviour
+public class TreeComponent : InteractableBaseComponent
 {
     public enum State
     {
@@ -39,7 +39,6 @@ public class TreeComponent : MonoBehaviour
 
     [SerializeField] private float stateChangeDurationVariance;
 
-    private bool _isGettingMined;
     private int _stateChangeDuration;
     private int _elapsedStateChangeTime;
     private int _elapsedMiningTime;
@@ -56,10 +55,9 @@ public class TreeComponent : MonoBehaviour
         CalculateStateChangeDuration();
     }
 
-    private void Start()
+    protected override void Start()
     {
-        PlayerController.OnPlayerMiningWoodStart += OnPlayerMiningWoodStart;
-        PlayerController.OnPlayerMiningWoodStop += OnPlayerMiningWoodStop;
+        base.Start();
 
         _renderer = GetComponent<SpriteRenderer>();
 
@@ -95,7 +93,7 @@ public class TreeComponent : MonoBehaviour
             CalculateStateChangeDuration();
         }
 
-        if (!Spawning.Equals(state) && _isGettingMined)
+        if (!Spawning.Equals(state) && _interaction1Enabled)
         {
             _elapsedMiningTime++;
             var currentData = GetDataByCurrentState();
@@ -112,22 +110,6 @@ public class TreeComponent : MonoBehaviour
         }
     }
 
-    private void OnPlayerMiningWoodStart(int instanceId)
-    {
-        if (instanceId.Equals(gameObject.GetInstanceID()))
-        {
-            _isGettingMined = true;
-        }
-    }
-
-    private void OnPlayerMiningWoodStop(int instanceId)
-    {
-        if (instanceId.Equals(gameObject.GetInstanceID()))
-        {
-            _isGettingMined = false;
-        }
-    }
-
     private StateData? GetDataByCurrentState()
     {
         foreach (var currentData in data.Where(currentData => state.Equals(currentData.state)))
@@ -136,12 +118,6 @@ public class TreeComponent : MonoBehaviour
         }
 
         return null;
-    }
-
-    private void OnDestroy()
-    {
-        PlayerController.OnPlayerMiningWoodStart -= OnPlayerMiningWoodStart;
-        PlayerController.OnPlayerMiningWoodStop -= OnPlayerMiningWoodStop;
     }
 
     private void SetSpawnPosition()
