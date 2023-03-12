@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    public int maxHp = 100;
     public float moveSpeed = 300f;
     public int coolDownTime = 60;
     public Vector2 throwBackForce = new Vector2(100f, 0f);
@@ -18,7 +17,6 @@ public class PlayerController : MonoBehaviour
     private bool _isCollidingWithStoneQuarry;
     private bool _isCollidingWithStatue;
     private bool _isInteracting;
-    [SerializeField] private int currentHp;
     private int _currentCooldown;
 
     [SerializeField] private int woodCount;
@@ -32,6 +30,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int yearDuration = 60;
     [SerializeField] private int statueHealAmount = 20;
     [SerializeField] private int statueInteractionCooldown = 300;
+    [SerializeField] private int enemyAgingAmount = 60;
 
     private int _yearPassedCounter;
 
@@ -54,7 +53,6 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        currentHp = maxHp;
         currentAge = minAge;
 
         OnPlayerAgeChanged?.Invoke(currentAge);
@@ -81,63 +79,65 @@ public class PlayerController : MonoBehaviour
     {
         // Handle age
         _yearPassedCounter++;
-        if (_yearPassedCounter > yearDuration)
+        while (_yearPassedCounter > yearDuration)
         {
             currentAge++;
             OnPlayerAgeChanged?.Invoke(currentAge);
-
-            if (currentAge > maxAge)
-            {
-                // TODO Handle Game Over
-                Debug.Log("GAME OVER!");
-            }
-
-            _yearPassedCounter = 0;
+            _yearPassedCounter -= yearDuration;
         }
 
-        // Handle interactions with objects
-        if (_isCollidingWithStatue)
+        if (currentAge > maxAge)
         {
-            _currentCooldown++;
-            if (_currentCooldown > statueInteractionCooldown)
+            // TODO Handle Game Over
+            Debug.Log("GAME OVER!");
+        }
+        
+        if (_isInteracting)
+        {
+            // Handle interactions with objects
+            if (_isCollidingWithStatue)
             {
-                DecreaseAge();
-                OnPlayerAgeChanged?.Invoke(currentAge);
+                _currentCooldown++;
+                if (_currentCooldown > statueInteractionCooldown)
+                {
+                    DecreaseAge();
+                    OnPlayerAgeChanged?.Invoke(currentAge);
+                    _currentCooldown = 0;
+                }
+            }
+            else if (_isCollidingWithFence)
+            {
+                _currentCooldown++;
+                if (_currentCooldown > coolDownTime)
+                {
+                    onPlayerFenceInteraction?.Invoke();
+                    _currentCooldown = 0;
+                }
+            }
+            else if (_isCollidingWithTree)
+            {
+                _currentCooldown++;
+                if (_currentCooldown > coolDownTime)
+                {
+                    woodCount++;
+                    OnPlayerTreeInteraction?.Invoke(woodCount);
+                    _currentCooldown = 0;
+                }
+            }
+            else if (_isCollidingWithStoneQuarry)
+            {
+                _currentCooldown++;
+                if (_currentCooldown > coolDownTime)
+                {
+                    stoneCount++;
+                    OnPlayerStoneQuarryInteraction?.Invoke(stoneCount);
+                    _currentCooldown = 0;
+                }
+            }
+            else
+            {
                 _currentCooldown = 0;
             }
-        }
-        else if (_isCollidingWithFence)
-        {
-            _currentCooldown++;
-            if (_currentCooldown > coolDownTime)
-            {
-                onPlayerFenceInteraction?.Invoke();
-                _currentCooldown = 0;
-            }
-        }
-        else if (_isCollidingWithTree)
-        {
-            _currentCooldown++;
-            if (_currentCooldown > coolDownTime)
-            {
-                woodCount++;
-                OnPlayerTreeInteraction?.Invoke(woodCount);
-                _currentCooldown = 0;
-            }
-        }
-        else if (_isCollidingWithStoneQuarry)
-        {
-            _currentCooldown++;
-            if (_currentCooldown > coolDownTime)
-            {
-                stoneCount++;
-                OnPlayerStoneQuarryInteraction?.Invoke(stoneCount);
-                _currentCooldown = 0;
-            }
-        }
-        else
-        {
-            _currentCooldown = 0;
         }
     }
 
@@ -206,14 +206,7 @@ public class PlayerController : MonoBehaviour
     {
         if (col.gameObject.layer.Equals(LayerMask.NameToLayer("Enemy")))
         {
-            currentHp--;
-
-            if (currentHp <= 0)
-            {
-                Debug.Log("GAME OVER!");
-                return;
-            }
-
+            _yearPassedCounter += enemyAgingAmount;
             _rigidbody.AddForce(throwBackForce);
         }
     }
