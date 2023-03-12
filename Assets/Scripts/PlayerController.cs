@@ -43,6 +43,10 @@ public class PlayerController : MonoBehaviour
     public delegate void PlayerMiningWoodStart(int instanceId);
     
     public delegate void PlayerMiningWoodStop(int instanceId);
+    
+    public delegate void PlayerMiningStoneStart(int instanceId);
+    
+    public delegate void PlayerMiningStoneStop(int instanceId);
 
     public delegate void PlayerStoneQuarryInteraction(int stoneCount);
 
@@ -53,6 +57,8 @@ public class PlayerController : MonoBehaviour
     public static PlayerTreeInteraction OnPlayerTreeInteraction;
     public static PlayerMiningWoodStart OnPlayerMiningWoodStart;
     public static PlayerMiningWoodStop OnPlayerMiningWoodStop;
+    public static PlayerMiningStoneStart OnPlayerMiningStoneStart;
+    public static PlayerMiningStoneStop OnPlayerMiningStoneStop;
     public static PlayerStoneQuarryInteraction OnPlayerStoneQuarryInteraction;
     public static PlayerStatueInteraction OnPlayerAgeChanged;
 
@@ -99,42 +105,42 @@ public class PlayerController : MonoBehaviour
         }
         
         // Handle interactions with objects
-        if (_isInteracting)
-        {
-            if (_isCollidingWithStatue)
-            {
-                _currentCooldown++;
-                if (_currentCooldown > statueInteractionCooldown)
-                {
-                    DecreaseAge();
-                    OnPlayerAgeChanged?.Invoke(currentAge);
-                    _currentCooldown = 0;
-                }
-            }
-            else if (_isCollidingWithFence)
-            {
-                _currentCooldown++;
-                if (_currentCooldown > coolDownTime)
-                {
-                    onPlayerFenceInteraction?.Invoke();
-                    _currentCooldown = 0;
-                }
-            }
-            else if (_isCollidingWithStoneQuarry)
-            {
-                _currentCooldown++;
-                if (_currentCooldown > coolDownTime)
-                {
-                    stoneCount++;
-                    OnPlayerStoneQuarryInteraction?.Invoke(stoneCount);
-                    _currentCooldown = 0;
-                }
-            }
-            else
-            {
-                _currentCooldown = 0;
-            }
-        }
+        // if (_isInteracting)
+        // {
+        //     if (_isCollidingWithStatue)
+        //     {
+        //         _currentCooldown++;
+        //         if (_currentCooldown > statueInteractionCooldown)
+        //         {
+        //             DecreaseAge();
+        //             OnPlayerAgeChanged?.Invoke(currentAge);
+        //             _currentCooldown = 0;
+        //         }
+        //     }
+        //     else if (_isCollidingWithFence)
+        //     {
+        //         _currentCooldown++;
+        //         if (_currentCooldown > coolDownTime)
+        //         {
+        //             onPlayerFenceInteraction?.Invoke();
+        //             _currentCooldown = 0;
+        //         }
+        //     }
+        //     else if (_isCollidingWithStoneQuarry)
+        //     {
+        //         _currentCooldown++;
+        //         if (_currentCooldown > coolDownTime)
+        //         {
+        //             stoneCount++;
+        //             OnPlayerStoneQuarryInteraction?.Invoke(stoneCount);
+        //             _currentCooldown = 0;
+        //         }
+        //     }
+        //     else
+        //     {
+        //         _currentCooldown = 0;
+        //     }
+        // }
     }
 
     public void OnMove(InputValue value)
@@ -161,6 +167,15 @@ public class PlayerController : MonoBehaviour
         else
         {
             OnPlayerMiningWoodStop?.Invoke(other.gameObject.GetInstanceID());
+        }
+        
+        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Stone")) && _isInteracting)
+        {
+            OnPlayerMiningStoneStart?.Invoke(other.gameObject.GetInstanceID());
+        }
+        else
+        {
+            OnPlayerMiningStoneStop?.Invoke(other.gameObject.GetInstanceID());
         }
     }
 
