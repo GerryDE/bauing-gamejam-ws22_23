@@ -4,9 +4,41 @@ using UnityEngine;
 public class DataHandlerComponent : MonoBehaviour
 {
     [SerializeField] private int remainingYears = 50;
+
+    public int RemainingYears
+    {
+        get => remainingYears;
+        set
+        {
+            remainingYears = value;
+            OnRemainingYearsChanged?.Invoke(remainingYears);
+        }
+    }
+
     [SerializeField] private int maxRemainingYears = 50;
     [SerializeField] private int wave = 1;
     [SerializeField] private int woodAmount;
+
+    public int WoodAmount
+    {
+        get => woodAmount;
+        set
+        {
+            woodAmount = value;
+            OnWoodAmountChanged?.Invoke(value);
+        }
+    }
+
+    public int StoneAmount
+    {
+        get => stoneAmount;
+        set
+        {
+            stoneAmount = value;
+            OnStoneAmountChanged?.Invoke(value);
+        }
+    }
+
     [SerializeField] private int stoneAmount;
 
     public delegate void WoodAmountChanged(int newValue);
@@ -34,32 +66,27 @@ public class DataHandlerComponent : MonoBehaviour
 
     private void OnYearPassed()
     {
-        remainingYears--;
-        OnRemainingYearsChanged?.Invoke(remainingYears);
+        RemainingYears--;
     }
 
     private void OnReducePlayerLifetime(int amount)
     {
-        remainingYears -= amount;
-        OnRemainingYearsChanged?.Invoke(remainingYears);
+        RemainingYears -= amount;
     }
 
     private void OnPrayed(int amount)
     {
-        remainingYears = Math.Min(remainingYears + amount, maxRemainingYears);
-        OnRemainingYearsChanged?.Invoke(remainingYears);
+        RemainingYears = Math.Min(remainingYears + amount, maxRemainingYears);
     }
 
     private void OnStoneDrop(int amount)
     {
-        stoneAmount += amount;
-        OnStoneAmountChanged?.Invoke(stoneAmount);
+        StoneAmount += amount;
     }
 
     private void OnDropWood(int amount)
     {
-        woodAmount += amount;
-        OnWoodAmountChanged?.Invoke(woodAmount);
+        WoodAmount += amount;
     }
 
     private void OnDestroy()
