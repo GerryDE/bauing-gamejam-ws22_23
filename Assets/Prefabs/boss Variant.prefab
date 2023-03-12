@@ -91,6 +91,10 @@ PrefabInstance:
       propertyPath: maxHp
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 1806021324276434789, guid: be29476555061cb15a17ac504aa4c812, type: 3}
+      propertyPath: damageOutput
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be29476555061cb15a17ac504aa4c812, type: 3}
 --- !u!1 &7866932865955879141 stripped

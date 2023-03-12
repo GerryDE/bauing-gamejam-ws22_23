@@ -180,5 +180,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 10
   moveSpeed: 50
+  damageOutput: 1
   throwBackForce: {x: -500, y: 0}
   currentHp: 0
