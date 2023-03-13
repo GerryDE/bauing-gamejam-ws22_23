@@ -1,13 +1,24 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class DataHandlerComponent : MonoBehaviour
 {
     [SerializeField] private int remainingYears = 50;
     [SerializeField] private int maxRemainingYears = 50;
-    [SerializeField] private int wave = 1;
+    [FormerlySerializedAs("wave")] [SerializeField] private int waveCount = 1;
     [SerializeField] private int woodAmount;
     [SerializeField] private int currentFenceVersion;
+
+    public int Wave
+    {
+        get => waveCount;
+        set
+        {
+            waveCount = value;
+            OnWaveCountChanged.Invoke(waveCount);
+        }
+    }
 
     public int RemainingYears
     {
@@ -52,10 +63,12 @@ public class DataHandlerComponent : MonoBehaviour
     public delegate void StoneAmountChanged(int newValue);
 
     public delegate void RemainingYearsChanged(int newValue);
+    public delegate void WaveCountChanged(int newValue);
 
     public static WoodAmountChanged OnWoodAmountChanged;
     public static StoneAmountChanged OnStoneAmountChanged;
     public static RemainingYearsChanged OnRemainingYearsChanged;
+    public static WaveCountChanged OnWaveCountChanged;
 
     private void Start()
     {
@@ -64,10 +77,17 @@ public class DataHandlerComponent : MonoBehaviour
         StatueComponent.OnPrayed += OnPrayed;
         EnemyController.OnReducePlayerLifetime += OnReducePlayerLifetime;
         PassingTimeComponent.OnYearPassed += OnYearPassed;
+        BossComponent.OnBossDestroyed += OnBossDestroyed;
 
         OnRemainingYearsChanged?.Invoke(remainingYears);
         OnWoodAmountChanged?.Invoke(woodAmount);
         OnStoneAmountChanged?.Invoke(stoneAmount);
+        OnWaveCountChanged?.Invoke(waveCount);
+    }
+
+    private void OnBossDestroyed()
+    {
+        Wave++;
     }
 
     private void OnYearPassed()
