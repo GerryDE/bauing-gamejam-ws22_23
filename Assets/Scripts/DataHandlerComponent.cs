@@ -4,6 +4,10 @@ using UnityEngine;
 public class DataHandlerComponent : MonoBehaviour
 {
     [SerializeField] private int remainingYears = 50;
+    [SerializeField] private int maxRemainingYears = 50;
+    [SerializeField] private int wave = 1;
+    [SerializeField] private int woodAmount;
+    [SerializeField] private int currentFenceVersion;
 
     public int RemainingYears
     {
@@ -15,9 +19,11 @@ public class DataHandlerComponent : MonoBehaviour
         }
     }
 
-    [SerializeField] private int maxRemainingYears = 50;
-    [SerializeField] private int wave = 1;
-    [SerializeField] private int woodAmount;
+    public int CurrentFenceVersion
+    {
+        get => currentFenceVersion;
+        set => currentFenceVersion = value;
+    }
 
     public int WoodAmount
     {

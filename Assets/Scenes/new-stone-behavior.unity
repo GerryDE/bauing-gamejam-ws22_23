@@ -694,6 +694,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6637309878941126062, guid: 8e92927aced3982498d8700c9f15374b, type: 3}
   m_PrefabInstance: {fileID: 37972189}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &322788987 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4610381315560898663, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+  m_PrefabInstance: {fileID: 1402857861}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &322788989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322788987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 089025e9264845fda27df07cac00956d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+  - woodCost: 0
+    stoneCost: 0
+    newHp: 100
+    sprite: {fileID: 21300000, guid: ca6ea48ab375a97958a53ec1d9369214, type: 3}
+  - woodCost: 10
+    stoneCost: 5
+    newHp: 250
+    sprite: {fileID: 21300000, guid: 29299aeb3f92fcbfdb77afdf456d5c7f, type: 3}
+  - woodCost: 30
+    stoneCost: 12
+    newHp: 500
+    sprite: {fileID: 21300000, guid: c37fa050fd6c8078c9c0369a2581dc07, type: 3}
 --- !u!1 &424138092
 GameObject:
   m_ObjectHideFlags: 0
@@ -1172,7 +1202,13 @@ MonoBehaviour:
   maxRemainingYears: 50
   wave: 1
   woodAmount: 0
+  currentFenceVersion: 0
   stoneAmount: 0
+--- !u!212 &784008834 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4610381316622984944, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+  m_PrefabInstance: {fileID: 1402857861}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &957759720
 GameObject:
   m_ObjectHideFlags: 0
@@ -1679,6 +1715,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 505910263, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 505910263, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.data[1].woodCost
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 505910263, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.data[2].woodCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 505910263, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.data[1].stoneCost
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 505910263, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.data[2].stoneCost
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 505910263, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.data[1].healAmount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 505910263, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.data[2].healAmount
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4610381316174552462, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: _renderer
+      value: 
+      objectReference: {fileID: 784008834}
     - target: {fileID: 4610381316174552466, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
       propertyPath: m_Name
       value: fence
