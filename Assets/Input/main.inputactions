@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Interact2Press",
+                    "type": "Button",
+                    "id": "fe35286a-2d45-4a7c-b582-dd7e45e1936d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -70,7 +79,7 @@
                 {
                     "name": "",
                     "id": "eb493e65-9030-4ff3-ab52-b23841b395b1",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -81,11 +90,22 @@
                 {
                     "name": "",
                     "id": "ab3e1b04-5722-4074-b9d1-9bea4e4ad934",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Interact1Press",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "35485553-a0de-431d-886b-298b0852783e",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact2Press",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

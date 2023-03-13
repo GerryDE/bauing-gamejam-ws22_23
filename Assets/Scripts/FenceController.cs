@@ -3,18 +3,36 @@ using UnityEngine;
 
 public class FenceController : MonoBehaviour
 {
-    [Range(0, 1000)] public int maxHp = 100;
-
-    public int MaxHp => maxHp;
-    public int CurrentHp => currentHp;
-
+    [SerializeField, Range(0, 1000)] private int maxHp = 100;
     [SerializeField] private int currentHp;
+
+    [SerializeField] private SpriteRenderer _renderer;
+
+    public int MaxHp
+    {
+        get => maxHp;
+        private set => maxHp = value;
+    }
+
+    public int CurrentHp
+    {
+        get => currentHp;
+        private set => currentHp = value;
+    }
 
     private void Awake()
     {
         FenceRepairComponent.OnRepairFence += OnRepairFence;
+        FenceUpgradeComponent.OnUpgradeFence += OnUpgradeFence;
 
         currentHp = maxHp;
+    }
+
+    private void OnUpgradeFence(int newHpValue, Sprite sprite)
+    {
+        MaxHp = newHpValue;
+        CurrentHp = MaxHp;
+        _renderer.sprite = sprite;
     }
 
     private void OnRepairFence(int amount)

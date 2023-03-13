@@ -15,7 +15,6 @@ public class FenceRepairComponent : InteractableBaseComponent
     public static RepairFence OnRepairFence;
 
     [SerializeField] private List<Data> data;
-    private int _currentVersion;
     private FenceController _fenceController;
 
     protected override void Start()
@@ -27,8 +26,9 @@ public class FenceRepairComponent : InteractableBaseComponent
     private void Update()
     {
         if (!_interactionButton1Pressed) return;
+        _interactionButton1Pressed = false;
 
-        var currentData = data[_currentVersion];
+        var currentData = data[_dataHandlerComponent.CurrentFenceVersion];
         if (_dataHandlerComponent.WoodAmount >= currentData.woodCost &&
             _dataHandlerComponent.StoneAmount >= currentData.stoneCost &&
             _fenceController.CurrentHp < _fenceController.MaxHp)
@@ -36,8 +36,6 @@ public class FenceRepairComponent : InteractableBaseComponent
             _dataHandlerComponent.WoodAmount -= currentData.woodCost;
             _dataHandlerComponent.StoneAmount -= currentData.stoneCost;
             OnRepairFence?.Invoke(currentData.healAmount);
-
-            _interactionButton1Pressed = false;
         }
     }
 }

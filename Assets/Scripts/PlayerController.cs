@@ -18,11 +18,14 @@ public class PlayerController : MonoBehaviour
 
     public delegate void InteractionButton1Pressed();
 
+    public delegate void InteractionButton2Pressed();
+
     public delegate void PlayerMove(float xVelocity);
 
     public static InteractionButton1Hold OnInteractionButton1Hold;
     public static InteractionButton1Released OnInteractionButton1Released;
     public static InteractionButton1Pressed OnInteractionButton1Pressed;
+    public static InteractionButton2Pressed OnInteractionButton2Pressed;
     public static PlayerMove OnPlayerMove;
 
     private void Awake()
@@ -71,6 +74,15 @@ public class PlayerController : MonoBehaviour
         if (floatValue > 0f)
         {
             OnInteractionButton1Pressed?.Invoke();
+        }
+    }
+
+    public void OnInteract2Press(InputValue value)
+    {
+        var floatValue = value.Get<float>();
+        if (floatValue > 0f)
+        {
+            OnInteractionButton2Pressed?.Invoke();
         }
     }
 

@@ -5,6 +5,7 @@ public class InteractableBaseComponent : MonoBehaviour
     protected DataHandlerComponent _dataHandlerComponent;
     protected bool _interactionButton1Holding;
     protected bool _interactionButton1Pressed;
+    protected bool _interactionButton2Pressed;
     protected bool _interaction1Enabled;
 
     protected virtual void Start()
@@ -12,6 +13,7 @@ public class InteractableBaseComponent : MonoBehaviour
         PlayerController.OnInteractionButton1Hold += OnInteractionButton1Hold;
         PlayerController.OnInteractionButton1Released += OnInteractionButton1Released;
         PlayerController.OnInteractionButton1Pressed += OnInteractionButton1Pressed;
+        PlayerController.OnInteractionButton2Pressed += OnInteractionButton2Pressed;
 
         _dataHandlerComponent = GameObject.FindWithTag("DataHandler").GetComponent<DataHandlerComponent>();
     }
@@ -19,6 +21,11 @@ public class InteractableBaseComponent : MonoBehaviour
     private void OnInteractionButton1Pressed()
     {
         _interactionButton1Pressed = true;
+    }
+
+    private void OnInteractionButton2Pressed()
+    {
+        _interactionButton2Pressed = true;
     }
 
     protected virtual void OnInteractionButton1Hold()
