@@ -9,7 +9,7 @@ public class DataHandlerComponent : MonoBehaviour
     [FormerlySerializedAs("wave")] [SerializeField] private int waveCount = 1;
     [SerializeField] private int woodAmount;
     [SerializeField] private int currentFenceVersion;
-
+    [SerializeField] AfterEffects postProcessingCameraScript;
     public int Wave
     {
         get => waveCount;
@@ -27,6 +27,7 @@ public class DataHandlerComponent : MonoBehaviour
         {
             remainingYears = value;
             OnRemainingYearsChanged?.Invoke(remainingYears);
+            postProcessingCameraScript.UpdateSaturaion(remainingYears * 1f);
         }
     }
 
