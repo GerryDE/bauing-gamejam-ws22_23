@@ -8,7 +8,7 @@ public class WaveHandlerComponent : MonoBehaviour
     private struct WaveData
     {
         public int enemiesToKillUntilBoss;
-        public int spawnInterval;
+        public float spawnInterval;
         public int maxAmountOfSimultaneouslyLivingEnemies;
         public GameObject bossPrefab;
     }
@@ -17,7 +17,7 @@ public class WaveHandlerComponent : MonoBehaviour
     [SerializeField] private List<WaveData> data;
 
     private DataHandlerComponent _dataHandlerComponent;
-    private int _elapsedTime;
+    private float _elapsedTime;
     private int _killedEnemiesDuringWave;
     private bool _bossFightEnabled;
 
@@ -37,7 +37,7 @@ public class WaveHandlerComponent : MonoBehaviour
     private void OnBossDestroyed()
     {
         _bossFightEnabled = false;
-        _elapsedTime = 0;
+        _elapsedTime = 0f;
     }
 
     private void OnEnemyDestroyed(int objectId)
@@ -49,7 +49,7 @@ public class WaveHandlerComponent : MonoBehaviour
     {
         if (_bossFightEnabled) return;
 
-        _elapsedTime++;
+        _elapsedTime += Time.deltaTime;
 
         var currentData = data[_dataHandlerComponent.Wave];
         if (_elapsedTime <= currentData.spawnInterval) return;
@@ -59,7 +59,7 @@ public class WaveHandlerComponent : MonoBehaviour
         {
             OnSpawnEnemy?.Invoke(enemyPrefab, maxAmountOfSimultaneouslyLivingEnemies, _killedEnemiesDuringWave,
                 currentData.enemiesToKillUntilBoss);
-            _elapsedTime = 0;
+            _elapsedTime = 0f;
         }
         else
         {
@@ -69,6 +69,6 @@ public class WaveHandlerComponent : MonoBehaviour
                 _killedEnemiesDuringWave, currentData.enemiesToKillUntilBoss);
         }
 
-        _elapsedTime = 0;
+        _elapsedTime = 0f;
     }
 }

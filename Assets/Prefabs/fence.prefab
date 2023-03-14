@@ -172,6 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 100
   currentHp: 0
+  _renderer: {fileID: 4610381316622984944}
 --- !u!1 &4610381316622984946
 GameObject:
   m_ObjectHideFlags: 0

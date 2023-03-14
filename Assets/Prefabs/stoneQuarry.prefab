@@ -156,5 +156,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d55d7c37e5d04fe9a04be5f0e6af862a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingMiningDuration: 60
-  miningDurationMultiplicator: 1.2
+  startingMiningDuration: 1
+  miningDurationMultiplicator: 1

@@ -35,13 +35,13 @@ public class TreeComponent : InteractableBaseComponent
     [SerializeField] private State state = Spawning;
     [SerializeField] private List<StateData> data;
 
-    [SerializeField] private int defaultStateChangeDuration;
+    [SerializeField] private float defaultStateChangeDuration = 5f;
 
-    [SerializeField] private float stateChangeDurationVariance;
+    [SerializeField] private float stateChangeDurationVariance = 0.2f;
 
-    private int _stateChangeDuration;
-    private int _elapsedStateChangeTime;
-    private int _elapsedMiningTime;
+    private float _stateChangeDuration;
+    private float _elapsedStateChangeTime;
+    private float _elapsedMiningTime;
 
     private SpriteRenderer _renderer;
 
@@ -77,7 +77,7 @@ public class TreeComponent : InteractableBaseComponent
     {
         // if (_isRespawning) return;
 
-        _elapsedStateChangeTime++;
+        _elapsedStateChangeTime += Time.deltaTime;
         if (_elapsedStateChangeTime > _stateChangeDuration)
         {
             _elapsedStateChangeTime = 0;
@@ -95,18 +95,18 @@ public class TreeComponent : InteractableBaseComponent
 
         if (!Spawning.Equals(state) && _interaction1Enabled)
         {
-            _elapsedMiningTime++;
+            _elapsedMiningTime += Time.deltaTime;
             var currentData = GetDataByCurrentState();
             if (currentData.HasValue && _elapsedMiningTime > currentData.Value.miningDuration)
             {
-                _elapsedMiningTime = 0;
+                _elapsedMiningTime = 0f;
                 OnDropWood?.Invoke(currentData.Value.dropAmount);
                 Respawn();
             }
         }
         else
         {
-            _elapsedMiningTime = 0;
+            _elapsedMiningTime = 0f;
         }
     }
 
@@ -129,7 +129,7 @@ public class TreeComponent : InteractableBaseComponent
 
     private void CalculateStateChangeDuration()
     {
-        _stateChangeDuration = (int)Random.Range(defaultStateChangeDuration * (1f - stateChangeDurationVariance),
+        _stateChangeDuration = Random.Range(defaultStateChangeDuration * (1f - stateChangeDurationVariance),
             defaultStateChangeDuration * (1f + stateChangeDurationVariance));
     }
 }

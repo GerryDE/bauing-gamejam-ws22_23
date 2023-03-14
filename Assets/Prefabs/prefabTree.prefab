@@ -131,15 +131,15 @@ MonoBehaviour:
   data:
   - state: 1
     dropAmount: 1
-    miningDuration: 60
+    miningDuration: 1
     sprite: {fileID: 21300000, guid: 70cc1007470687bbf97f631d6c9f5801, type: 3}
   - state: 2
     dropAmount: 3
-    miningDuration: 120
+    miningDuration: 2
     sprite: {fileID: 21300000, guid: 52e6a9e6248d9961189537070c5d70f4, type: 3}
   - state: 3
     dropAmount: 5
-    miningDuration: 180
+    miningDuration: 3
     sprite: {fileID: 21300000, guid: 3417152f38cf2da29851580cc417d51b, type: 3}
-  defaultStateChangeDuration: 300
+  defaultStateChangeDuration: 5
   stateChangeDurationVariance: 0.2

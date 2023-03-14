@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class StatueComponent : InteractableBaseComponent
 {
-    [SerializeField] private int startingPrayingDuration = 60;
+    [SerializeField] private float startingPrayingDuration = 1f;
     [SerializeField] private float prayingDurationMultiplicator = 0.9f;
 
-    private int _elapsedTime;
-    private int _prayingDuration;
+    private float _elapsedTime;
+    private float _prayingDuration;
     private int _prayCount;
 
     public delegate void Prayed(int amount);
@@ -27,7 +27,7 @@ public class StatueComponent : InteractableBaseComponent
             return;
         }
 
-        _elapsedTime++;
+        _elapsedTime += Time.deltaTime;
         if (_elapsedTime <= _prayingDuration) return;
 
         OnPrayed?.Invoke(1);
@@ -36,8 +36,8 @@ public class StatueComponent : InteractableBaseComponent
         _prayingDuration = CalculatePrayingDuration();
     }
 
-    private int CalculatePrayingDuration()
+    private float CalculatePrayingDuration()
     {
-        return (int)(startingPrayingDuration * Mathf.Pow(prayingDurationMultiplicator, _prayCount));
+        return (startingPrayingDuration * Mathf.Pow(prayingDurationMultiplicator, _prayCount));
     }
 }

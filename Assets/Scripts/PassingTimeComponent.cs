@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class PassingTimeComponent : MonoBehaviour
 {
-    [SerializeField] private int yearPassedDuration;
-    private int _elapsedTime;
+    [SerializeField] private float yearPassedDuration = 2f;
+    private float _elapsedTime;
 
     public delegate void YearPassed();
 
@@ -11,10 +11,10 @@ public class PassingTimeComponent : MonoBehaviour
 
     private void Update()
     {
-        _elapsedTime++;
+        _elapsedTime += Time.deltaTime;
         if (_elapsedTime <= yearPassedDuration) return;
 
         OnYearPassed?.Invoke();
-        _elapsedTime = 0;
+        _elapsedTime = 0f;
     }
 }
