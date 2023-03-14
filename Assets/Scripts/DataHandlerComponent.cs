@@ -27,7 +27,7 @@ public class DataHandlerComponent : MonoBehaviour
         {
             remainingYears = value;
             OnRemainingYearsChanged?.Invoke(remainingYears);
-            // postProcessingCameraScript.UpdateSaturaion(remainingYears * 1f); TODO Uncomment!
+            postProcessingCameraScript.UpdateSaturaion(remainingYears * 1f);
         }
     }
 
