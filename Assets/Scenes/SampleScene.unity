@@ -1710,10 +1710,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5856693080496111653, guid: e462d0429dea4debebe3c42844e6d476, type: 3}
-      propertyPath: m_SleepingMode
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5856693080496111655, guid: e462d0429dea4debebe3c42844e6d476, type: 3}
       propertyPath: m_Name
       value: player
@@ -2170,9 +2166,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3807700196154225559, guid: 395c7d61bf08f2dd7994f3fb1dd0e89e, type: 3}
+      propertyPath: yearPassedDuration
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3807700196154225560, guid: 395c7d61bf08f2dd7994f3fb1dd0e89e, type: 3}
       propertyPath: m_Name
       value: PassingTime
+      objectReference: {fileID: 0}
+    - target: {fileID: 3807700196154225560, guid: 395c7d61bf08f2dd7994f3fb1dd0e89e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 395c7d61bf08f2dd7994f3fb1dd0e89e, type: 3}

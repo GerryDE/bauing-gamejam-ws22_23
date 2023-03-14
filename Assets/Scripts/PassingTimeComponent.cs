@@ -14,7 +14,7 @@ public class PassingTimeComponent : MonoBehaviour
         _elapsedTime += Time.deltaTime;
         if (_elapsedTime <= yearPassedDuration) return;
 
-        OnYearPassed?.Invoke();
         _elapsedTime = 0f;
+        OnYearPassed?.Invoke();
     }
 }
