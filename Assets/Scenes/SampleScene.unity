@@ -1581,7 +1581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bced930af2749d6992f2e7d77a2ff17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yearPassedDuration: 30
+  yearPassedDuration: 2
 --- !u!4 &580226089
 Transform:
   m_ObjectHideFlags: 0
@@ -1869,6 +1869,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stoneQuarry (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 51227242892978169, guid: 5f851b1f25e932380bd3bee791d69854, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 51227242892978170, guid: 5f851b1f25e932380bd3bee791d69854, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1912,14 +1916,6 @@ PrefabInstance:
     - target: {fileID: 51227242892978170, guid: 5f851b1f25e932380bd3bee791d69854, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 879962239662921057, guid: 5f851b1f25e932380bd3bee791d69854, type: 3}
-      propertyPath: startingMiningDuration
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 879962239662921057, guid: 5f851b1f25e932380bd3bee791d69854, type: 3}
-      propertyPath: miningDurationMultiplicator
-      value: 1.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f851b1f25e932380bd3bee791d69854, type: 3}
@@ -2064,23 +2060,23 @@ MonoBehaviour:
   enemyPrefab: {fileID: 1806021324276434788, guid: be29476555061cb15a17ac504aa4c812, type: 3}
   data:
   - enemiesToKillUntilBoss: 1
-    spawnInterval: 10
+    spawnInterval: 5
     maxAmountOfSimultaneouslyLivingEnemies: 2
     bossPrefab: {fileID: 7866932865955879141, guid: b269a59c572df88d48a959922170a03b, type: 3}
   - enemiesToKillUntilBoss: 1
-    spawnInterval: 240
+    spawnInterval: 4
     maxAmountOfSimultaneouslyLivingEnemies: 3
     bossPrefab: {fileID: 7866932865955879141, guid: b269a59c572df88d48a959922170a03b, type: 3}
   - enemiesToKillUntilBoss: 1
-    spawnInterval: 180
+    spawnInterval: 3
     maxAmountOfSimultaneouslyLivingEnemies: 4
     bossPrefab: {fileID: 7866932865955879141, guid: b269a59c572df88d48a959922170a03b, type: 3}
   - enemiesToKillUntilBoss: 1
-    spawnInterval: 120
+    spawnInterval: 2
     maxAmountOfSimultaneouslyLivingEnemies: 5
     bossPrefab: {fileID: 7866932865955879141, guid: b269a59c572df88d48a959922170a03b, type: 3}
   - enemiesToKillUntilBoss: 1
-    spawnInterval: 120
+    spawnInterval: 1
     maxAmountOfSimultaneouslyLivingEnemies: 5
     bossPrefab: {fileID: 267851758946750762, guid: a52292cbf15a476bd8003030d2292d7c, type: 3}
 --- !u!4 &905504225
@@ -2852,25 +2848,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 843bec4df2bff618a900c3232cba76d4, type: 3}
---- !u!1 &1397905244 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5078483185614107012, guid: 843bec4df2bff618a900c3232cba76d4, type: 3}
-  m_PrefabInstance: {fileID: 1397905243}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1397905245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1397905244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e0df30c3593442f82d3a62438f7ff8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingPrayingDuration: 60
-  prayingDurationMultiplicator: 0.9
 --- !u!1001 &1446172691
 PrefabInstance:
   m_ObjectHideFlags: 0

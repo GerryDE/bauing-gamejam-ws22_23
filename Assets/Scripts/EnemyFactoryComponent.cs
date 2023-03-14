@@ -4,15 +4,15 @@ public class EnemyFactoryComponent : MonoBehaviour
 {
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private GameObject bossPrefab;
-    [SerializeField] private int spawnInterval = 600;
+    [SerializeField] private float spawnInterval = 0.5f;
     [SerializeField] private Vector3 spawnPosition;
     [SerializeField] private int enemyAmountUntilBoss = 10;
-    private int _elapsedTime;
+    private float _elapsedTime;
     private int _spawnedEnemiesCount;
 
     private void Update()
     {
-        _elapsedTime++;
+        _elapsedTime += Time.deltaTime;
         if (_elapsedTime > spawnInterval)
         {
             GameObject enemy;
@@ -29,7 +29,7 @@ public class EnemyFactoryComponent : MonoBehaviour
 
             enemy.transform.position = spawnPosition;
 
-            _elapsedTime = 0;
+            _elapsedTime = 0f;
         }
     }
 }

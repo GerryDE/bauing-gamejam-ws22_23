@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class StoneComponent : InteractableBaseComponent
 {
-    [SerializeField] private int startingMiningDuration = 60;
-    [SerializeField] private float miningDurationMultiplicator = 1.2f;
+    [SerializeField] private float startingMiningDuration = 1f;
+    [SerializeField] private float miningDurationMultiplicator = 1f;
 
-    private int _elapsedMiningTime;
-    private int _miningDuration;
+    private float _elapsedMiningTime;
+    private float _miningDuration;
     private int _minedStonesCount;
 
     public delegate void StoneDrop(int amount);
@@ -23,11 +23,11 @@ public class StoneComponent : InteractableBaseComponent
     {
         if (!_interaction1Enabled) return;
 
-        _elapsedMiningTime++;
+        _elapsedMiningTime += Time.deltaTime;
         if (_elapsedMiningTime <= _miningDuration) return;
 
         OnStoneDrop?.Invoke(1);
-        _elapsedMiningTime = 0;
+        _elapsedMiningTime = 0f;
         _minedStonesCount++;
         _miningDuration = CalculateMiningDuration();
     }
