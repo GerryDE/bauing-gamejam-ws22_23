@@ -19,7 +19,7 @@ public class StoneComponent : InteractableBaseComponent
         _miningDuration = CalculateMiningDuration();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!_interaction1Enabled) return;
 

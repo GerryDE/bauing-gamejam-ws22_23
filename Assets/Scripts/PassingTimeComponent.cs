@@ -9,7 +9,7 @@ public class PassingTimeComponent : MonoBehaviour
 
     public static YearPassed OnYearPassed;
 
-    private void Update()
+    private void FixedUpdate()
     {
         _elapsedTime += Time.deltaTime;
         if (_elapsedTime <= yearPassedDuration) return;

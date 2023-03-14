@@ -45,7 +45,7 @@ public class WaveHandlerComponent : MonoBehaviour
         _killedEnemiesDuringWave++;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (_bossFightEnabled) return;
 

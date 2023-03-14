@@ -10,7 +10,7 @@ public class EnemyFactoryComponent : MonoBehaviour
     private float _elapsedTime;
     private int _spawnedEnemiesCount;
 
-    private void Update()
+    private void FixedUpdate()
     {
         _elapsedTime += Time.deltaTime;
         if (_elapsedTime > spawnInterval)

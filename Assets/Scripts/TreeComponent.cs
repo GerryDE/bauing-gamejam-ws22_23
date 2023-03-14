@@ -73,7 +73,7 @@ public class TreeComponent : InteractableBaseComponent
         CalculateStateChangeDuration();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         // if (_isRespawning) return;
 
