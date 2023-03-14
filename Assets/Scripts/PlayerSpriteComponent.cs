@@ -13,31 +13,16 @@ public class PlayerSpriteComponent : MonoBehaviour
     private void Start()
     {
         PlayerController.OnPlayerMove += HandleHorizontalFlip;
+        YoungToOldTransitionComponent.OnYoungOldTransitionChanged += OnYoungOldTransitionChanged;
 
         _renderer = GetComponent<SpriteRenderer>();
         _dataHandlerComponent = GameObject.FindWithTag("DataHandler").GetComponent<DataHandlerComponent>();
     }
 
-    private void Update()
+    private void OnYoungOldTransitionChanged(float newValue)
     {
-        var remainingYears = _dataHandlerComponent.RemainingYears;
-        if (remainingYears > remainingYearsForYoung)
-        {
-            _renderer.color = new Color(1f, 1f, 1f, 1f);
-            oldSpriteRenderer.color = new Color(1f, 1f, 1f, 0f);
-        }
-        else if (remainingYears > remainingYearsForOld)
-        {
-            var alpha = (remainingYears - remainingYearsForOld) /
-                        (float)(remainingYearsForYoung - remainingYearsForOld);
-            _renderer.color = new Color(1f, 1f, 1f, alpha);
-            oldSpriteRenderer.color = new Color(1f, 1f, 1f, 1f - alpha);
-        }
-        else
-        {
-            _renderer.color = new Color(1f, 1f, 1f, 0f);
-            oldSpriteRenderer.color = new Color(1f, 1f, 1f, 1f);
-        }
+        _renderer.color = new Color(1f, 1f, 1f, newValue);
+        oldSpriteRenderer.color = new Color(1f, 1f, 1f, 1f - newValue);
     }
 
     private void HandleHorizontalFlip(float xVelocity)
