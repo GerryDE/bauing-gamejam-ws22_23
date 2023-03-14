@@ -1966,6 +1966,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2327958371312134164, guid: 4dd592d671ce987169292b14774de46d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2327958371312134165, guid: 4dd592d671ce987169292b14774de46d, type: 3}
       propertyPath: m_Name
       value: Light 2D
