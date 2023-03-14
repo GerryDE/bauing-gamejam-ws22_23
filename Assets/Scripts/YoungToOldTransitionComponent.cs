@@ -32,8 +32,7 @@ public class YoungToOldTransitionComponent : MonoBehaviour
         {
             transitionValue = 0f;
         }
-
-        Debug.Log(transitionValue);
+        
         OnYoungOldTransitionChanged?.Invoke(transitionValue);
     }
 }

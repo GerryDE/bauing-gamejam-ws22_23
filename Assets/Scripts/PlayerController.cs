@@ -5,12 +5,13 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 300f;
+    [SerializeField] private float minSpeedPercentage = 0.2f;
     public Vector2 throwBackForce = new Vector2(100f, 0f);
     public bool isFacingLeft = true;
 
     private Rigidbody2D _rigidbody;
     private float _velocity;
-    private bool _isCollidingWithFence;
+    private float _moveSpeedMultiplier = 1f;
 
     public delegate void InteractionButton1Hold();
 
@@ -30,12 +31,20 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        YoungToOldTransitionComponent.OnYoungOldTransitionChanged += OnYoungOldTransitionChanged;
+        
         _rigidbody = GetComponent<Rigidbody2D>();
+    }
+
+    private void OnYoungOldTransitionChanged(float newValue)
+    {
+        _moveSpeedMultiplier = (1 - minSpeedPercentage) * newValue + minSpeedPercentage;
     }
 
     private void FixedUpdate()
     {
-        _rigidbody.velocity = new Vector2(_velocity * (Time.deltaTime * moveSpeed), 0f);
+        _rigidbody.velocity = new Vector2(_velocity * _moveSpeedMultiplier * (Time.deltaTime * moveSpeed), 0f);
+        
         if (_velocity != 0f)
         {
             OnPlayerMove?.Invoke(_velocity);
