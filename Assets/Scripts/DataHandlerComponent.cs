@@ -32,6 +32,18 @@ public class DataHandlerComponent : MonoBehaviour
         }
     }
 
+    [SerializeField] private int currentTreeVersion;
+
+    public int CurrentTreeVersion
+    {
+        get => currentTreeVersion;
+        set
+        {
+            currentTreeVersion = value; 
+            OnTreeVersionChanged?.Invoke(currentTreeVersion);
+        }
+    }
+
     [SerializeField] AfterEffects postProcessingCameraScript;
 
     public int Wave
@@ -107,6 +119,8 @@ public class DataHandlerComponent : MonoBehaviour
 
     public delegate void MineVersionChanged(int newValue);
 
+    public delegate void TreeVersionChanged(int newVersion);
+
     public static WoodAmountChanged OnWoodAmountChanged;
     public static StoneAmountChanged OnStoneAmountChanged;
     public static RemainingYearsChanged OnRemainingYearsChanged;
@@ -114,6 +128,7 @@ public class DataHandlerComponent : MonoBehaviour
     public static WaveCountChanged OnWaveCountChanged;
     public static StatueVersionChanged OnStatueVersionChanged;
     public static MineVersionChanged OnMineVersionChanged;
+    public static TreeVersionChanged OnTreeVersionChanged;
 
     private void Start()
     {
@@ -125,11 +140,17 @@ public class DataHandlerComponent : MonoBehaviour
         BossComponent.OnBossDestroyed += OnBossDestroyed;
         StatueUpgradeComponent.OnUpgradeStatue += OnUpgradeStatue;
         StoneUpgradeComponent.OnUpgradeMine += OnUpgradeMine;
+        TreeUpgradeComponent.OnUpgradeTree += OnUpgradeTree;
 
         OnRemainingYearsChanged?.Invoke(remainingYears);
         OnWoodAmountChanged?.Invoke(woodAmount);
         OnStoneAmountChanged?.Invoke(stoneAmount);
         OnWaveCountChanged?.Invoke(waveCount);
+    }
+
+    private void OnUpgradeTree()
+    {
+        CurrentTreeVersion++;
     }
 
     private void OnUpgradeMine(float newMiningDuration, int newDropAmount, Sprite sprite)
@@ -139,7 +160,7 @@ public class DataHandlerComponent : MonoBehaviour
 
     private void OnUpgradeStatue(int newAgeValue, Sprite sprite)
     {
-        maxRemainingYears = newAgeValue;
+        MaxRemainingYears = newAgeValue;
     }
 
     private void OnBossDestroyed()
