@@ -9,6 +9,8 @@ public class AfterEffects : MonoBehaviour
     Vignette vignette;
     ColorAdjustments colorAdjustments;
     VolumeProfile volumeProfile;
+    [SerializeField] float fadeSpeed;
+    private float fadeAmount = 0;
     private void Awake()
     {
         volumeProfile = GetComponent<Volume>()?.profile;
@@ -20,7 +22,10 @@ public class AfterEffects : MonoBehaviour
 
     public void UpdateVignette(float value)
     {
-        vignette.intensity.Override(value);
+        if(value == 0.0f)
+        {
+            StartCoroutine(VignetteOnDeath());
+        }
     }
 
     public void UpdateSaturaion(float value)
@@ -32,5 +37,25 @@ public class AfterEffects : MonoBehaviour
     float Normalize(float val, float valmin, float valmax, float min, float max)
     {
         return (((val - valmin) / (valmax - valmin)) * (max - min)) + min;
+    }
+
+    IEnumerator VignetteOnDeath()
+    {
+        while (true)
+        {
+            if(fadeAmount >= 5f)
+            {
+                while(fadeAmount <=300f)
+                {
+                    fadeAmount += fadeSpeed * Time.deltaTime * 50;
+                    vignette.intensity.Override(fadeAmount);
+                    yield return null;
+                }
+                yield break;
+            }
+            fadeAmount += fadeSpeed * Time.deltaTime;
+            vignette.intensity.Override(fadeAmount);
+            yield return null;
+        }
     }
 }
