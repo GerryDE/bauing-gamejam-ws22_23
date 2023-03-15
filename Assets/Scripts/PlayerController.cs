@@ -4,14 +4,14 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 300f;
+    [SerializeField] private float moveSpeed = 300f;
     [SerializeField] private float minSpeedPercentage = 0.2f;
-    public Vector2 throwBackForce = new Vector2(100f, 0f);
-    public bool isFacingLeft = true;
+    [SerializeField] private Vector2 throwBackForce;
 
     private Rigidbody2D _rigidbody;
     private float _velocity;
     private float _moveSpeedMultiplier = 1f;
+    private float _direction;
 
     public delegate void InteractionButton1Hold();
 
@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
 
     public delegate void InteractionButton2Pressed();
 
-    public delegate void PlayerMove(float xVelocity);
+    public delegate void PlayerMove(float direction, float velocity);
 
     public static InteractionButton1Hold OnInteractionButton1Hold;
     public static InteractionButton1Released OnInteractionButton1Released;
@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         YoungToOldTransitionComponent.OnYoungOldTransitionChanged += OnYoungOldTransitionChanged;
-        
+
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
@@ -44,24 +44,16 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         _rigidbody.velocity = new Vector2(_velocity * _moveSpeedMultiplier * (Time.deltaTime * moveSpeed), 0f);
-        
-        if (_velocity != 0f)
-        {
-            OnPlayerMove?.Invoke(_velocity);
-            if (_velocity < 0f)
-            {
-                isFacingLeft = true;
-            }
-            else
-            {
-                isFacingLeft = false;
-            }
-        }
+        OnPlayerMove?.Invoke(_direction, _velocity);
     }
 
     public void OnMove(InputValue value)
     {
         _velocity = value.Get<float>();
+        if (_velocity != 0f)
+        {
+            _direction = _velocity;
+        }
     }
 
     public void OnInteract1Hold(InputValue value)
