@@ -21,8 +21,15 @@ public class TreeComponent : InteractableBaseComponent
     {
         public State state;
         public int dropAmount;
-        public int miningDuration;
+        public float defaultStateChangeDuration;
+        public float miningDuration;
         public Sprite sprite;
+    }
+
+    [Serializable]
+    private struct VersionData
+    {
+        public List<StateData> data;
     }
 
     [Serializable]
@@ -33,9 +40,7 @@ public class TreeComponent : InteractableBaseComponent
 
     [SerializeField] private Range spawnRange;
     [SerializeField] private State state = Spawning;
-    [SerializeField] private List<StateData> data;
-
-    [SerializeField] private float defaultStateChangeDuration = 5f;
+    [SerializeField] private List<VersionData> data;
 
     [Range(0f, 1f)] [SerializeField] private float stateChangeDurationVariance = 0.2f;
 
@@ -58,7 +63,7 @@ public class TreeComponent : InteractableBaseComponent
     protected override void Start()
     {
         base.Start();
-
+        
         _renderer = GetComponent<SpriteRenderer>();
 
         SetSpawnPosition();
@@ -112,7 +117,8 @@ public class TreeComponent : InteractableBaseComponent
 
     private StateData? GetDataByCurrentState()
     {
-        foreach (var currentData in data.Where(currentData => state.Equals(currentData.state)))
+        foreach (var currentData in data[_dataHandlerComponent.CurrentTreeVersion].data
+                     .Where(currentData => state.Equals(currentData.state)))
         {
             return currentData;
         }
@@ -129,6 +135,7 @@ public class TreeComponent : InteractableBaseComponent
 
     private void CalculateStateChangeDuration()
     {
+        var defaultStateChangeDuration = GetDataByCurrentState().Value.defaultStateChangeDuration;
         _stateChangeDuration = Random.Range(defaultStateChangeDuration * (1f - stateChangeDurationVariance),
             defaultStateChangeDuration * (1f + stateChangeDurationVariance));
     }

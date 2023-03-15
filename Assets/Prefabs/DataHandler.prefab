@@ -50,5 +50,7 @@ MonoBehaviour:
   woodAmount: 0
   currentFenceVersion: 0
   currentStatueVersion: 0
+  currentMineVersion: 0
+  currentTreeVersion: 0
   postProcessingCameraScript: {fileID: 0}
   stoneAmount: 0
