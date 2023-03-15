@@ -103,6 +103,13 @@ PrefabInstance:
       propertyPath: damageOutput
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4849114260762904019, guid: be29476555061cb15a17ac504aa4c812, type: 3}
+    - target: {fileID: 1806021324276434789, guid: be29476555061cb15a17ac504aa4c812, type: 3}
+      propertyPath: throwBackForce.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4849114260762904019, guid: be29476555061cb15a17ac504aa4c812, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6384d670bfecc3bab8921c3703b1bc17, type: 2}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be29476555061cb15a17ac504aa4c812, type: 3}
