@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bced930af2749d6992f2e7d77a2ff17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yearPassedDuration: 2
+  yearPassedDuration: 60

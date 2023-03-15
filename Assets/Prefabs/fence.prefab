@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4610381315560898660}
   - component: {fileID: 4610381315560898658}
   - component: {fileID: 505910263}
+  - component: {fileID: 1319941728}
   m_Layer: 9
   m_Name: fence_player_interaction
   m_TagString: Untagged
@@ -46,7 +47,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.73}
+  m_Offset: {x: 0, y: 0.85}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -74,7 +75,38 @@ MonoBehaviour:
   data:
   - woodCost: 2
     stoneCost: 1
-    healAmount: 5
+    healAmount: 1000
+  - woodCost: 2
+    stoneCost: 2
+    healAmount: 1000
+  - woodCost: 1
+    stoneCost: 3
+    healAmount: 1000
+--- !u!114 &1319941728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4610381315560898663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 089025e9264845fda27df07cac00956d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+  - woodCost: 0
+    stoneCost: 0
+    newHp: 200
+    sprite: {fileID: 21300000, guid: ca6ea48ab375a97958a53ec1d9369214, type: 3}
+  - woodCost: 10
+    stoneCost: 5
+    newHp: 500
+    sprite: {fileID: 21300000, guid: 29299aeb3f92fcbfdb77afdf456d5c7f, type: 3}
+  - woodCost: 30
+    stoneCost: 12
+    newHp: 1000
+    sprite: {fileID: 21300000, guid: c37fa050fd6c8078c9c0369a2581dc07, type: 3}
 --- !u!1 &4610381316174552466
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b035801e77f6bee879764be7d94ec7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
+  maxHp: 200
   currentHp: 0
   _renderer: {fileID: 4610381316622984944}
 --- !u!1 &4610381316622984946

@@ -49,5 +49,6 @@ MonoBehaviour:
   waveCount: 0
   woodAmount: 0
   currentFenceVersion: 0
+  currentStatueVersion: 0
   postProcessingCameraScript: {fileID: 0}
   stoneAmount: 0

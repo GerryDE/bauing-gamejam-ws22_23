@@ -46,23 +46,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1806021324276434788, guid: be29476555061cb15a17ac504aa4c812, type: 3}
   data:
-  - enemiesToKillUntilBoss: 1
-    spawnInterval: 5
+  - enemiesToKillUntilBoss: 10
+    spawnInterval: 6
     maxAmountOfSimultaneouslyLivingEnemies: 2
     bossPrefab: {fileID: 7866932865955879141, guid: b269a59c572df88d48a959922170a03b, type: 3}
-  - enemiesToKillUntilBoss: 1
-    spawnInterval: 4
+  - enemiesToKillUntilBoss: 20
+    spawnInterval: 6
     maxAmountOfSimultaneouslyLivingEnemies: 3
     bossPrefab: {fileID: 7866932865955879141, guid: b269a59c572df88d48a959922170a03b, type: 3}
-  - enemiesToKillUntilBoss: 1
-    spawnInterval: 3
+  - enemiesToKillUntilBoss: 30
+    spawnInterval: 5
     maxAmountOfSimultaneouslyLivingEnemies: 4
     bossPrefab: {fileID: 7866932865955879141, guid: b269a59c572df88d48a959922170a03b, type: 3}
-  - enemiesToKillUntilBoss: 1
-    spawnInterval: 2
+  - enemiesToKillUntilBoss: 40
+    spawnInterval: 5
     maxAmountOfSimultaneouslyLivingEnemies: 5
     bossPrefab: {fileID: 7866932865955879141, guid: b269a59c572df88d48a959922170a03b, type: 3}
-  - enemiesToKillUntilBoss: 1
-    spawnInterval: 1
-    maxAmountOfSimultaneouslyLivingEnemies: 5
+  - enemiesToKillUntilBoss: 50
+    spawnInterval: 4
+    maxAmountOfSimultaneouslyLivingEnemies: 6
     bossPrefab: {fileID: 267851758946750762, guid: a52292cbf15a476bd8003030d2292d7c, type: 3}

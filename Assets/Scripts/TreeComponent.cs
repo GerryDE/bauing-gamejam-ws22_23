@@ -37,7 +37,7 @@ public class TreeComponent : InteractableBaseComponent
 
     [SerializeField] private float defaultStateChangeDuration = 5f;
 
-    [SerializeField] private float stateChangeDurationVariance = 0.2f;
+    [Range(0f, 1f)] [SerializeField] private float stateChangeDurationVariance = 0.2f;
 
     private float _stateChangeDuration;
     private float _elapsedStateChangeTime;

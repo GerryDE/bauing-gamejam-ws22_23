@@ -25,8 +25,8 @@ public class FenceRepairComponent : InteractableBaseComponent
 
     private void Update()
     {
-        if (!_interactionButton1Pressed) return;
-        _interactionButton1Pressed = false;
+        if (!_interaction1Enabled) return;
+        _interaction1Enabled = false;
 
         var currentData = data[_dataHandlerComponent.CurrentFenceVersion];
         if (_dataHandlerComponent.WoodAmount >= currentData.woodCost &&

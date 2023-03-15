@@ -1,15 +1,27 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class DataHandlerComponent : MonoBehaviour
 {
     [SerializeField] private int remainingYears = 50;
     [SerializeField] private int maxRemainingYears = 50;
-    [FormerlySerializedAs("wave")] [SerializeField] private int waveCount = 1;
+
+    public int MaxRemainingYears
+    {
+        get => maxRemainingYears;
+        set
+        {
+            maxRemainingYears = value;
+            OnMaxRemainingYearsChanged?.Invoke(maxRemainingYears);
+        }
+    }
+
+    [SerializeField] private int waveCount = 1;
     [SerializeField] private int woodAmount;
     [SerializeField] private int currentFenceVersion;
+    [SerializeField] private int currentStatueVersion;
     [SerializeField] AfterEffects postProcessingCameraScript;
+
     public int Wave
     {
         get => waveCount;
@@ -56,6 +68,16 @@ public class DataHandlerComponent : MonoBehaviour
             OnStoneAmountChanged?.Invoke(value);
         }
     }
+    
+    public int CurrentStatueVersion
+    {
+        get => currentStatueVersion;
+        set
+        {
+            currentStatueVersion = value;
+            OnStatueVersionChanged?.Invoke(value);
+        }
+    }
 
     [SerializeField] private int stoneAmount;
 
@@ -64,12 +86,19 @@ public class DataHandlerComponent : MonoBehaviour
     public delegate void StoneAmountChanged(int newValue);
 
     public delegate void RemainingYearsChanged(int newValue);
+    
+    public delegate void MaxRemainingYearsChanged(int newValue);
+
     public delegate void WaveCountChanged(int newValue);
+    
+    public delegate void StatueVersionChanged(int newValue);
 
     public static WoodAmountChanged OnWoodAmountChanged;
     public static StoneAmountChanged OnStoneAmountChanged;
     public static RemainingYearsChanged OnRemainingYearsChanged;
+    public static MaxRemainingYearsChanged OnMaxRemainingYearsChanged;
     public static WaveCountChanged OnWaveCountChanged;
+    public static StatueVersionChanged OnStatueVersionChanged;
 
     private void Start()
     {
@@ -79,11 +108,17 @@ public class DataHandlerComponent : MonoBehaviour
         EnemyController.OnReducePlayerLifetime += OnReducePlayerLifetime;
         PassingTimeComponent.OnYearPassed += OnYearPassed;
         BossComponent.OnBossDestroyed += OnBossDestroyed;
+        StatueUpgradeComponent.OnUpgradeStatue += OnUpgradeStatue;
 
         OnRemainingYearsChanged?.Invoke(remainingYears);
         OnWoodAmountChanged?.Invoke(woodAmount);
         OnStoneAmountChanged?.Invoke(stoneAmount);
         OnWaveCountChanged?.Invoke(waveCount);
+    }
+
+    private void OnUpgradeStatue(int newAgeValue, Sprite sprite)
+    {
+        maxRemainingYears = newAgeValue;
     }
 
     private void OnBossDestroyed()
@@ -122,5 +157,7 @@ public class DataHandlerComponent : MonoBehaviour
         StoneComponent.OnStoneDrop -= OnStoneDrop;
         StatueComponent.OnPrayed -= OnPrayed;
         EnemyController.OnReducePlayerLifetime -= OnReducePlayerLifetime;
+        PassingTimeComponent.OnYearPassed -= OnYearPassed;
+        BossComponent.OnBossDestroyed -= OnBossDestroyed;
     }
 }

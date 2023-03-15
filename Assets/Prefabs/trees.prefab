@@ -41,9 +41,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1323007477120522196}
     m_Modifications:
+    - target: {fileID: -5815794603671109948, guid: 8e92927aced3982498d8700c9f15374b, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -1296733942280734069, guid: 8e92927aced3982498d8700c9f15374b, type: 3}
       propertyPath: spawnRange.max
-      value: -0.5
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: -1296733942280734069, guid: 8e92927aced3982498d8700c9f15374b, type: 3}
+      propertyPath: spawnRange.min
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1296733942280734069, guid: 8e92927aced3982498d8700c9f15374b, type: 3}
+      propertyPath: defaultStateChangeDuration
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 973785045564950549, guid: 8e92927aced3982498d8700c9f15374b, type: 3}
       propertyPath: m_Name
@@ -107,13 +119,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1323007477120522196}
     m_Modifications:
+    - target: {fileID: -5815794603671109948, guid: 8e92927aced3982498d8700c9f15374b, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -1296733942280734069, guid: 8e92927aced3982498d8700c9f15374b, type: 3}
       propertyPath: spawnRange.max
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -1296733942280734069, guid: 8e92927aced3982498d8700c9f15374b, type: 3}
       propertyPath: spawnRange.min
-      value: 0.5
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1296733942280734069, guid: 8e92927aced3982498d8700c9f15374b, type: 3}
+      propertyPath: defaultStateChangeDuration
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 973785045564950549, guid: 8e92927aced3982498d8700c9f15374b, type: 3}
       propertyPath: m_Name
@@ -153,9 +173,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1323007477120522196}
     m_Modifications:
+    - target: {fileID: -5815794603671109948, guid: 8e92927aced3982498d8700c9f15374b, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1296733942280734069, guid: 8e92927aced3982498d8700c9f15374b, type: 3}
+      propertyPath: spawnRange.max
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: -1296733942280734069, guid: 8e92927aced3982498d8700c9f15374b, type: 3}
       propertyPath: spawnRange.min
-      value: 2.5
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -1296733942280734069, guid: 8e92927aced3982498d8700c9f15374b, type: 3}
+      propertyPath: defaultStateChangeDuration
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 973785045564950549, guid: 8e92927aced3982498d8700c9f15374b, type: 3}
       propertyPath: m_Name
