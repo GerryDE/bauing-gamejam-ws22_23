@@ -239,7 +239,6 @@ MonoBehaviour:
   moveSpeed: 300
   minSpeedPercentage: 0.2
   throwBackForce: {x: 500, y: 0}
-  isFacingLeft: 1
 --- !u!1 &5856693081428041770
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,6 +251,8 @@ GameObject:
   - component: {fileID: 5856693081428041768}
   - component: {fileID: 1977292494}
   - component: {fileID: 300001937}
+  - component: {fileID: 859591894}
+  - component: {fileID: 859591893}
   m_Layer: 6
   m_Name: player_sprite
   m_TagString: Untagged
@@ -339,8 +340,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa140b8759476b9f6be332a1fd73e0ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  remainingYearsForYoung: 40
-  remainingYearsForOld: 10
   oldSpriteRenderer: {fileID: 1953102470}
 --- !u!114 &300001937
 MonoBehaviour:
@@ -421,3 +420,36 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!95 &859591894
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5856693081428041770}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d4d8cb6de2a5492e3b360279572bada5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &859591893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5856693081428041770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d86c6de20446b6b660556f0d078ea3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
