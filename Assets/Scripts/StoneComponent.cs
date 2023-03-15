@@ -1,13 +1,17 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class StoneComponent : InteractableBaseComponent
 {
     [SerializeField] private float startingMiningDuration = 1f;
     [SerializeField] private float miningDurationMultiplicator = 1f;
+    [SerializeField] private SpriteRenderer renderer;
 
     private float _elapsedMiningTime;
+    private float _currentBaseMiningDuration;
     private float _miningDuration;
     private int _minedStonesCount;
+    private int _dropAmount = 1;
 
     public delegate void StoneDrop(int amount);
 
@@ -16,7 +20,16 @@ public class StoneComponent : InteractableBaseComponent
     protected override void Start()
     {
         base.Start();
+        StoneUpgradeComponent.OnUpgradeMine += OnUpgradeMine;
+        _currentBaseMiningDuration = startingMiningDuration;
         _miningDuration = CalculateMiningDuration();
+    }
+
+    private void OnUpgradeMine(float newMiningDuration, int newDropAmount, Sprite sprite)
+    {
+        renderer.sprite = sprite;
+        _currentBaseMiningDuration = newMiningDuration;
+        _dropAmount = newDropAmount;
     }
 
     private void FixedUpdate()
@@ -26,14 +39,14 @@ public class StoneComponent : InteractableBaseComponent
         _elapsedMiningTime += Time.deltaTime;
         if (_elapsedMiningTime <= _miningDuration) return;
 
-        OnStoneDrop?.Invoke(1);
+        OnStoneDrop?.Invoke(_dropAmount);
         _elapsedMiningTime = 0f;
-        _minedStonesCount++;
+        _minedStonesCount += _dropAmount;
         _miningDuration = CalculateMiningDuration();
     }
 
-    private int CalculateMiningDuration()
+    private float CalculateMiningDuration()
     {
-        return (int)(startingMiningDuration * Mathf.Pow(miningDurationMultiplicator, _minedStonesCount));
+        return (_currentBaseMiningDuration * Mathf.Pow(miningDurationMultiplicator, _minedStonesCount));
     }
 }
