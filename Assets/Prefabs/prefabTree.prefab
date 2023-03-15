@@ -125,21 +125,71 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnRange:
-    min: -2.5
-    max: 3.5
+    min: 2
+    max: 4
   state: 0
   data:
-  - state: 1
-    dropAmount: 1
-    miningDuration: 1
-    sprite: {fileID: 21300000, guid: 70cc1007470687bbf97f631d6c9f5801, type: 3}
-  - state: 2
-    dropAmount: 3
-    miningDuration: 2
-    sprite: {fileID: 21300000, guid: 52e6a9e6248d9961189537070c5d70f4, type: 3}
-  - state: 3
-    dropAmount: 5
-    miningDuration: 3
-    sprite: {fileID: 21300000, guid: 3417152f38cf2da29851580cc417d51b, type: 3}
-  defaultStateChangeDuration: 5
+  - data:
+    - state: 0
+      dropAmount: 0
+      defaultStateChangeDuration: 20
+      miningDuration: 0
+      sprite: {fileID: 0}
+    - state: 1
+      dropAmount: 1
+      defaultStateChangeDuration: 20
+      miningDuration: 1
+      sprite: {fileID: 21300000, guid: 70cc1007470687bbf97f631d6c9f5801, type: 3}
+    - state: 2
+      dropAmount: 3
+      defaultStateChangeDuration: 20
+      miningDuration: 2
+      sprite: {fileID: 21300000, guid: 52e6a9e6248d9961189537070c5d70f4, type: 3}
+    - state: 3
+      dropAmount: 5
+      defaultStateChangeDuration: 20
+      miningDuration: 3
+      sprite: {fileID: 21300000, guid: 3417152f38cf2da29851580cc417d51b, type: 3}
+  - data:
+    - state: 0
+      dropAmount: 0
+      defaultStateChangeDuration: 15
+      miningDuration: 0
+      sprite: {fileID: 0}
+    - state: 1
+      dropAmount: 2
+      defaultStateChangeDuration: 15
+      miningDuration: 0.8
+      sprite: {fileID: 21300000, guid: 70cc1007470687bbf97f631d6c9f5801, type: 3}
+    - state: 2
+      dropAmount: 5
+      defaultStateChangeDuration: 15
+      miningDuration: 1.5
+      sprite: {fileID: 21300000, guid: 52e6a9e6248d9961189537070c5d70f4, type: 3}
+    - state: 3
+      dropAmount: 7
+      defaultStateChangeDuration: 15
+      miningDuration: 2
+      sprite: {fileID: 21300000, guid: 3417152f38cf2da29851580cc417d51b, type: 3}
+  - data:
+    - state: 0
+      dropAmount: 0
+      defaultStateChangeDuration: 10
+      miningDuration: 0
+      sprite: {fileID: 0}
+    - state: 1
+      dropAmount: 3
+      defaultStateChangeDuration: 10
+      miningDuration: 0.5
+      sprite: {fileID: 21300000, guid: 70cc1007470687bbf97f631d6c9f5801, type: 3}
+    - state: 2
+      dropAmount: 6
+      defaultStateChangeDuration: 10
+      miningDuration: 1
+      sprite: {fileID: 21300000, guid: 52e6a9e6248d9961189537070c5d70f4, type: 3}
+    - state: 3
+      dropAmount: 10
+      defaultStateChangeDuration: 10
+      miningDuration: 1.5
+      sprite: {fileID: 21300000, guid: 3417152f38cf2da29851580cc417d51b, type: 3}
   stateChangeDurationVariance: 0.2
