@@ -201,5 +201,8 @@ public class DataHandlerComponent : MonoBehaviour
         EnemyController.OnReducePlayerLifetime -= OnReducePlayerLifetime;
         PassingTimeComponent.OnYearPassed -= OnYearPassed;
         BossComponent.OnBossDestroyed -= OnBossDestroyed;
+        StatueUpgradeComponent.OnUpgradeStatue -= OnUpgradeStatue;
+        StoneUpgradeComponent.OnUpgradeMine -= OnUpgradeMine;
+        TreeUpgradeComponent.OnUpgradeTree -= OnUpgradeTree;
     }
 }

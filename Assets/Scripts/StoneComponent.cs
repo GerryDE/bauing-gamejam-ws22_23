@@ -49,4 +49,10 @@ public class StoneComponent : InteractableBaseComponent
     {
         return (_currentBaseMiningDuration * Mathf.Pow(miningDurationMultiplicator, _minedStonesCount));
     }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        StoneUpgradeComponent.OnUpgradeMine -= OnUpgradeMine;
+    }
 }

@@ -71,4 +71,10 @@ public class WaveHandlerComponent : MonoBehaviour
 
         _elapsedTime = 0f;
     }
+
+    private void OnDestroy()
+    {
+        EnemyController.OnEnemyDestroyed -= OnEnemyDestroyed;
+        BossComponent.OnBossDestroyed -= OnBossDestroyed;
+    }
 }

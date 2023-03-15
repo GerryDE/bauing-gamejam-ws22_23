@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -91,5 +92,10 @@ public class PlayerController : MonoBehaviour
     {
         if (!col.gameObject.layer.Equals(LayerMask.NameToLayer("Enemy"))) return;
         _rigidbody.AddForce(throwBackForce);
+    }
+
+    private void OnDestroy()
+    {
+        YoungToOldTransitionComponent.OnYoungOldTransitionChanged -= OnYoungOldTransitionChanged;
     }
 }

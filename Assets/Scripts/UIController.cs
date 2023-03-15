@@ -98,7 +98,8 @@ public class UIController : MonoBehaviour
     {
         DataHandlerComponent.OnWoodAmountChanged -= UpdateHolzVorrat;
         DataHandlerComponent.OnStoneAmountChanged -= UpdateSteinVorrat;
-        DataHandlerComponent.OnRemainingYearsChanged += UpdateRemainingYears;
+        DataHandlerComponent.OnRemainingYearsChanged -= UpdateRemainingYears;
+        DataHandlerComponent.OnWaveCountChanged -= UpdateWaveCount;
         BossComponent.OnBossDestroyed -= UpdateWelle;
     }
 }

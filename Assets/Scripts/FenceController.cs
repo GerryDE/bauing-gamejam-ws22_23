@@ -49,4 +49,10 @@ public class FenceController : MonoBehaviour
         if (currentHp > 0) return;
         Destroy(gameObject);
     }
+
+    private void OnDestroy()
+    {
+        FenceRepairComponent.OnRepairFence -= OnRepairFence;
+        FenceUpgradeComponent.OnUpgradeFence -= OnUpgradeFence;
+    }
 }

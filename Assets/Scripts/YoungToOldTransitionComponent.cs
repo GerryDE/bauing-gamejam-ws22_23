@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class YoungToOldTransitionComponent : MonoBehaviour
@@ -34,5 +35,10 @@ public class YoungToOldTransitionComponent : MonoBehaviour
         }
         
         OnYoungOldTransitionChanged?.Invoke(transitionValue);
+    }
+
+    private void OnDestroy()
+    {
+        DataHandlerComponent.OnRemainingYearsChanged -= OnRemainingYearsChanged;
     }
 }

@@ -47,4 +47,10 @@ public class StatueComponent : InteractableBaseComponent
     {
         return (startingPrayingDuration * Mathf.Pow(prayingDurationMultiplicator, _prayCount));
     }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        StatueUpgradeComponent.OnUpgradeStatue -= OnUpgradeStatue;
+    }
 }

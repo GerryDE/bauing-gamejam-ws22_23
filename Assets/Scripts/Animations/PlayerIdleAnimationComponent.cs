@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Animations
@@ -18,6 +19,11 @@ namespace Animations
         {
             _animator.SetBool("isMoving", !velocity.Equals(0f));
             _animator.SetFloat("direction", direction);
+        }
+
+        private void OnDestroy()
+        {
+            PlayerController.OnPlayerMove -= OnMove;
         }
     }
 }

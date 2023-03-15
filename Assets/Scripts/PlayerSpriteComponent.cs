@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -18,5 +19,10 @@ public class PlayerSpriteComponent : MonoBehaviour
     {
         _renderer.color = new Color(1f, 1f, 1f, newValue);
         oldSpriteRenderer.color = new Color(1f, 1f, 1f, 1f - newValue);
+    }
+
+    private void OnDestroy()
+    {
+        YoungToOldTransitionComponent.OnYoungOldTransitionChanged -= OnYoungOldTransitionChanged;
     }
 }
