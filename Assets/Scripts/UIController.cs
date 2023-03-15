@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class UIController : MonoBehaviour
@@ -39,9 +40,16 @@ public class UIController : MonoBehaviour
         DataHandlerComponent.OnRemainingYearsChanged += UpdateRemainingYears;
         DataHandlerComponent.OnWaveCountChanged += UpdateWaveCount;
         BossComponent.OnBossDestroyed += UpdateWelle;
+        PlayerController.OnRestartGame += OnRestartGame;
         InitTexteUndWerte();
-        gameOverText.enabled = false;
-        tryAgainText.enabled = false;
+        // gameOverText.enabled = false;
+        // tryAgainText.enabled = false;
+    }
+
+    private void OnRestartGame()
+    {
+        if (!tryAgainText.enabled) return;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void Update()
@@ -123,6 +131,7 @@ public class UIController : MonoBehaviour
         DataHandlerComponent.OnRemainingYearsChanged -= UpdateRemainingYears;
         DataHandlerComponent.OnWaveCountChanged -= UpdateWaveCount;
         BossComponent.OnBossDestroyed -= UpdateWelle;
+        PlayerController.OnRestartGame -= OnRestartGame;
     }
 
     IEnumerator EndGameScreen()

@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
 
     public delegate void InteractionButton2Pressed();
 
+    public delegate void RestartGame();
+
     public delegate void PlayerMove(float direction, float velocity);
 
     public static InteractionButton1Hold OnInteractionButton1Hold;
@@ -29,6 +31,7 @@ public class PlayerController : MonoBehaviour
     public static InteractionButton1Pressed OnInteractionButton1Pressed;
     public static InteractionButton2Pressed OnInteractionButton2Pressed;
     public static PlayerMove OnPlayerMove;
+    public static RestartGame OnRestartGame;
 
     private void Awake()
     {
@@ -86,6 +89,11 @@ public class PlayerController : MonoBehaviour
         {
             OnInteractionButton2Pressed?.Invoke();
         }
+    }
+
+    public void OnRestart(InputValue value)
+    {
+        OnRestartGame?.Invoke();
     }
 
     private void OnCollisionEnter2D(Collision2D col)
