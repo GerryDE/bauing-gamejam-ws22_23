@@ -7,6 +7,8 @@ public class InteractableBaseComponent : MonoBehaviour
     protected bool _interactionButton1Pressed;
     protected bool _interactionButton2Pressed;
     protected bool _interaction1Enabled;
+    protected bool _interaction2Enabled;
+    protected bool _isCollidingWithPlayer;
 
     protected virtual void Start()
     {
@@ -18,12 +20,12 @@ public class InteractableBaseComponent : MonoBehaviour
         _dataHandlerComponent = GameObject.FindWithTag("DataHandler").GetComponent<DataHandlerComponent>();
     }
 
-    private void OnInteractionButton1Pressed()
+    protected virtual void OnInteractionButton1Pressed()
     {
         _interactionButton1Pressed = true;
     }
 
-    private void OnInteractionButton2Pressed()
+    protected virtual void OnInteractionButton2Pressed()
     {
         _interactionButton2Pressed = true;
     }
@@ -40,14 +42,9 @@ public class InteractableBaseComponent : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Player")) && _interactionButton1Holding)
-        {
-            _interaction1Enabled = true;
-        }
-        else
-        {
-            _interaction1Enabled = false;
-        }
+        _isCollidingWithPlayer = other.gameObject.layer.Equals(LayerMask.NameToLayer("Player"));
+        _interaction1Enabled = _isCollidingWithPlayer && _interactionButton1Holding;
+        _interaction2Enabled = _isCollidingWithPlayer && _interactionButton2Pressed;
     }
 
     protected virtual void OnDestroy()

@@ -23,19 +23,18 @@ public class FenceRepairComponent : InteractableBaseComponent
         _fenceController = transform.parent.gameObject.GetComponent<FenceController>();
     }
 
-    private void Update()
+    protected override void OnInteractionButton1Pressed()
     {
-        if (!_interaction1Enabled) return;
-        _interaction1Enabled = false;
+        base.OnInteractionButton1Pressed();
+        _interactionButton1Pressed = false;
 
+        if (!_isCollidingWithPlayer) return;
         var currentData = data[_dataHandlerComponent.CurrentFenceVersion];
-        if (_dataHandlerComponent.WoodAmount >= currentData.woodCost &&
-            _dataHandlerComponent.StoneAmount >= currentData.stoneCost &&
-            _fenceController.CurrentHp < _fenceController.MaxHp)
-        {
-            _dataHandlerComponent.WoodAmount -= currentData.woodCost;
-            _dataHandlerComponent.StoneAmount -= currentData.stoneCost;
-            OnRepairFence?.Invoke(currentData.healAmount);
-        }
+        if (_dataHandlerComponent.WoodAmount < currentData.woodCost ||
+            _dataHandlerComponent.StoneAmount < currentData.stoneCost ||
+            _fenceController.CurrentHp >= _fenceController.MaxHp) return;
+        _dataHandlerComponent.WoodAmount -= currentData.woodCost;
+        _dataHandlerComponent.StoneAmount -= currentData.stoneCost;
+        OnRepairFence?.Invoke(currentData.healAmount);
     }
 }

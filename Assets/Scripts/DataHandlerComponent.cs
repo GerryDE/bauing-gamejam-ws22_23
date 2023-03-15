@@ -20,6 +20,18 @@ public class DataHandlerComponent : MonoBehaviour
     [SerializeField] private int woodAmount;
     [SerializeField] private int currentFenceVersion;
     [SerializeField] private int currentStatueVersion;
+    [SerializeField] private int currentMineVersion;
+
+    public int CurrentMineVersion
+    {
+        get => currentMineVersion;
+        set
+        {
+            currentMineVersion = value; 
+            OnMineVersionChanged?.Invoke(currentMineVersion);
+        }
+    }
+
     [SerializeField] AfterEffects postProcessingCameraScript;
 
     public int Wave
@@ -68,7 +80,7 @@ public class DataHandlerComponent : MonoBehaviour
             OnStoneAmountChanged?.Invoke(value);
         }
     }
-    
+
     public int CurrentStatueVersion
     {
         get => currentStatueVersion;
@@ -86,12 +98,14 @@ public class DataHandlerComponent : MonoBehaviour
     public delegate void StoneAmountChanged(int newValue);
 
     public delegate void RemainingYearsChanged(int newValue);
-    
+
     public delegate void MaxRemainingYearsChanged(int newValue);
 
     public delegate void WaveCountChanged(int newValue);
-    
+
     public delegate void StatueVersionChanged(int newValue);
+
+    public delegate void MineVersionChanged(int newValue);
 
     public static WoodAmountChanged OnWoodAmountChanged;
     public static StoneAmountChanged OnStoneAmountChanged;
@@ -99,6 +113,7 @@ public class DataHandlerComponent : MonoBehaviour
     public static MaxRemainingYearsChanged OnMaxRemainingYearsChanged;
     public static WaveCountChanged OnWaveCountChanged;
     public static StatueVersionChanged OnStatueVersionChanged;
+    public static MineVersionChanged OnMineVersionChanged;
 
     private void Start()
     {
@@ -109,11 +124,17 @@ public class DataHandlerComponent : MonoBehaviour
         PassingTimeComponent.OnYearPassed += OnYearPassed;
         BossComponent.OnBossDestroyed += OnBossDestroyed;
         StatueUpgradeComponent.OnUpgradeStatue += OnUpgradeStatue;
+        StoneUpgradeComponent.OnUpgradeMine += OnUpgradeMine;
 
         OnRemainingYearsChanged?.Invoke(remainingYears);
         OnWoodAmountChanged?.Invoke(woodAmount);
         OnStoneAmountChanged?.Invoke(stoneAmount);
         OnWaveCountChanged?.Invoke(waveCount);
+    }
+
+    private void OnUpgradeMine(float newMiningDuration, int newDropAmount, Sprite sprite)
+    {
+        CurrentMineVersion++;
     }
 
     private void OnUpgradeStatue(int newAgeValue, Sprite sprite)

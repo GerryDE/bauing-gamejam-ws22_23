@@ -17,25 +17,19 @@ public class FenceUpgradeComponent : InteractableBaseComponent
 
     public static UpgradeFence OnUpgradeFence;
 
-    private void Update()
+    protected override void OnInteractionButton2Pressed()
     {
-        if (!_interactionButton2Pressed || _dataHandlerComponent.CurrentFenceVersion >= data.Count)
-        {
-            _interactionButton2Pressed = false;
-            return;
-        }
-
-        var nextUpgradeData = data[_dataHandlerComponent.CurrentFenceVersion + 1];
-        if (_dataHandlerComponent.WoodAmount >= nextUpgradeData.woodCost &&
-            _dataHandlerComponent.StoneAmount >= nextUpgradeData.stoneCost)
-        {
-            _dataHandlerComponent.WoodAmount -= nextUpgradeData.woodCost;
-            _dataHandlerComponent.StoneAmount -= nextUpgradeData.stoneCost;
-
-            OnUpgradeFence?.Invoke(nextUpgradeData.newHp, nextUpgradeData.sprite);
-            _dataHandlerComponent.CurrentFenceVersion++;
-        }
-
+        base.OnInteractionButton2Pressed();
+        
         _interactionButton2Pressed = false;
+        if (!_isCollidingWithPlayer || _dataHandlerComponent.CurrentFenceVersion >= data.Count - 1) return;
+        
+        var nextUpgradeData = data[_dataHandlerComponent.CurrentFenceVersion + 1];
+        if (_dataHandlerComponent.WoodAmount < nextUpgradeData.woodCost ||
+            _dataHandlerComponent.StoneAmount < nextUpgradeData.stoneCost) return;
+        _dataHandlerComponent.WoodAmount -= nextUpgradeData.woodCost;
+        _dataHandlerComponent.StoneAmount -= nextUpgradeData.stoneCost;
+        OnUpgradeFence?.Invoke(nextUpgradeData.newHp, nextUpgradeData.sprite);
+        _dataHandlerComponent.CurrentFenceVersion++;
     }
 }
