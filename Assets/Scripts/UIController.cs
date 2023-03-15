@@ -25,6 +25,13 @@ public class UIController : MonoBehaviour
     // Initiale Texte
     [SerializeField] String[] texte;
 
+    [SerializeField] TextMeshProUGUI gameOverText;
+    [SerializeField] TextMeshProUGUI tryAgainText;
+
+    private bool fadeIn, fadeOut = false;
+    [SerializeField] float fadeAmount = 0f;
+    [SerializeField] float fadeSpeed;
+
     private void Awake()
     {
         DataHandlerComponent.OnWoodAmountChanged += UpdateHolzVorrat;
@@ -33,11 +40,22 @@ public class UIController : MonoBehaviour
         DataHandlerComponent.OnWaveCountChanged += UpdateWaveCount;
         BossComponent.OnBossDestroyed += UpdateWelle;
         InitTexteUndWerte();
+        gameOverText.enabled = false;
+        tryAgainText.enabled = false;
     }
 
     private void Update()
     {
         InitTexteUndWerte();
+        if (fadeIn)
+        {
+            fadeAmount = gameOverText.color.a + (fadeSpeed * Time.deltaTime);
+            gameOverText.color = new Color(255, 255, 255, fadeAmount);
+            if(gameOverText.color.a >= 255)
+            {
+                fadeIn = false;
+            }
+        }
     }
 
     private void InitTexteUndWerte()
@@ -77,6 +95,10 @@ public class UIController : MonoBehaviour
     private void UpdateRemainingYears(int newValue)
     {
         remainingYears = newValue;
+        if(remainingYears == 0)
+        {
+            StartCoroutine(EndGameScreen());
+        }
     }
 
     private void UpdateWelle()
@@ -101,5 +123,14 @@ public class UIController : MonoBehaviour
         DataHandlerComponent.OnRemainingYearsChanged -= UpdateRemainingYears;
         DataHandlerComponent.OnWaveCountChanged -= UpdateWaveCount;
         BossComponent.OnBossDestroyed -= UpdateWelle;
+    }
+
+    IEnumerator EndGameScreen()
+    {
+        gameOverText.enabled = true;
+        fadeIn = true;
+        yield return new WaitForSeconds(2f);
+        tryAgainText.enabled = true;
+        yield break; ;
     }
 }
