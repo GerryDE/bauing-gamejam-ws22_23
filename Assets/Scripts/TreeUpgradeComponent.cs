@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 public class TreeUpgradeComponent : InteractableBaseComponent
 {
     [Serializable]
-    private struct Data
+    public struct Data
     {
         public int woodCost, stoneCost;
     }
@@ -30,5 +30,10 @@ public class TreeUpgradeComponent : InteractableBaseComponent
         _dataHandlerComponent.WoodAmount -= nextUpgradeData.woodCost;
         _dataHandlerComponent.StoneAmount -= nextUpgradeData.stoneCost;
         OnUpgradeTree?.Invoke();
+    }
+
+    public List<Data> GetData()
+    {
+        return data;
     }
 }
