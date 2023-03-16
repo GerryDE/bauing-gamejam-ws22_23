@@ -45,6 +45,7 @@ public class DataHandlerComponent : MonoBehaviour
     }
 
     [SerializeField] AfterEffects postProcessingCameraScript;
+    [SerializeField] UIController uiScript;
 
     public int Wave
     {
@@ -187,11 +188,13 @@ public class DataHandlerComponent : MonoBehaviour
     private void OnStoneDrop(int amount)
     {
         StoneAmount += amount;
+        uiScript.giveFeedbackWithValues(amount, "Stone");
     }
 
     private void OnDropWood(int amount)
     {
         WoodAmount += amount;
+        uiScript.giveFeedbackWithValues(amount, "Wood");
     }
 
     private void OnDestroy()
