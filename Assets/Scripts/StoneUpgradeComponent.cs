@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 public class StoneUpgradeComponent : InteractableBaseComponent
 {
     [Serializable]
-    private struct Data
+    public struct Data
     {
         public int woodCost, stoneCost;
         public float miningDuration;
@@ -33,5 +33,10 @@ public class StoneUpgradeComponent : InteractableBaseComponent
         _dataHandlerComponent.WoodAmount -= nextUpgradeData.woodCost;
         _dataHandlerComponent.StoneAmount -= nextUpgradeData.stoneCost;
         OnUpgradeMine?.Invoke(nextUpgradeData.miningDuration, nextUpgradeData.dropAmount, nextUpgradeData.sprite);
+    }
+
+    public List<Data> GetData()
+    {
+        return data;
     }
 }

@@ -12,16 +12,16 @@ public class PlayerInteractionUiComponent : MonoBehaviour
     [SerializeField] private string statueText;
     [SerializeField] private string mineText;
 
-    [SerializeField] private TextMeshPro textComponent;
+    [SerializeField] protected TextMeshPro textComponent;
 
-    private void Start()
+    protected virtual void Start()
     {
         textComponent.SetText(Empty);
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    protected virtual void OnTriggerStay2D(Collider2D other)
     {
-        var layer = LayerMask.LayerToName(col.gameObject.layer);
+        var layer = LayerMask.LayerToName(other.gameObject.layer);
         if (layer is not ("FenceTrigger" or "Tree" or "Statue" or "Stone")) return;
         var action = layer switch
         {
@@ -33,9 +33,17 @@ public class PlayerInteractionUiComponent : MonoBehaviour
         };
 
         textComponent.SetText("[" + buttonText + "] " + action);
+
+        if (layer != "Tree") return;
+        var state = other.gameObject.GetComponent<TreeComponent>().getState();
+        if (state == TreeComponent.State.Spawning)
+        {
+            textComponent.SetText(Empty);
+        }
+        
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    protected virtual void OnTriggerExit2D(Collider2D other)
     {
         var layer = LayerMask.LayerToName(other.gameObject.layer);
         if (layer is not ("FenceTrigger" or "Tree" or "Statue" or "Stone")) return;

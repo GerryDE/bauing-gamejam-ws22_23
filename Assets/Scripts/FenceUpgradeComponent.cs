@@ -5,7 +5,7 @@ using UnityEngine;
 public class FenceUpgradeComponent : InteractableBaseComponent
 {
     [Serializable]
-    private struct Data
+    public struct Data
     {
         public int woodCost, stoneCost, newHp;
         public Sprite sprite;
@@ -16,6 +16,11 @@ public class FenceUpgradeComponent : InteractableBaseComponent
     public delegate void UpgradeFence(int newHpValue, Sprite sprite);
 
     public static UpgradeFence OnUpgradeFence;
+
+    public List<Data> GetData()
+    {
+        return data;
+    }
 
     protected override void OnInteractionButton2Pressed()
     {
