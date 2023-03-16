@@ -32,8 +32,13 @@ public class PlayerInteractionUiComponent : MonoBehaviour
             _ => ""
         };
 
-        textComponent.SetText("[" + buttonText + "] " + action);
+        textComponent.SetText("[" + buttonText + " (Hold)] " + action);
 
+        if (layer == "FenceTrigger" || buttonText.Equals("E"))
+        {
+            textComponent.SetText("[" + buttonText + " (Press)] " + action);
+        }
+        
         if (layer != "Tree") return;
         var state = other.gameObject.GetComponent<TreeComponent>().getState();
         if (state == TreeComponent.State.Spawning)
