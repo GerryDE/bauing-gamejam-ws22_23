@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe6b94908b12f594a86575cd6e695212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: TreeLogic
+  scene: SampleScene
 --- !u!1 &275987852
 GameObject:
   m_ObjectHideFlags: 0

@@ -92,8 +92,8 @@ public class PlayerUpgradeUiComponent : PlayerInteractionUiComponent
             _stoneCosts = nextUpgradeData.stoneCost;
         }
 
-        woodTextComponent.SetText("Wood: " + _dataHandlerComponent.WoodAmount + "/" + _woodCosts);
-        stoneTextComponent.SetText("Stone: " + _dataHandlerComponent.StoneAmount + "/" + _stoneCosts);
+        woodTextComponent.SetText("Wood: " + _woodCosts);
+        stoneTextComponent.SetText("Stone: " + _stoneCosts);
 
         textComponent.color = _dataHandlerComponent.WoodAmount >= _woodCosts
             ? enoughResourcesColor
