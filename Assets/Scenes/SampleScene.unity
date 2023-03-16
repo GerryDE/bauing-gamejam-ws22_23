@@ -268,6 +268,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: environment
       objectReference: {fileID: 0}
+    - target: {fileID: 1859226363746122232, guid: d3df90f7fc026df5a97c0bc0aa0053c4, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859226363746122232, guid: d3df90f7fc026df5a97c0bc0aa0053c4, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859226363746122232, guid: d3df90f7fc026df5a97c0bc0aa0053c4, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 578132587
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3df90f7fc026df5a97c0bc0aa0053c4, type: 3}
 --- !u!1001 &309562825
@@ -809,6 +821,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 210214840610094999, guid: 6d9db2e2cd9f0b3c196b27b1f2523524, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 210214840610094999, guid: 6d9db2e2cd9f0b3c196b27b1f2523524, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -521902439
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d9db2e2cd9f0b3c196b27b1f2523524, type: 3}
 --- !u!1001 &935356301186611744
@@ -926,6 +946,30 @@ PrefabInstance:
     - target: {fileID: 1323007477120522199, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: m_Name
       value: trees
+      objectReference: {fileID: 0}
+    - target: {fileID: 4401788531548797236, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4401788531548797236, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2104640249
+      objectReference: {fileID: 0}
+    - target: {fileID: 4401788532325271922, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4401788532325271922, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2104640249
+      objectReference: {fileID: 0}
+    - target: {fileID: 4401788532669061464, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4401788532669061464, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2104640249
       objectReference: {fileID: 0}
     - target: {fileID: 8961414575285790006, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.data[0].data.Array.size
@@ -1132,8 +1176,20 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 8961414575285790006, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
-      propertyPath: data.Array.data[0].data.Array.data[3].defaultStateChangeDuration
+      propertyPath: data.Array.data[0].data.Array.data[0].defaultStateChangeDuration
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8961414575285790006, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
+      propertyPath: data.Array.data[0].data.Array.data[1].defaultStateChangeDuration
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8961414575285790006, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
+      propertyPath: data.Array.data[0].data.Array.data[2].defaultStateChangeDuration
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8961414575285790006, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
+      propertyPath: data.Array.data[0].data.Array.data[3].defaultStateChangeDuration
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8961414575285790006, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.data[1].data.Array.data[3].defaultStateChangeDuration
