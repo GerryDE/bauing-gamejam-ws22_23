@@ -50,6 +50,11 @@ public class TreeComponent : InteractableBaseComponent
 
     private SpriteRenderer _renderer;
 
+    public State getState()
+    {
+        return state;
+    }
+
     public delegate void DropWood(int amount);
 
     public static DropWood OnDropWood;

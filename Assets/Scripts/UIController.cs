@@ -78,7 +78,7 @@ public class UIController : MonoBehaviour
                     index++;
                     break;
                 case 1:
-                    item.text = texte[index] + ": " + welle;
+                    item.text = texte[index] + ": " + welle + "/5";
                     index++;
                     break;
                 case 2:

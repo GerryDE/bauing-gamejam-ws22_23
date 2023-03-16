@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 public class StatueUpgradeComponent : InteractableBaseComponent
 {
     [Serializable]
-    private struct Data
+    public struct Data
     {
         public int woodCost, stoneCost;
         public int newMaxAge;
@@ -33,5 +33,10 @@ public class StatueUpgradeComponent : InteractableBaseComponent
         _dataHandlerComponent.StoneAmount -= nextUpgradeData.stoneCost;
         OnUpgradeStatue?.Invoke(nextUpgradeData.newMaxAge, nextUpgradeData.sprite);
         _dataHandlerComponent.CurrentStatueVersion++;
+    }
+
+    public List<Data> GetData()
+    {
+        return data;
     }
 }

@@ -31,7 +31,7 @@ public class AfterEffects : MonoBehaviour
     public void UpdateSaturaion(float value)
     {
         float normVal = Normalize(value, 0f, 50f, -100f, 0f);
-        colorAdjustments.saturation.Override(normVal);
+        colorAdjustments.saturation.Override(Mathf.Min(normVal, 0f));
     }
 
     float Normalize(float val, float valmin, float valmax, float min, float max)
