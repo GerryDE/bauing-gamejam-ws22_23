@@ -556,12 +556,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 497310208}
-  m_maskType: 0
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 497310208}
+  m_maskType: 0
 --- !u!23 &497310208
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1158,12 +1158,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 1627002129}
-  m_maskType: 0
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 1627002129}
+  m_maskType: 0
 --- !u!23 &1627002129
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1402,12 +1402,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 2102084929}
-  m_maskType: 0
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 2102084929}
+  m_maskType: 0
 --- !u!23 &2102084929
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1683,31 +1683,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 223772646, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.data[0].woodCost
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 223772646, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.data[1].woodCost
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 223772646, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.data[2].woodCost
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 223772646, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.data[3].woodCost
-      value: 30
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 223772646, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
+      propertyPath: data.Array.data[0].stoneCost
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 223772646, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.data[1].stoneCost
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 223772646, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.data[2].stoneCost
-      value: 15
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 223772646, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.data[3].stoneCost
-      value: 20
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 442581950, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.size

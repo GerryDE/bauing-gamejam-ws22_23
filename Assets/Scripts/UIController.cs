@@ -163,7 +163,7 @@ public class UIController : MonoBehaviour
         float amount;
         for (int i = 0; i < 100; i++)
         {
-            amount = textGameObject.color.a - (fadeTime / 50);
+            amount = textGameObject.color.a - (fadeTime / 40);
             textGameObject.color = new Color(255, 255, 255, amount);
             yield return new WaitForSeconds(fadeTime / 10000);
         }
