@@ -46,7 +46,7 @@ public class PlayerUpgradeUiComponent : PlayerInteractionUiComponent
         if (layer.Equals("Tree"))
         {
             var data = other.gameObject.GetComponent<TreeUpgradeComponent>().GetData();
-            var state = other.gameObject.GetComponent<TreeComponent>().getState();
+            var state = other.gameObject.GetComponent<TreeComponent>().GetState();
             var currentVersion = _dataHandlerComponent.CurrentTreeVersion;
             if (state.Equals(TreeComponent.State.Spawning) || currentVersion >= data.Count - 1)
             {

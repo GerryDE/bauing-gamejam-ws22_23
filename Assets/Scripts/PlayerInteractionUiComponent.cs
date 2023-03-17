@@ -40,7 +40,7 @@ public class PlayerInteractionUiComponent : MonoBehaviour
         }
         
         if (layer != "Tree") return;
-        var state = other.gameObject.GetComponent<TreeComponent>().getState();
+        var state = other.gameObject.GetComponent<TreeComponent>().GetState();
         if (state == TreeComponent.State.Spawning)
         {
             textComponent.SetText(Empty);
