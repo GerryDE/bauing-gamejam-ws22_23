@@ -33,6 +33,11 @@ public class UIController : MonoBehaviour
     [SerializeField] float fadeAmount = 0f;
     [SerializeField] float fadeSpeed;
 
+    [SerializeField] GameObject prefabPopupText;
+    [SerializeField] Transform playerTransform;
+    [SerializeField] Transform parentTransform;
+    private TextMeshPro textPopup;
+
     private void Awake()
     {
         DataHandlerComponent.OnWoodAmountChanged += UpdateHolzVorrat;
@@ -44,6 +49,7 @@ public class UIController : MonoBehaviour
         InitTexteUndWerte();
         // gameOverText.enabled = false;
         // tryAgainText.enabled = false;
+        textPopup = prefabPopupText.GetComponent<TextMeshPro>();
     }
 
     private void OnRestartGame()
@@ -64,6 +70,16 @@ public class UIController : MonoBehaviour
                 fadeIn = false;
             }
         }
+    }
+
+    public void giveFeedbackWithValues(int value, String text)
+    {
+        Debug.Log(textPopup);
+        textPopup.text = text + " +" + value;
+        var positionNew = playerTransform.position;
+        GameObject instantiatetdText = Instantiate(prefabPopupText, positionNew, Quaternion.identity, parentTransform);
+        TextMeshPro textMeshProUGUI = instantiatetdText.GetComponent<TextMeshPro>();
+        StartCoroutine(FadeOutText(1f, textMeshProUGUI, instantiatetdText));
     }
 
     private void InitTexteUndWerte()
@@ -141,5 +157,18 @@ public class UIController : MonoBehaviour
         yield return new WaitForSeconds(2f);
         tryAgainText.enabled = true;
         yield break; ;
+    }
+
+    IEnumerator FadeOutText(float fadeTime, TextMeshPro textGameObject, GameObject gameObject)
+    {
+        float amount;
+        for (int i = 0; i < 100; i++)
+        {
+            amount = textGameObject.color.a - (fadeTime / 50);
+            textGameObject.color = new Color(255, 255, 255, amount);
+            yield return new WaitForSeconds(fadeTime / 10000);
+        }
+        Destroy(gameObject);
+        yield break;
     }
 }
