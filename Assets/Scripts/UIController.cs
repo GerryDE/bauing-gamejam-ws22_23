@@ -74,7 +74,6 @@ public class UIController : MonoBehaviour
 
     public void giveFeedbackWithValues(int value, String text)
     {
-        Debug.Log(textPopup);
         textPopup.text = text + " +" + value;
         var positionNew = playerTransform.position;
         GameObject instantiatetdText = Instantiate(prefabPopupText, positionNew, Quaternion.identity, parentTransform);

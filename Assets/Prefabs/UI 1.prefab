@@ -577,6 +577,9 @@ MonoBehaviour:
   tryAgainText: {fileID: 8751882928964330661}
   fadeAmount: 0
   fadeSpeed: 1
+  prefabPopupText: {fileID: 3594920303683170849, guid: 27d073374e57d0341a15da8ac092c103, type: 3}
+  playerTransform: {fileID: 0}
+  parentTransform: {fileID: 0}
 --- !u!1 &8751882929541374729
 GameObject:
   m_ObjectHideFlags: 0
