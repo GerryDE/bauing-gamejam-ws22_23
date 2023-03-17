@@ -5,7 +5,7 @@ using UnityEngine;
 public class FenceRepairComponent : InteractableBaseComponent
 {
     [Serializable]
-    private struct Data
+    public struct Data
     {
         public int woodCost, stoneCost, healAmount;
     }
@@ -16,6 +16,11 @@ public class FenceRepairComponent : InteractableBaseComponent
 
     [SerializeField] private List<Data> data;
     private FenceController _fenceController;
+
+    public List<Data> GetData()
+    {
+        return data;
+    }
 
     protected override void Start()
     {
