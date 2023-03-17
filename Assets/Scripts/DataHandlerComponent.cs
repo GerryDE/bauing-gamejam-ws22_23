@@ -107,6 +107,16 @@ public class DataHandlerComponent : MonoBehaviour
 
     [SerializeField] private int stoneAmount;
 
+    [SerializeField] AudioClip[] audioclips;
+
+    /// <summary>
+    /// 1 Attacking
+    /// 2 Mining
+    /// 3 Praising
+    /// 4 Upgrading
+    /// 5 Woodcutting
+    /// </summary>
+
     public delegate void WoodAmountChanged(int newValue);
 
     public delegate void StoneAmountChanged(int newValue);
@@ -131,6 +141,12 @@ public class DataHandlerComponent : MonoBehaviour
     public static StatueVersionChanged OnStatueVersionChanged;
     public static MineVersionChanged OnMineVersionChanged;
     public static TreeVersionChanged OnTreeVersionChanged;
+    private AudioSource audioSource;
+
+    private void Update()
+    {
+
+    }
 
     private void Start()
     {
@@ -148,21 +164,25 @@ public class DataHandlerComponent : MonoBehaviour
         OnWoodAmountChanged?.Invoke(woodAmount);
         OnStoneAmountChanged?.Invoke(stoneAmount);
         OnWaveCountChanged?.Invoke(waveCount);
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     private void OnUpgradeTree()
     {
         CurrentTreeVersion++;
+        audioSource.PlayOneShot(audioclips[3]);
     }
 
     private void OnUpgradeMine(float newMiningDuration, int newDropAmount, Sprite sprite)
     {
         CurrentMineVersion++;
+        audioSource.PlayOneShot(audioclips[3]);
     }
 
     private void OnUpgradeStatue(int newAgeValue, Sprite sprite)
     {
         MaxRemainingYears = newAgeValue;
+        audioSource.PlayOneShot(audioclips[3]);
     }
 
     private void OnBossDestroyed()
