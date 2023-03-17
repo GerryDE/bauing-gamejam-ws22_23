@@ -40,6 +40,7 @@ public class EnemyController : MonoBehaviour
     {
         if (col.gameObject.layer.Equals(LayerMask.NameToLayer("Fence")))
         {
+            currentHp -= col.gameObject.GetComponent<FenceController>().DamageOutput;
             _rigidbody.AddForce(throwBackForce);
         }
 
@@ -48,14 +49,12 @@ public class EnemyController : MonoBehaviour
             OnReducePlayerLifetime?.Invoke(damageOutput);
 
             currentHp--;
-            if (currentHp <= 0 && !_shallBeDestroyed)
-            {
-                _shallBeDestroyed = true;
-                OnEnemyDestroyed?.Invoke(gameObject.GetInstanceID());
-                return;
-            }
 
             _rigidbody.AddForce(throwBackForce);
         }
+
+        if (currentHp > 0 || _shallBeDestroyed) return;
+        _shallBeDestroyed = true;
+        OnEnemyDestroyed?.Invoke(gameObject.GetInstanceID());
     }
 }

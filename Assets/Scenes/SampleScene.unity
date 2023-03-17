@@ -141,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 407308388}
     - target: {fileID: 8751882929439384470, guid: 341aae876b120dd799da380188f741cd, type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 8751882929439384470, guid: 341aae876b120dd799da380188f741cd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -736,6 +736,94 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 505910263, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.data[0].woodCost
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 505910263, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.data[1].woodCost
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 505910263, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.data[2].woodCost
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 505910263, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.data[0].stoneCost
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 505910263, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.data[1].stoneCost
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 505910263, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.data[2].stoneCost
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 505910263, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.data[0].healAmount
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 505910263, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.data[1].healAmount
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 505910263, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.data[2].healAmount
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319941728, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.data[0].newHp
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319941728, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.data[1].newHp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319941728, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.data[2].newHp
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319941728, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.data[0].damage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319941728, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.data[1].damage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319941728, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.data[2].damage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319941728, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.data[1].woodCost
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319941728, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.data[2].woodCost
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319941728, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.data[1].stoneCost
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319941728, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: data.Array.data[2].stoneCost
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 87612897708973493, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1923011386518585959, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4610381316174552462, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: maxHp
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4610381316174552466, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
       propertyPath: m_Name
       value: fence
@@ -940,6 +1028,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5426667541780081402, guid: 843bec4df2bff618a900c3232cba76d4, type: 3}
+      propertyPath: startingPrayingDuration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1785293164, guid: 843bec4df2bff618a900c3232cba76d4, type: 3}
+      propertyPath: data.Array.data[1].woodCost
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1785293164, guid: 843bec4df2bff618a900c3232cba76d4, type: 3}
+      propertyPath: data.Array.data[2].woodCost
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1785293164, guid: 843bec4df2bff618a900c3232cba76d4, type: 3}
+      propertyPath: data.Array.data[1].stoneCost
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1785293164, guid: 843bec4df2bff618a900c3232cba76d4, type: 3}
+      propertyPath: data.Array.data[2].stoneCost
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 5078483185614107012, guid: 843bec4df2bff618a900c3232cba76d4, type: 3}
       propertyPath: m_Name
       value: statue
@@ -1484,7 +1592,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 210214840610094998, guid: 6d9db2e2cd9f0b3c196b27b1f2523524, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 210214840610094998, guid: 6d9db2e2cd9f0b3c196b27b1f2523524, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1556,6 +1664,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1743846192}
     - target: {fileID: 935356300631845555, guid: a3707011a3566c3abb9b4a4f7e015d82, type: 3}
+      propertyPath: woodAmount
+      value: 803
+      objectReference: {fileID: 0}
+    - target: {fileID: 935356300631845555, guid: a3707011a3566c3abb9b4a4f7e015d82, type: 3}
+      propertyPath: stoneAmount
+      value: 450
+      objectReference: {fileID: 0}
+    - target: {fileID: 935356300631845555, guid: a3707011a3566c3abb9b4a4f7e015d82, type: 3}
       propertyPath: postProcessingCameraScript
       value: 
       objectReference: {fileID: 947274320}
@@ -1618,7 +1734,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 223772646, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 223772646, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.data[0].woodCost
@@ -1630,7 +1746,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 223772646, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.data[2].woodCost
-      value: 5
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 223772646, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.data[3].woodCost
@@ -1642,7 +1758,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 223772646, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.data[2].stoneCost
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 223772646, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.data[3].stoneCost
@@ -1650,7 +1766,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 442581950, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 442581950, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.data[0].woodCost
@@ -1662,7 +1778,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 442581950, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.data[2].woodCost
-      value: 5
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 442581950, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.data[3].woodCost
@@ -1674,7 +1790,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 442581950, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.data[2].stoneCost
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 442581950, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.data[3].stoneCost
@@ -1682,7 +1798,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2130334765, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2130334765, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.data[0].woodCost
@@ -1694,7 +1810,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2130334765, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.data[2].woodCost
-      value: 5
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 2130334765, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.data[3].woodCost
@@ -1706,7 +1822,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2130334765, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.data[2].stoneCost
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2130334765, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: data.Array.data[3].stoneCost
@@ -2741,71 +2857,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 395c7d61bf08f2dd7994f3fb1dd0e89e, type: 3}
---- !u!1001 &4072223743692084970
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1750309511686762253, guid: 2bc25c09ef058094cb090f1b48b91f81, type: 3}
-      propertyPath: m_Name
-      value: afterEffects
-      objectReference: {fileID: 0}
-    - target: {fileID: 1750309511686762253, guid: 2bc25c09ef058094cb090f1b48b91f81, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7290426529222756971, guid: 2bc25c09ef058094cb090f1b48b91f81, type: 3}
-      propertyPath: m_RootOrder
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 7290426529222756971, guid: 2bc25c09ef058094cb090f1b48b91f81, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7290426529222756971, guid: 2bc25c09ef058094cb090f1b48b91f81, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7290426529222756971, guid: 2bc25c09ef058094cb090f1b48b91f81, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7290426529222756971, guid: 2bc25c09ef058094cb090f1b48b91f81, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7290426529222756971, guid: 2bc25c09ef058094cb090f1b48b91f81, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7290426529222756971, guid: 2bc25c09ef058094cb090f1b48b91f81, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7290426529222756971, guid: 2bc25c09ef058094cb090f1b48b91f81, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7290426529222756971, guid: 2bc25c09ef058094cb090f1b48b91f81, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7290426529222756971, guid: 2bc25c09ef058094cb090f1b48b91f81, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7290426529222756971, guid: 2bc25c09ef058094cb090f1b48b91f81, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2bc25c09ef058094cb090f1b48b91f81, type: 3}
 --- !u!1001 &6390011803778917685
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2816,7 +2867,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6390011804329847525, guid: b3da4e9eb227b939dac3429e2f0f1800, type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 6390011804329847525, guid: b3da4e9eb227b939dac3429e2f0f1800, type: 3}
       propertyPath: m_LocalPosition.x

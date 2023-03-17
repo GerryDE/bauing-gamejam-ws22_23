@@ -6,6 +6,9 @@ public class FenceController : MonoBehaviour
 {
     [SerializeField, Range(0, 1000)] private int maxHp = 100;
     [SerializeField] private int currentHp;
+    [SerializeField] private int damageOutput = 1;
+
+    public int DamageOutput => damageOutput;
 
     [SerializeField] private SpriteRenderer _renderer;
     
@@ -38,10 +41,11 @@ public class FenceController : MonoBehaviour
         currentHp = maxHp;
     }
 
-    private void OnUpgradeFence(int newHpValue, Sprite sprite)
+    private void OnUpgradeFence(int newHpValue, int damage, Sprite sprite)
     {
         MaxHp = newHpValue;
         CurrentHp = MaxHp;
+        damageOutput = damage;
         _renderer.sprite = sprite;
         _progressBarComponent.UpdateValues(currentHp, MaxHp);
     }
