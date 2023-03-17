@@ -6,7 +6,7 @@ public class MainMenuScript : MonoBehaviour
 {
     [SerializeField] String scene;
     
-    public void SwitchToGame()
+    public void OnSubmit()
     {
         SceneManager.LoadScene(scene);
     }
