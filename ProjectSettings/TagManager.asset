@@ -60,3 +60,6 @@ TagManager:
   - name: UI
     uniqueID: 1320368621
     locked: 0
+  - name: ProgressBar
+    uniqueID: 1588309021
+    locked: 0
