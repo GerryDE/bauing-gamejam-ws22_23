@@ -18,7 +18,7 @@ public class ProgressBarComponent : MonoBehaviour
         _currentTime = currentTime;
         _requiredTime = requiredTime;
         
-        foreground.gameObject.transform.localScale = Vector3.right * (currentTime / requiredTime);
+        foreground.gameObject.transform.localScale = new Vector3(Mathf.Min(currentTime / requiredTime, 1f), foreground.gameObject.transform.localScale.y, 0f);
     }
 
     public void Enable()

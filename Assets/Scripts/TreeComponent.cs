@@ -73,6 +73,7 @@ public class TreeComponent : InteractableBaseComponent
         base.Start();
         
         _renderer = GetComponent<SpriteRenderer>();
+        _renderer.sprite = GetDataByCurrentState()?.sprite;
 
         SetSpawnPosition();
         CalculateStateChangeDuration();
