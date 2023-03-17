@@ -41,5 +41,6 @@ public class FenceRepairComponent : InteractableBaseComponent
         _dataHandlerComponent.WoodAmount -= currentData.woodCost;
         _dataHandlerComponent.StoneAmount -= currentData.stoneCost;
         OnRepairFence?.Invoke(currentData.healAmount);
+        _dataHandlerComponent.PlayUpgradingAudioClip();
     }
 }

@@ -30,6 +30,7 @@ public class TreeUpgradeComponent : InteractableBaseComponent
         _dataHandlerComponent.WoodAmount -= nextUpgradeData.woodCost;
         _dataHandlerComponent.StoneAmount -= nextUpgradeData.stoneCost;
         OnUpgradeTree?.Invoke();
+        _dataHandlerComponent.PlayUpgradingAudioClip();
     }
 
     public List<Data> GetData()

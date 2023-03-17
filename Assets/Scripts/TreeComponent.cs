@@ -120,6 +120,7 @@ public class TreeComponent : InteractableBaseComponent
             {
                 _elapsedMiningTime = 0f;
                 OnDropWood?.Invoke(currentData.Value.dropAmount);
+                _dataHandlerComponent.PlayWoodCuttingAudioClip();
                 Respawn();
                 _progressBarComponent.Disable();
             }

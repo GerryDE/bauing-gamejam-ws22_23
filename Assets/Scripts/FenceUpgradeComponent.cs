@@ -36,5 +36,6 @@ public class FenceUpgradeComponent : InteractableBaseComponent
         _dataHandlerComponent.StoneAmount -= nextUpgradeData.stoneCost;
         OnUpgradeFence?.Invoke(nextUpgradeData.newHp, nextUpgradeData.damage, nextUpgradeData.sprite);
         _dataHandlerComponent.CurrentFenceVersion++;
+        _dataHandlerComponent.PlayUpgradingAudioClip();
     }
 }

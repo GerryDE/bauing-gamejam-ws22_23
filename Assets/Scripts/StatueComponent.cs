@@ -47,6 +47,7 @@ public class StatueComponent : InteractableBaseComponent
         _elapsedTime = 0;
         _prayCount++;
         _prayingDuration = CalculatePrayingDuration();
+        _dataHandlerComponent.PlayPraisingAudioClip();
     }
 
     private float CalculatePrayingDuration()
