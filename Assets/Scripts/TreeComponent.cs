@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 using static TreeComponent.State;
 using Random = UnityEngine.Random;
 
@@ -41,6 +42,7 @@ public class TreeComponent : InteractableBaseComponent
     [SerializeField] private Range spawnRange;
     [SerializeField] private State state = Spawning;
     [SerializeField] private List<VersionData> data;
+    private ProgressBarComponent _progressBarComponent;
 
     [Range(0f, 1f)] [SerializeField] private float stateChangeDurationVariance = 0.2f;
 
@@ -50,7 +52,7 @@ public class TreeComponent : InteractableBaseComponent
 
     private SpriteRenderer _renderer;
 
-    public State getState()
+    public State GetState()
     {
         return state;
     }
@@ -67,6 +69,7 @@ public class TreeComponent : InteractableBaseComponent
 
     protected override void Start()
     {
+        _progressBarComponent = GetComponent<ProgressBarComponent>();
         base.Start();
         
         _renderer = GetComponent<SpriteRenderer>();
@@ -106,17 +109,25 @@ public class TreeComponent : InteractableBaseComponent
         if (!Spawning.Equals(state) && _interaction1Enabled)
         {
             _elapsedMiningTime += Time.deltaTime;
+            
+            _progressBarComponent.Enable();
             var currentData = GetDataByCurrentState();
-            if (currentData.HasValue && _elapsedMiningTime > currentData.Value.miningDuration)
+            if (currentData == null) return;
+
+            _progressBarComponent.UpdateValues(_elapsedMiningTime, currentData.Value.miningDuration);
+            if (_elapsedMiningTime > currentData.Value.miningDuration)
             {
                 _elapsedMiningTime = 0f;
                 OnDropWood?.Invoke(currentData.Value.dropAmount);
                 Respawn();
+                _progressBarComponent.Disable();
             }
         }
         else
         {
+            _progressBarComponent.Disable();
             _elapsedMiningTime = 0f;
+            _progressBarComponent.UpdateValues(_elapsedMiningTime, 1f);
         }
     }
 
