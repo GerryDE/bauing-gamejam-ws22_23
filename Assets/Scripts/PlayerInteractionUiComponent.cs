@@ -1,13 +1,11 @@
-using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using static System.String;
 
 public class PlayerInteractionUiComponent : MonoBehaviour
 {
-    [SerializeField] private string buttonText;
-    [SerializeField] private string fenceText;
+    [SerializeField] protected string buttonText;
+    [SerializeField] protected string fenceText;
     [SerializeField] private string treeText;
     [SerializeField] private string statueText;
     [SerializeField] private string mineText;
@@ -34,18 +32,22 @@ public class PlayerInteractionUiComponent : MonoBehaviour
 
         textComponent.SetText("[" + buttonText + " (Hold)] " + action);
 
-        if (layer == "FenceTrigger" || buttonText.Equals("E"))
+        if (buttonText.Equals("E"))
         {
             textComponent.SetText("[" + buttonText + " (Press)] " + action);
         }
-        
+
+        if (layer is "FenceTrigger" && buttonText != "E")
+        {
+            textComponent.SetText(Empty);
+        }
+
         if (layer != "Tree") return;
         var state = other.gameObject.GetComponent<TreeComponent>().GetState();
         if (state == TreeComponent.State.Spawning)
         {
             textComponent.SetText(Empty);
         }
-        
     }
 
     protected virtual void OnTriggerExit2D(Collider2D other)
