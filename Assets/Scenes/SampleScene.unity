@@ -1149,11 +1149,11 @@ PrefabInstance:
       objectReference: {fileID: 1743846192}
     - target: {fileID: 935356300631845555, guid: a3707011a3566c3abb9b4a4f7e015d82, type: 3}
       propertyPath: woodAmount
-      value: 229
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 935356300631845555, guid: a3707011a3566c3abb9b4a4f7e015d82, type: 3}
       propertyPath: stoneAmount
-      value: 232
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 935356300631845555, guid: a3707011a3566c3abb9b4a4f7e015d82, type: 3}
       propertyPath: attackAudioClip
@@ -2295,9 +2295,45 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
+      propertyPath: data.Array.data[0].bossPrefab
+      value: 
+      objectReference: {fileID: 7866932865955879141, guid: b269a59c572df88d48a959922170a03b, type: 3}
+    - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
+      propertyPath: data.Array.data[1].bossPrefab
+      value: 
+      objectReference: {fileID: 7866932865955879141, guid: 78dfebff992be9c40ba2ef8ca7ab9dd1, type: 3}
+    - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
       propertyPath: data.Array.data[2].bossPrefab
       value: 
       objectReference: {fileID: 267851758946750762, guid: a52292cbf15a476bd8003030d2292d7c, type: 3}
+    - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
+      propertyPath: data.Array.data[0].spawnInterval
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
+      propertyPath: data.Array.data[2].spawnInterval
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
+      propertyPath: data.Array.data[1].enemiesToKillUntilBoss
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
+      propertyPath: data.Array.data[2].enemiesToKillUntilBoss
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
+      propertyPath: data.Array.data[0].maxAmountOfSimultaneouslyLivingEnemies
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
+      propertyPath: data.Array.data[1].maxAmountOfSimultaneouslyLivingEnemies
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
+      propertyPath: data.Array.data[2].maxAmountOfSimultaneouslyLivingEnemies
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3546891448737068497, guid: 29688846d5e648d309661e6784cc0585, type: 3}
       propertyPath: m_RootOrder
       value: 15
