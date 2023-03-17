@@ -7,13 +7,13 @@ public class FenceUpgradeComponent : InteractableBaseComponent
     [Serializable]
     public struct Data
     {
-        public int woodCost, stoneCost, newHp;
+        public int woodCost, stoneCost, newHp, damage;
         public Sprite sprite;
     }
 
     [SerializeField] private List<Data> data;
 
-    public delegate void UpgradeFence(int newHpValue, Sprite sprite);
+    public delegate void UpgradeFence(int newHpValue, int newDamage, Sprite sprite);
 
     public static UpgradeFence OnUpgradeFence;
 
@@ -34,7 +34,7 @@ public class FenceUpgradeComponent : InteractableBaseComponent
             _dataHandlerComponent.StoneAmount < nextUpgradeData.stoneCost) return;
         _dataHandlerComponent.WoodAmount -= nextUpgradeData.woodCost;
         _dataHandlerComponent.StoneAmount -= nextUpgradeData.stoneCost;
-        OnUpgradeFence?.Invoke(nextUpgradeData.newHp, nextUpgradeData.sprite);
+        OnUpgradeFence?.Invoke(nextUpgradeData.newHp, nextUpgradeData.damage, nextUpgradeData.sprite);
         _dataHandlerComponent.CurrentFenceVersion++;
     }
 }
