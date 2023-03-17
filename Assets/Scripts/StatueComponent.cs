@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(ProgressBarComponent))]
 public class StatueComponent : InteractableBaseComponent
 {
     [SerializeField] private float startingPrayingDuration = 1f;
@@ -9,6 +10,7 @@ public class StatueComponent : InteractableBaseComponent
     private float _elapsedTime;
     private float _prayingDuration;
     private int _prayCount;
+    private ProgressBarComponent _progressBarComponent;
 
     public delegate void Prayed(int amount);
 
@@ -18,6 +20,7 @@ public class StatueComponent : InteractableBaseComponent
     {
         base.Start();
         StatueUpgradeComponent.OnUpgradeStatue += OnUpgradeStatue;
+        _progressBarComponent = GetComponent<ProgressBarComponent>();
         _prayingDuration = CalculatePrayingDuration();
     }
 
@@ -31,10 +34,13 @@ public class StatueComponent : InteractableBaseComponent
         if (!_interaction1Enabled)
         {
             _prayCount = 0;
+            _progressBarComponent.Disable();
             return;
         }
 
         _elapsedTime += Time.deltaTime;
+        _progressBarComponent.Enable();
+        _progressBarComponent.UpdateValues(_elapsedTime, _prayingDuration);
         if (_elapsedTime <= _prayingDuration) return;
 
         OnPrayed?.Invoke(1);

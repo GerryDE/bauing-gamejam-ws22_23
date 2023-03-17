@@ -1,12 +1,15 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(ProgressBarComponent))]
 public class FenceController : MonoBehaviour
 {
     [SerializeField, Range(0, 1000)] private int maxHp = 100;
     [SerializeField] private int currentHp;
 
     [SerializeField] private SpriteRenderer _renderer;
+    
+    private ProgressBarComponent _progressBarComponent;
 
     public int MaxHp
     {
@@ -18,6 +21,13 @@ public class FenceController : MonoBehaviour
     {
         get => currentHp;
         private set => currentHp = value;
+    }
+
+    private void Start()
+    {
+        _progressBarComponent = GetComponent<ProgressBarComponent>();
+        _progressBarComponent.Enable();
+        _progressBarComponent.UpdateValues(currentHp, MaxHp);
     }
 
     private void Awake()
@@ -33,11 +43,13 @@ public class FenceController : MonoBehaviour
         MaxHp = newHpValue;
         CurrentHp = MaxHp;
         _renderer.sprite = sprite;
+        _progressBarComponent.UpdateValues(currentHp, MaxHp);
     }
 
     private void OnRepairFence(int amount)
     {
         currentHp = Math.Min(currentHp + amount, maxHp);
+        _progressBarComponent.UpdateValues(currentHp, MaxHp);
     }
 
     private void OnCollisionEnter2D(Collision2D col)
@@ -45,6 +57,7 @@ public class FenceController : MonoBehaviour
         if (!col.gameObject.layer.Equals(LayerMask.NameToLayer("Enemy"))) return;
 
         currentHp -= 1;
+        _progressBarComponent.UpdateValues(currentHp, MaxHp);
 
         if (currentHp > 0) return;
         Destroy(gameObject);

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
+[RequireComponent(typeof(ProgressBarComponent))]
 public class StoneComponent : InteractableBaseComponent
 {
     [SerializeField] private float startingMiningDuration = 1f;
@@ -12,6 +13,7 @@ public class StoneComponent : InteractableBaseComponent
     private float _miningDuration;
     private int _minedStonesCount;
     private int _dropAmount = 1;
+    private ProgressBarComponent _progressBarComponent;
 
     public delegate void StoneDrop(int amount);
 
@@ -20,6 +22,7 @@ public class StoneComponent : InteractableBaseComponent
     protected override void Start()
     {
         base.Start();
+        _progressBarComponent = GetComponent<ProgressBarComponent>();
         StoneUpgradeComponent.OnUpgradeMine += OnUpgradeMine;
         _currentBaseMiningDuration = startingMiningDuration;
         _miningDuration = CalculateMiningDuration();
@@ -34,9 +37,15 @@ public class StoneComponent : InteractableBaseComponent
 
     private void FixedUpdate()
     {
-        if (!_interaction1Enabled) return;
+        if (!_interaction1Enabled)
+        {
+            _progressBarComponent.Disable();
+            return;
+        }
 
         _elapsedMiningTime += Time.deltaTime;
+        _progressBarComponent.Enable();
+        _progressBarComponent.UpdateValues(_elapsedMiningTime, _miningDuration);
         if (_elapsedMiningTime <= _miningDuration) return;
 
         OnStoneDrop?.Invoke(_dropAmount);
