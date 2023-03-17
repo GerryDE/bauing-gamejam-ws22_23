@@ -1,4 +1,6 @@
+using DefaultNamespace;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyController : MonoBehaviour
@@ -7,6 +9,10 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float moveSpeed = 100f;
     [SerializeField] private int damageOutput = 30;
     [SerializeField] private Vector2 throwBackForce = new Vector2(-100f, 0f);
+    [SerializeField] private EnemyHpBar hpBar;
+    
+    [SerializeField] private SpriteRenderer backgroundRenderer;
+    [SerializeField] private SpriteRenderer foregroundRenderer;
 
     private Rigidbody2D _rigidbody;
     [SerializeField] private int currentHp;
@@ -44,6 +50,7 @@ public class EnemyController : MonoBehaviour
         if (col.gameObject.layer.Equals(LayerMask.NameToLayer("Fence")))
         {
             currentHp -= col.gameObject.GetComponent<FenceController>().DamageOutput;
+            hpBar.UpdateValues(currentHp, maxHp);
             _rigidbody.AddForce(throwBackForce);
             _dataHandlerComponent.PlayAttackAudioClip();
         }
@@ -56,6 +63,7 @@ public class EnemyController : MonoBehaviour
 
             _rigidbody.AddForce(throwBackForce);
             _dataHandlerComponent.PlayAttackPlayerAudioClip();
+            hpBar.UpdateValues(currentHp, maxHp);
         }
 
         if (currentHp > 0 || _shallBeDestroyed) return;
