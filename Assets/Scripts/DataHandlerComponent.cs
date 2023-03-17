@@ -107,7 +107,53 @@ public class DataHandlerComponent : MonoBehaviour
 
     [SerializeField] private int stoneAmount;
 
-    [SerializeField] AudioClip[] audioclips;
+    [SerializeField] private AudioClip attackAudioClip;
+    [SerializeField] private AudioClip attackPlayerAudioClip;
+    [SerializeField] private AudioClip miningAudioClip;
+    [SerializeField] private AudioClip praisingAudioClip;
+    [SerializeField] private AudioClip woodCuttingAudioClip;
+    [SerializeField] private AudioClip upgradingAudioClip;
+
+    public void PlayAttackAudioClip()
+    {
+        audioSource.clip = attackAudioClip;
+        audioSource.PlayOneShot(attackAudioClip);
+    }
+    
+    public void PlayAttackPlayerAudioClip()
+    {
+        audioSource.clip = attackPlayerAudioClip;
+        audioSource.PlayOneShot(attackPlayerAudioClip);
+    }
+    
+    public void PlayMiningAudioClip()
+    {
+        audioSource.clip = miningAudioClip;
+        audioSource.PlayOneShot(miningAudioClip);
+    }
+    
+    public void PlayPraisingAudioClip()
+    {
+        audioSource.clip = praisingAudioClip;
+        audioSource.PlayOneShot(praisingAudioClip);
+    }
+    
+    public void PlayWoodCuttingAudioClip()
+    {
+        audioSource.clip = woodCuttingAudioClip;
+        audioSource.PlayOneShot(woodCuttingAudioClip);
+    }
+    
+    public void PlayUpgradingAudioClip()
+    {
+        audioSource.clip = upgradingAudioClip;
+        audioSource.PlayOneShot(upgradingAudioClip);
+    }
+    
+    public void PlayerAttackAudioClip()
+    {
+        audioSource.PlayOneShot(attackAudioClip);
+    }
 
     /// <summary>
     /// 1 Attacking
@@ -170,19 +216,19 @@ public class DataHandlerComponent : MonoBehaviour
     private void OnUpgradeTree()
     {
         CurrentTreeVersion++;
-        audioSource.PlayOneShot(audioclips[3]);
+        PlayUpgradingAudioClip();
     }
 
     private void OnUpgradeMine(float newMiningDuration, int newDropAmount, Sprite sprite)
     {
         CurrentMineVersion++;
-        audioSource.PlayOneShot(audioclips[3]);
+        PlayUpgradingAudioClip();
     }
 
     private void OnUpgradeStatue(int newAgeValue, Sprite sprite)
     {
         MaxRemainingYears = newAgeValue;
-        audioSource.PlayOneShot(audioclips[3]);
+        PlayUpgradingAudioClip();
     }
 
     private void OnBossDestroyed()

@@ -33,6 +33,7 @@ public class StatueUpgradeComponent : InteractableBaseComponent
         _dataHandlerComponent.StoneAmount -= nextUpgradeData.stoneCost;
         OnUpgradeStatue?.Invoke(nextUpgradeData.newMaxAge, nextUpgradeData.sprite);
         _dataHandlerComponent.CurrentStatueVersion++;
+        _dataHandlerComponent.PlayUpgradingAudioClip();
     }
 
     public List<Data> GetData()

@@ -19,8 +19,11 @@ public class EnemyController : MonoBehaviour
     public static EnemyDestroyed OnEnemyDestroyed;
     public static ReducePlayerLifetime OnReducePlayerLifetime;
 
+    private DataHandlerComponent _dataHandlerComponent;
+
     private void Awake()
     {
+        _dataHandlerComponent = GameObject.FindWithTag("DataHandler").GetComponent<DataHandlerComponent>();
         _rigidbody = GetComponent<Rigidbody2D>();
         currentHp = maxHp;
     }
@@ -42,6 +45,7 @@ public class EnemyController : MonoBehaviour
         {
             currentHp -= col.gameObject.GetComponent<FenceController>().DamageOutput;
             _rigidbody.AddForce(throwBackForce);
+            _dataHandlerComponent.PlayAttackAudioClip();
         }
 
         if (col.gameObject.layer.Equals(LayerMask.NameToLayer("Player")))
@@ -51,6 +55,7 @@ public class EnemyController : MonoBehaviour
             currentHp--;
 
             _rigidbody.AddForce(throwBackForce);
+            _dataHandlerComponent.PlayAttackPlayerAudioClip();
         }
 
         if (currentHp > 0 || _shallBeDestroyed) return;

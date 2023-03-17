@@ -52,6 +52,7 @@ public class StoneComponent : InteractableBaseComponent
         _elapsedMiningTime = 0f;
         _minedStonesCount += _dropAmount;
         _miningDuration = CalculateMiningDuration();
+        _dataHandlerComponent.PlayMiningAudioClip();
     }
 
     private float CalculateMiningDuration()
