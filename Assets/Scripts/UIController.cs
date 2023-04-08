@@ -11,7 +11,7 @@ public class UIController : MonoBehaviour
     // In welcher Welle befinden wir uns
     [SerializeField] int welle = 1;
     // In Welcher Generation befinden wir uns, ggf. als Pop-Up
-    [FormerlySerializedAs("alter")] [FormerlySerializedAs("generation")] [SerializeField] int remainingYears;
+    [SerializeField] int remainingYears;
     //Holz, und Steinvorrat
     [SerializeField] int anzahlStein;
     [SerializeField] int anzahlHolz;
@@ -37,6 +37,7 @@ public class UIController : MonoBehaviour
     [SerializeField] Transform playerTransform;
     [SerializeField] Transform parentTransform;
     private TextMeshPro textPopup;
+    private bool _gameOverTriggered;
 
     private void Awake()
     {
@@ -118,10 +119,9 @@ public class UIController : MonoBehaviour
     private void UpdateRemainingYears(int newValue)
     {
         remainingYears = newValue;
-        if(remainingYears == 0)
-        {
-            StartCoroutine(EndGameScreen());
-        }
+        if (remainingYears > 0 || _gameOverTriggered) return;
+        _gameOverTriggered = true;
+        StartCoroutine(EndGameScreen());
     }
 
     private void UpdateWelle()
@@ -155,7 +155,6 @@ public class UIController : MonoBehaviour
         fadeIn = true;
         yield return new WaitForSeconds(2f);
         tryAgainText.enabled = true;
-        yield break; ;
     }
 
     IEnumerator FadeOutText(float fadeTime, TextMeshPro textGameObject, GameObject gameObject)
