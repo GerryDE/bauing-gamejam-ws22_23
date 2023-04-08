@@ -62,7 +62,7 @@ public class DataHandlerComponent : MonoBehaviour
         get => remainingYears;
         set
         {
-            remainingYears = value;
+            remainingYears = Math.Max(0, value);
             OnRemainingYearsChanged?.Invoke(remainingYears);
             postProcessingCameraScript.UpdateSaturaion(remainingYears * 1f);
             postProcessingCameraScript.UpdateVignette(remainingYears);
