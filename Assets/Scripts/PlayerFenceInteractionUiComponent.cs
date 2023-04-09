@@ -35,7 +35,7 @@ namespace DefaultNamespace
                 return;
             }
 
-            textComponent.SetText("[" + buttonText + " (Press)] " + fenceText);
+            textComponent.SetText("[" + buttonText + "] " + fenceText);
 
             var data = other.gameObject.GetComponent<FenceRepairComponent>().GetData();
             var currentVersion = _dataHandlerComponent.CurrentFenceVersion;

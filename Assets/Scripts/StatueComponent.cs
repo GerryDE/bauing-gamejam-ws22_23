@@ -34,6 +34,7 @@ public class StatueComponent : InteractableBaseComponent
         if (!_interaction1Enabled)
         {
             _prayCount = 0;
+            _elapsedTime = 0;
             _progressBarComponent.Disable();
             return;
         }

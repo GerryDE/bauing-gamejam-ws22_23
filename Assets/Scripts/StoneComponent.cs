@@ -39,6 +39,7 @@ public class StoneComponent : InteractableBaseComponent
     {
         if (!_interaction1Enabled)
         {
+            _elapsedMiningTime = 0f;
             _progressBarComponent.Disable();
             return;
         }
