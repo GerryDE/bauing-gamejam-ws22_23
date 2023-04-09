@@ -30,11 +30,11 @@ public class PlayerInteractionUiComponent : MonoBehaviour
             _ => ""
         };
 
-        textComponent.SetText("[" + buttonText + " (Hold)] " + action);
+        textComponent.SetText("[" + buttonText + "] " + action);
 
         if (buttonText.Equals("E"))
         {
-            textComponent.SetText("[" + buttonText + " (Press)] " + action);
+            textComponent.SetText("[" + buttonText + "] " + action);
         }
 
         if (layer is "FenceTrigger" && buttonText != "E")

@@ -16,8 +16,16 @@ public class InteractableBaseComponent : MonoBehaviour
         PlayerController.OnInteractionButton1Released += OnInteractionButton1Released;
         PlayerController.OnInteractionButton1Pressed += OnInteractionButton1Pressed;
         PlayerController.OnInteractionButton2Pressed += OnInteractionButton2Pressed;
+        PlayerController.OnPlayerMove += OnPlayerMove;
 
         _dataHandlerComponent = GameObject.FindWithTag("DataHandler").GetComponent<DataHandlerComponent>();
+    }
+
+    protected virtual void OnPlayerMove(float direction, float velocity)
+    {
+        if (velocity.Equals(0f)) return;
+        _interactionButton1Pressed = false;
+        _interaction1Enabled = false;
     }
 
     protected virtual void OnInteractionButton1Pressed()
@@ -43,7 +51,14 @@ public class InteractableBaseComponent : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other)
     {
         _isCollidingWithPlayer = other.gameObject.layer.Equals(LayerMask.NameToLayer("Player"));
-        _interaction1Enabled = _isCollidingWithPlayer && _interactionButton1Holding;
+
+        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Enemy")))
+        {
+            _interactionButton1Pressed = false;
+            _interactionButton2Pressed = false;
+        }
+        
+        _interaction1Enabled = _isCollidingWithPlayer && _interactionButton1Pressed;
         _interaction2Enabled = _isCollidingWithPlayer && _interactionButton2Pressed;
     }
 

@@ -89,8 +89,6 @@ public class TreeComponent : InteractableBaseComponent
 
     private void FixedUpdate()
     {
-        // if (_isRespawning) return;
-
         _elapsedStateChangeTime += Time.deltaTime;
         if (_elapsedStateChangeTime > _stateChangeDuration)
         {
@@ -123,6 +121,8 @@ public class TreeComponent : InteractableBaseComponent
                 _dataHandlerComponent.PlayWoodCuttingAudioClip();
                 Respawn();
                 _progressBarComponent.Disable();
+                _interaction1Enabled = false;
+                _interactionButton1Pressed = false;
             }
         }
         else
