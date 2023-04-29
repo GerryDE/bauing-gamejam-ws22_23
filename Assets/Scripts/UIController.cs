@@ -45,8 +45,8 @@ public class UIController : MonoBehaviour
 
     private void Start()
     {
-        DataHandlerComponent.OnWoodAmountChanged += UpdateHolzVorrat;
-        DataHandlerComponent.OnStoneAmountChanged += UpdateSteinVorrat;
+        ResourceData.OnCurrentWoodAmountChanged += UpdateHolzVorrat;
+        ResourceData.OnCurrentStoneAmountChanged += UpdateSteinVorrat;
         PlayerData.OnPlayerCurrentRemainingYearsChanged += UpdateRemainingYears;
         DataHandlerComponent.OnWaveCountChanged += UpdateWaveCount;
         BossComponent.OnBossDestroyed += UpdateWelle;
@@ -148,8 +148,8 @@ public class UIController : MonoBehaviour
 
     private void OnDestroy()
     {
-        DataHandlerComponent.OnWoodAmountChanged -= UpdateHolzVorrat;
-        DataHandlerComponent.OnStoneAmountChanged -= UpdateSteinVorrat;
+        ResourceData.OnCurrentWoodAmountChanged -= UpdateHolzVorrat;
+        ResourceData.OnCurrentStoneAmountChanged -= UpdateSteinVorrat;
         PlayerData.OnPlayerCurrentRemainingYearsChanged -= UpdateRemainingYears;
         DataHandlerComponent.OnWaveCountChanged -= UpdateWaveCount;
         BossComponent.OnBossDestroyed -= UpdateWelle;

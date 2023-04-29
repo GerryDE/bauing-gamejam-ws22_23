@@ -5,12 +5,12 @@ using UnityEngine;
 public class DataHandlerComponent : MonoBehaviour
 {
     [SerializeField] private int waveCount = 1;
-    [SerializeField] private int woodAmount;
     [SerializeField] private int currentFenceVersion;
     [SerializeField] private int currentStatueVersion;
     [SerializeField] private int currentMineVersion;
 
     private static PlayerData _playerData;
+    private static ResourceData _resourceData;
 
     public int CurrentMineVersion
     {
@@ -53,26 +53,6 @@ public class DataHandlerComponent : MonoBehaviour
         set => currentFenceVersion = value;
     }
 
-    public int WoodAmount
-    {
-        get => woodAmount;
-        set
-        {
-            woodAmount = value;
-            OnWoodAmountChanged?.Invoke(value);
-        }
-    }
-
-    public int StoneAmount
-    {
-        get => stoneAmount;
-        set
-        {
-            stoneAmount = value;
-            OnStoneAmountChanged?.Invoke(value);
-        }
-    }
-
     public int CurrentStatueVersion
     {
         get => currentStatueVersion;
@@ -83,8 +63,6 @@ public class DataHandlerComponent : MonoBehaviour
         }
     }
 
-    [SerializeField] private int stoneAmount;
-
     [SerializeField] private AudioClip attackAudioClip;
     [SerializeField] private AudioClip attackPlayerAudioClip;
     [SerializeField] private AudioClip miningAudioClip;
@@ -94,43 +72,43 @@ public class DataHandlerComponent : MonoBehaviour
 
     public void PlayAttackAudioClip()
     {
-        audioSource.clip = attackAudioClip;
-        audioSource.PlayOneShot(attackAudioClip);
+        _audioSource.clip = attackAudioClip;
+        _audioSource.PlayOneShot(attackAudioClip);
     }
 
     public void PlayAttackPlayerAudioClip()
     {
-        audioSource.clip = attackPlayerAudioClip;
-        audioSource.PlayOneShot(attackPlayerAudioClip);
+        _audioSource.clip = attackPlayerAudioClip;
+        _audioSource.PlayOneShot(attackPlayerAudioClip);
     }
 
     public void PlayMiningAudioClip()
     {
-        audioSource.clip = miningAudioClip;
-        audioSource.PlayOneShot(miningAudioClip);
+        _audioSource.clip = miningAudioClip;
+        _audioSource.PlayOneShot(miningAudioClip);
     }
 
     public void PlayPraisingAudioClip()
     {
-        audioSource.clip = praisingAudioClip;
-        audioSource.PlayOneShot(praisingAudioClip);
+        _audioSource.clip = praisingAudioClip;
+        _audioSource.PlayOneShot(praisingAudioClip);
     }
 
     public void PlayWoodCuttingAudioClip()
     {
-        audioSource.clip = woodCuttingAudioClip;
-        audioSource.PlayOneShot(woodCuttingAudioClip);
+        _audioSource.clip = woodCuttingAudioClip;
+        _audioSource.PlayOneShot(woodCuttingAudioClip);
     }
 
     public void PlayUpgradingAudioClip()
     {
-        audioSource.clip = upgradingAudioClip;
-        audioSource.PlayOneShot(upgradingAudioClip);
+        _audioSource.clip = upgradingAudioClip;
+        _audioSource.PlayOneShot(upgradingAudioClip);
     }
 
     public void PlayerAttackAudioClip()
     {
-        audioSource.PlayOneShot(attackAudioClip);
+        _audioSource.PlayOneShot(attackAudioClip);
     }
 
     /// <summary>
@@ -140,10 +118,6 @@ public class DataHandlerComponent : MonoBehaviour
     /// 4 Upgrading
     /// 5 Woodcutting
     /// </summary>
-    public delegate void WoodAmountChanged(int newValue);
-
-    public delegate void StoneAmountChanged(int newValue);
-
     public delegate void WaveCountChanged(int newValue);
 
     public delegate void StatueVersionChanged(int newValue);
@@ -152,13 +126,11 @@ public class DataHandlerComponent : MonoBehaviour
 
     public delegate void TreeVersionChanged(int newVersion);
 
-    public static WoodAmountChanged OnWoodAmountChanged;
-    public static StoneAmountChanged OnStoneAmountChanged;
     public static WaveCountChanged OnWaveCountChanged;
     public static StatueVersionChanged OnStatueVersionChanged;
     public static MineVersionChanged OnMineVersionChanged;
     public static TreeVersionChanged OnTreeVersionChanged;
-    private AudioSource audioSource;
+    private AudioSource _audioSource;
 
     private void Update()
     {
@@ -167,7 +139,8 @@ public class DataHandlerComponent : MonoBehaviour
     private void Start()
     {
         _playerData = DataProvider.Instance.PlayerData;
-            
+        _resourceData = DataProvider.Instance.ResourceData;
+
         TreeComponent.OnDropWood += OnDropWood;
         StoneComponent.OnStoneDrop += OnStoneDrop;
         StatueComponent.OnPrayed += OnPrayed;
@@ -178,10 +151,8 @@ public class DataHandlerComponent : MonoBehaviour
         StoneUpgradeComponent.OnUpgradeMine += OnUpgradeMine;
         TreeUpgradeComponent.OnUpgradeTree += OnUpgradeTree;
 
-        OnWoodAmountChanged?.Invoke(woodAmount);
-        OnStoneAmountChanged?.Invoke(stoneAmount);
         OnWaveCountChanged?.Invoke(waveCount);
-        audioSource = gameObject.GetComponent<AudioSource>();
+        _audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     private void OnUpgradeTree()
@@ -225,13 +196,13 @@ public class DataHandlerComponent : MonoBehaviour
 
     private void OnStoneDrop(int amount)
     {
-        StoneAmount += amount;
+        _resourceData.CurrentStoneAmount += amount;
         uiScript.giveFeedbackWithValues(amount, "Stone");
     }
 
     private void OnDropWood(int amount)
     {
-        WoodAmount += amount;
+        _resourceData.CurrentWoodAmount += amount;
         uiScript.giveFeedbackWithValues(amount, "Wood");
     }
 
