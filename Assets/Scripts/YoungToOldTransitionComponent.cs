@@ -1,44 +1,38 @@
-using System;
+using Data;
 using UnityEngine;
 
 public class YoungToOldTransitionComponent : MonoBehaviour
 {
-    [SerializeField] private int remainingYearsForYoung;
-    [SerializeField] private int remainingYearsForOld;
-
-    private DataHandlerComponent _dataHandlerComponent;
-
     public delegate void YoungOldTransitionChanged(float newValue);
 
     public static YoungOldTransitionChanged OnYoungOldTransitionChanged;
 
-    private void Start()
+    private static PlayerData _playerData;
+
+    private void Awake()
     {
-        DataHandlerComponent.OnRemainingYearsChanged += OnRemainingYearsChanged;
+        _playerData = DataProvider.Instance.PlayerData;
+        PlayerData.OnPlayerCurrentRemainingYearsChanged += OnRemainingYearsChanged;
     }
 
     private void OnRemainingYearsChanged(int remainingYears)
     {
         float transitionValue;
-        if (remainingYears > remainingYearsForYoung)
+        if (remainingYears > _playerData.RemainingYearsForStayingYoung)
         {
             transitionValue = 1f;
         }
-        else if (remainingYears > remainingYearsForOld)
+        else if (remainingYears > _playerData.RemainingYearsForBecomingOld)
         {
-            transitionValue = (remainingYears - remainingYearsForOld) /
-                              (float)(remainingYearsForYoung - remainingYearsForOld);
+            transitionValue = (remainingYears - _playerData.RemainingYearsForBecomingOld) /
+                              (float)(_playerData.RemainingYearsForStayingYoung -
+                                      _playerData.RemainingYearsForBecomingOld);
         }
         else
         {
             transitionValue = 0f;
         }
-        
-        OnYoungOldTransitionChanged?.Invoke(transitionValue);
-    }
 
-    private void OnDestroy()
-    {
-        DataHandlerComponent.OnRemainingYearsChanged -= OnRemainingYearsChanged;
+        OnYoungOldTransitionChanged?.Invoke(transitionValue);
     }
 }

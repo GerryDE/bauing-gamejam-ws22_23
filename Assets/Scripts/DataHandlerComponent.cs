@@ -1,33 +1,23 @@
 using System;
+using Data;
 using UnityEngine;
 
 public class DataHandlerComponent : MonoBehaviour
 {
-    [SerializeField] private int remainingYears = 50;
-    [SerializeField] private int maxRemainingYears = 50;
-
-    public int MaxRemainingYears
-    {
-        get => maxRemainingYears;
-        set
-        {
-            maxRemainingYears = value;
-            OnMaxRemainingYearsChanged?.Invoke(maxRemainingYears);
-        }
-    }
-
     [SerializeField] private int waveCount = 1;
     [SerializeField] private int woodAmount;
     [SerializeField] private int currentFenceVersion;
     [SerializeField] private int currentStatueVersion;
     [SerializeField] private int currentMineVersion;
 
+    private static PlayerData _playerData;
+
     public int CurrentMineVersion
     {
         get => currentMineVersion;
         set
         {
-            currentMineVersion = value; 
+            currentMineVersion = value;
             OnMineVersionChanged?.Invoke(currentMineVersion);
         }
     }
@@ -39,7 +29,7 @@ public class DataHandlerComponent : MonoBehaviour
         get => currentTreeVersion;
         set
         {
-            currentTreeVersion = value; 
+            currentTreeVersion = value;
             OnTreeVersionChanged?.Invoke(currentTreeVersion);
         }
     }
@@ -54,18 +44,6 @@ public class DataHandlerComponent : MonoBehaviour
         {
             waveCount = value;
             OnWaveCountChanged.Invoke(waveCount);
-        }
-    }
-
-    public int RemainingYears
-    {
-        get => remainingYears;
-        set
-        {
-            remainingYears = Math.Max(0, value);
-            OnRemainingYearsChanged?.Invoke(remainingYears);
-            postProcessingCameraScript.UpdateSaturaion(remainingYears * 1f);
-            postProcessingCameraScript.UpdateVignette(remainingYears);
         }
     }
 
@@ -119,37 +97,37 @@ public class DataHandlerComponent : MonoBehaviour
         audioSource.clip = attackAudioClip;
         audioSource.PlayOneShot(attackAudioClip);
     }
-    
+
     public void PlayAttackPlayerAudioClip()
     {
         audioSource.clip = attackPlayerAudioClip;
         audioSource.PlayOneShot(attackPlayerAudioClip);
     }
-    
+
     public void PlayMiningAudioClip()
     {
         audioSource.clip = miningAudioClip;
         audioSource.PlayOneShot(miningAudioClip);
     }
-    
+
     public void PlayPraisingAudioClip()
     {
         audioSource.clip = praisingAudioClip;
         audioSource.PlayOneShot(praisingAudioClip);
     }
-    
+
     public void PlayWoodCuttingAudioClip()
     {
         audioSource.clip = woodCuttingAudioClip;
         audioSource.PlayOneShot(woodCuttingAudioClip);
     }
-    
+
     public void PlayUpgradingAudioClip()
     {
         audioSource.clip = upgradingAudioClip;
         audioSource.PlayOneShot(upgradingAudioClip);
     }
-    
+
     public void PlayerAttackAudioClip()
     {
         audioSource.PlayOneShot(attackAudioClip);
@@ -162,14 +140,9 @@ public class DataHandlerComponent : MonoBehaviour
     /// 4 Upgrading
     /// 5 Woodcutting
     /// </summary>
-
     public delegate void WoodAmountChanged(int newValue);
 
     public delegate void StoneAmountChanged(int newValue);
-
-    public delegate void RemainingYearsChanged(int newValue);
-
-    public delegate void MaxRemainingYearsChanged(int newValue);
 
     public delegate void WaveCountChanged(int newValue);
 
@@ -181,8 +154,6 @@ public class DataHandlerComponent : MonoBehaviour
 
     public static WoodAmountChanged OnWoodAmountChanged;
     public static StoneAmountChanged OnStoneAmountChanged;
-    public static RemainingYearsChanged OnRemainingYearsChanged;
-    public static MaxRemainingYearsChanged OnMaxRemainingYearsChanged;
     public static WaveCountChanged OnWaveCountChanged;
     public static StatueVersionChanged OnStatueVersionChanged;
     public static MineVersionChanged OnMineVersionChanged;
@@ -191,11 +162,12 @@ public class DataHandlerComponent : MonoBehaviour
 
     private void Update()
     {
-
     }
 
     private void Start()
     {
+        _playerData = DataProvider.Instance.PlayerData;
+            
         TreeComponent.OnDropWood += OnDropWood;
         StoneComponent.OnStoneDrop += OnStoneDrop;
         StatueComponent.OnPrayed += OnPrayed;
@@ -206,7 +178,6 @@ public class DataHandlerComponent : MonoBehaviour
         StoneUpgradeComponent.OnUpgradeMine += OnUpgradeMine;
         TreeUpgradeComponent.OnUpgradeTree += OnUpgradeTree;
 
-        OnRemainingYearsChanged?.Invoke(remainingYears);
         OnWoodAmountChanged?.Invoke(woodAmount);
         OnStoneAmountChanged?.Invoke(stoneAmount);
         OnWaveCountChanged?.Invoke(waveCount);
@@ -227,7 +198,7 @@ public class DataHandlerComponent : MonoBehaviour
 
     private void OnUpgradeStatue(int newAgeValue, Sprite sprite)
     {
-        MaxRemainingYears = newAgeValue;
+        _playerData.MaxRemainingYears = newAgeValue;
         PlayUpgradingAudioClip();
     }
 
@@ -238,17 +209,18 @@ public class DataHandlerComponent : MonoBehaviour
 
     private void OnYearPassed()
     {
-        RemainingYears--;
+        _playerData.CurrentRemainingYears--;
     }
 
     private void OnReducePlayerLifetime(int amount)
     {
-        RemainingYears -= amount;
+        _playerData.CurrentRemainingYears -= amount;
     }
 
     private void OnPrayed(int amount)
     {
-        RemainingYears = Math.Min(remainingYears + amount, maxRemainingYears);
+        _playerData.CurrentRemainingYears =
+            Math.Min(_playerData.CurrentRemainingYears + amount, _playerData.MaxRemainingYears);
     }
 
     private void OnStoneDrop(int amount)

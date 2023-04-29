@@ -1,20 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using Data;
 using TMPro;
-using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 public class UIController : MonoBehaviour
 {
     // In welcher Welle befinden wir uns
     [SerializeField] int welle = 1;
+
     // In Welcher Generation befinden wir uns, ggf. als Pop-Up
     [SerializeField] int remainingYears;
+
     //Holz, und Steinvorrat
     [SerializeField] int anzahlStein;
+
     [SerializeField] int anzahlHolz;
+
     //Liste der Texte
     [SerializeField] List<TextMeshProUGUI> listTexte = new List<TextMeshProUGUI>();
     // Nach Index was ist was
@@ -39,14 +43,17 @@ public class UIController : MonoBehaviour
     private TextMeshPro textPopup;
     private bool _gameOverTriggered;
 
-    private void Awake()
+    private void Start()
     {
         DataHandlerComponent.OnWoodAmountChanged += UpdateHolzVorrat;
         DataHandlerComponent.OnStoneAmountChanged += UpdateSteinVorrat;
-        DataHandlerComponent.OnRemainingYearsChanged += UpdateRemainingYears;
+        PlayerData.OnPlayerCurrentRemainingYearsChanged += UpdateRemainingYears;
         DataHandlerComponent.OnWaveCountChanged += UpdateWaveCount;
         BossComponent.OnBossDestroyed += UpdateWelle;
         PlayerController.OnRestartGame += OnRestartGame;
+
+        remainingYears = DataProvider.Instance.PlayerData.CurrentRemainingYears;
+
         InitTexteUndWerte();
         // gameOverText.enabled = false;
         // tryAgainText.enabled = false;
@@ -66,7 +73,7 @@ public class UIController : MonoBehaviour
         {
             fadeAmount = gameOverText.color.a + (fadeSpeed * Time.deltaTime);
             gameOverText.color = new Color(255, 255, 255, fadeAmount);
-            if(gameOverText.color.a >= 255)
+            if (gameOverText.color.a >= 255)
             {
                 fadeIn = false;
             }
@@ -143,7 +150,7 @@ public class UIController : MonoBehaviour
     {
         DataHandlerComponent.OnWoodAmountChanged -= UpdateHolzVorrat;
         DataHandlerComponent.OnStoneAmountChanged -= UpdateSteinVorrat;
-        DataHandlerComponent.OnRemainingYearsChanged -= UpdateRemainingYears;
+        PlayerData.OnPlayerCurrentRemainingYearsChanged -= UpdateRemainingYears;
         DataHandlerComponent.OnWaveCountChanged -= UpdateWaveCount;
         BossComponent.OnBossDestroyed -= UpdateWelle;
         PlayerController.OnRestartGame -= OnRestartGame;
@@ -166,6 +173,7 @@ public class UIController : MonoBehaviour
             textGameObject.color = new Color(255, 255, 255, amount);
             yield return new WaitForSeconds(fadeTime / 10000);
         }
+
         Destroy(gameObject);
         yield break;
     }
