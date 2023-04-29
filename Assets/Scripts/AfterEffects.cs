@@ -1,5 +1,6 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
+using Data;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -11,18 +12,28 @@ public class AfterEffects : MonoBehaviour
     VolumeProfile volumeProfile;
     [SerializeField] float fadeSpeed;
     private float fadeAmount = 0;
+
     private void Awake()
     {
-        volumeProfile = GetComponent<Volume>()?.profile;
-        if (!volumeProfile) throw new System.NullReferenceException(nameof(VolumeProfile));
+        PlayerData.OnPlayerCurrentRemainingYearsChanged += OnRemainingYearsChanged;
 
-        if (!volumeProfile.TryGet(out vignette)) throw new System.NullReferenceException(nameof(vignette));
-        if (!volumeProfile.TryGet(out colorAdjustments)) throw new System.NullReferenceException(nameof(colorAdjustments));
+        volumeProfile = GetComponent<Volume>()?.profile;
+        if (!volumeProfile) throw new NullReferenceException(nameof(VolumeProfile));
+
+        if (!volumeProfile.TryGet(out vignette)) throw new NullReferenceException(nameof(vignette));
+        if (!volumeProfile.TryGet(out colorAdjustments))
+            throw new NullReferenceException(nameof(colorAdjustments));
+    }
+
+    private void OnRemainingYearsChanged(int value)
+    {
+        UpdateVignette(value);
+        UpdateSaturaion(value);
     }
 
     public void UpdateVignette(float value)
     {
-        if(value == 0.0f)
+        if (value == 0.0f)
         {
             StartCoroutine(VignetteOnDeath());
         }
@@ -43,19 +54,26 @@ public class AfterEffects : MonoBehaviour
     {
         while (true)
         {
-            if(fadeAmount >= 5f)
+            if (fadeAmount >= 5f)
             {
-                while(fadeAmount <=300f)
+                while (fadeAmount <= 300f)
                 {
                     fadeAmount += fadeSpeed * Time.deltaTime * 50;
                     vignette.intensity.Override(fadeAmount);
                     yield return null;
                 }
+
                 yield break;
             }
+
             fadeAmount += fadeSpeed * Time.deltaTime;
             vignette.intensity.Override(fadeAmount);
             yield return null;
         }
+    }
+
+    private void OnDestroy()
+    {
+        PlayerData.OnPlayerCurrentRemainingYearsChanged -= OnRemainingYearsChanged;
     }
 }
