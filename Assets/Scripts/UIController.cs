@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,14 +9,6 @@ public class UIController : MonoBehaviour
 {
     // In welcher Welle befinden wir uns
     [SerializeField] int welle = 1;
-
-    // In Welcher Generation befinden wir uns, ggf. als Pop-Up
-    [SerializeField] int remainingYears;
-
-    //Holz, und Steinvorrat
-    [SerializeField] int anzahlStein;
-
-    [SerializeField] int anzahlHolz;
 
     //Liste der Texte
     [SerializeField] List<TextMeshProUGUI> listTexte = new List<TextMeshProUGUI>();
@@ -43,16 +34,17 @@ public class UIController : MonoBehaviour
     private TextMeshPro textPopup;
     private bool _gameOverTriggered;
 
+    private static DataProvider.CurrentPlayerData _playerData;
+    private static DataProvider.CurrentResourceData _resourceData;
+
     private void Start()
     {
-        ResourceData.OnCurrentWoodAmountChanged += UpdateHolzVorrat;
-        ResourceData.OnCurrentStoneAmountChanged += UpdateSteinVorrat;
-        PlayerData.OnPlayerCurrentRemainingYearsChanged += UpdateRemainingYears;
+        _playerData = DataProvider.Instance.PlayerData;
+        _resourceData = DataProvider.Instance.ResourceData;
+
         DataHandlerComponent.OnWaveCountChanged += UpdateWaveCount;
         BossComponent.OnBossDestroyed += UpdateWelle;
         PlayerController.OnRestartGame += OnRestartGame;
-
-        remainingYears = DataProvider.Instance.PlayerData.CurrentRemainingYears;
 
         InitTexteUndWerte();
         // gameOverText.enabled = false;
@@ -69,6 +61,13 @@ public class UIController : MonoBehaviour
     private void Update()
     {
         InitTexteUndWerte();
+
+        if (_playerData.CurrentRemainingYears <= 0 && !_gameOverTriggered)
+        {
+            _gameOverTriggered = true;
+            StartCoroutine(EndGameScreen());
+        }
+
         if (fadeIn)
         {
             fadeAmount = gameOverText.color.a + (fadeSpeed * Time.deltaTime);
@@ -97,7 +96,7 @@ public class UIController : MonoBehaviour
             switch (index)
             {
                 case 0:
-                    item.text = texte[index] + ": " + remainingYears;
+                    item.text = texte[index] + ": " + _playerData.CurrentRemainingYears;
                     index++;
                     break;
                 case 1:
@@ -105,11 +104,11 @@ public class UIController : MonoBehaviour
                     index++;
                     break;
                 case 2:
-                    item.text = texte[index] + ": " + anzahlHolz;
+                    item.text = texte[index] + ": " + _resourceData.WoodAmount;
                     index++;
                     break;
                 case 3:
-                    item.text = texte[index] + ": " + anzahlStein;
+                    item.text = texte[index] + ": " + _resourceData.StoneAmount;
                     index++;
                     break;
                 default:
@@ -123,34 +122,13 @@ public class UIController : MonoBehaviour
         welle = newValue + 1;
     }
 
-    private void UpdateRemainingYears(int newValue)
-    {
-        remainingYears = newValue;
-        if (remainingYears > 0 || _gameOverTriggered) return;
-        _gameOverTriggered = true;
-        StartCoroutine(EndGameScreen());
-    }
-
     private void UpdateWelle()
     {
         welle++;
     }
 
-    private void UpdateHolzVorrat(int setHolz)
-    {
-        anzahlHolz = setHolz;
-    }
-
-    private void UpdateSteinVorrat(int setStein)
-    {
-        anzahlStein = setStein;
-    }
-
     private void OnDestroy()
     {
-        ResourceData.OnCurrentWoodAmountChanged -= UpdateHolzVorrat;
-        ResourceData.OnCurrentStoneAmountChanged -= UpdateSteinVorrat;
-        PlayerData.OnPlayerCurrentRemainingYearsChanged -= UpdateRemainingYears;
         DataHandlerComponent.OnWaveCountChanged -= UpdateWaveCount;
         BossComponent.OnBossDestroyed -= UpdateWelle;
         PlayerController.OnRestartGame -= OnRestartGame;

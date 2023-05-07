@@ -1,4 +1,3 @@
-using Data;
 using UnityEngine;
 
 public class YoungToOldTransitionComponent : MonoBehaviour
@@ -7,12 +6,12 @@ public class YoungToOldTransitionComponent : MonoBehaviour
 
     public static YoungOldTransitionChanged OnYoungOldTransitionChanged;
 
-    private static PlayerData _playerData;
+    private static DataProvider.CurrentPlayerData _playerData;
 
-    private void Awake()
+    private void OnParticleSystemStopped()
     {
         _playerData = DataProvider.Instance.PlayerData;
-        PlayerData.OnPlayerCurrentRemainingYearsChanged += OnRemainingYearsChanged;
+        DataProvider.OnCurrentRemainingYearsChanged += OnRemainingYearsChanged;
     }
 
     private void OnRemainingYearsChanged(int remainingYears)
@@ -22,11 +21,11 @@ public class YoungToOldTransitionComponent : MonoBehaviour
         {
             transitionValue = 1f;
         }
-        else if (remainingYears > _playerData.RemainingYearsForBecomingOld)
+        else if (remainingYears > _playerData.RemainingYearsUntilBecomingOld)
         {
-            transitionValue = (remainingYears - _playerData.RemainingYearsForBecomingOld) /
+            transitionValue = (remainingYears - _playerData.RemainingYearsUntilBecomingOld) /
                               (float)(_playerData.RemainingYearsForStayingYoung -
-                                      _playerData.RemainingYearsForBecomingOld);
+                                      _playerData.RemainingYearsUntilBecomingOld);
         }
         else
         {
@@ -34,5 +33,10 @@ public class YoungToOldTransitionComponent : MonoBehaviour
         }
 
         OnYoungOldTransitionChanged?.Invoke(transitionValue);
+    }
+
+    private void OnDestroy()
+    {
+        DataProvider.OnCurrentRemainingYearsChanged -= OnRemainingYearsChanged;
     }
 }

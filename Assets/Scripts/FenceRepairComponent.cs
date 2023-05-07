@@ -36,11 +36,11 @@ public class FenceRepairComponent : InteractableBaseComponent
         if (!_isCollidingWithPlayer) return;
         var currentFenceData = data[_dataHandlerComponent.CurrentFenceVersion];
         var resourceData = DataProvider.Instance.ResourceData;
-        if (resourceData.CurrentWoodAmount < currentFenceData.woodCost ||
-            resourceData.CurrentStoneAmount< currentFenceData.stoneCost ||
+        if (resourceData.WoodAmount < currentFenceData.woodCost ||
+            resourceData.StoneAmount < currentFenceData.stoneCost ||
             _fenceController.CurrentHp >= _fenceController.MaxHp) return;
-        resourceData.CurrentWoodAmount -= currentFenceData.woodCost;
-        resourceData.CurrentStoneAmount -= currentFenceData.stoneCost;
+        resourceData.WoodAmount -= currentFenceData.woodCost;
+        resourceData.StoneAmount -= currentFenceData.stoneCost;
         OnRepairFence?.Invoke(currentFenceData.healAmount);
         _dataHandlerComponent.PlayUpgradingAudioClip();
     }

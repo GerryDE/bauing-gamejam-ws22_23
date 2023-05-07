@@ -28,10 +28,10 @@ public class StoneUpgradeComponent : InteractableBaseComponent
 
         var nextUpgradeData = data[_dataHandlerComponent.CurrentMineVersion + 1];
         var resourceData = DataProvider.Instance.ResourceData;
-        if (resourceData.CurrentWoodAmount < nextUpgradeData.woodCost ||
-            resourceData.CurrentStoneAmount < nextUpgradeData.stoneCost) return;
-        resourceData.CurrentWoodAmount -= nextUpgradeData.woodCost;
-        resourceData.CurrentStoneAmount -= nextUpgradeData.stoneCost;
+        if (resourceData.WoodAmount < nextUpgradeData.woodCost ||
+            resourceData.StoneAmount < nextUpgradeData.stoneCost) return;
+        resourceData.WoodAmount -= nextUpgradeData.woodCost;
+        resourceData.StoneAmount -= nextUpgradeData.stoneCost;
         OnUpgradeMine?.Invoke(nextUpgradeData.miningDuration, nextUpgradeData.dropAmount, nextUpgradeData.sprite);
         _dataHandlerComponent.PlayUpgradingAudioClip();
     }

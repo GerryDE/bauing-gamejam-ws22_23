@@ -854,8 +854,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d866fcd79d774c84b3f564809138f135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: 1f174d0add8a5eac1a7c7cf17532d2c2, type: 2}
-  resourceData: {fileID: 11400000, guid: d56a6b73cb052b0c5a8ecd813ae24b06, type: 2}
+  initialCurrentPlayerData: {fileID: 11400000, guid: 1f174d0add8a5eac1a7c7cf17532d2c2, type: 2}
+  initialResourceData: {fileID: 11400000, guid: d56a6b73cb052b0c5a8ecd813ae24b06, type: 2}
 --- !u!4 &1503518195
 Transform:
   m_ObjectHideFlags: 0

@@ -1,5 +1,4 @@
 using System;
-using Data;
 using UnityEngine;
 
 public class DataHandlerComponent : MonoBehaviour
@@ -9,8 +8,8 @@ public class DataHandlerComponent : MonoBehaviour
     [SerializeField] private int currentStatueVersion;
     [SerializeField] private int currentMineVersion;
 
-    private static PlayerData _playerData;
-    private static ResourceData _resourceData;
+    private DataProvider.CurrentPlayerData _currentPlayerData;
+    private DataProvider.CurrentResourceData _resourceData;
 
     public int CurrentMineVersion
     {
@@ -138,7 +137,7 @@ public class DataHandlerComponent : MonoBehaviour
 
     private void Start()
     {
-        _playerData = DataProvider.Instance.PlayerData;
+        _currentPlayerData = DataProvider.Instance.PlayerData;
         _resourceData = DataProvider.Instance.ResourceData;
 
         TreeComponent.OnDropWood += OnDropWood;
@@ -169,7 +168,7 @@ public class DataHandlerComponent : MonoBehaviour
 
     private void OnUpgradeStatue(int newAgeValue, Sprite sprite)
     {
-        _playerData.MaxRemainingYears = newAgeValue;
+        DataProvider.Instance.PlayerData.MaxRemainingYears = newAgeValue;
         PlayUpgradingAudioClip();
     }
 
@@ -180,29 +179,29 @@ public class DataHandlerComponent : MonoBehaviour
 
     private void OnYearPassed()
     {
-        _playerData.CurrentRemainingYears--;
+        _currentPlayerData.CurrentRemainingYears--;
     }
 
     private void OnReducePlayerLifetime(int amount)
     {
-        _playerData.CurrentRemainingYears -= amount;
+        _currentPlayerData.CurrentRemainingYears -= amount;
     }
 
     private void OnPrayed(int amount)
     {
-        _playerData.CurrentRemainingYears =
-            Math.Min(_playerData.CurrentRemainingYears + amount, _playerData.MaxRemainingYears);
+        _currentPlayerData.CurrentRemainingYears =
+            Math.Min(_currentPlayerData.CurrentRemainingYears + amount, _currentPlayerData.MaxRemainingYears);
     }
 
     private void OnStoneDrop(int amount)
     {
-        _resourceData.CurrentStoneAmount += amount;
+        _resourceData.StoneAmount += amount;
         uiScript.giveFeedbackWithValues(amount, "Stone");
     }
 
     private void OnDropWood(int amount)
     {
-        _resourceData.CurrentWoodAmount += amount;
+        _resourceData.WoodAmount += amount;
         uiScript.giveFeedbackWithValues(amount, "Wood");
     }
 

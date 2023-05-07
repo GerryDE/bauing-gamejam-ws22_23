@@ -37,12 +37,12 @@ public class PlayerUpgradeUiComponent : PlayerInteractionUiComponent
                 stoneTextComponent.text = Empty;
                 return;
             }
-            
+
             var nextUpgradeData = data[currentVersion + 1];
             _woodCosts = nextUpgradeData.woodCost;
             _stoneCosts = nextUpgradeData.stoneCost;
         }
-        
+
         if (layer.Equals("Tree"))
         {
             var data = other.gameObject.GetComponent<TreeUpgradeComponent>().GetData();
@@ -55,7 +55,7 @@ public class PlayerUpgradeUiComponent : PlayerInteractionUiComponent
                 stoneTextComponent.text = Empty;
                 return;
             }
-            
+
             var nextUpgradeData = data[currentVersion + 1];
             _woodCosts = nextUpgradeData.woodCost;
             _stoneCosts = nextUpgradeData.stoneCost;
@@ -72,7 +72,7 @@ public class PlayerUpgradeUiComponent : PlayerInteractionUiComponent
                 stoneTextComponent.text = Empty;
                 return;
             }
-            
+
             var nextUpgradeData = data[currentVersion + 1];
             _woodCosts = nextUpgradeData.woodCost;
             _stoneCosts = nextUpgradeData.stoneCost;
@@ -89,7 +89,7 @@ public class PlayerUpgradeUiComponent : PlayerInteractionUiComponent
                 stoneTextComponent.text = Empty;
                 return;
             }
-            
+
             var nextUpgradeData = data[currentVersion + 1];
             _woodCosts = nextUpgradeData.woodCost;
             _stoneCosts = nextUpgradeData.stoneCost;
@@ -99,13 +99,13 @@ public class PlayerUpgradeUiComponent : PlayerInteractionUiComponent
         stoneTextComponent.SetText("Stone: " + _stoneCosts);
 
         var resourceData = DataProvider.Instance.ResourceData;
-        textComponent.color = resourceData.CurrentWoodAmount >= _woodCosts
+        textComponent.color = resourceData.WoodAmount >= _woodCosts
             ? enoughResourcesColor
             : notEnoughResourcesColor;
-        woodTextComponent.color = resourceData.CurrentWoodAmount >= _woodCosts
+        woodTextComponent.color = resourceData.WoodAmount >= _woodCosts
             ? enoughResourcesColor
             : notEnoughResourcesColor;
-        stoneTextComponent.color = resourceData.CurrentStoneAmount >= _stoneCosts
+        stoneTextComponent.color = resourceData.StoneAmount >= _stoneCosts
             ? enoughResourcesColor
             : notEnoughResourcesColor;
     }

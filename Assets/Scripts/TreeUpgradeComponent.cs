@@ -25,10 +25,10 @@ public class TreeUpgradeComponent : InteractableBaseComponent
 
         var nextUpgradeData = data[_dataHandlerComponent.CurrentTreeVersion + 1];
         var resourceData = DataProvider.Instance.ResourceData;
-        if (resourceData.CurrentWoodAmount < nextUpgradeData.woodCost ||
-            resourceData.CurrentStoneAmount < nextUpgradeData.stoneCost) return;
-        resourceData.CurrentWoodAmount -= nextUpgradeData.woodCost;
-        resourceData.CurrentStoneAmount -= nextUpgradeData.stoneCost;
+        if (resourceData.WoodAmount < nextUpgradeData.woodCost ||
+            resourceData.StoneAmount < nextUpgradeData.stoneCost) return;
+        resourceData.WoodAmount -= nextUpgradeData.woodCost;
+        resourceData.StoneAmount -= nextUpgradeData.stoneCost;
         OnUpgradeTree?.Invoke();
         _dataHandlerComponent.PlayUpgradingAudioClip();
     }

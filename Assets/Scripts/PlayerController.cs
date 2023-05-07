@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (!col.gameObject.layer.Equals(LayerMask.NameToLayer("Enemy"))) return;
-        _rigidbody.AddForce(DataProvider.Instance.PlayerData.ThrowBackForce);
+        _rigidbody.AddForce(DataProvider.Instance.PlayerData.ThrowForce);
     }
 
     private void OnDestroy()

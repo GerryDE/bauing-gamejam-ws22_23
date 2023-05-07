@@ -45,13 +45,13 @@ public class PlayerFenceInteractionUiComponent : MonoBehaviour
         stoneTextComponent.SetText("Stone: " + _stoneCosts);
 
         var resourceData = DataProvider.Instance.ResourceData;
-        textComponent.color = resourceData.CurrentWoodAmount >= _woodCosts
+        textComponent.color = resourceData.WoodAmount >= _woodCosts
             ? enoughResourcesColor
             : notEnoughResourcesColor;
-        woodTextComponent.color = resourceData.CurrentWoodAmount >= _woodCosts
+        woodTextComponent.color = resourceData.WoodAmount >= _woodCosts
             ? enoughResourcesColor
             : notEnoughResourcesColor;
-        stoneTextComponent.color = resourceData.CurrentStoneAmount >= _stoneCosts
+        stoneTextComponent.color = resourceData.StoneAmount >= _stoneCosts
             ? enoughResourcesColor
             : notEnoughResourcesColor;
     }

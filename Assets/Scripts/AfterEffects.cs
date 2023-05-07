@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Data;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -15,7 +14,7 @@ public class AfterEffects : MonoBehaviour
 
     private void Awake()
     {
-        PlayerData.OnPlayerCurrentRemainingYearsChanged += OnRemainingYearsChanged;
+        DataProvider.OnCurrentRemainingYearsChanged += OnRemainingYearsChanged;
 
         volumeProfile = GetComponent<Volume>()?.profile;
         if (!volumeProfile) throw new NullReferenceException(nameof(VolumeProfile));
@@ -74,6 +73,6 @@ public class AfterEffects : MonoBehaviour
 
     private void OnDestroy()
     {
-        PlayerData.OnPlayerCurrentRemainingYearsChanged -= OnRemainingYearsChanged;
+        DataProvider.OnCurrentRemainingYearsChanged -= OnRemainingYearsChanged;
     }
 }
