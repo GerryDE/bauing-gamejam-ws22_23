@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using static System.String;
@@ -23,7 +22,7 @@ public class PlayerUpgradeUiComponent : PlayerInteractionUiComponent
     protected override void OnTriggerStay2D(Collider2D other)
     {
         base.OnTriggerStay2D(other);
-        
+
         var layer = LayerMask.LayerToName(other.gameObject.layer);
         if (layer is not ("FenceTrigger" or "Tree" or "Statue" or "Stone")) return;
 
@@ -37,12 +36,13 @@ public class PlayerUpgradeUiComponent : PlayerInteractionUiComponent
                 woodTextComponent.text = Empty;
                 stoneTextComponent.text = Empty;
                 return;
-            };
+            }
+
             var nextUpgradeData = data[currentVersion + 1];
             _woodCosts = nextUpgradeData.woodCost;
             _stoneCosts = nextUpgradeData.stoneCost;
         }
-        
+
         if (layer.Equals("Tree"))
         {
             var data = other.gameObject.GetComponent<TreeUpgradeComponent>().GetData();
@@ -54,12 +54,13 @@ public class PlayerUpgradeUiComponent : PlayerInteractionUiComponent
                 woodTextComponent.text = Empty;
                 stoneTextComponent.text = Empty;
                 return;
-            };
+            }
+
             var nextUpgradeData = data[currentVersion + 1];
             _woodCosts = nextUpgradeData.woodCost;
             _stoneCosts = nextUpgradeData.stoneCost;
         }
-        
+
         if (layer.Equals("Statue"))
         {
             var data = other.gameObject.GetComponent<StatueUpgradeComponent>().GetData();
@@ -70,12 +71,13 @@ public class PlayerUpgradeUiComponent : PlayerInteractionUiComponent
                 woodTextComponent.text = Empty;
                 stoneTextComponent.text = Empty;
                 return;
-            };
+            }
+
             var nextUpgradeData = data[currentVersion + 1];
             _woodCosts = nextUpgradeData.woodCost;
             _stoneCosts = nextUpgradeData.stoneCost;
         }
-        
+
         if (layer.Equals("Stone"))
         {
             var data = other.gameObject.GetComponent<StoneUpgradeComponent>().GetData();
@@ -86,7 +88,8 @@ public class PlayerUpgradeUiComponent : PlayerInteractionUiComponent
                 woodTextComponent.text = Empty;
                 stoneTextComponent.text = Empty;
                 return;
-            };
+            }
+
             var nextUpgradeData = data[currentVersion + 1];
             _woodCosts = nextUpgradeData.woodCost;
             _stoneCosts = nextUpgradeData.stoneCost;
@@ -95,13 +98,14 @@ public class PlayerUpgradeUiComponent : PlayerInteractionUiComponent
         woodTextComponent.SetText("Wood: " + _woodCosts);
         stoneTextComponent.SetText("Stone: " + _stoneCosts);
 
-        textComponent.color = _dataHandlerComponent.WoodAmount >= _woodCosts
+        var resourceData = DataProvider.Instance.ResourceData;
+        textComponent.color = resourceData.WoodAmount >= _woodCosts
             ? enoughResourcesColor
             : notEnoughResourcesColor;
-        woodTextComponent.color = _dataHandlerComponent.WoodAmount >= _woodCosts
+        woodTextComponent.color = resourceData.WoodAmount >= _woodCosts
             ? enoughResourcesColor
             : notEnoughResourcesColor;
-        stoneTextComponent.color = _dataHandlerComponent.StoneAmount >= _stoneCosts
+        stoneTextComponent.color = resourceData.StoneAmount >= _stoneCosts
             ? enoughResourcesColor
             : notEnoughResourcesColor;
     }

@@ -25,15 +25,16 @@ public class FenceUpgradeComponent : InteractableBaseComponent
     protected override void OnInteractionButton2Pressed()
     {
         base.OnInteractionButton2Pressed();
-        
+
         _interactionButton2Pressed = false;
         if (!_isCollidingWithPlayer || _dataHandlerComponent.CurrentFenceVersion >= data.Count - 1) return;
-        
+
         var nextUpgradeData = data[_dataHandlerComponent.CurrentFenceVersion + 1];
-        if (_dataHandlerComponent.WoodAmount < nextUpgradeData.woodCost ||
-            _dataHandlerComponent.StoneAmount < nextUpgradeData.stoneCost) return;
-        _dataHandlerComponent.WoodAmount -= nextUpgradeData.woodCost;
-        _dataHandlerComponent.StoneAmount -= nextUpgradeData.stoneCost;
+        var resourceData = DataProvider.Instance.ResourceData;
+        if (resourceData.WoodAmount < nextUpgradeData.woodCost ||
+            resourceData.StoneAmount < nextUpgradeData.stoneCost) return;
+        resourceData.WoodAmount -= nextUpgradeData.woodCost;
+        resourceData.StoneAmount -= nextUpgradeData.stoneCost;
         OnUpgradeFence?.Invoke(nextUpgradeData.newHp, nextUpgradeData.damage, nextUpgradeData.sprite);
         _dataHandlerComponent.CurrentFenceVersion++;
         _dataHandlerComponent.PlayUpgradingAudioClip();

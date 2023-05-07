@@ -1,44 +1,42 @@
-using System;
 using UnityEngine;
 
 public class YoungToOldTransitionComponent : MonoBehaviour
 {
-    [SerializeField] private int remainingYearsForYoung;
-    [SerializeField] private int remainingYearsForOld;
-
-    private DataHandlerComponent _dataHandlerComponent;
-
     public delegate void YoungOldTransitionChanged(float newValue);
 
     public static YoungOldTransitionChanged OnYoungOldTransitionChanged;
 
-    private void Start()
+    private static DataProvider.CurrentPlayerData _playerData;
+
+    private void OnParticleSystemStopped()
     {
-        DataHandlerComponent.OnRemainingYearsChanged += OnRemainingYearsChanged;
+        _playerData = DataProvider.Instance.PlayerData;
+        DataProvider.OnCurrentRemainingYearsChanged += OnRemainingYearsChanged;
     }
 
     private void OnRemainingYearsChanged(int remainingYears)
     {
         float transitionValue;
-        if (remainingYears > remainingYearsForYoung)
+        if (remainingYears > _playerData.RemainingYearsForStayingYoung)
         {
             transitionValue = 1f;
         }
-        else if (remainingYears > remainingYearsForOld)
+        else if (remainingYears > _playerData.RemainingYearsUntilBecomingOld)
         {
-            transitionValue = (remainingYears - remainingYearsForOld) /
-                              (float)(remainingYearsForYoung - remainingYearsForOld);
+            transitionValue = (remainingYears - _playerData.RemainingYearsUntilBecomingOld) /
+                              (float)(_playerData.RemainingYearsForStayingYoung -
+                                      _playerData.RemainingYearsUntilBecomingOld);
         }
         else
         {
             transitionValue = 0f;
         }
-        
+
         OnYoungOldTransitionChanged?.Invoke(transitionValue);
     }
 
     private void OnDestroy()
     {
-        DataHandlerComponent.OnRemainingYearsChanged -= OnRemainingYearsChanged;
+        DataProvider.OnCurrentRemainingYearsChanged -= OnRemainingYearsChanged;
     }
 }

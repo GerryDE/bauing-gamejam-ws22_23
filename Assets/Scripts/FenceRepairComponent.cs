@@ -34,13 +34,14 @@ public class FenceRepairComponent : InteractableBaseComponent
         _interactionButton1Pressed = false;
 
         if (!_isCollidingWithPlayer) return;
-        var currentData = data[_dataHandlerComponent.CurrentFenceVersion];
-        if (_dataHandlerComponent.WoodAmount < currentData.woodCost ||
-            _dataHandlerComponent.StoneAmount < currentData.stoneCost ||
+        var currentFenceData = data[_dataHandlerComponent.CurrentFenceVersion];
+        var resourceData = DataProvider.Instance.ResourceData;
+        if (resourceData.WoodAmount < currentFenceData.woodCost ||
+            resourceData.StoneAmount < currentFenceData.stoneCost ||
             _fenceController.CurrentHp >= _fenceController.MaxHp) return;
-        _dataHandlerComponent.WoodAmount -= currentData.woodCost;
-        _dataHandlerComponent.StoneAmount -= currentData.stoneCost;
-        OnRepairFence?.Invoke(currentData.healAmount);
+        resourceData.WoodAmount -= currentFenceData.woodCost;
+        resourceData.StoneAmount -= currentFenceData.stoneCost;
+        OnRepairFence?.Invoke(currentFenceData.healAmount);
         _dataHandlerComponent.PlayUpgradingAudioClip();
     }
 }

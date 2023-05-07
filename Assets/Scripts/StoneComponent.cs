@@ -6,7 +6,7 @@ public class StoneComponent : InteractableBaseComponent
 {
     [SerializeField] private float startingMiningDuration = 1f;
     [SerializeField] private float miningDurationMultiplicator = 1f;
-    [SerializeField] private SpriteRenderer renderer;
+    [SerializeField] private new SpriteRenderer renderer;
 
     private float _elapsedMiningTime;
     private float _currentBaseMiningDuration;
