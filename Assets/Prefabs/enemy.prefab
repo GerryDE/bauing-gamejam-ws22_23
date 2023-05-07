@@ -227,14 +227,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea178e381418950ba07acf1e3c7bda2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 10
-  moveSpeed: 50
-  damageOutput: 1
-  throwBackForce: {x: -700, y: 0}
+  data: {fileID: 11400000, guid: 057936deece4ebac19d6c011fc1c659e, type: 2}
   hpBar: {fileID: 1393146753815195446}
-  backgroundRenderer: {fileID: 0}
-  foregroundRenderer: {fileID: 0}
-  currentHp: 0
+  backgroundRenderer: {fileID: 5566265567591396794}
+  foregroundRenderer: {fileID: 1387405295878097170}
 --- !u!1 &2763040216644070364
 GameObject:
   m_ObjectHideFlags: 0
