@@ -8,7 +8,7 @@ public class YoungToOldTransitionComponent : MonoBehaviour
 
     private static DataProvider.CurrentPlayerData _playerData;
 
-    private void OnParticleSystemStopped()
+    private void Awake()
     {
         _playerData = DataProvider.Instance.PlayerData;
         DataProvider.OnCurrentRemainingYearsChanged += OnRemainingYearsChanged;
