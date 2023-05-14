@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class InteractableBaseComponent : MonoBehaviour
+public abstract class InteractableBaseComponent : MonoBehaviour
 {
     protected DataHandlerComponent _dataHandlerComponent;
     protected bool _interactionButton1Holding;
