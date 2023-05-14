@@ -12,6 +12,7 @@ public class FenceUpgradeComponent : InteractableBaseComponent
     }
 
     [SerializeField] private List<Data> data;
+    [SerializeField] private SpriteRenderer upgradeNotificationSprite;
 
     public delegate void UpgradeFence(int newHpValue, int newDamage, Sprite sprite);
 
@@ -20,6 +21,22 @@ public class FenceUpgradeComponent : InteractableBaseComponent
     public List<Data> GetData()
     {
         return data;
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        DataProvider.OnResourceDataChanged += OnResourceDataChanged;
+    }
+
+    private void OnResourceDataChanged(DataProvider.CurrentResourceData resourceData)
+    {
+        if (upgradeNotificationSprite == null || _dataHandlerComponent.CurrentFenceVersion >= data.Count - 1) return;
+
+        var nextUpgradeData = data[_dataHandlerComponent.CurrentFenceVersion + 1];
+        var isUpgradable = resourceData.WoodAmount  >= nextUpgradeData.woodCost &&
+            resourceData.StoneAmount >= nextUpgradeData.stoneCost;
+        upgradeNotificationSprite.enabled = isUpgradable;
     }
 
     protected override void OnInteractionButton2Pressed()
@@ -38,5 +55,10 @@ public class FenceUpgradeComponent : InteractableBaseComponent
         OnUpgradeFence?.Invoke(nextUpgradeData.newHp, nextUpgradeData.damage, nextUpgradeData.sprite);
         _dataHandlerComponent.CurrentFenceVersion++;
         _dataHandlerComponent.PlayUpgradingAudioClip();
+    }
+
+    protected override void OnDestroy() {
+        base.OnDestroy();
+        DataProvider.OnResourceDataChanged -= OnResourceDataChanged;   
     }
 }

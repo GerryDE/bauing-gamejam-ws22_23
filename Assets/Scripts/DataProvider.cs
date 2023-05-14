@@ -35,6 +35,8 @@ public class DataProvider : MonoBehaviour
 
     public delegate void StoneAmountChanged(int value);
 
+    public delegate void ResourceDataChanged(CurrentResourceData data);
+
     public static MaxRemainingYearsChanged OnPlayerMaxRemainingYearsChanged;
     public static CurrentRemainingYearsChanged OnCurrentRemainingYearsChanged;
     public static AttackValueChanged OnAttackValueChanged;
@@ -46,6 +48,7 @@ public class DataProvider : MonoBehaviour
     public static ThrowForceChanged OnThrowForceChanged;
     public static WoodAmountChanged OnWoodAmountChanged;
     public static StoneAmountChanged OnStoneAmountChanged;
+    public static ResourceDataChanged OnResourceDataChanged;
 
     public class CurrentPlayerData
     {
@@ -162,6 +165,7 @@ public class DataProvider : MonoBehaviour
             {
                 _woodAmount = value;
                 OnWoodAmountChanged?.Invoke(value);
+                OnResourceDataChanged?.Invoke(this);
             }
         }
 
@@ -172,6 +176,7 @@ public class DataProvider : MonoBehaviour
             {
                 _stoneAmount = value;
                 OnStoneAmountChanged?.Invoke(value);
+                OnResourceDataChanged?.Invoke(this);
             }
         }
     }
