@@ -16,6 +16,16 @@ public class TreeUpgradeComponent : InteractableBaseComponent
 
     public static UpgradeTree OnUpgradeTree;
 
+    protected override void OnResourceDataChanged(DataProvider.CurrentResourceData resourceData)
+    {
+        if (upgradeNotificationSprite == null || _dataHandlerComponent.CurrentTreeVersion >= data.Count - 1) return;
+
+        var nextUpgradeData = data[_dataHandlerComponent.CurrentTreeVersion + 1];
+        var isUpgradable = resourceData.WoodAmount  >= nextUpgradeData.woodCost &&
+            resourceData.StoneAmount >= nextUpgradeData.stoneCost;
+        upgradeNotificationSprite.enabled = isUpgradable;
+    }
+
     protected override void OnInteractionButton2Pressed()
     {
         base.OnInteractionButton2Pressed();

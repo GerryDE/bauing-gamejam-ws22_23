@@ -19,6 +19,16 @@ public class StoneUpgradeComponent : InteractableBaseComponent
 
     public static UpgradeMine OnUpgradeMine;
 
+    protected override void OnResourceDataChanged(DataProvider.CurrentResourceData resourceData)
+    {
+        if (upgradeNotificationSprite == null || _dataHandlerComponent.CurrentMineVersion >= data.Count - 1) return;
+
+        var nextUpgradeData = data[_dataHandlerComponent.CurrentMineVersion + 1];
+        var isUpgradable = resourceData.WoodAmount  >= nextUpgradeData.woodCost &&
+            resourceData.StoneAmount >= nextUpgradeData.stoneCost;
+        upgradeNotificationSprite.enabled = isUpgradable;
+    }
+
     protected override void OnInteractionButton2Pressed()
     {
         base.OnInteractionButton2Pressed();

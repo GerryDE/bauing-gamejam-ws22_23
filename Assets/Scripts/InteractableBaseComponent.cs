@@ -2,6 +2,7 @@ using UnityEngine;
 
 public abstract class InteractableBaseComponent : MonoBehaviour
 {
+    [SerializeField] protected SpriteRenderer upgradeNotificationSprite;
     protected DataHandlerComponent _dataHandlerComponent;
     protected bool _interactionButton1Holding;
     protected bool _interactionButton1Pressed;
@@ -17,6 +18,7 @@ public abstract class InteractableBaseComponent : MonoBehaviour
         PlayerController.OnInteractionButton1Pressed += OnInteractionButton1Pressed;
         PlayerController.OnInteractionButton2Pressed += OnInteractionButton2Pressed;
         PlayerController.OnPlayerMove += OnPlayerMove;
+        DataProvider.OnResourceDataChanged += OnResourceDataChanged;
 
         _dataHandlerComponent = GameObject.FindWithTag("DataHandler").GetComponent<DataHandlerComponent>();
     }
@@ -48,6 +50,10 @@ public abstract class InteractableBaseComponent : MonoBehaviour
         _interactionButton1Holding = false;
     }
 
+    protected virtual void OnResourceDataChanged(DataProvider.CurrentResourceData resourceData)
+    {
+    }
+
     private void OnTriggerStay2D(Collider2D other)
     {
         _isCollidingWithPlayer = other.gameObject.layer.Equals(LayerMask.NameToLayer("Player"));
@@ -68,5 +74,6 @@ public abstract class InteractableBaseComponent : MonoBehaviour
         PlayerController.OnInteractionButton1Released -= OnInteractionButton1Released;
         PlayerController.OnInteractionButton1Pressed -= OnInteractionButton1Pressed;
         PlayerController.OnInteractionButton2Pressed -= OnInteractionButton2Pressed;
+        DataProvider.OnResourceDataChanged -= OnResourceDataChanged;
     }
 }
