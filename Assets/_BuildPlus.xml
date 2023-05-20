@@ -1,0 +1,49 @@
+<Build xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <xmlVersion>0</xmlVersion>
+  <versions>
+    <Version>
+      <major>1</major>
+      <minor>0</minor>
+      <build>0</build>
+      <revision />
+      <date>2023-05-19T00:00:00</date>
+      <dateString>2023.05.19.0000</dateString>
+      <yanked>false</yanked>
+      <unreleased>false</unreleased>
+      <notes>
+        <Note>
+          <category>Features</category>
+          <description>#43 Include attack + defense stats for the Player + Enemies</description>
+        </Note>
+        <Note>
+          <category>Features</category>
+          <description>#41 Start actions by pressing a button instead of holding it</description>
+        </Note>
+        <Note>
+          <category>Fixes</category>
+          <description>#38 Game Over will not be triggered on Final boss battle</description>
+        </Note>
+        <Note>
+          <category>General</category>
+          <description>Release v1.0.0 Inital Changelog with some Notes</description>
+        </Note>
+      </notes>
+    </Version>
+  </versions>
+  <editorSettings>
+    <saveToPlayerSettings>true</saveToPlayerSettings>
+    <saveToPackageJson>false</saveToPackageJson>
+    <buildPathScheme>{p_path}/Build/{p_name}_{ver}</buildPathScheme>
+    <saveToChangelogMd>true</saveToChangelogMd>
+  </editorSettings>
+  <todo>
+    <major>0</major>
+    <minor>0</minor>
+    <build>0</build>
+    <revision />
+    <date>0001-01-01T00:00:00</date>
+    <yanked>false</yanked>
+    <unreleased>false</unreleased>
+    <notes />
+  </todo>
+</Build>
