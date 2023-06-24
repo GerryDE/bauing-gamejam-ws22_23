@@ -4,11 +4,10 @@ using static GameStateHandlerComponent;
 public class TimeScaleHandlerComponent : MonoBehaviour {
 
     private void Awake() {
-        GameInputHandlerComponent.OnPauseButtonPressed += OnPause;
+        GameStateHandlerComponent.OnGameStateChanged += OnGameStateChanged;
     }
 
-    private void OnPause() {
-        GameState gameState = Instance.GetGameState();
+    private void OnGameStateChanged(GameState gameState) {
         if (gameState == GameState.PAUSED)
         {
             Time.timeScale = 0f;
@@ -21,6 +20,6 @@ public class TimeScaleHandlerComponent : MonoBehaviour {
 
     private void OnDestroy()
     {
-        GameInputHandlerComponent.OnPauseButtonPressed -= OnPause;
+        GameStateHandlerComponent.OnGameStateChanged -= OnGameStateChanged;
     }
 }

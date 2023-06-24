@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private float _velocity;
     private float _moveSpeedMultiplier = 1f;
     private float _direction;
+    private PlayerInput _playerInput;
 
     public delegate void InteractionButton1Hold();
 
@@ -31,8 +32,22 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         YoungToOldTransitionComponent.OnYoungOldTransitionChanged += OnYoungOldTransitionChanged;
+        GameStateHandlerComponent.OnGameStateChanged += OnGameStateChanged;
 
         _rigidbody = GetComponent<Rigidbody2D>();
+        _playerInput = GetComponent<PlayerInput>();
+    }
+
+    private void OnGameStateChanged(GameStateHandlerComponent.GameState gameState)
+    {
+        if (gameState == GameStateHandlerComponent.GameState.PAUSED)
+        {
+            _playerInput.SwitchCurrentActionMap("Pause");
+        }
+        else if (gameState == GameStateHandlerComponent.GameState.RUNNING)
+        {
+            _playerInput.SwitchCurrentActionMap("Player");
+        }
     }
 
     private void OnYoungOldTransitionChanged(float newValue)

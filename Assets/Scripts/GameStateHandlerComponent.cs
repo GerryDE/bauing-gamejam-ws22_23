@@ -12,7 +12,20 @@ public class GameStateHandlerComponent : MonoBehaviour
     // Make sure that this component only exists once in the project to the keep the Singleton approach
     public static GameStateHandlerComponent Instance { get; private set; }
 
-    private GameState _gameState;
+    public delegate void GameStateChanged(GameState gameState);
+    public static GameStateChanged OnGameStateChanged;
+
+    private GameState _globalGameState;
+
+    public GameState GlobalGameState
+    {
+        get => _globalGameState;
+        set 
+        {
+            _globalGameState = value;
+            OnGameStateChanged?.Invoke(value);
+        }
+    }
 
     private void Awake()
     {
@@ -25,34 +38,29 @@ public class GameStateHandlerComponent : MonoBehaviour
             Instance = this;
         }
 
-        _gameState = GameState.RUNNING;
+        GlobalGameState = GameState.RUNNING;
 
-        GameInputHandlerComponent.OnPauseButtonPressed += OnPause;
+        GameInputHandlerComponent.OnPauseButtonPressed += OnPauseButtonPressed;
     }
 
-    private void OnPause()
+    private void OnPauseButtonPressed()
     {
-        if (_gameState == GameState.PAUSED)
+        if (GlobalGameState == GameState.PAUSED)
         {
-            _gameState = GameState.RUNNING;
+            GlobalGameState = GameState.RUNNING;
         }
-        else if (_gameState == GameState.RUNNING)
+        else if (GlobalGameState == GameState.RUNNING)
         {
-            _gameState = GameState.PAUSED;
+            GlobalGameState = GameState.PAUSED;
         }
         else
         {
-            Debug.LogError("ERROR: Unknown gameState: " + _gameState);
+            Debug.LogError("ERROR: Unknown gameState: " + _globalGameState);
         }
-    }
-
-    public GameState GetGameState()
-    {
-        return _gameState;
     }
 
     private void OnDestroy()
     {
-        GameInputHandlerComponent.OnPauseButtonPressed -= OnPause;
+        GameInputHandlerComponent.OnPauseButtonPressed -= OnPauseButtonPressed;
     }
 }
