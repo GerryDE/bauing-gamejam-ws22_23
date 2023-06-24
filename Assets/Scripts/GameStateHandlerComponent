@@ -1,0 +1,47 @@
+using UnityEngine;
+
+public class GameStateHandlerComponent : MonoBehaviour {
+
+    public enum GameState
+    {
+        RUNNING,
+        PAUSED
+    }
+
+    // Make sure that this component only exists once in the project to the keep the Singleton approach
+    public static GameStateHandlerComponent Instance { get; private set; }
+
+    private GameState _gameState;
+
+    private void Awake() 
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+
+        _gameState = RUNNING;
+
+        GameInputHandlerComponent.OnPause += OnPause;
+        PauseInputHandlerComponent.OnResume += OnResume;
+    }
+
+    private void OnPause()
+    {
+        _gameState = PAUSED;
+    }
+
+    private void OnResume()
+    {
+        _gameState = RUNNING;
+    }
+
+    public GameState GetGameState()
+    {
+        return _gameState;
+    }
+}
