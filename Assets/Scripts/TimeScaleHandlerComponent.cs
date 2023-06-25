@@ -4,22 +4,23 @@ using static GameStateHandlerComponent;
 public class TimeScaleHandlerComponent : MonoBehaviour {
 
     private void Awake() {
-        GameStateHandlerComponent.OnGameStateChanged += OnGameStateChanged;
+        GameStateHandlerComponent.OnGameStatePause += OnGameStatePause;
+        GameStateHandlerComponent.OnGameStateResume += OnGameStateResume;
     }
 
-    private void OnGameStateChanged(GameState gameState) {
-        if (gameState == GameState.PAUSED)
-        {
-            Time.timeScale = 0f;
-        } 
-        else if (gameState == GameState.RUNNING)
-        {
-            Time.timeScale = 1f;
-        }
+    private void OnGameStatePause()
+    {
+        Time.timeScale = 0f;
+    }
+
+    private void OnGameStateResume()
+    {
+        Time.timeScale = 1f;
     }
 
     private void OnDestroy()
     {
-        GameStateHandlerComponent.OnGameStateChanged -= OnGameStateChanged;
+        GameStateHandlerComponent.OnGameStatePause -= OnGameStatePause;
+        GameStateHandlerComponent.OnGameStateResume -= OnGameStateResume;
     }
 }

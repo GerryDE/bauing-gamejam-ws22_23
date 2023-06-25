@@ -6,37 +6,42 @@ public class GameInputHandlerComponent : MonoBehaviour {
 
     PlayerInput _playerInput;
 
-    public delegate void Pause();
-    public static Pause OnPauseButtonPressed;
+    public delegate void PauseButtonPressed();
+    public delegate void ResumeButtonPressed();
+    public static PauseButtonPressed OnPauseButtonPressed;
+    public static ResumeButtonPressed OnResumeButtonPressed;
 
     private void Awake()
     {
-        GameStateHandlerComponent.OnGameStateChanged += OnGameStateChanged;
+        GameStateHandlerComponent.OnGameStatePause += OnGameStatePause;
+        GameStateHandlerComponent.OnGameStateResume += OnGameStateResume;
 
         _playerInput = gameObject.GetComponent<PlayerInput>();
     }
 
-    private void OnGameStateChanged(GameStateHandlerComponent.GameState gameState)
+    private void OnGameStatePause()
     {
-        if (gameState == GameStateHandlerComponent.GameState.PAUSED)
-        {
-            _playerInput.SwitchCurrentActionMap("Pause");
-        }
-        else if (gameState == GameStateHandlerComponent.GameState.RUNNING)
-        {
-            _playerInput.SwitchCurrentActionMap("Player");
-        }
+        _playerInput.SwitchCurrentActionMap("Pause");
+    }
+
+    private void OnGameStateResume()
+    {
+        _playerInput.SwitchCurrentActionMap("Player");
     }
 
 
     public void OnPauseGame(InputValue value) {
-        Debug.Log("Pause button pressed");
         OnPauseButtonPressed?.Invoke();
     }
 
     public void OnResumeGame(InputValue value)
     {
-        Debug.Log("Resume button pressed");
-        OnPauseButtonPressed?.Invoke();
+        OnResumeButtonPressed?.Invoke();
+    }
+
+    private void OnDestroy()
+    {
+        GameStateHandlerComponent.OnGameStatePause -= OnGameStatePause;
+        GameStateHandlerComponent.OnGameStateResume -= OnGameStateResume;
     }
 }

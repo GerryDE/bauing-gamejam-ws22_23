@@ -32,22 +32,21 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         YoungToOldTransitionComponent.OnYoungOldTransitionChanged += OnYoungOldTransitionChanged;
-        GameStateHandlerComponent.OnGameStateChanged += OnGameStateChanged;
+        GameStateHandlerComponent.OnGameStatePause += OnGameStatePause;
+        GameStateHandlerComponent.OnGameStateResume += OnGameStateResume;
 
         _rigidbody = GetComponent<Rigidbody2D>();
         _playerInput = GetComponent<PlayerInput>();
     }
 
-    private void OnGameStateChanged(GameStateHandlerComponent.GameState gameState)
+    private void OnGameStatePause()
     {
-        if (gameState == GameStateHandlerComponent.GameState.PAUSED)
-        {
-            _playerInput.SwitchCurrentActionMap("Pause");
-        }
-        else if (gameState == GameStateHandlerComponent.GameState.RUNNING)
-        {
-            _playerInput.SwitchCurrentActionMap("Player");
-        }
+        _playerInput.SwitchCurrentActionMap("Pause");
+    }
+
+    private void OnGameStateResume()
+    {
+        _playerInput.SwitchCurrentActionMap("Player");
     }
 
     private void OnYoungOldTransitionChanged(float newValue)
@@ -118,5 +117,7 @@ public class PlayerController : MonoBehaviour
     private void OnDestroy()
     {
         YoungToOldTransitionComponent.OnYoungOldTransitionChanged -= OnYoungOldTransitionChanged;
+        GameStateHandlerComponent.OnGameStatePause -= OnGameStatePause;
+        GameStateHandlerComponent.OnGameStateResume -= OnGameStateResume;
     }
 }

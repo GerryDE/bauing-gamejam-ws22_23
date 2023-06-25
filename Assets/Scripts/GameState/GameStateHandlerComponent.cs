@@ -13,7 +13,11 @@ public class GameStateHandlerComponent : MonoBehaviour
     public static GameStateHandlerComponent Instance { get; private set; }
 
     public delegate void GameStateChanged(GameState gameState);
+    public delegate void GameStatePause();
+    public delegate void GameStateResume();
     public static GameStateChanged OnGameStateChanged;
+    public static GameStatePause OnGameStatePause;
+    public static GameStateResume OnGameStateResume;
 
     private GameState _globalGameState;
 
@@ -41,26 +45,35 @@ public class GameStateHandlerComponent : MonoBehaviour
         GlobalGameState = GameState.RUNNING;
 
         GameInputHandlerComponent.OnPauseButtonPressed += OnPauseButtonPressed;
+        GameInputHandlerComponent.OnResumeButtonPressed += OnResumeButtonPressed;
+        OnGameStateChanged += OnGameStateChangedFunction;
     }
 
     private void OnPauseButtonPressed()
     {
-        if (GlobalGameState == GameState.PAUSED)
+        GlobalGameState = GameState.PAUSED;
+    }
+
+    private void OnResumeButtonPressed()
+    {
+        GlobalGameState = GameState.RUNNING;
+    }
+
+    private void OnGameStateChangedFunction(GameState gameState)
+    {
+        if (gameState == GameState.PAUSED)
         {
-            GlobalGameState = GameState.RUNNING;
+            OnGameStatePause?.Invoke();
         }
-        else if (GlobalGameState == GameState.RUNNING)
+        else if (gameState == GameState.RUNNING)
         {
-            GlobalGameState = GameState.PAUSED;
-        }
-        else
-        {
-            Debug.LogError("ERROR: Unknown gameState: " + _globalGameState);
+            OnGameStateResume?.Invoke();
         }
     }
 
     private void OnDestroy()
     {
         GameInputHandlerComponent.OnPauseButtonPressed -= OnPauseButtonPressed;
+        GameInputHandlerComponent.OnResumeButtonPressed -= OnResumeButtonPressed;
     }
 }
