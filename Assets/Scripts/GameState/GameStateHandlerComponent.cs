@@ -13,11 +13,11 @@ public class GameStateHandlerComponent : MonoBehaviour
     public static GameStateHandlerComponent Instance { get; private set; }
 
     public delegate void GameStateChanged(GameState gameState);
-    public delegate void GameStatePause();
-    public delegate void GameStateResume();
+    public delegate void GameStatePauseEntered();
+    public delegate void GameStateResumeEntered();
     public static GameStateChanged OnGameStateChanged;
-    public static GameStatePause OnGameStatePause;
-    public static GameStateResume OnGameStateResume;
+    public static GameStatePauseEntered OnGameStatePauseEntered;
+    public static GameStateResumeEntered OnGameStateResumeEntered;
 
     private GameState _globalGameState;
 
@@ -26,6 +26,7 @@ public class GameStateHandlerComponent : MonoBehaviour
         get => _globalGameState;
         set 
         {
+            Debug.Log("New state: " + value);
             _globalGameState = value;
             OnGameStateChanged?.Invoke(value);
         }
@@ -33,6 +34,10 @@ public class GameStateHandlerComponent : MonoBehaviour
 
     private void Awake()
     {
+        GameInputHandlerComponent.OnPauseCalled += OnPauseButtonPressed;
+        GameInputHandlerComponent.OnResumeCalled += OnResumeButtonPressed;
+        OnGameStateChanged += OnGameStateChangedFunction;
+
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -43,10 +48,6 @@ public class GameStateHandlerComponent : MonoBehaviour
         }
 
         GlobalGameState = GameState.RUNNING;
-
-        GameInputHandlerComponent.OnPauseButtonPressed += OnPauseButtonPressed;
-        GameInputHandlerComponent.OnResumeButtonPressed += OnResumeButtonPressed;
-        OnGameStateChanged += OnGameStateChangedFunction;
     }
 
     private void OnPauseButtonPressed()
@@ -63,17 +64,17 @@ public class GameStateHandlerComponent : MonoBehaviour
     {
         if (gameState == GameState.PAUSED)
         {
-            OnGameStatePause?.Invoke();
+            OnGameStatePauseEntered?.Invoke();
         }
         else if (gameState == GameState.RUNNING)
         {
-            OnGameStateResume?.Invoke();
+            OnGameStateResumeEntered?.Invoke();
         }
     }
 
     private void OnDestroy()
     {
-        GameInputHandlerComponent.OnPauseButtonPressed -= OnPauseButtonPressed;
-        GameInputHandlerComponent.OnResumeButtonPressed -= OnResumeButtonPressed;
+        GameInputHandlerComponent.OnPauseCalled -= OnPauseButtonPressed;
+        GameInputHandlerComponent.OnResumeCalled -= OnResumeButtonPressed;
     }
 }

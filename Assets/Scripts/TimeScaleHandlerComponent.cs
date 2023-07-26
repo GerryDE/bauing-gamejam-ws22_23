@@ -4,8 +4,8 @@ using static GameStateHandlerComponent;
 public class TimeScaleHandlerComponent : MonoBehaviour {
 
     private void Awake() {
-        GameStateHandlerComponent.OnGameStatePause += OnGameStatePause;
-        GameStateHandlerComponent.OnGameStateResume += OnGameStateResume;
+        GameStateHandlerComponent.OnGameStatePauseEntered += OnGameStatePause;
+        GameStateHandlerComponent.OnGameStateResumeEntered += OnGameStateResume;
     }
 
     private void OnGameStatePause()
@@ -20,7 +20,7 @@ public class TimeScaleHandlerComponent : MonoBehaviour {
 
     private void OnDestroy()
     {
-        GameStateHandlerComponent.OnGameStatePause -= OnGameStatePause;
-        GameStateHandlerComponent.OnGameStateResume -= OnGameStateResume;
+        GameStateHandlerComponent.OnGameStatePauseEntered -= OnGameStatePause;
+        GameStateHandlerComponent.OnGameStateResumeEntered -= OnGameStateResume;
     }
 }

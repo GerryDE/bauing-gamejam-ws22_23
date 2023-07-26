@@ -13,10 +13,10 @@ public abstract class InteractableBaseComponent : MonoBehaviour
 
     protected virtual void Start()
     {
-        PlayerController.OnInteractionButton1Hold += OnInteractionButton1Hold;
-        PlayerController.OnInteractionButton1Released += OnInteractionButton1Released;
-        PlayerController.OnInteractionButton1Pressed += OnInteractionButton1Pressed;
-        PlayerController.OnInteractionButton2Pressed += OnInteractionButton2Pressed;
+        GameInputHandlerComponent.OnInteract1HoldCalled += OnInteractionButton1Hold;
+        GameInputHandlerComponent.OnInteract1ReleasedCalled += OnInteractionButton1Released;
+        GameInputHandlerComponent.OnInteract1PressCalled += OnInteractionButton1Pressed;
+        GameInputHandlerComponent.OnInteract2PressCalled += OnInteractionButton2Pressed;
         PlayerController.OnPlayerMove += OnPlayerMove;
         DataProvider.OnResourceDataChanged += OnResourceDataChanged;
 
@@ -70,10 +70,11 @@ public abstract class InteractableBaseComponent : MonoBehaviour
 
     protected virtual void OnDestroy()
     {
-        PlayerController.OnInteractionButton1Hold -= OnInteractionButton1Hold;
-        PlayerController.OnInteractionButton1Released -= OnInteractionButton1Released;
-        PlayerController.OnInteractionButton1Pressed -= OnInteractionButton1Pressed;
-        PlayerController.OnInteractionButton2Pressed -= OnInteractionButton2Pressed;
+        GameInputHandlerComponent.OnInteract1HoldCalled -= OnInteractionButton1Hold;
+        GameInputHandlerComponent.OnInteract1ReleasedCalled -= OnInteractionButton1Released;
+        GameInputHandlerComponent.OnInteract1PressCalled -= OnInteractionButton1Pressed;
+        GameInputHandlerComponent.OnInteract2PressCalled -= OnInteractionButton2Pressed;
+        PlayerController.OnPlayerMove -= OnPlayerMove;
         DataProvider.OnResourceDataChanged -= OnResourceDataChanged;
     }
 }
