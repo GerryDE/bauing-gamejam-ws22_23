@@ -26,7 +26,6 @@ public class GameStateHandlerComponent : MonoBehaviour
         get => _globalGameState;
         set 
         {
-            Debug.Log("New state: " + value);
             _globalGameState = value;
             OnGameStateChanged?.Invoke(value);
         }
@@ -46,7 +45,10 @@ public class GameStateHandlerComponent : MonoBehaviour
         {
             Instance = this;
         }
+    }
 
+    private void Start()
+    {
         GlobalGameState = GameState.RUNNING;
     }
 
