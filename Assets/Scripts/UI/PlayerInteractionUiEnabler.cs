@@ -41,42 +41,4 @@ public class PlayerInteractionUiEnabler : MonoBehaviour
             }
         }
     }
-
-    //private void SetActiveFoLabels(string layer, bool value)
-    //{
-    //    switch(layer)
-    //    {
-    //        case "FenceTrigger":
-    //            fenceUiObject.SetActive(value);
-    //            treeUiObject.SetActive(!value);
-    //            mineUiObject.SetActive(!value);
-    //            statueUiObject.SetActive(!value);
-    //            break;
-    //        case "Tree":
-    //            treeUiObject.SetActive(value);
-    //            fenceUiObject.SetActive(!value);
-    //            mineUiObject.SetActive(!value);
-    //            statueUiObject.SetActive(!value);
-    //            break;
-    //        case "Stone":
-    //            mineUiObject.SetActive(value);
-    //            treeUiObject.SetActive(!value);
-    //            fenceUiObject.SetActive(!value);
-    //            statueUiObject.SetActive(!value);
-    //            break;
-    //        case "Statue":
-    //            statueUiObject.SetActive(value);
-    //            treeUiObject.SetActive(!value);
-    //            mineUiObject.SetActive(!value);
-    //            fenceUiObject.SetActive(!value);
-    //            break;
-    //        default:
-    //            statueUiObject.SetActive(!value);
-    //            treeUiObject.SetActive(!value);
-    //            mineUiObject.SetActive(!value);
-    //            fenceUiObject.SetActive(!value);
-    //            break;
-
-    //    }
-    //}
 }
