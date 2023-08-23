@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using AssemblyCSharp.Assets.Scripts;
 using Data;
 using UnityEngine;
 
@@ -9,9 +11,11 @@ public class DataProvider : MonoBehaviour
 
     [SerializeField] private PlayerData initialCurrentPlayerData;
     [SerializeField] private ResourceData initialResourceData;
+    [SerializeField] private List<FenceData> fenceData;
 
     public CurrentPlayerData PlayerData;
     public CurrentResourceData ResourceData;
+    public List<FenceData> FenceData;
 
     public delegate void MaxRemainingYearsChanged(int value);
 
@@ -210,5 +214,16 @@ public class DataProvider : MonoBehaviour
             WoodAmount = initialResourceData.woodAmount,
             StoneAmount = initialResourceData.stoneAmount
         };
+
+        FenceData = fenceData;
+    }
+
+    public CostData GetCostData(Interactable interactable, int version)
+    {
+        Dictionary<Interactable, CostData> data = new Dictionary<Interactable, CostData>();
+        data.Add(Interactable.Fence_Repair, FenceData[version].repairCost);
+        data.Add(Interactable.Fence_Upgrade, FenceData[version].upgradeCost);
+
+        return data[interactable];
     }
 }

@@ -12,11 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ca75c42c6c8dc3228c11948873ce532, type: 3}
   m_Name: FenceData_Lv1
   m_EditorClassIdentifier: 
-  upgradeLumberCost: 0
-  upgradeStoneCost: 0
+  upgradeCost: {fileID: 11400000, guid: 43984b85622f94ec6941cd850acf2d67, type: 2}
   maxHp: 50
   damage: 1
-  repairLumberCost: 2
-  repairStoneCost: 2
+  repairCost: {fileID: 11400000, guid: 9785aa8885effb4198823aeb3df275f5, type: 2}
   repairHealAmount: 25
   sprite: {fileID: 21300000, guid: ca6ea48ab375a97958a53ec1d9369214, type: 3}
