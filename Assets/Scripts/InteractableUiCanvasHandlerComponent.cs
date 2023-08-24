@@ -60,6 +60,9 @@ namespace AssemblyCSharp.Assets.Scripts
                 case Interactable.Fence_Upgrade:
                     data = _dataProvider.FenceData[version].upgradeCost;
                     break;
+                case Interactable.Tree_Upgrade:
+                    data = _dataProvider.TreeData[version].upgradeCost;
+                    break;
             }
 
             return data;

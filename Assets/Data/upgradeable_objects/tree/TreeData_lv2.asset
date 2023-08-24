@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd0fba0ee8c649c4686a4afab5b9acb7, type: 3}
+  m_Name: TreeData_lv2
+  m_EditorClassIdentifier: 
+  upgradeCost: {fileID: 11400000, guid: 6236933220bda1d7e9caebb2d81b20a5, type: 2}
