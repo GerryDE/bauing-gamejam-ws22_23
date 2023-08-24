@@ -14,12 +14,14 @@ public class DataProvider : MonoBehaviour
 
     [SerializeField] private List<FenceData> fenceData;
     [SerializeField] private List<TreeData> treeData;
+    [SerializeField] private List<MineData> mineData;
 
     [NonSerialized] public CurrentPlayerData PlayerData;
     [NonSerialized] public CurrentResourceData ResourceData;
 
     [NonSerialized] public List<FenceData> FenceData;
     [NonSerialized] public List<TreeData> TreeData;
+    [NonSerialized] public List<MineData> MineData;
 
     public delegate void MaxRemainingYearsChanged(int value);
 
@@ -221,6 +223,7 @@ public class DataProvider : MonoBehaviour
 
         FenceData = fenceData;
         TreeData = treeData;
+        MineData = mineData;
     }
 
     public CostData GetCostData(Interactable interactable, int version)
@@ -229,6 +232,7 @@ public class DataProvider : MonoBehaviour
         data.Add(Interactable.Fence_Repair, FenceData[version].repairCost);
         data.Add(Interactable.Fence_Upgrade, FenceData[version].upgradeCost);
         data.Add(Interactable.Tree_Upgrade, TreeData[version].upgradeCost);
+        data.Add(Interactable.Stone_Upgrade, MineData[version].upgradeCost);
 
         return data[interactable];
     }

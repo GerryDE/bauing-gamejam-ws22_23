@@ -16,7 +16,6 @@ public class ShowRequiredLumberCostValueInTextComponent : MonoBehaviour
     private DataHandlerComponent _dataHandlerComponent;
     private TextMeshProUGUI textComponent;
 
-    // Start is called before the first frame update
     void Start()
     {
         textComponent = GetComponent<TextMeshProUGUI>();
@@ -29,16 +28,32 @@ public class ShowRequiredLumberCostValueInTextComponent : MonoBehaviour
         _dataHandlerComponent = GameObject.FindWithTag("DataHandler").GetComponent<DataHandlerComponent>();
         _dataProvider = DataProvider.Instance;
 
-        int version = _dataHandlerComponent.CurrentFenceVersion;
+        int version = 0;
+        int count = 0;
+        switch (Interactable)
+        {
+            case Interactable.Fence_Repair:
+            case Interactable.Fence_Upgrade:
+                version = _dataHandlerComponent.CurrentFenceVersion;
+                count = _dataProvider.FenceData.Count;
+                break;
+            case Interactable.Tree_Upgrade:
+                version = _dataHandlerComponent.CurrentTreeVersion;
+                count = _dataProvider.TreeData.Count;
+                break;
+            case Interactable.Stone_Upgrade:
+                version = _dataHandlerComponent.CurrentMineVersion;
+                count = _dataProvider.MineData.Count;
+                break;
+        }
+
         if (UseNextVersionValue)
         {
             version++;
         }
 
-        List<FenceData> fenceData = _dataProvider.FenceData;
-
         string text = "-";
-        if (version < fenceData.Count)
+        if (version < count)
         {
             CostData currentCostData = _dataProvider.GetCostData(Interactable, version);
             switch (Currency)
@@ -52,11 +67,5 @@ public class ShowRequiredLumberCostValueInTextComponent : MonoBehaviour
             }
         }
         textComponent.text = text;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

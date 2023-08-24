@@ -21,13 +21,31 @@ namespace AssemblyCSharp.Assets.Scripts
             _dataHandlerComponent = GameObject.FindWithTag("DataHandler").GetComponent<DataHandlerComponent>();
             _canvasGroup = GetComponent<CanvasGroup>();
 
-            int version = _dataHandlerComponent.CurrentFenceVersion;
+            int version = 0;
+            int count = 0;
+            switch (Interactable)
+            {
+                case Interactable.Fence_Repair:
+                case Interactable.Fence_Upgrade:
+                    version = _dataHandlerComponent.CurrentFenceVersion;
+                    count = _dataProvider.FenceData.Count;
+                    break;
+                case Interactable.Tree_Upgrade:
+                    version = _dataHandlerComponent.CurrentTreeVersion;
+                    count = _dataProvider.TreeData.Count;
+                    break;
+                case Interactable.Stone_Upgrade:
+                    version = _dataHandlerComponent.CurrentMineVersion;
+                    count = _dataProvider.MineData.Count;
+                    break;
+            }
+
             if (Upgrade)
             {
                 version++;
             }
 
-            if (version < _dataProvider.FenceData.Count)
+            if (version < count)
             {
                 int currentLumberAmount = _dataProvider.ResourceData.WoodAmount;
                 int currentStoneAmount = _dataProvider.ResourceData.StoneAmount;
@@ -62,6 +80,9 @@ namespace AssemblyCSharp.Assets.Scripts
                     break;
                 case Interactable.Tree_Upgrade:
                     data = _dataProvider.TreeData[version].upgradeCost;
+                    break;
+                case Interactable.Stone_Upgrade:
+                    data = _dataProvider.MineData[version].upgradeCost;
                     break;
             }
 
