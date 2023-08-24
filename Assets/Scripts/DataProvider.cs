@@ -15,6 +15,7 @@ public class DataProvider : MonoBehaviour
     [SerializeField] private List<FenceData> fenceData;
     [SerializeField] private List<TreeData> treeData;
     [SerializeField] private List<MineData> mineData;
+    [SerializeField] private List<StatueData> statueData;
 
     [NonSerialized] public CurrentPlayerData PlayerData;
     [NonSerialized] public CurrentResourceData ResourceData;
@@ -22,6 +23,7 @@ public class DataProvider : MonoBehaviour
     [NonSerialized] public List<FenceData> FenceData;
     [NonSerialized] public List<TreeData> TreeData;
     [NonSerialized] public List<MineData> MineData;
+    [NonSerialized] public List<StatueData> StatueData;
 
     public delegate void MaxRemainingYearsChanged(int value);
 
@@ -224,15 +226,19 @@ public class DataProvider : MonoBehaviour
         FenceData = fenceData;
         TreeData = treeData;
         MineData = mineData;
+        StatueData = statueData;
     }
 
     public CostData GetCostData(Interactable interactable, int version)
     {
-        Dictionary<Interactable, CostData> data = new Dictionary<Interactable, CostData>();
-        data.Add(Interactable.Fence_Repair, FenceData[version].repairCost);
-        data.Add(Interactable.Fence_Upgrade, FenceData[version].upgradeCost);
-        data.Add(Interactable.Tree_Upgrade, TreeData[version].upgradeCost);
-        data.Add(Interactable.Stone_Upgrade, MineData[version].upgradeCost);
+        Dictionary<Interactable, CostData> data = new Dictionary<Interactable, CostData>
+        {
+            { Interactable.Fence_Repair, FenceData[version].repairCost },
+            { Interactable.Fence_Upgrade, FenceData[version].upgradeCost },
+            { Interactable.Tree_Upgrade, TreeData[version].upgradeCost },
+            { Interactable.Stone_Upgrade, MineData[version].upgradeCost },
+            { Interactable.Statue_Upgrade, StatueData[version].upgradeCost }
+        };
 
         return data[interactable];
     }

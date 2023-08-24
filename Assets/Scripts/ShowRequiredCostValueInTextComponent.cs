@@ -45,6 +45,10 @@ public class ShowRequiredLumberCostValueInTextComponent : MonoBehaviour
                 version = _dataHandlerComponent.CurrentMineVersion;
                 count = _dataProvider.MineData.Count;
                 break;
+            case Interactable.Statue_Upgrade:
+                version = _dataHandlerComponent.CurrentStatueVersion;
+                count = _dataProvider.StatueData.Count;
+                break;
         }
 
         if (UseNextVersionValue)

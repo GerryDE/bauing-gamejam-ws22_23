@@ -38,6 +38,10 @@ namespace AssemblyCSharp.Assets.Scripts
                     version = _dataHandlerComponent.CurrentMineVersion;
                     count = _dataProvider.MineData.Count;
                     break;
+                case Interactable.Statue_Upgrade:
+                    version = _dataHandlerComponent.CurrentStatueVersion;
+                    count = _dataProvider.StatueData.Count;
+                    break;
             }
 
             if (Upgrade)
@@ -83,6 +87,9 @@ namespace AssemblyCSharp.Assets.Scripts
                     break;
                 case Interactable.Stone_Upgrade:
                     data = _dataProvider.MineData[version].upgradeCost;
+                    break;
+                case Interactable.Statue_Upgrade:
+                    data = _dataProvider.StatueData[version].upgradeCost;
                     break;
             }
 
