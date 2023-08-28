@@ -318,6 +318,11 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 7664209195361324428, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
   m_PrefabInstance: {fileID: 1323007476650608558}
   m_PrefabAsset: {fileID: 0}
+--- !u!212 &188787712 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7667268539550347276, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+  m_PrefabInstance: {fileID: 1319941725}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &232551868
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2777,6 +2782,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 505910263, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
+      propertyPath: upgradeNotificationSprite
+      value: 
+      objectReference: {fileID: 188787712}
     - target: {fileID: 4610381316174552466, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
       propertyPath: m_Name
       value: fence

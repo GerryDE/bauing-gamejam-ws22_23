@@ -11,24 +11,19 @@ public class FenceUpgradeComponent : InteractableBaseComponent
         public Sprite sprite;
     }
 
-    [SerializeField] private List<Data> data;
-
     public delegate void UpgradeFence(int newHpValue, int newDamage, Sprite sprite);
 
     public static UpgradeFence OnUpgradeFence;
 
-    public List<Data> GetData()
-    {
-        return data;
-    }
-
     protected override void OnResourceDataChanged(DataProvider.CurrentResourceData resourceData)
     {
-        if (upgradeNotificationSprite == null || _dataHandlerComponent.CurrentFenceVersion >= data.Count - 1) return;
+        var fenceData = DataProvider.Instance.FenceData;
 
-        var nextUpgradeData = data[_dataHandlerComponent.CurrentFenceVersion + 1];
-        var isUpgradable = resourceData.WoodAmount  >= nextUpgradeData.woodCost &&
-            resourceData.StoneAmount >= nextUpgradeData.stoneCost;
+        if (upgradeNotificationSprite == null || _dataHandlerComponent.CurrentFenceVersion >= fenceData.Count - 1) return;
+
+        var nextUpgradeData = fenceData[_dataHandlerComponent.CurrentFenceVersion + 1];
+        var isUpgradable = resourceData.WoodAmount  >= nextUpgradeData.upgradeCost.lumberCost &&
+            resourceData.StoneAmount >= nextUpgradeData.upgradeCost.stoneCost;
         upgradeNotificationSprite.enabled = isUpgradable;
     }
 
@@ -36,16 +31,18 @@ public class FenceUpgradeComponent : InteractableBaseComponent
     {
         base.OnInteractionButton2Pressed();
 
-        _interactionButton2Pressed = false;
-        if (!_isCollidingWithPlayer || _dataHandlerComponent.CurrentFenceVersion >= data.Count - 1) return;
+        var fenceData = DataProvider.Instance.FenceData;
 
-        var nextUpgradeData = data[_dataHandlerComponent.CurrentFenceVersion + 1];
+        _interactionButton2Pressed = false;
+        if (!_isCollidingWithPlayer || _dataHandlerComponent.CurrentFenceVersion >= fenceData.Count - 1) return;
+
+        var nextUpgradeData = fenceData[_dataHandlerComponent.CurrentFenceVersion + 1];
         var resourceData = DataProvider.Instance.ResourceData;
-        if (resourceData.WoodAmount < nextUpgradeData.woodCost ||
-            resourceData.StoneAmount < nextUpgradeData.stoneCost) return;
-        resourceData.WoodAmount -= nextUpgradeData.woodCost;
-        resourceData.StoneAmount -= nextUpgradeData.stoneCost;
-        OnUpgradeFence?.Invoke(nextUpgradeData.newHp, nextUpgradeData.damage, nextUpgradeData.sprite);
+        if (resourceData.WoodAmount < nextUpgradeData.upgradeCost.lumberCost ||
+            resourceData.StoneAmount < nextUpgradeData.upgradeCost.stoneCost) return;
+        resourceData.WoodAmount -= nextUpgradeData.upgradeCost.lumberCost;
+        resourceData.StoneAmount -= nextUpgradeData.upgradeCost.stoneCost;
+        OnUpgradeFence?.Invoke(nextUpgradeData.maxHp, nextUpgradeData.damage, nextUpgradeData.sprite);
         _dataHandlerComponent.CurrentFenceVersion++;
         _dataHandlerComponent.PlayUpgradingAudioClip();
     }

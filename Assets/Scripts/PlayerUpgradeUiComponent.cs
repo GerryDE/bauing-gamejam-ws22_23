@@ -28,7 +28,7 @@ public class PlayerUpgradeUiComponent : PlayerInteractionUiComponent
 
         if (layer.Equals("FenceTrigger"))
         {
-            var data = other.gameObject.GetComponent<FenceUpgradeComponent>().GetData();
+            var data = DataProvider.Instance.FenceData;
             var currentVersion = _dataHandlerComponent.CurrentFenceVersion;
             if (currentVersion >= data.Count - 1)
             {
@@ -39,8 +39,8 @@ public class PlayerUpgradeUiComponent : PlayerInteractionUiComponent
             }
 
             var nextUpgradeData = data[currentVersion + 1];
-            _woodCosts = nextUpgradeData.woodCost;
-            _stoneCosts = nextUpgradeData.stoneCost;
+            _woodCosts = nextUpgradeData.upgradeCost.lumberCost;
+            _stoneCosts = nextUpgradeData.upgradeCost.stoneCost;
         }
 
         if (layer.Equals("Tree"))

@@ -35,11 +35,11 @@ public class PlayerFenceInteractionUiComponent : MonoBehaviour
 
         textComponent.SetText("[" + buttonText + "] " + fenceText);
 
-        var data = other.gameObject.GetComponent<FenceRepairComponent>().GetData();
+        var data = DataProvider.Instance.FenceData;
         var currentVersion = _dataHandlerComponent.CurrentFenceVersion;
         var currentData = data[currentVersion];
-        _woodCosts = currentData.woodCost;
-        _stoneCosts = currentData.stoneCost;
+        _woodCosts = currentData.repairCost.lumberCost;
+        _stoneCosts = currentData.repairCost.stoneCost;
 
         woodTextComponent.SetText("Wood: " + _woodCosts);
         stoneTextComponent.SetText("Stone: " + _stoneCosts);
