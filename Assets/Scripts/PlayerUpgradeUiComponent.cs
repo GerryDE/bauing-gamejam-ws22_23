@@ -80,7 +80,7 @@ public class PlayerUpgradeUiComponent : PlayerInteractionUiComponent
 
         if (layer.Equals("Stone"))
         {
-            var data = other.gameObject.GetComponent<StoneUpgradeComponent>().GetData();
+            var data = DataProvider.Instance.MineData;
             var currentVersion = _dataHandlerComponent.CurrentMineVersion;
             if (currentVersion >= data.Count - 1)
             {
@@ -91,8 +91,8 @@ public class PlayerUpgradeUiComponent : PlayerInteractionUiComponent
             }
 
             var nextUpgradeData = data[currentVersion + 1];
-            _woodCosts = nextUpgradeData.woodCost;
-            _stoneCosts = nextUpgradeData.stoneCost;
+            _woodCosts = nextUpgradeData.upgradeCost.lumberCost;
+            _stoneCosts = nextUpgradeData.upgradeCost.stoneCost;
         }
 
         woodTextComponent.SetText("Wood: " + _woodCosts);

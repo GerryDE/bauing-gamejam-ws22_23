@@ -19,7 +19,11 @@ public class FenceUpgradeComponent : InteractableBaseComponent
     {
         var fenceData = DataProvider.Instance.FenceData;
 
-        if (upgradeNotificationSprite == null || _dataHandlerComponent.CurrentFenceVersion >= fenceData.Count - 1) return;
+        if (upgradeNotificationSprite == null || _dataHandlerComponent.CurrentFenceVersion >= fenceData.Count - 1)
+        {
+            upgradeNotificationSprite.enabled = false;
+            return;
+        }
 
         var nextUpgradeData = fenceData[_dataHandlerComponent.CurrentFenceVersion + 1];
         var isUpgradable = resourceData.WoodAmount  >= nextUpgradeData.upgradeCost.lumberCost &&

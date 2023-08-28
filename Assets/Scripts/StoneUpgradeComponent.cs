@@ -13,19 +13,23 @@ public class StoneUpgradeComponent : InteractableBaseComponent
         public Sprite sprite;
     }
 
-    [SerializeField] private List<Data> data;
-
     public delegate void UpgradeMine(float newMiningDuration, int newDropAmount, Sprite sprite);
 
     public static UpgradeMine OnUpgradeMine;
 
     protected override void OnResourceDataChanged(DataProvider.CurrentResourceData resourceData)
     {
-        if (upgradeNotificationSprite == null || _dataHandlerComponent.CurrentMineVersion >= data.Count - 1) return;
+        var data = DataProvider.Instance.MineData;
+
+        if (upgradeNotificationSprite == null || _dataHandlerComponent.CurrentMineVersion >= data.Count - 1)
+        {
+            upgradeNotificationSprite.enabled = false;
+            return;
+        }
 
         var nextUpgradeData = data[_dataHandlerComponent.CurrentMineVersion + 1];
-        var isUpgradable = resourceData.WoodAmount  >= nextUpgradeData.woodCost &&
-            resourceData.StoneAmount >= nextUpgradeData.stoneCost;
+        var isUpgradable = resourceData.WoodAmount  >= nextUpgradeData.upgradeCost.lumberCost &&
+            resourceData.StoneAmount >= nextUpgradeData.upgradeCost.stoneCost;
         upgradeNotificationSprite.enabled = isUpgradable;
     }
 
@@ -33,21 +37,18 @@ public class StoneUpgradeComponent : InteractableBaseComponent
     {
         base.OnInteractionButton2Pressed();
 
+        var data = DataProvider.Instance.MineData;
+
         _interactionButton2Pressed = false;
         if (!_isCollidingWithPlayer || _dataHandlerComponent.CurrentMineVersion >= data.Count - 1) return;
 
         var nextUpgradeData = data[_dataHandlerComponent.CurrentMineVersion + 1];
         var resourceData = DataProvider.Instance.ResourceData;
-        if (resourceData.WoodAmount < nextUpgradeData.woodCost ||
-            resourceData.StoneAmount < nextUpgradeData.stoneCost) return;
-        resourceData.WoodAmount -= nextUpgradeData.woodCost;
-        resourceData.StoneAmount -= nextUpgradeData.stoneCost;
-        OnUpgradeMine?.Invoke(nextUpgradeData.miningDuration, nextUpgradeData.dropAmount, nextUpgradeData.sprite);
+        if (resourceData.WoodAmount < nextUpgradeData.upgradeCost.lumberCost ||
+            resourceData.StoneAmount < nextUpgradeData.upgradeCost.stoneCost) return;
+        resourceData.WoodAmount -= nextUpgradeData.upgradeCost.lumberCost;
+        resourceData.StoneAmount -= nextUpgradeData.upgradeCost.stoneCost;
+        OnUpgradeMine?.Invoke(nextUpgradeData.miningDuaration, nextUpgradeData.dropAmount, nextUpgradeData.sprite);
         _dataHandlerComponent.PlayUpgradingAudioClip();
-    }
-
-    public List<Data> GetData()
-    {
-        return data;
     }
 }

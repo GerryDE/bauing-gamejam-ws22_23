@@ -7,7 +7,7 @@ namespace Data
     {
         public CostData upgradeCost;
         public float miningDuaration = 1f;
-        public float dropAmount = 1;
+        public int dropAmount = 1;
         public Sprite sprite;
     }
 }
