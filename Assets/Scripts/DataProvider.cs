@@ -49,6 +49,14 @@ public class DataProvider : MonoBehaviour
 
     public delegate void ResourceDataChanged(CurrentResourceData data);
 
+    public delegate void FenceVersionChanged(int newVersion);
+
+    public delegate void TreeVersionChanged(int newVersion);
+
+    public delegate void MineVersionChanged(int newVersion);
+
+    public delegate void StatueVersionChanged(int newVersion);
+
     public static MaxRemainingYearsChanged OnPlayerMaxRemainingYearsChanged;
     public static CurrentRemainingYearsChanged OnCurrentRemainingYearsChanged;
     public static AttackValueChanged OnAttackValueChanged;
@@ -61,6 +69,55 @@ public class DataProvider : MonoBehaviour
     public static WoodAmountChanged OnWoodAmountChanged;
     public static StoneAmountChanged OnStoneAmountChanged;
     public static ResourceDataChanged OnResourceDataChanged;
+    public static FenceVersionChanged OnFenceVersionChanged;
+    public static TreeVersionChanged OnTreeVersionChanged;
+    public static MineVersionChanged OnMineVersionChanged;
+    public static StatueVersionChanged OnStatueVersionChanged;
+
+    private int _currentFenceVersion;
+    private int _currentTreeVersion;
+    private int _currentMineVersion;
+    private int _currentStatueVersion;
+
+    public int CurrentFenceVersion
+    {
+        get => _currentFenceVersion;
+        set
+        {
+            _currentFenceVersion = value;
+            OnFenceVersionChanged?.Invoke(value);
+        }
+    }
+
+    public int CurrentTreeVersion
+    {
+        get => _currentTreeVersion;
+        set
+        {
+            _currentTreeVersion = value;
+            OnTreeVersionChanged?.Invoke(value);
+        }
+    }
+
+    public int CurrentMineVersion
+    {
+        get => _currentMineVersion;
+        set
+        {
+            _currentMineVersion = value;
+            OnMineVersionChanged?.Invoke(value);
+        }
+    }
+
+    public int CurrentStatueVersion
+    {
+        get => _currentStatueVersion;
+        set
+        {
+            _currentStatueVersion = value;
+            OnStatueVersionChanged?.Invoke(value);
+        }
+    }
 
     public class CurrentPlayerData
     {

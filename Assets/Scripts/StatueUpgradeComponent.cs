@@ -11,7 +11,7 @@ public class StatueUpgradeComponent : InteractableBaseComponent
     protected override void Start()
     {
         base.Start();
-        DataHandlerComponent.OnStatueVersionChanged += OnStatueVersionChanged;
+        DataProvider.OnStatueVersionChanged += OnStatueVersionChanged;
     }
 
     private void OnStatueVersionChanged(int newVersion)
@@ -24,31 +24,27 @@ public class StatueUpgradeComponent : InteractableBaseComponent
     {
         base.OnResourceDataChanged(resourceData);
         if (upgradeNotificationSprite == null) return;
-        upgradeNotificationSprite.enabled = IsUpgradeable(_dataHandlerComponent.CurrentStatueVersion + 1);
+        upgradeNotificationSprite.enabled = IsUpgradeable(DataProvider.Instance.CurrentStatueVersion + 1);
     }
 
     protected override void OnInteractionButton2Pressed()
     {
         base.OnInteractionButton2Pressed();
-        var data = DataProvider.Instance.StatueData;
+        var data = DataProvider.Instance;
+        var statueData = data.StatueData;
 
         _interactionButton2Pressed = false;
-        if (!_isCollidingWithPlayer || _dataHandlerComponent.CurrentStatueVersion >= data.Count - 1) return;
+        if (!_isCollidingWithPlayer || data.CurrentStatueVersion >= statueData.Count - 1) return;
 
-        var nextUpgradeData = data[_dataHandlerComponent.CurrentStatueVersion + 1];
+        var nextUpgradeData = statueData[data.CurrentStatueVersion + 1];
         var resourceData = DataProvider.Instance.ResourceData;
         if (resourceData.WoodAmount < nextUpgradeData.upgradeCost.lumberCost ||
             resourceData.StoneAmount < nextUpgradeData.upgradeCost.stoneCost) return;
         resourceData.WoodAmount -= nextUpgradeData.upgradeCost.lumberCost;
         resourceData.StoneAmount -= nextUpgradeData.upgradeCost.stoneCost;
         OnUpgradeStatue?.Invoke(nextUpgradeData.maxAge, nextUpgradeData.sprite);
-        _dataHandlerComponent.CurrentStatueVersion++;
+        data.CurrentStatueVersion++;
         _dataHandlerComponent.PlayUpgradingAudioClip();
-    }
-
-    protected override void OnDestroy()
-    {
-        DataHandlerComponent.OnStatueVersionChanged -= OnStatueVersionChanged;
     }
 
     private bool IsUpgradeable(int nextVersionIndex)
@@ -62,5 +58,10 @@ public class StatueUpgradeComponent : InteractableBaseComponent
         var isUpgradable = resourceData.WoodAmount >= nextUpgradeData.upgradeCost.lumberCost &&
             resourceData.StoneAmount >= nextUpgradeData.upgradeCost.stoneCost;
         return isUpgradable;
+    }
+
+    protected override void OnDestroy()
+    {
+        DataProvider.OnStatueVersionChanged -= OnStatueVersionChanged;
     }
 }

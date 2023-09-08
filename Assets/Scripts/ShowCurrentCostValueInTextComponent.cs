@@ -14,27 +14,25 @@ public class ShowCurrentCostValueInTextComponent : MonoBehaviour
     [SerializeField] private Currency currency;
 
     private TextMeshProUGUI textComponent;
-    private static DataProvider.CurrentResourceData _resourceData;
 
     // Start is called before the first frame update
     void Start()
     {
         textComponent = GetComponent<TextMeshProUGUI>();
-        _resourceData = DataProvider.Instance.ResourceData;
     }
 
     private void OnEnable() {
         textComponent = GetComponent<TextMeshProUGUI>();
-        _resourceData = DataProvider.Instance.ResourceData;
+        var resourceData = DataProvider.Instance.ResourceData;
 
         string text = "0";
         switch (currency)
         {
             case Currency.Lumber:
-                text = _resourceData.WoodAmount.ToString();
+                text = resourceData.WoodAmount.ToString();
                 break;
             case Currency.Stone:
-                text = _resourceData.StoneAmount.ToString();
+                text = resourceData.StoneAmount.ToString();
                 break;
         }
         textComponent.text = text;

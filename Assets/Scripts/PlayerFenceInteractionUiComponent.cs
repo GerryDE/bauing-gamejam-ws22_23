@@ -35,16 +35,17 @@ public class PlayerFenceInteractionUiComponent : MonoBehaviour
 
         textComponent.SetText("[" + buttonText + "] " + fenceText);
 
-        var data = DataProvider.Instance.FenceData;
-        var currentVersion = _dataHandlerComponent.CurrentFenceVersion;
-        var currentData = data[currentVersion];
+        var data = DataProvider.Instance;
+        var fenceData = data.FenceData;
+        var currentVersion = data.CurrentFenceVersion;
+        var currentData = fenceData[currentVersion];
         _woodCosts = currentData.repairCost.lumberCost;
         _stoneCosts = currentData.repairCost.stoneCost;
 
         woodTextComponent.SetText("Wood: " + _woodCosts);
         stoneTextComponent.SetText("Stone: " + _stoneCosts);
 
-        var resourceData = DataProvider.Instance.ResourceData;
+        var resourceData = data.ResourceData;
         textComponent.color = resourceData.WoodAmount >= _woodCosts
             ? enoughResourcesColor
             : notEnoughResourcesColor;

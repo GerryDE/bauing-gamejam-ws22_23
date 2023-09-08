@@ -11,7 +11,6 @@ public class ShowRequiredLumberCostValueInTextComponent : MonoBehaviour
     [SerializeField] private bool UseNextVersionValue;
     [SerializeField] private Currency Currency;
     [SerializeField] private Interactable Interactable;
-    private static DataProvider _dataProvider;
 
     private DataHandlerComponent _dataHandlerComponent;
     private TextMeshProUGUI textComponent;
@@ -20,13 +19,12 @@ public class ShowRequiredLumberCostValueInTextComponent : MonoBehaviour
     {
         textComponent = GetComponent<TextMeshProUGUI>();
         _dataHandlerComponent = GameObject.FindWithTag("DataHandler").GetComponent<DataHandlerComponent>();
-        _dataProvider = DataProvider.Instance;
     }
 
     private void OnEnable() {
         textComponent = GetComponent<TextMeshProUGUI>();
         _dataHandlerComponent = GameObject.FindWithTag("DataHandler").GetComponent<DataHandlerComponent>();
-        _dataProvider = DataProvider.Instance;
+        var dataProvider = DataProvider.Instance;
 
         int version = 0;
         int count = 0;
@@ -34,20 +32,20 @@ public class ShowRequiredLumberCostValueInTextComponent : MonoBehaviour
         {
             case Interactable.Fence_Repair:
             case Interactable.Fence_Upgrade:
-                version = _dataHandlerComponent.CurrentFenceVersion;
-                count = _dataProvider.FenceData.Count;
+                version = dataProvider.CurrentFenceVersion;
+                count = dataProvider.FenceData.Count;
                 break;
             case Interactable.Tree_Upgrade:
-                version = _dataHandlerComponent.CurrentTreeVersion;
-                count = _dataProvider.TreeData.Count;
+                version = dataProvider.CurrentTreeVersion;
+                count = dataProvider.TreeData.Count;
                 break;
             case Interactable.Stone_Upgrade:
-                version = _dataHandlerComponent.CurrentMineVersion;
-                count = _dataProvider.MineData.Count;
+                version = dataProvider.CurrentMineVersion;
+                count = dataProvider.MineData.Count;
                 break;
             case Interactable.Statue_Upgrade:
-                version = _dataHandlerComponent.CurrentStatueVersion;
-                count = _dataProvider.StatueData.Count;
+                version = dataProvider.CurrentStatueVersion;
+                count = dataProvider.StatueData.Count;
                 break;
         }
 
@@ -59,7 +57,7 @@ public class ShowRequiredLumberCostValueInTextComponent : MonoBehaviour
         string text = "-";
         if (version < count)
         {
-            CostData currentCostData = _dataProvider.GetCostData(Interactable, version);
+            CostData currentCostData = DataProvider.Instance.GetCostData(Interactable, version);
             switch (Currency)
             {
                 case Currency.Lumber:

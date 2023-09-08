@@ -28,8 +28,9 @@ public class FenceRepairComponent : InteractableBaseComponent
         _interactionButton1Pressed = false;
 
         if (!_isCollidingWithPlayer) return;
-        var currentFenceData = DataProvider.Instance.FenceData[_dataHandlerComponent.CurrentFenceVersion];
-        var resourceData = DataProvider.Instance.ResourceData;
+        var data = DataProvider.Instance;
+        var currentFenceData = data.FenceData[data.CurrentFenceVersion];
+        var resourceData = data.ResourceData;
         if (resourceData.WoodAmount < currentFenceData.repairCost.lumberCost ||
             resourceData.StoneAmount < currentFenceData.repairCost.stoneCost ||
             _fenceController.CurrentHp >= _fenceController.MaxHp) return;

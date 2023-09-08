@@ -11,14 +11,11 @@ namespace AssemblyCSharp.Assets.Scripts
         [SerializeField] Interactable Interactable;
         [SerializeField] bool Upgrade = true;
 
-        private DataProvider _dataProvider;
-        private DataHandlerComponent _dataHandlerComponent;
         private CanvasGroup _canvasGroup;
 
         private void OnEnable()
         {
-            _dataProvider = DataProvider.Instance;
-            _dataHandlerComponent = GameObject.FindWithTag("DataHandler").GetComponent<DataHandlerComponent>();
+            var data = DataProvider.Instance;
             _canvasGroup = GetComponent<CanvasGroup>();
 
             int version = 0;
@@ -27,20 +24,20 @@ namespace AssemblyCSharp.Assets.Scripts
             {
                 case Interactable.Fence_Repair:
                 case Interactable.Fence_Upgrade:
-                    version = _dataHandlerComponent.CurrentFenceVersion;
-                    count = _dataProvider.FenceData.Count;
+                    version = data.CurrentFenceVersion;
+                    count = data.FenceData.Count;
                     break;
                 case Interactable.Tree_Upgrade:
-                    version = _dataHandlerComponent.CurrentTreeVersion;
-                    count = _dataProvider.TreeData.Count;
+                    version = data.CurrentTreeVersion;
+                    count = data.TreeData.Count;
                     break;
                 case Interactable.Stone_Upgrade:
-                    version = _dataHandlerComponent.CurrentMineVersion;
-                    count = _dataProvider.MineData.Count;
+                    version = data.CurrentMineVersion;
+                    count = data.MineData.Count;
                     break;
                 case Interactable.Statue_Upgrade:
-                    version = _dataHandlerComponent.CurrentStatueVersion;
-                    count = _dataProvider.StatueData.Count;
+                    version = data.CurrentStatueVersion;
+                    count = data.StatueData.Count;
                     break;
             }
 
@@ -51,8 +48,8 @@ namespace AssemblyCSharp.Assets.Scripts
 
             if (version < count)
             {
-                int currentLumberAmount = _dataProvider.ResourceData.WoodAmount;
-                int currentStoneAmount = _dataProvider.ResourceData.StoneAmount;
+                int currentLumberAmount = data.ResourceData.WoodAmount;
+                int currentStoneAmount = data.ResourceData.StoneAmount;
                 int requiredLumberAmount = GetCostData(version).lumberCost;
                 int requiredStoneAmount = GetCostData(version).stoneCost;
 
@@ -73,27 +70,28 @@ namespace AssemblyCSharp.Assets.Scripts
 
         private CostData GetCostData(int version)
         {
-            CostData data = null;
+            CostData costData = null;
+            var data = DataProvider.Instance;
             switch (Interactable)
             {
                 case Interactable.Fence_Repair:
-                    data = _dataProvider.FenceData[version].repairCost;
+                    costData = data.FenceData[version].repairCost;
                     break;
                 case Interactable.Fence_Upgrade:
-                    data = _dataProvider.FenceData[version].upgradeCost;
+                    costData = data.FenceData[version].upgradeCost;
                     break;
                 case Interactable.Tree_Upgrade:
-                    data = _dataProvider.TreeData[version].upgradeCost;
+                    costData = data.TreeData[version].upgradeCost;
                     break;
                 case Interactable.Stone_Upgrade:
-                    data = _dataProvider.MineData[version].upgradeCost;
+                    costData = data.MineData[version].upgradeCost;
                     break;
                 case Interactable.Statue_Upgrade:
-                    data = _dataProvider.StatueData[version].upgradeCost;
+                    costData = data.StatueData[version].upgradeCost;
                     break;
             }
 
-            return data;
+            return costData;
         }
     }
 }

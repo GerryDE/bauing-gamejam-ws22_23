@@ -18,7 +18,7 @@ public class FenceUpgradeComponent : InteractableBaseComponent
     protected override void Start()
     {
         base.Start();
-        DataHandlerComponent.OnFenceVersionChanged += OnFenceVersionChanged;
+        DataProvider.OnFenceVersionChanged += OnFenceVersionChanged;
     }
 
     private void OnFenceVersionChanged(int newVersion)
@@ -31,26 +31,27 @@ public class FenceUpgradeComponent : InteractableBaseComponent
     {
         base.OnResourceDataChanged(resourceData);
         if (upgradeNotificationSprite == null) return;
-        upgradeNotificationSprite.enabled = IsUpgradeable(_dataHandlerComponent.CurrentFenceVersion + 1);
+        upgradeNotificationSprite.enabled = IsUpgradeable(DataProvider.Instance.CurrentFenceVersion + 1);
     }
 
     protected override void OnInteractionButton2Pressed()
     {
         base.OnInteractionButton2Pressed();
 
+        var data = DataProvider.Instance;
         var fenceData = DataProvider.Instance.FenceData;
 
         _interactionButton2Pressed = false;
-        if (!_isCollidingWithPlayer || _dataHandlerComponent.CurrentFenceVersion >= fenceData.Count - 1) return;
+        if (!_isCollidingWithPlayer || data.CurrentFenceVersion >= fenceData.Count - 1) return;
 
-        var nextUpgradeData = fenceData[_dataHandlerComponent.CurrentFenceVersion + 1];
+        var nextUpgradeData = fenceData[data.CurrentFenceVersion + 1];
         var resourceData = DataProvider.Instance.ResourceData;
         if (resourceData.WoodAmount < nextUpgradeData.upgradeCost.lumberCost ||
             resourceData.StoneAmount < nextUpgradeData.upgradeCost.stoneCost) return;
         resourceData.WoodAmount -= nextUpgradeData.upgradeCost.lumberCost;
         resourceData.StoneAmount -= nextUpgradeData.upgradeCost.stoneCost;
         OnUpgradeFence?.Invoke(nextUpgradeData.maxHp, nextUpgradeData.damage, nextUpgradeData.sprite);
-        _dataHandlerComponent.CurrentFenceVersion++;
+        data.CurrentFenceVersion++;
         _dataHandlerComponent.PlayUpgradingAudioClip();
     }
 
@@ -69,6 +70,6 @@ public class FenceUpgradeComponent : InteractableBaseComponent
 
     protected override void OnDestroy()
     {
-        DataHandlerComponent.OnFenceVersionChanged -= OnFenceVersionChanged;
+        DataProvider.OnFenceVersionChanged -= OnFenceVersionChanged;
     }
 }
