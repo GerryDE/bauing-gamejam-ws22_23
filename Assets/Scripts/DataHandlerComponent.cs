@@ -49,7 +49,11 @@ public class DataHandlerComponent : MonoBehaviour
     public int CurrentFenceVersion
     {
         get => currentFenceVersion;
-        set => currentFenceVersion = value;
+        set
+        { 
+            currentFenceVersion = value;
+            OnFenceVersionChanged?.Invoke(value);
+        }
     }
 
     public int CurrentStatueVersion
@@ -117,18 +121,21 @@ public class DataHandlerComponent : MonoBehaviour
     /// 4 Upgrading
     /// 5 Woodcutting
     /// </summary>
-    public delegate void WaveCountChanged(int newValue);
+    public delegate void WaveCountChanged(int newWaveCount);
 
-    public delegate void StatueVersionChanged(int newValue);
+    public delegate void StatueVersionChanged(int newVersion);
 
-    public delegate void MineVersionChanged(int newValue);
+    public delegate void MineVersionChanged(int newVersion);
 
     public delegate void TreeVersionChanged(int newVersion);
+
+    public delegate void FenceVersionChanged(int newVersion);
 
     public static WaveCountChanged OnWaveCountChanged;
     public static StatueVersionChanged OnStatueVersionChanged;
     public static MineVersionChanged OnMineVersionChanged;
     public static TreeVersionChanged OnTreeVersionChanged;
+    public static FenceVersionChanged OnFenceVersionChanged;
     private AudioSource _audioSource;
 
     private void Update()

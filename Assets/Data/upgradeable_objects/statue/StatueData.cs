@@ -6,7 +6,9 @@ namespace Data
     public class StatueData : ScriptableObject
     {
         public CostData upgradeCost;
-        public int maxAge;
+        public int maxAge = 50;
+        public float prayingDuration = 0.7f;
+        public float prayingDurationMultiplicator = 0.9f;
         public Sprite sprite;
     }
 }

@@ -63,7 +63,7 @@ public class PlayerUpgradeUiComponent : PlayerInteractionUiComponent
 
         if (layer.Equals("Statue"))
         {
-            var data = other.gameObject.GetComponent<StatueUpgradeComponent>().GetData();
+            var data = DataProvider.Instance.StatueData;
             var currentVersion = _dataHandlerComponent.CurrentStatueVersion;
             if (currentVersion >= data.Count - 1)
             {
@@ -74,8 +74,8 @@ public class PlayerUpgradeUiComponent : PlayerInteractionUiComponent
             }
 
             var nextUpgradeData = data[currentVersion + 1];
-            _woodCosts = nextUpgradeData.woodCost;
-            _stoneCosts = nextUpgradeData.stoneCost;
+            _woodCosts = nextUpgradeData.upgradeCost.lumberCost;
+            _stoneCosts = nextUpgradeData.upgradeCost.stoneCost;
         }
 
         if (layer.Equals("Stone"))
