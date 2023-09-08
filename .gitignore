@@ -9,6 +9,7 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
+/[Uu]ser[Ss]ettings/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
@@ -25,8 +26,8 @@
 # Rider cache directory
 .idea/
 
-# User settings
-UserSettings/
+# Visual Studio Code cache directory
+.vscode
 
 # Gradle cache directory
 .gradle/
@@ -63,4 +64,3 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
-
