@@ -13,3 +13,19 @@ MonoBehaviour:
   m_Name: TreeData_lv3
   m_EditorClassIdentifier: 
   upgradeCost: {fileID: 11400000, guid: a1eeae6525225bac8932e42f6c51eb3e, type: 2}
+  spawingDropAmount: 0
+  spawningDefaultStateChangeDuration: 5
+  spawningMiningDuration: 0
+  spawningSprite: {fileID: 0}
+  smallDropAmount: 3
+  smallDefaultStateChangeDuration: 5
+  smallMiningDuration: 0.5
+  smallSprite: {fileID: 21300000, guid: 70cc1007470687bbf97f631d6c9f5801, type: 3}
+  mediumDropAmount: 6
+  mediumDefaultStateChangeDuration: 5
+  mediumMiningDuration: 1
+  mediumSprite: {fileID: 21300000, guid: 52e6a9e6248d9961189537070c5d70f4, type: 3}
+  largeDropAmount: 10
+  largeDefaultStateChangeDuration: 5
+  largeMiningDuration: 1.5
+  largeSprite: {fileID: 21300000, guid: 3417152f38cf2da29851580cc417d51b, type: 3}
