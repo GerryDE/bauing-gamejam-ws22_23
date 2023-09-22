@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using AssemblyCSharp.Assets.Scripts;
 using Data;
 using UnityEngine;
 
@@ -10,8 +12,18 @@ public class DataProvider : MonoBehaviour
     [SerializeField] private PlayerData initialCurrentPlayerData;
     [SerializeField] private ResourceData initialResourceData;
 
-    public CurrentPlayerData PlayerData;
-    public CurrentResourceData ResourceData;
+    [SerializeField] private List<FenceData> fenceData;
+    [SerializeField] private List<TreeData> treeData;
+    [SerializeField] private List<MineData> mineData;
+    [SerializeField] private List<StatueData> statueData;
+
+    [NonSerialized] public CurrentPlayerData PlayerData;
+    [NonSerialized] public CurrentResourceData ResourceData;
+
+    [NonSerialized] public List<FenceData> FenceData;
+    [NonSerialized] public List<TreeData> TreeData;
+    [NonSerialized] public List<MineData> MineData;
+    [NonSerialized] public List<StatueData> StatueData;
 
     public delegate void MaxRemainingYearsChanged(int value);
 
@@ -35,6 +47,16 @@ public class DataProvider : MonoBehaviour
 
     public delegate void StoneAmountChanged(int value);
 
+    public delegate void ResourceDataChanged(CurrentResourceData data);
+
+    public delegate void FenceVersionChanged(int newVersion);
+
+    public delegate void TreeVersionChanged(int newVersion);
+
+    public delegate void MineVersionChanged(int newVersion);
+
+    public delegate void StatueVersionChanged(int newVersion);
+
     public static MaxRemainingYearsChanged OnPlayerMaxRemainingYearsChanged;
     public static CurrentRemainingYearsChanged OnCurrentRemainingYearsChanged;
     public static AttackValueChanged OnAttackValueChanged;
@@ -46,6 +68,56 @@ public class DataProvider : MonoBehaviour
     public static ThrowForceChanged OnThrowForceChanged;
     public static WoodAmountChanged OnWoodAmountChanged;
     public static StoneAmountChanged OnStoneAmountChanged;
+    public static ResourceDataChanged OnResourceDataChanged;
+    public static FenceVersionChanged OnFenceVersionChanged;
+    public static TreeVersionChanged OnTreeVersionChanged;
+    public static MineVersionChanged OnMineVersionChanged;
+    public static StatueVersionChanged OnStatueVersionChanged;
+
+    private int _currentFenceVersion;
+    private int _currentTreeVersion;
+    private int _currentMineVersion;
+    private int _currentStatueVersion;
+
+    public int CurrentFenceVersion
+    {
+        get => _currentFenceVersion;
+        set
+        {
+            _currentFenceVersion = value;
+            OnFenceVersionChanged?.Invoke(value);
+        }
+    }
+
+    public int CurrentTreeVersion
+    {
+        get => _currentTreeVersion;
+        set
+        {
+            _currentTreeVersion = value;
+            OnTreeVersionChanged?.Invoke(value);
+        }
+    }
+
+    public int CurrentMineVersion
+    {
+        get => _currentMineVersion;
+        set
+        {
+            _currentMineVersion = value;
+            OnMineVersionChanged?.Invoke(value);
+        }
+    }
+
+    public int CurrentStatueVersion
+    {
+        get => _currentStatueVersion;
+        set
+        {
+            _currentStatueVersion = value;
+            OnStatueVersionChanged?.Invoke(value);
+        }
+    }
 
     public class CurrentPlayerData
     {
@@ -162,6 +234,7 @@ public class DataProvider : MonoBehaviour
             {
                 _woodAmount = value;
                 OnWoodAmountChanged?.Invoke(value);
+                OnResourceDataChanged?.Invoke(this);
             }
         }
 
@@ -172,6 +245,7 @@ public class DataProvider : MonoBehaviour
             {
                 _stoneAmount = value;
                 OnStoneAmountChanged?.Invoke(value);
+                OnResourceDataChanged?.Invoke(this);
             }
         }
     }
@@ -205,5 +279,24 @@ public class DataProvider : MonoBehaviour
             WoodAmount = initialResourceData.woodAmount,
             StoneAmount = initialResourceData.stoneAmount
         };
+
+        FenceData = fenceData;
+        TreeData = treeData;
+        MineData = mineData;
+        StatueData = statueData;
+    }
+
+    public CostData GetCostData(Interactable interactable, int version)
+    {
+        Dictionary<Interactable, CostData> data = new Dictionary<Interactable, CostData>
+        {
+            { Interactable.Fence_Repair, FenceData[version].repairCost },
+            { Interactable.Fence_Upgrade, FenceData[version].upgradeCost },
+            { Interactable.Tree_Upgrade, TreeData[version].upgradeCost },
+            { Interactable.Stone_Upgrade, MineData[version].upgradeCost },
+            { Interactable.Statue_Upgrade, StatueData[version].upgradeCost }
+        };
+
+        return data[interactable];
     }
 }

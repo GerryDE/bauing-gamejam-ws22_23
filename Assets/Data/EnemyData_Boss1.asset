@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae327de5219c446abe68fea14300ea3a, type: 3}
   m_Name: EnemyData_Boss1
   m_EditorClassIdentifier: 
-  initialMaxHp: 50
-  initialAttack: 1
-  initialDefense: 1
-  initialSpeed: 50
+  maxHp: 50
+  attack: 1
+  defense: 1
+  moveSpeed: 50
+  throwBackForce: {x: -700, y: 0}

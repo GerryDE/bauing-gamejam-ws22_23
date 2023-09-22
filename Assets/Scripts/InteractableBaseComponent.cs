@@ -1,7 +1,8 @@
 using UnityEngine;
 
-public class InteractableBaseComponent : MonoBehaviour
+public abstract class InteractableBaseComponent : MonoBehaviour
 {
+    [SerializeField] protected SpriteRenderer upgradeNotificationSprite;
     protected DataHandlerComponent _dataHandlerComponent;
     protected bool _interactionButton1Holding;
     protected bool _interactionButton1Pressed;
@@ -12,11 +13,12 @@ public class InteractableBaseComponent : MonoBehaviour
 
     protected virtual void Start()
     {
-        PlayerController.OnInteractionButton1Hold += OnInteractionButton1Hold;
-        PlayerController.OnInteractionButton1Released += OnInteractionButton1Released;
-        PlayerController.OnInteractionButton1Pressed += OnInteractionButton1Pressed;
-        PlayerController.OnInteractionButton2Pressed += OnInteractionButton2Pressed;
+        GameInputHandlerComponent.OnInteract1HoldCalled += OnInteractionButton1Hold;
+        GameInputHandlerComponent.OnInteract1ReleasedCalled += OnInteractionButton1Released;
+        GameInputHandlerComponent.OnInteract1PressCalled += OnInteractionButton1Pressed;
+        GameInputHandlerComponent.OnInteract2PressCalled += OnInteractionButton2Pressed;
         PlayerController.OnPlayerMove += OnPlayerMove;
+        DataProvider.OnResourceDataChanged += OnResourceDataChanged;
 
         _dataHandlerComponent = GameObject.FindWithTag("DataHandler").GetComponent<DataHandlerComponent>();
     }
@@ -48,6 +50,10 @@ public class InteractableBaseComponent : MonoBehaviour
         _interactionButton1Holding = false;
     }
 
+    protected virtual void OnResourceDataChanged(DataProvider.CurrentResourceData resourceData)
+    {
+    }
+
     private void OnTriggerStay2D(Collider2D other)
     {
         _isCollidingWithPlayer = other.gameObject.layer.Equals(LayerMask.NameToLayer("Player"));
@@ -64,9 +70,11 @@ public class InteractableBaseComponent : MonoBehaviour
 
     protected virtual void OnDestroy()
     {
-        PlayerController.OnInteractionButton1Hold -= OnInteractionButton1Hold;
-        PlayerController.OnInteractionButton1Released -= OnInteractionButton1Released;
-        PlayerController.OnInteractionButton1Pressed -= OnInteractionButton1Pressed;
-        PlayerController.OnInteractionButton2Pressed -= OnInteractionButton2Pressed;
+        GameInputHandlerComponent.OnInteract1HoldCalled -= OnInteractionButton1Hold;
+        GameInputHandlerComponent.OnInteract1ReleasedCalled -= OnInteractionButton1Released;
+        GameInputHandlerComponent.OnInteract1PressCalled -= OnInteractionButton1Pressed;
+        GameInputHandlerComponent.OnInteract2PressCalled -= OnInteractionButton2Pressed;
+        PlayerController.OnPlayerMove -= OnPlayerMove;
+        DataProvider.OnResourceDataChanged -= OnResourceDataChanged;
     }
 }

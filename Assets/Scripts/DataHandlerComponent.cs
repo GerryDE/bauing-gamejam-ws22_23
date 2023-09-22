@@ -4,34 +4,9 @@ using UnityEngine;
 public class DataHandlerComponent : MonoBehaviour
 {
     [SerializeField] private int waveCount = 1;
-    [SerializeField] private int currentFenceVersion;
-    [SerializeField] private int currentStatueVersion;
-    [SerializeField] private int currentMineVersion;
 
     private DataProvider.CurrentPlayerData _currentPlayerData;
     private DataProvider.CurrentResourceData _resourceData;
-
-    public int CurrentMineVersion
-    {
-        get => currentMineVersion;
-        set
-        {
-            currentMineVersion = value;
-            OnMineVersionChanged?.Invoke(currentMineVersion);
-        }
-    }
-
-    [SerializeField] private int currentTreeVersion;
-
-    public int CurrentTreeVersion
-    {
-        get => currentTreeVersion;
-        set
-        {
-            currentTreeVersion = value;
-            OnTreeVersionChanged?.Invoke(currentTreeVersion);
-        }
-    }
 
     [SerializeField] AfterEffects postProcessingCameraScript;
     [SerializeField] UIController uiScript;
@@ -43,22 +18,6 @@ public class DataHandlerComponent : MonoBehaviour
         {
             waveCount = value;
             OnWaveCountChanged.Invoke(waveCount);
-        }
-    }
-
-    public int CurrentFenceVersion
-    {
-        get => currentFenceVersion;
-        set => currentFenceVersion = value;
-    }
-
-    public int CurrentStatueVersion
-    {
-        get => currentStatueVersion;
-        set
-        {
-            currentStatueVersion = value;
-            OnStatueVersionChanged?.Invoke(value);
         }
     }
 
@@ -117,18 +76,9 @@ public class DataHandlerComponent : MonoBehaviour
     /// 4 Upgrading
     /// 5 Woodcutting
     /// </summary>
-    public delegate void WaveCountChanged(int newValue);
-
-    public delegate void StatueVersionChanged(int newValue);
-
-    public delegate void MineVersionChanged(int newValue);
-
-    public delegate void TreeVersionChanged(int newVersion);
+    public delegate void WaveCountChanged(int newWaveCount);
 
     public static WaveCountChanged OnWaveCountChanged;
-    public static StatueVersionChanged OnStatueVersionChanged;
-    public static MineVersionChanged OnMineVersionChanged;
-    public static TreeVersionChanged OnTreeVersionChanged;
     private AudioSource _audioSource;
 
     private void Update()
@@ -156,13 +106,13 @@ public class DataHandlerComponent : MonoBehaviour
 
     private void OnUpgradeTree()
     {
-        CurrentTreeVersion++;
+        DataProvider.Instance.CurrentTreeVersion++;
         PlayUpgradingAudioClip();
     }
 
     private void OnUpgradeMine(float newMiningDuration, int newDropAmount, Sprite sprite)
     {
-        CurrentMineVersion++;
+        DataProvider.Instance.CurrentMineVersion++;
         PlayUpgradingAudioClip();
     }
 

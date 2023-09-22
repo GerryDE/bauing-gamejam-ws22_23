@@ -17,20 +17,12 @@ public class TreeComponent : InteractableBaseComponent
         Large
     }
 
-    [Serializable]
     private struct StateData
     {
-        public State state;
         public int dropAmount;
         public float defaultStateChangeDuration;
         public float miningDuration;
         public Sprite sprite;
-    }
-
-    [Serializable]
-    private struct VersionData
-    {
-        public List<StateData> data;
     }
 
     [Serializable]
@@ -41,7 +33,6 @@ public class TreeComponent : InteractableBaseComponent
 
     [SerializeField] private Range spawnRange;
     [SerializeField] private State state = Spawning;
-    [SerializeField] private List<VersionData> data;
     private ProgressBarComponent _progressBarComponent;
 
     [Range(0f, 1f)] [SerializeField] private float stateChangeDurationVariance = 0.2f;
@@ -71,7 +62,8 @@ public class TreeComponent : InteractableBaseComponent
     {
         _progressBarComponent = GetComponent<ProgressBarComponent>();
         base.Start();
-        
+
+
         _renderer = GetComponent<SpriteRenderer>();
         _renderer.sprite = GetDataByCurrentState()?.sprite;
 
@@ -93,12 +85,17 @@ public class TreeComponent : InteractableBaseComponent
         if (_elapsedStateChangeTime > _stateChangeDuration)
         {
             _elapsedStateChangeTime = 0;
-            state = state switch
+            switch (state)
             {
-                Spawning => Small,
-                Small => Medium,
-                Medium => Large,
-                _ => state
+                case Spawning: 
+                    state = Small; 
+                    break;
+                case Small:
+                    state = Medium; 
+                    break;
+                case Medium:
+                    state = Large; 
+                    break;
             };
 
             _renderer.sprite = GetDataByCurrentState()?.sprite;
@@ -108,10 +105,29 @@ public class TreeComponent : InteractableBaseComponent
         if (!Spawning.Equals(state) && _interaction1Enabled)
         {
             _elapsedMiningTime += Time.deltaTime;
-            
+
             _progressBarComponent.Enable();
+
+            var data = DataProvider.Instance;
+            var treeData = data.TreeData;
+            float miningDuration = 0f;
+            switch (state)
+            {
+                case Spawning:
+                    miningDuration = treeData[data.CurrentTreeVersion].spawningMiningDuration;
+                    break;
+                case Small:
+                    miningDuration = treeData[data.CurrentTreeVersion].smallMiningDuration;
+                    break;
+                case Medium:
+                    miningDuration = treeData[data.CurrentTreeVersion].mediumMiningDuration;
+                    break;
+                case Large:
+                    miningDuration = treeData[data.CurrentTreeVersion].largeMiningDuration;
+                    break;
+            }
+
             var currentData = GetDataByCurrentState();
-            if (currentData == null) return;
 
             _progressBarComponent.UpdateValues(_elapsedMiningTime, currentData.Value.miningDuration);
             if (_elapsedMiningTime > currentData.Value.miningDuration)
@@ -135,13 +151,55 @@ public class TreeComponent : InteractableBaseComponent
 
     private StateData? GetDataByCurrentState()
     {
-        foreach (var currentData in data[_dataHandlerComponent.CurrentTreeVersion].data
-                     .Where(currentData => state.Equals(currentData.state)))
-        {
-            return currentData;
-        }
+        var data = DataProvider.Instance;
+        var treeData = data.TreeData;
+        var currentTreeData = treeData[data.CurrentTreeVersion];
 
-        return null;
+        Dictionary<State, StateData> stateDataDict = new Dictionary<State, StateData>
+        {
+            {
+                Spawning,
+                new StateData
+                {
+                    dropAmount = currentTreeData.spawingDropAmount,
+                    defaultStateChangeDuration = currentTreeData.spawningDefaultStateChangeDuration,
+                    miningDuration = currentTreeData.spawningMiningDuration,
+                    sprite = currentTreeData.spawningSprite
+                }
+            },
+            {
+                Small,
+                new StateData
+                {
+                    dropAmount = currentTreeData.smallDropAmount,
+                    defaultStateChangeDuration = currentTreeData.smallDefaultStateChangeDuration,
+                    miningDuration = currentTreeData.smallMiningDuration,
+                    sprite = currentTreeData.smallSprite
+                }
+            },
+            {
+                Medium,
+                new StateData
+                {
+                    dropAmount = currentTreeData.mediumDropAmount,
+                    defaultStateChangeDuration = currentTreeData.mediumDefaultStateChangeDuration,
+                    miningDuration = currentTreeData.mediumMiningDuration,
+                    sprite = currentTreeData.mediumSprite
+                }
+            },
+            {
+                Large,
+                new StateData
+                {
+                    dropAmount = currentTreeData.largeDropAmount,
+                    defaultStateChangeDuration = currentTreeData.largeDefaultStateChangeDuration,
+                    miningDuration = currentTreeData.largeMiningDuration,
+                    sprite = currentTreeData.largeSprite
+                }
+            }
+        };
+
+        return stateDataDict[state];
     }
 
     private void SetSpawnPosition()

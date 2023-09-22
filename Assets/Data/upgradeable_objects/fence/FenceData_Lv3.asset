@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca75c42c6c8dc3228c11948873ce532, type: 3}
+  m_Name: FenceData_Lv3
+  m_EditorClassIdentifier: 
+  upgradeCost: {fileID: 11400000, guid: feb60c8f7f31cbe7896d2c92a2006bde, type: 2}
+  maxHp: 120
+  damage: 3
+  repairCost: {fileID: 11400000, guid: ee416a8c36db0147ea19c41becebe5df, type: 2}
+  repairHealAmount: 100
+  sprite: {fileID: 21300000, guid: c37fa050fd6c8078c9c0369a2581dc07, type: 3}
