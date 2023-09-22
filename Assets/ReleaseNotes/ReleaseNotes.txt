@@ -1,0 +1,15 @@
+RELEASE NOTES
+
+v2.0.0
+  FEATURES
+    * #40 Show textboxes that inform the Player about changes of the next upgrades
+    * #42 Show visual feedback to the Player when an object can be upgraded
+
+v1.0.0 (2023.05.19.0000)
+  FEATURES
+    * #43 Include attack + defense stats for the Player + Enemies
+    * #41 Start actions by pressing a button instead of holding it
+  FIXES
+    * #38 Game Over will not be triggered on Final boss battle
+  GENERAL
+    * Release v1.0.0 Inital Changelog with some Notes
