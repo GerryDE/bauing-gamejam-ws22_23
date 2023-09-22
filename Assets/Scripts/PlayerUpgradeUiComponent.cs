@@ -26,11 +26,12 @@ public class PlayerUpgradeUiComponent : PlayerInteractionUiComponent
         var layer = LayerMask.LayerToName(other.gameObject.layer);
         if (layer is not ("FenceTrigger" or "Tree" or "Statue" or "Stone")) return;
 
+        var data = DataProvider.Instance;
         if (layer.Equals("FenceTrigger"))
         {
-            var data = other.gameObject.GetComponent<FenceUpgradeComponent>().GetData();
-            var currentVersion = _dataHandlerComponent.CurrentFenceVersion;
-            if (currentVersion >= data.Count - 1)
+            var fenceData = data.FenceData;
+            var currentVersion = data.CurrentFenceVersion;
+            if (currentVersion >= fenceData.Count - 1)
             {
                 textComponent.text = Empty;
                 woodTextComponent.text = Empty;
@@ -38,17 +39,17 @@ public class PlayerUpgradeUiComponent : PlayerInteractionUiComponent
                 return;
             }
 
-            var nextUpgradeData = data[currentVersion + 1];
-            _woodCosts = nextUpgradeData.woodCost;
-            _stoneCosts = nextUpgradeData.stoneCost;
+            var nextUpgradeData = fenceData[currentVersion + 1];
+            _woodCosts = nextUpgradeData.upgradeCost.lumberCost;
+            _stoneCosts = nextUpgradeData.upgradeCost.stoneCost;
         }
 
         if (layer.Equals("Tree"))
         {
-            var data = other.gameObject.GetComponent<TreeUpgradeComponent>().GetData();
+            var treeData = DataProvider.Instance.TreeData;
             var state = other.gameObject.GetComponent<TreeComponent>().GetState();
-            var currentVersion = _dataHandlerComponent.CurrentTreeVersion;
-            if (state.Equals(TreeComponent.State.Spawning) || currentVersion >= data.Count - 1)
+            var currentVersion = data.CurrentTreeVersion;
+            if (state.Equals(TreeComponent.State.Spawning) || currentVersion >= treeData.Count - 1)
             {
                 textComponent.text = Empty;
                 woodTextComponent.text = Empty;
@@ -56,16 +57,16 @@ public class PlayerUpgradeUiComponent : PlayerInteractionUiComponent
                 return;
             }
 
-            var nextUpgradeData = data[currentVersion + 1];
-            _woodCosts = nextUpgradeData.woodCost;
-            _stoneCosts = nextUpgradeData.stoneCost;
+            var nextUpgradeData = treeData[currentVersion + 1];
+            _woodCosts = nextUpgradeData.upgradeCost.lumberCost;
+            _stoneCosts = nextUpgradeData.upgradeCost.stoneCost;
         }
 
         if (layer.Equals("Statue"))
         {
-            var data = other.gameObject.GetComponent<StatueUpgradeComponent>().GetData();
-            var currentVersion = _dataHandlerComponent.CurrentStatueVersion;
-            if (currentVersion >= data.Count - 1)
+            var statueData = DataProvider.Instance.StatueData;
+            var currentVersion = data.CurrentStatueVersion;
+            if (currentVersion >= statueData.Count - 1)
             {
                 textComponent.text = Empty;
                 woodTextComponent.text = Empty;
@@ -73,16 +74,16 @@ public class PlayerUpgradeUiComponent : PlayerInteractionUiComponent
                 return;
             }
 
-            var nextUpgradeData = data[currentVersion + 1];
-            _woodCosts = nextUpgradeData.woodCost;
-            _stoneCosts = nextUpgradeData.stoneCost;
+            var nextUpgradeData = statueData[currentVersion + 1];
+            _woodCosts = nextUpgradeData.upgradeCost.lumberCost;
+            _stoneCosts = nextUpgradeData.upgradeCost.stoneCost;
         }
 
         if (layer.Equals("Stone"))
         {
-            var data = other.gameObject.GetComponent<StoneUpgradeComponent>().GetData();
-            var currentVersion = _dataHandlerComponent.CurrentMineVersion;
-            if (currentVersion >= data.Count - 1)
+            var mineData = DataProvider.Instance.MineData;
+            var currentVersion = data.CurrentMineVersion;
+            if (currentVersion >= mineData.Count - 1)
             {
                 textComponent.text = Empty;
                 woodTextComponent.text = Empty;
@@ -90,9 +91,9 @@ public class PlayerUpgradeUiComponent : PlayerInteractionUiComponent
                 return;
             }
 
-            var nextUpgradeData = data[currentVersion + 1];
-            _woodCosts = nextUpgradeData.woodCost;
-            _stoneCosts = nextUpgradeData.stoneCost;
+            var nextUpgradeData = mineData[currentVersion + 1];
+            _woodCosts = nextUpgradeData.upgradeCost.lumberCost;
+            _stoneCosts = nextUpgradeData.upgradeCost.stoneCost;
         }
 
         woodTextComponent.SetText("Wood: " + _woodCosts);

@@ -6,26 +6,29 @@ public class YoungToOldTransitionComponent : MonoBehaviour
 
     public static YoungOldTransitionChanged OnYoungOldTransitionChanged;
 
-    private static DataProvider.CurrentPlayerData _playerData;
-
-    private void OnParticleSystemStopped()
+    private void Awake()
     {
-        _playerData = DataProvider.Instance.PlayerData;
         DataProvider.OnCurrentRemainingYearsChanged += OnRemainingYearsChanged;
     }
 
     private void OnRemainingYearsChanged(int remainingYears)
     {
+        DataProvider.CurrentPlayerData playerData = DataProvider.Instance.PlayerData;
+        if (playerData == null) 
+        {
+            return;
+        }
+        
         float transitionValue;
-        if (remainingYears > _playerData.RemainingYearsForStayingYoung)
+        if (remainingYears > playerData.RemainingYearsForStayingYoung)
         {
             transitionValue = 1f;
         }
-        else if (remainingYears > _playerData.RemainingYearsUntilBecomingOld)
+        else if (remainingYears > playerData.RemainingYearsUntilBecomingOld)
         {
-            transitionValue = (remainingYears - _playerData.RemainingYearsUntilBecomingOld) /
-                              (float)(_playerData.RemainingYearsForStayingYoung -
-                                      _playerData.RemainingYearsUntilBecomingOld);
+            transitionValue = (remainingYears - playerData.RemainingYearsUntilBecomingOld) /
+                              (float)(playerData.RemainingYearsForStayingYoung -
+                                      playerData.RemainingYearsUntilBecomingOld);
         }
         else
         {

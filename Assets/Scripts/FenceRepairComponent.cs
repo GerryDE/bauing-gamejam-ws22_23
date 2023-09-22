@@ -14,13 +14,7 @@ public class FenceRepairComponent : InteractableBaseComponent
 
     public static RepairFence OnRepairFence;
 
-    [SerializeField] private List<Data> data;
     private FenceController _fenceController;
-
-    public List<Data> GetData()
-    {
-        return data;
-    }
 
     protected override void Start()
     {
@@ -34,14 +28,15 @@ public class FenceRepairComponent : InteractableBaseComponent
         _interactionButton1Pressed = false;
 
         if (!_isCollidingWithPlayer) return;
-        var currentFenceData = data[_dataHandlerComponent.CurrentFenceVersion];
-        var resourceData = DataProvider.Instance.ResourceData;
-        if (resourceData.WoodAmount < currentFenceData.woodCost ||
-            resourceData.StoneAmount < currentFenceData.stoneCost ||
+        var data = DataProvider.Instance;
+        var currentFenceData = data.FenceData[data.CurrentFenceVersion];
+        var resourceData = data.ResourceData;
+        if (resourceData.WoodAmount < currentFenceData.repairCost.lumberCost ||
+            resourceData.StoneAmount < currentFenceData.repairCost.stoneCost ||
             _fenceController.CurrentHp >= _fenceController.MaxHp) return;
-        resourceData.WoodAmount -= currentFenceData.woodCost;
-        resourceData.StoneAmount -= currentFenceData.stoneCost;
-        OnRepairFence?.Invoke(currentFenceData.healAmount);
+        resourceData.WoodAmount -= currentFenceData.repairCost.lumberCost;
+        resourceData.StoneAmount -= currentFenceData.repairCost.stoneCost;
+        OnRepairFence?.Invoke(currentFenceData.repairHealAmount);
         _dataHandlerComponent.PlayUpgradingAudioClip();
     }
 }

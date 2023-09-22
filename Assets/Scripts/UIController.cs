@@ -24,7 +24,7 @@ public class UIController : MonoBehaviour
     [SerializeField] TextMeshProUGUI gameOverText;
     [SerializeField] TextMeshProUGUI tryAgainText;
 
-    private bool fadeIn, fadeOut = false;
+    private bool fadeIn = false;
     [SerializeField] float fadeAmount = 0f;
     [SerializeField] float fadeSpeed;
 
@@ -44,7 +44,7 @@ public class UIController : MonoBehaviour
 
         DataHandlerComponent.OnWaveCountChanged += UpdateWaveCount;
         BossComponent.OnBossDestroyed += UpdateWelle;
-        PlayerController.OnRestartGame += OnRestartGame;
+        GameInputHandlerComponent.OnRestartCalled += OnRestartGame;
 
         InitTexteUndWerte();
         // gameOverText.enabled = false;
@@ -131,7 +131,7 @@ public class UIController : MonoBehaviour
     {
         DataHandlerComponent.OnWaveCountChanged -= UpdateWaveCount;
         BossComponent.OnBossDestroyed -= UpdateWelle;
-        PlayerController.OnRestartGame -= OnRestartGame;
+        GameInputHandlerComponent.OnRestartCalled -= OnRestartGame;
     }
 
     IEnumerator EndGameScreen()
