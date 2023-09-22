@@ -24,7 +24,7 @@ public class FenceUpgradeComponent : InteractableBaseComponent
     private void OnFenceVersionChanged(int newVersion)
     {
         if (upgradeNotificationSprite == null) return;
-        upgradeNotificationSprite.enabled = IsUpgradeable(newVersion);
+        upgradeNotificationSprite.enabled = IsUpgradeable(newVersion + 1);
     }
 
     protected override void OnResourceDataChanged(DataProvider.CurrentResourceData resourceData)
@@ -60,7 +60,7 @@ public class FenceUpgradeComponent : InteractableBaseComponent
         var data = DataProvider.Instance.FenceData;
         var resourceData = DataProvider.Instance.ResourceData;
 
-        if (nextVersionIndex >= data.Count - 1) return false;
+        if (nextVersionIndex >= data.Count) return false;
 
         var nextUpgradeData = data[nextVersionIndex];
         var isUpgradable = resourceData.WoodAmount >= nextUpgradeData.upgradeCost.lumberCost &&

@@ -17,7 +17,7 @@ public class StatueUpgradeComponent : InteractableBaseComponent
     private void OnStatueVersionChanged(int newVersion)
     {
         if (upgradeNotificationSprite == null) return;
-        upgradeNotificationSprite.enabled = IsUpgradeable(newVersion);
+        upgradeNotificationSprite.enabled = IsUpgradeable(newVersion + 1);
     }
 
     protected override void OnResourceDataChanged(DataProvider.CurrentResourceData resourceData)
@@ -52,7 +52,7 @@ public class StatueUpgradeComponent : InteractableBaseComponent
         var data = DataProvider.Instance.StatueData;
         var resourceData = DataProvider.Instance.ResourceData;
 
-        if (nextVersionIndex >= data.Count - 1) return false;
+        if (nextVersionIndex >= data.Count) return false;
 
         var nextUpgradeData = data[nextVersionIndex];
         var isUpgradable = resourceData.WoodAmount >= nextUpgradeData.upgradeCost.lumberCost &&

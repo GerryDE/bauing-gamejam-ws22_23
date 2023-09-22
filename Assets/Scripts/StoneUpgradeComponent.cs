@@ -17,7 +17,7 @@ public class StoneUpgradeComponent : InteractableBaseComponent
     void OnMineVersionChanged(int newVersion)
     {
         if (upgradeNotificationSprite == null) return;
-        upgradeNotificationSprite.enabled = IsUpgradeable(newVersion);
+        upgradeNotificationSprite.enabled = IsUpgradeable(newVersion + 1);
     }
 
 
@@ -53,7 +53,7 @@ public class StoneUpgradeComponent : InteractableBaseComponent
         var data = DataProvider.Instance.MineData;
         var resourceData = DataProvider.Instance.ResourceData;
 
-        if (nextVersionIndex >= data.Count - 1) return false;
+        if (nextVersionIndex >= data.Count) return false;
 
         var nextUpgradeData = data[nextVersionIndex];
         var isUpgradable = resourceData.WoodAmount >= nextUpgradeData.upgradeCost.lumberCost &&

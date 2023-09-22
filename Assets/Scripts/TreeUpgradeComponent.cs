@@ -17,7 +17,7 @@ public class TreeUpgradeComponent : InteractableBaseComponent
     private void OnTreeVersionChanged(int newVersion)
     {
         if (upgradeNotificationSprite == null) return;
-        upgradeNotificationSprite.enabled = IsUpgradeable(newVersion);
+        upgradeNotificationSprite.enabled = IsUpgradeable(newVersion + 1);
     }
 
     protected override void OnResourceDataChanged(DataProvider.CurrentResourceData resourceData)
@@ -52,7 +52,7 @@ public class TreeUpgradeComponent : InteractableBaseComponent
         var treeData = data.TreeData;
         var resourceData = data.ResourceData;
 
-        if (nextVersionIndex >= treeData.Count - 1) return false;
+        if (nextVersionIndex >= treeData.Count) return false;
 
         var nextUpgradeData = treeData[nextVersionIndex];
         var isUpgradable = resourceData.WoodAmount >= nextUpgradeData.upgradeCost.lumberCost &&
