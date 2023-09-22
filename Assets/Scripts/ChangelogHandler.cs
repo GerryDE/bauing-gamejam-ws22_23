@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,30 +19,25 @@ public class ChangelogHandler : MonoBehaviour
     [Header("Scene to Load to (Main Menu)")]
     [SerializeField] string mainMenuScene;
 
-    //Check for Button-presses
-    private void Update()
-    {
-        if ((Keyboard.current.sKey.wasPressedThisFrame || Keyboard.current.sKey.isPressed) && scrollbar.value < 1f)
-        {
-            //Scroll-Down
-            scrollbar.value += scrollSpeed;
-        }
-        if ((Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.wKey.isPressed) && scrollbar.value > 0f)
-        {
-            //Scroll-Up
-            scrollbar.value -= scrollSpeed;
-        }
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
-        {
-            //Load Back to MainMenu
-            SceneManager.LoadScene(mainMenuScene);
-        }
-    }
-
     private void Awake()
     {
+        MenuInputHandlerComponent.OnScrollbarButtonTriggered += OnScrollbarButtonTriggered;
+        MenuInputHandlerComponent.OnExitButtonTriggered += OnExitButtonTriggered;
+
         LoadChangelogText();
         LoadScrollbarLength();
+    }
+
+    private void OnScrollbarButtonTriggered(float value)
+    {
+        //Scroll-Up/Down
+        scrollbar.value += value;
+    }
+
+    private void OnExitButtonTriggered()
+    {
+        //Load Back to MainMenu
+        SceneManager.LoadScene(mainMenuScene);
     }
 
     //Load Scrollbar Length, if Text is Longer than Canvas
@@ -54,5 +50,11 @@ public class ChangelogHandler : MonoBehaviour
     private void LoadChangelogText()
     {
         changelogText.text = textAsset.text;
+    }
+
+    private void OnDestroy()
+    {
+        MenuInputHandlerComponent.OnScrollbarButtonTriggered -= OnScrollbarButtonTriggered;
+        MenuInputHandlerComponent.OnExitButtonTriggered -= OnExitButtonTriggered;
     }
 }

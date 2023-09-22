@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -6,11 +7,19 @@ public class CreditSceneHandler : MonoBehaviour
 {
     [Header("Scene to Switch to (String)")]
     [SerializeField] string mainMenuScene;
-    private void Update()
+
+    private void Awake()
     {
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
-        {
-            SceneManager.LoadScene(mainMenuScene);
-        }
+        MenuInputHandlerComponent.OnExitButtonTriggered += OnExitButtonTriggered;
+    }
+
+    private void OnExitButtonTriggered()
+    {
+        SceneManager.LoadScene(mainMenuScene);
+    }
+
+    private void OnDestroy()
+    {
+        MenuInputHandlerComponent.OnExitButtonTriggered -= OnExitButtonTriggered;
     }
 }
