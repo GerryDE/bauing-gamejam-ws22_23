@@ -32,7 +32,6 @@ public class UIController : MonoBehaviour
     [SerializeField] Transform playerTransform;
     [SerializeField] Transform parentTransform;
     private TextMeshPro textPopup;
-    private bool _gameOverTriggered;
 
     private static DataProvider.CurrentPlayerData _playerData;
     private static DataProvider.CurrentResourceData _resourceData;
@@ -45,11 +44,17 @@ public class UIController : MonoBehaviour
         DataHandlerComponent.OnWaveCountChanged += UpdateWaveCount;
         BossComponent.OnBossDestroyed += UpdateWelle;
         GameInputHandlerComponent.OnRestartCalled += OnRestartGame;
+        CheckForGameOverComponent.OnGameOver += OnGameOver;
 
         InitTexteUndWerte();
         // gameOverText.enabled = false;
         // tryAgainText.enabled = false;
         textPopup = prefabPopupText.GetComponent<TextMeshPro>();
+    }
+
+    private void OnGameOver()
+    {
+        StartCoroutine(EndGameScreen());
     }
 
     private void OnRestartGame()
@@ -61,12 +66,6 @@ public class UIController : MonoBehaviour
     private void Update()
     {
         InitTexteUndWerte();
-
-        if (_playerData.CurrentRemainingYears <= 0 && !_gameOverTriggered)
-        {
-            _gameOverTriggered = true;
-            StartCoroutine(EndGameScreen());
-        }
 
         if (fadeIn)
         {
