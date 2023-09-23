@@ -22,7 +22,7 @@ public class UIController : MonoBehaviour
     [SerializeField] String[] texte;
 
     [SerializeField] TextMeshProUGUI gameOverText;
-    [SerializeField] TextMeshProUGUI tryAgainText;
+    [SerializeField] GameObject tryAgainTextObj;
 
     private bool fadeIn = false;
     [SerializeField] float fadeAmount = 0f;
@@ -54,7 +54,7 @@ public class UIController : MonoBehaviour
 
     private void OnRestartGame()
     {
-        if (!tryAgainText.enabled) return;
+        if (!tryAgainTextObj.activeSelf) return;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -139,7 +139,7 @@ public class UIController : MonoBehaviour
         gameOverText.enabled = true;
         fadeIn = true;
         yield return new WaitForSeconds(2f);
-        tryAgainText.enabled = true;
+        tryAgainTextObj.SetActive(true);
     }
 
     IEnumerator FadeOutText(float fadeTime, TextMeshPro textGameObject, GameObject gameObject)
