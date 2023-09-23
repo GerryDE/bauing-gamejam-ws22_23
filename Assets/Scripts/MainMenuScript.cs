@@ -20,7 +20,7 @@ public class MainMenuScript : MonoBehaviour
         {
             SceneManager.LoadScene(creditScene);
         }
-        if (Keyboard.current.enterKey.wasPressedThisFrame)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             SceneManager.LoadScene(gameScene);
         }
