@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class DisableOnGameOverComponent : MonoBehaviour
+public class DestroyOnGameOverComponent : MonoBehaviour
 {
     private void Awake()
     {
@@ -10,7 +10,6 @@ public class DisableOnGameOverComponent : MonoBehaviour
 
     private void OnGameOver()
     {
-        if (this == null) return;
-        gameObject.SetActive(false);
+        Destroy(this);
     }
 }

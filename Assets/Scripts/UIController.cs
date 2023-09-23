@@ -32,6 +32,7 @@ public class UIController : MonoBehaviour
     [SerializeField] Transform playerTransform;
     [SerializeField] Transform parentTransform;
     private TextMeshPro textPopup;
+    private bool _gameOverTriggered;
 
     private static DataProvider.CurrentPlayerData _playerData;
     private static DataProvider.CurrentResourceData _resourceData;
@@ -54,6 +55,8 @@ public class UIController : MonoBehaviour
 
     private void OnGameOver()
     {
+        if (_gameOverTriggered) return;
+        _gameOverTriggered = true;
         StartCoroutine(EndGameScreen());
     }
 
@@ -146,7 +149,7 @@ public class UIController : MonoBehaviour
             yield return new WaitForSeconds(fadeTime / 10000);
         }
 
-        Destroy(gameObject);
+        //Destroy(gameObject);
         yield break;
     }
 }
