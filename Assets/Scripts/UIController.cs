@@ -42,7 +42,7 @@ public class UIController : MonoBehaviour
         _resourceData = DataProvider.Instance.ResourceData;
 
         DataHandlerComponent.OnWaveCountChanged += UpdateWaveCount;
-        BossComponent.OnBossDestroyed += UpdateWelle;
+        //BossComponent.OnBossDestroyed += UpdateWelle;
         GameInputHandlerComponent.OnRestartCalled += OnRestartGame;
         CheckForGameOverComponent.OnGameOver += OnGameOver;
 
@@ -121,15 +121,10 @@ public class UIController : MonoBehaviour
         welle = newValue + 1;
     }
 
-    private void UpdateWelle()
-    {
-        welle++;
-    }
-
     private void OnDestroy()
     {
         DataHandlerComponent.OnWaveCountChanged -= UpdateWaveCount;
-        BossComponent.OnBossDestroyed -= UpdateWelle;
+        //BossComponent.OnBossDestroyed -= UpdateWelle;
         GameInputHandlerComponent.OnRestartCalled -= OnRestartGame;
     }
 
