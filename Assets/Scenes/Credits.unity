@@ -760,43 +760,43 @@ MonoBehaviour:
   m_text: 'CREDITS
 
 
-    Internal graphics: Feliza
+    Graphics<pos=25%>Feliza
 
-    Programming: Gerry, erikando
+    Programming<pos=25%>Gerry,
+    erikando
 
     <align="left">
 
-    External
-    graphics
+    External graphics
 
 
     Player character<pos=25%>KusSv
 
-    Normal monster<pos=25%>Elthen''s
-    Pixel Art Shop (itch.io)
+    Normal
+    monster<pos=25%>Elthen''s Pixel Art Shop (itch.io)
 
     Wave Boss<pos=25%>Redshrike
 
-    Final Boss<pos=25%>OneManArmyDev
+    Final
+    Boss<pos=25%>OneManArmyDev
 
 
 
-    External
-    Audio
+    External Audio
 
 
     Wood cutting<pos=25%>mixkit.co
 
-    Stone mining<pos=25%>spookymodem,
+    Stone
+    mining<pos=25%>spookymodem, opengameart.com
+
+    Praising goddess<pos=25%>p0ss,
     opengameart.com
 
-    Praising goddess<pos=25%>p0ss, opengameart.com
+    Enemy Attack<pos=25%>Gabovitch, opengameart.com
 
-    Enemy
-    Attack<pos=25%>Gabovitch, opengameart.com
-
-    Upgrade<pos=25%>bart opengameart.com
-    eart.com'
+    Upgrade<pos=25%>bart
+    opengameart.com eart.com'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
