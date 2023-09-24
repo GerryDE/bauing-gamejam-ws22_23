@@ -9,7 +9,6 @@ public class StatisticsDataComponent : MonoBehaviour
     public static StatisticsDataComponent Instance { get; private set; }
 
     [SerializeField] private StatisticsData data;
-    private StatisticsData _tempData;
 
     private void Awake()
     {
@@ -34,15 +33,15 @@ public class StatisticsDataComponent : MonoBehaviour
         StatueUpgradeComponent.OnUpgradeStatue += OnUpgradeStatue;
         MovingCloudComponent.OnResetCloudPosition += OnResetCloudPosition;
 
-        CheckForGameOverComponent.OnGameOver += WriteDataIntoFile;
-        FinalBossComponent.OnGameFinished += WriteDataIntoFile;
+        CheckForGameOverComponent.OnGameOver += WritePlayTime;
+        FinalBossComponent.OnGameFinished += WritePlayTime;
 
-        _tempData = new StatisticsData();
+        ResetData();
     }
 
     private void OnResetCloudPosition()
     {
-        _tempData.CloudsScreenLeftAmount++;
+        data.CloudsScreenLeftAmount++;
     }
 
     private void OnUpgradeStatue(int newAgeValue, Sprite sprite)
@@ -67,50 +66,55 @@ public class StatisticsDataComponent : MonoBehaviour
 
     private void OnRepairFence(int amount)
     {
-        _tempData.FenceRepairAmount++;
+        data.FenceRepairAmount++;
     }
 
     private void OnBossDestroyed()
     {
-        _tempData.SurvivedWavesAmount++;
+        data.SurvivedWavesAmount++;
     }
 
     private void OnEnemyDestroyed(int objectId)
     {
-        _tempData.EnemyDestroyedAmount++;
+        data.EnemyDestroyedAmount++;
     }
 
     private void OnPrayed(int amount)
     {
-        _tempData.PrayAmount += amount;
+        data.PrayAmount += amount;
     }
 
     private void OnStoneDrop(int amount)
     {
-        _tempData.StoneAmount += amount;
+        data.StoneAmount += amount;
     }
 
     private void OnDropWood(int amount)
     {
-        _tempData.LumberAmount += amount;
+        data.LumberAmount += amount;
     }
 
     private void IncrementUpgradeData()
     {
-        _tempData.UpgradeAmount++;
+        data.UpgradeAmount++;
     }
 
-    private void WriteDataIntoFile()
+    private void WritePlayTime()
     {
-        data.LumberAmount = _tempData.LumberAmount;
-        data.StoneAmount = _tempData.StoneAmount;
-        data.PrayAmount = _tempData.PrayAmount;
-        data.EnemyDestroyedAmount = _tempData.EnemyDestroyedAmount;
-        data.SurvivedWavesAmount = _tempData.SurvivedWavesAmount;
         data.PlayTime = Time.time;
-        data.CloudsScreenLeftAmount = _tempData.CloudsScreenLeftAmount;
-        data.FenceRepairAmount = _tempData.FenceRepairAmount;
-        data.UpgradeAmount = _tempData.UpgradeAmount;
+    }
+
+    private void ResetData()
+    {
+        data.PlayTime = 0f;
+        data.LumberAmount = 0;
+        data.StoneAmount = 0;
+        data.PrayAmount = 0;
+        data.EnemyDestroyedAmount = 0;
+        data.SurvivedWavesAmount = 0;
+        data.CloudsScreenLeftAmount = 0;
+        data.FenceRepairAmount = 0;
+        data.UpgradeAmount = 0;
     }
 
     private void OnDestroy()
@@ -127,7 +131,7 @@ public class StatisticsDataComponent : MonoBehaviour
         StatueUpgradeComponent.OnUpgradeStatue -= OnUpgradeStatue;
         MovingCloudComponent.OnResetCloudPosition -= OnResetCloudPosition;
 
-        CheckForGameOverComponent.OnGameOver -= WriteDataIntoFile;
-        FinalBossComponent.OnGameFinished -= WriteDataIntoFile;
+        CheckForGameOverComponent.OnGameOver -= WritePlayTime;
+        FinalBossComponent.OnGameFinished -= WritePlayTime;
     }
 }

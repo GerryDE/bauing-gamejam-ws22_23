@@ -33,7 +33,7 @@ public class StatisticsTextComponent : MonoBehaviour
     {
         Dictionary<StatisticsValue, string> dictionary = new Dictionary<StatisticsValue, string>()
         {
-            { StatisticsValue.PlayTime, data.PlayTime.ToString() + " seconds" },
+            { StatisticsValue.PlayTime, data.PlayTime.ToString() },
             { StatisticsValue.LumberAmount, data.LumberAmount.ToString() },
             { StatisticsValue.StoneAmount, data.StoneAmount.ToString() },
             { StatisticsValue.PrayAmount, data.PrayAmount.ToString() },
