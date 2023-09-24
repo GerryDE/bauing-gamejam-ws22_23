@@ -18,7 +18,6 @@ public class EnemyController : MonoBehaviour
     private int _defenseValue;
     private float _moveSpeed;
     private Vector2 _throwBackForce;
-    private bool _shallBeDestroyed;
 
     public delegate void EnemyDestroyed(int objectId);
 
@@ -44,12 +43,6 @@ public class EnemyController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_shallBeDestroyed)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         _rigidbody.velocity = new Vector2(_moveSpeed * Time.deltaTime, _rigidbody.velocity.y);
     }
 
@@ -74,8 +67,8 @@ public class EnemyController : MonoBehaviour
             hpBar.UpdateValues(_currentHp, _maxHp);
         }
 
-        if (_currentHp > 0 || _shallBeDestroyed) return;
-        _shallBeDestroyed = true;
+        if (_currentHp > 0) return;
         OnEnemyDestroyed?.Invoke(gameObject.GetInstanceID());
+        Destroy(gameObject);
     }
 }

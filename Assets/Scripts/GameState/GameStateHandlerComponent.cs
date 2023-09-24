@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class GameStateHandlerComponent : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class GameStateHandlerComponent : MonoBehaviour
         GameInputHandlerComponent.OnPauseCalled += OnPauseButtonPressed;
         GameInputHandlerComponent.OnResumeCalled += OnResumeButtonPressed;
         OnGameStateChanged += OnGameStateChangedFunction;
+        CheckForGameOverComponent.OnGameOver += OnGameOver;
 
         if (Instance != null && Instance != this)
         {
@@ -45,6 +47,12 @@ public class GameStateHandlerComponent : MonoBehaviour
         {
             Instance = this;
         }
+    }
+
+    private void OnGameOver()
+    {
+        GlobalGameState = GameState.RUNNING;
+        OnDestroy();
     }
 
     private void Start()
@@ -78,5 +86,7 @@ public class GameStateHandlerComponent : MonoBehaviour
     {
         GameInputHandlerComponent.OnPauseCalled -= OnPauseButtonPressed;
         GameInputHandlerComponent.OnResumeCalled -= OnResumeButtonPressed;
+        OnGameStateChanged -= OnGameStateChangedFunction;
+        CheckForGameOverComponent.OnGameOver -= OnGameOver;
     }
 }

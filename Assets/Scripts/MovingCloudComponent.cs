@@ -7,6 +7,9 @@ namespace DefaultNamespace
     [RequireComponent(typeof(Rigidbody2D))]
     public class MovingCloudComponent : MonoBehaviour
     {
+        public delegate void ResetCloudPosition();
+        public static ResetCloudPosition OnResetCloudPosition;
+
         [SerializeField] private float respawnPosition;
         [SerializeField] private float endingPosition;
         [SerializeField] private float moveSpeed;
@@ -16,7 +19,6 @@ namespace DefaultNamespace
         private void Start()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
-            // SetPosition(startingPosition);
         }
 
         private void SetPosition(float x)
@@ -34,6 +36,7 @@ namespace DefaultNamespace
             if (Math.Abs(transform.position.x - endingPosition) < 0.2f)
             {
                 SetPosition(respawnPosition);
+                OnResetCloudPosition?.Invoke();
             }
         }
     }

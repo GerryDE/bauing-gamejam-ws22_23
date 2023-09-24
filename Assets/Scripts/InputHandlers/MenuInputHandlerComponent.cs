@@ -8,9 +8,11 @@ public class MenuInputHandlerComponent : MonoBehaviour
 
     public delegate void ScrollbarButtonTriggered(float value);
     public delegate void ExitButtonTriggered();
+    public delegate void RestartButtonTriggered();
 
     public static ScrollbarButtonTriggered OnScrollbarButtonTriggered;
     public static ExitButtonTriggered OnExitButtonTriggered;
+    public static RestartButtonTriggered OnRestartButtonTriggered;
 
     private void Awake()
     {
@@ -25,5 +27,10 @@ public class MenuInputHandlerComponent : MonoBehaviour
     public void OnExit(InputValue value)
     {
         OnExitButtonTriggered?.Invoke();
+    }
+
+    public void OnRestart(InputValue value)
+    {
+        OnRestartButtonTriggered?.Invoke();
     }
 }

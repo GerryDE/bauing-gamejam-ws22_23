@@ -43,13 +43,21 @@ public class UIController : MonoBehaviour
         _resourceData = DataProvider.Instance.ResourceData;
 
         DataHandlerComponent.OnWaveCountChanged += UpdateWaveCount;
-        BossComponent.OnBossDestroyed += UpdateWelle;
+        //BossComponent.OnBossDestroyed += UpdateWelle;
         GameInputHandlerComponent.OnRestartCalled += OnRestartGame;
+        CheckForGameOverComponent.OnGameOver += OnGameOver;
 
         InitTexteUndWerte();
         // gameOverText.enabled = false;
         // tryAgainText.enabled = false;
         textPopup = prefabPopupText.GetComponent<TextMeshPro>();
+    }
+
+    private void OnGameOver()
+    {
+        if (_gameOverTriggered) return;
+        _gameOverTriggered = true;
+        StartCoroutine(EndGameScreen());
     }
 
     private void OnRestartGame()
@@ -61,12 +69,6 @@ public class UIController : MonoBehaviour
     private void Update()
     {
         InitTexteUndWerte();
-
-        if (_playerData.CurrentRemainingYears <= 0 && !_gameOverTriggered)
-        {
-            _gameOverTriggered = true;
-            StartCoroutine(EndGameScreen());
-        }
 
         if (fadeIn)
         {
@@ -122,15 +124,10 @@ public class UIController : MonoBehaviour
         welle = newValue + 1;
     }
 
-    private void UpdateWelle()
-    {
-        welle++;
-    }
-
     private void OnDestroy()
     {
         DataHandlerComponent.OnWaveCountChanged -= UpdateWaveCount;
-        BossComponent.OnBossDestroyed -= UpdateWelle;
+        //BossComponent.OnBossDestroyed -= UpdateWelle;
         GameInputHandlerComponent.OnRestartCalled -= OnRestartGame;
     }
 
@@ -152,7 +149,7 @@ public class UIController : MonoBehaviour
             yield return new WaitForSeconds(fadeTime / 10000);
         }
 
-        Destroy(gameObject);
+        //Destroy(gameObject);
         yield break;
     }
 }
