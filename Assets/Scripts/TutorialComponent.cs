@@ -19,7 +19,7 @@ public class TutorialComponent : MonoBehaviour
         DataProvider.OnTutorialObjectiveIndexChanged += OnTutorialObjectiveIndexChanged;
     }
 
-    private void OnObjectiveReached()
+    private void OnObjectiveReached(Type type)
     {
         if (DataProvider.Instance.TutorialObjectives.Count > DataProvider.Instance.CurrentTutorialObjectiveIndex + 1)
         {
@@ -32,9 +32,9 @@ public class TutorialComponent : MonoBehaviour
         }
     }
     
-    private void OnTutorialObjectiveIndexChanged(int newindex)
+    private void OnTutorialObjectiveIndexChanged(int newIndex)
     {
-        SetupObjective(DataProvider.Instance.TutorialObjectives[newindex]);
+        SetupObjective(DataProvider.Instance.TutorialObjectives[newIndex]);
     }
 
     private void SetupObjective(ObjectiveData data)
@@ -43,5 +43,11 @@ public class TutorialComponent : MonoBehaviour
         {
             _objectiveHandler = new MoveObjectiveHandler((MoveObjectiveData) data);
         }
+    }
+
+    private void OnDestroy()
+    {
+        ObjectiveHandler.OnObjectiveReached -= OnObjectiveReached;
+        DataProvider.OnTutorialObjectiveIndexChanged -= OnTutorialObjectiveIndexChanged;
     }
 }
