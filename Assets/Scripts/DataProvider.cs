@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using AssemblyCSharp.Assets.Scripts;
 using Data;
+using Data.objective;
 using UnityEngine;
 
 public class DataProvider : MonoBehaviour
@@ -17,6 +18,8 @@ public class DataProvider : MonoBehaviour
     [SerializeField] private List<MineData> mineData;
     [SerializeField] private List<StatueData> statueData;
 
+    [SerializeField] private List<ObjectiveData> tutorialObjectives;
+
     [NonSerialized] public CurrentPlayerData PlayerData;
     [NonSerialized] public CurrentResourceData ResourceData;
 
@@ -24,6 +27,8 @@ public class DataProvider : MonoBehaviour
     [NonSerialized] public List<TreeData> TreeData;
     [NonSerialized] public List<MineData> MineData;
     [NonSerialized] public List<StatueData> StatueData;
+
+    [NonSerialized] public List<ObjectiveData> TutorialObjectives;
 
     public delegate void MaxRemainingYearsChanged(int value);
 
@@ -57,6 +62,8 @@ public class DataProvider : MonoBehaviour
 
     public delegate void StatueVersionChanged(int newVersion);
 
+    public delegate void TutorialObjectiveIndexChanged(int newIndex);
+
     public static MaxRemainingYearsChanged OnPlayerMaxRemainingYearsChanged;
     public static CurrentRemainingYearsChanged OnCurrentRemainingYearsChanged;
     public static AttackValueChanged OnAttackValueChanged;
@@ -73,11 +80,13 @@ public class DataProvider : MonoBehaviour
     public static TreeVersionChanged OnTreeVersionChanged;
     public static MineVersionChanged OnMineVersionChanged;
     public static StatueVersionChanged OnStatueVersionChanged;
+    public static TutorialObjectiveIndexChanged OnTutorialObjectiveIndexChanged;
 
     private int _currentFenceVersion;
     private int _currentTreeVersion;
     private int _currentMineVersion;
     private int _currentStatueVersion;
+    private int _currentTutorialObjectiveIndex;
 
     public int CurrentFenceVersion
     {
@@ -116,6 +125,16 @@ public class DataProvider : MonoBehaviour
         {
             _currentStatueVersion = value;
             OnStatueVersionChanged?.Invoke(value);
+        }
+    }
+
+    public int CurrentTutorialObjectiveIndex
+    {
+        get => _currentTutorialObjectiveIndex;
+        set
+        {
+            _currentTutorialObjectiveIndex = value;
+            OnTutorialObjectiveIndexChanged?.Invoke(value);
         }
     }
 
@@ -284,6 +303,9 @@ public class DataProvider : MonoBehaviour
         TreeData = treeData;
         MineData = mineData;
         StatueData = statueData;
+        TutorialObjectives = tutorialObjectives;
+        
+        OnTutorialObjectiveIndexChanged?.Invoke(CurrentTutorialObjectiveIndex);
     }
 
     public CostData GetCostData(Interactable interactable, int version)
