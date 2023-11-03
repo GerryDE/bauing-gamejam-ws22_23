@@ -121,7 +121,7 @@ public class UIController : MonoBehaviour
 
     private void UpdateWaveCount(int newValue)
     {
-        welle = newValue + 1;
+        welle = newValue;
     }
 
     private void OnDestroy()

@@ -57,6 +57,10 @@ public class TutorialComponent : MonoBehaviour
         {
             _objectiveHandler = new DefeatEnemyObjectiveHandler((DefeatEnemyObjectiveData) data);
         }
+        else if (data.GetType() == typeof(TutorialCompletedObjectiveData))
+        {
+            _objectiveHandler = new TutorialCompletedObjectiveHandler((TutorialCompletedObjectiveData) data);
+        }
     }
 
     private void OnDestroy()
