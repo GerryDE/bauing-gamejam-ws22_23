@@ -15,6 +15,8 @@ public class TutorialComponent : MonoBehaviour
     {
         _objectiveHandler = null;
         
+        OnTutorialObjectiveIndexChanged(0);
+        
         ObjectiveHandler.OnObjectiveReached += OnObjectiveReached;
         DataProvider.OnTutorialObjectiveIndexChanged += OnTutorialObjectiveIndexChanged;
     }
@@ -39,9 +41,13 @@ public class TutorialComponent : MonoBehaviour
 
     private void SetupObjective(ObjectiveData data)
     {
-        if (data.GetType().Equals(typeof(MoveObjectiveData)))
+        if (data.GetType() == typeof(MoveObjectiveData))
         {
             _objectiveHandler = new MoveObjectiveHandler((MoveObjectiveData) data);
+        }
+        else if (data.GetType() == typeof(CollectResourcesObjectiveData))
+        {
+            _objectiveHandler = new CollectResourcesObjectiveHandler((CollectResourcesObjectiveData) data);
         }
     }
 

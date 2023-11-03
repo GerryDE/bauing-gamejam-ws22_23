@@ -16,6 +16,8 @@ namespace UI
         private void Awake()
         {
             _objectsForType = new Dictionary<Type, List<TextMeshProUGUI>>();
+
+            OnTutorialObjectiveIndexChanged(0);
                 
             ObjectiveHandler.OnObjectiveReached += OnObjectiveReached;
             DataProvider.OnTutorialObjectiveIndexChanged += OnTutorialObjectiveIndexChanged;

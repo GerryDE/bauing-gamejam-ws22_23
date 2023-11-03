@@ -21,7 +21,7 @@ namespace Data.objective
             } 
             if (shallMoveRight)
             {
-                return "Move Right";
+                return "Move right";
             }
             
             Debug.LogError("Neither shallMoveLeft nor shallMoveRight is enabled. One must be enabled!");
