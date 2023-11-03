@@ -7,6 +7,7 @@ public class WaveHandlerComponent : MonoBehaviour
     [Serializable]
     private struct WaveData
     {
+        public bool tutorial;
         public int enemiesToKillUntilBoss;
         public float spawnInterval;
         public int maxAmountOfSimultaneouslyLivingEnemies;
@@ -49,9 +50,10 @@ public class WaveHandlerComponent : MonoBehaviour
     {
         if (_bossFightEnabled) return;
 
-        _elapsedTime += Time.deltaTime;
-
         var currentData = data[_dataHandlerComponent.Wave];
+        if (currentData.tutorial) return;
+        
+        _elapsedTime += Time.deltaTime;
         if (_elapsedTime <= currentData.spawnInterval) return;
 
         var maxAmountOfSimultaneouslyLivingEnemies = currentData.maxAmountOfSimultaneouslyLivingEnemies;

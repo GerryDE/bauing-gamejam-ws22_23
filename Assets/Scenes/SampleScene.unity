@@ -15412,7 +15412,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 779716c56a2fff8a58a239289971f590, type: 2}
     - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
       propertyPath: tutorialObjectives.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
       propertyPath: tutorialObjectives.Array.data[0]
@@ -15430,6 +15430,10 @@ PrefabInstance:
       propertyPath: tutorialObjectives.Array.data[3]
       value: 
       objectReference: {fileID: 11400000, guid: ffe15a937106667969e184e510182957, type: 2}
+    - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
+      propertyPath: tutorialObjectives.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 78a8fe1703cfee983bd64e191598418e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15713,46 +15717,66 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
       propertyPath: data.Array.size
-      value: 3
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
+      propertyPath: data.Array.data[0].tutorial
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
       propertyPath: data.Array.data[0].bossPrefab
       value: 
-      objectReference: {fileID: 7866932865955879141, guid: b269a59c572df88d48a959922170a03b, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
       propertyPath: data.Array.data[1].bossPrefab
       value: 
-      objectReference: {fileID: 7866932865955879141, guid: 78dfebff992be9c40ba2ef8ca7ab9dd1, type: 3}
+      objectReference: {fileID: 7866932865955879141, guid: b269a59c572df88d48a959922170a03b, type: 3}
     - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
       propertyPath: data.Array.data[2].bossPrefab
+      value: 
+      objectReference: {fileID: 7866932865955879141, guid: 78dfebff992be9c40ba2ef8ca7ab9dd1, type: 3}
+    - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
+      propertyPath: data.Array.data[3].bossPrefab
       value: 
       objectReference: {fileID: 267851758946750762, guid: a52292cbf15a476bd8003030d2292d7c, type: 3}
     - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
       propertyPath: data.Array.data[0].spawnInterval
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
       propertyPath: data.Array.data[2].spawnInterval
-      value: 5
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
+      propertyPath: data.Array.data[0].enemiesToKillUntilBoss
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
       propertyPath: data.Array.data[1].enemiesToKillUntilBoss
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
       propertyPath: data.Array.data[2].enemiesToKillUntilBoss
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
+      propertyPath: data.Array.data[3].enemiesToKillUntilBoss
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
       propertyPath: data.Array.data[0].maxAmountOfSimultaneouslyLivingEnemies
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
       propertyPath: data.Array.data[1].maxAmountOfSimultaneouslyLivingEnemies
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
       propertyPath: data.Array.data[2].maxAmountOfSimultaneouslyLivingEnemies
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
+      propertyPath: data.Array.data[3].maxAmountOfSimultaneouslyLivingEnemies
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3546891448737068497, guid: 29688846d5e648d309661e6784cc0585, type: 3}
@@ -15803,6 +15827,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaveHandler
       objectReference: {fileID: 0}
+    - target: {fileID: 3546891448737068527, guid: 29688846d5e648d309661e6784cc0585, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15822,7 +15850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3608090724731289252, guid: 002110f1c72bb31abbdd8aad89142dfb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3608090724731289254, guid: 002110f1c72bb31abbdd8aad89142dfb, type: 3}
       propertyPath: m_RootOrder

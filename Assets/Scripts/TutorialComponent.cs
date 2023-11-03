@@ -53,6 +53,10 @@ public class TutorialComponent : MonoBehaviour
         {
             _objectiveHandler = new UpgradeObjectiveHandler((UpgradeObjectiveData) data);
         }
+        else if (data.GetType() == typeof(DefeatEnemyObjectiveData))
+        {
+            _objectiveHandler = new DefeatEnemyObjectiveHandler((DefeatEnemyObjectiveData) data);
+        }
     }
 
     private void OnDestroy()

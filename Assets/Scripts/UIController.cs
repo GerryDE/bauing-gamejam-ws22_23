@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class UIController : MonoBehaviour
 {
     // In welcher Welle befinden wir uns
-    [SerializeField] int welle = 1;
+    [SerializeField] int welle = 0;
 
     //Liste der Texte
     [SerializeField] List<TextMeshProUGUI> listTexte = new List<TextMeshProUGUI>();
