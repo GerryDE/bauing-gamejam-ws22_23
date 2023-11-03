@@ -49,6 +49,10 @@ public class TutorialComponent : MonoBehaviour
         {
             _objectiveHandler = new CollectResourcesObjectiveHandler((CollectResourcesObjectiveData) data);
         }
+        else if (data.GetType() == typeof(UpgradeObjectiveData))
+        {
+            _objectiveHandler = new UpgradeObjectiveHandler((UpgradeObjectiveData) data);
+        }
     }
 
     private void OnDestroy()
