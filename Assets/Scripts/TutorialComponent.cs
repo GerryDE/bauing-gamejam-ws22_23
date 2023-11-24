@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class TutorialComponent : MonoBehaviour
 {
+    public delegate void NewObjectiveStarted(Type type);
     public delegate void TutorialCompleted();
-
     public static TutorialCompleted OnTutorialCompleted;
-
+    public static NewObjectiveStarted OnNewObjectiveStarted;
+    
     private ObjectiveHandler _objectiveHandler;
     
     private void Awake()
@@ -61,6 +62,8 @@ public class TutorialComponent : MonoBehaviour
         {
             _objectiveHandler = new TutorialCompletedObjectiveHandler((TutorialCompletedObjectiveData) data);
         }
+        
+        OnNewObjectiveStarted?.Invoke(data.GetType());
     }
 
     private void OnDestroy()
