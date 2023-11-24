@@ -12614,9 +12614,9 @@ RectTransform:
   m_Father: {fileID: 1814396541}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 54, y: -340}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -55, y: -225}
   m_SizeDelta: {x: 100, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1423210004
@@ -12650,7 +12650,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 2
   m_Spacing: 4
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
@@ -15416,28 +15416,28 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 779716c56a2fff8a58a239289971f590, type: 2}
     - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
       propertyPath: tutorialObjectives.Array.size
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
       propertyPath: tutorialObjectives.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: e4668eed56c6008c0a449864aae3cf82, type: 2}
+      objectReference: {fileID: 11400000, guid: b408666845a410e029fee86538e546c4, type: 2}
     - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
       propertyPath: tutorialObjectives.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: dbc2a513978ac0d1899af31bac9061d2, type: 2}
+      objectReference: {fileID: 11400000, guid: fd9a8b0678e075a46aacaef86362bddb, type: 2}
     - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
       propertyPath: tutorialObjectives.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: fd9a8b0678e075a46aacaef86362bddb, type: 2}
+      objectReference: {fileID: 11400000, guid: ffe15a937106667969e184e510182957, type: 2}
     - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
       propertyPath: tutorialObjectives.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: ffe15a937106667969e184e510182957, type: 2}
+      objectReference: {fileID: 11400000, guid: 78a8fe1703cfee983bd64e191598418e, type: 2}
     - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
       propertyPath: tutorialObjectives.Array.data[4]
       value: 
-      objectReference: {fileID: 11400000, guid: 78a8fe1703cfee983bd64e191598418e, type: 2}
+      objectReference: {fileID: 11400000, guid: 209e738a15c2149ff99f2701e3b68b5e, type: 2}
     - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
       propertyPath: tutorialObjectives.Array.data[5]
       value: 
