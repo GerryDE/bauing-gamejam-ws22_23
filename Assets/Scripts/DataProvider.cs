@@ -304,8 +304,6 @@ public class DataProvider : MonoBehaviour
         MineData = mineData;
         StatueData = statueData;
         TutorialObjectives = tutorialObjectives;
-        
-        OnTutorialObjectiveIndexChanged?.Invoke(CurrentTutorialObjectiveIndex);
     }
 
     public CostData GetCostData(Interactable interactable, int version)

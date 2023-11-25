@@ -13,7 +13,7 @@ namespace Data.objective
         {
             if (shallMoveLeft && shallMoveRight)
             {
-                return "Move left and left";
+                return "Move left and right";
             }
             if (shallMoveLeft)
             {

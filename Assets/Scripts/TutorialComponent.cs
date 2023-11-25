@@ -12,7 +12,7 @@ public class TutorialComponent : MonoBehaviour
     
     private ObjectiveHandler _objectiveHandler;
     
-    private void Awake()
+    private void Start()
     {
         _objectiveHandler = null;
         
