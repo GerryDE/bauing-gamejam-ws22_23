@@ -35,6 +35,8 @@ public class TreeComponent : InteractableBaseComponent
 
     [SerializeField] private Range spawnRange;
     [SerializeField] private State state = Spawning;
+    [SerializeField] private GameObject disableOnSpawningStateObj;
+
     private ProgressBarComponent _progressBarComponent;
 
     [Range(0f, 1f)] [SerializeField] private float stateChangeDurationVariance = 0.2f;
@@ -60,6 +62,7 @@ public class TreeComponent : InteractableBaseComponent
         state = newState;
         _renderer.sprite = GetDataByCurrentState()?.sprite;
         CalculateStateChangeDuration();
+        disableOnSpawningStateObj.SetActive(!Spawning.Equals(state));
     }
 
     protected override void Start()
@@ -86,10 +89,8 @@ public class TreeComponent : InteractableBaseComponent
 
     private void Respawn()
     {
-        state = Spawning;
-        _renderer.sprite = null;
+        SetState(Spawning);
         SetSpawnPosition();
-        CalculateStateChangeDuration();
     }
 
     private void FixedUpdate()
@@ -103,18 +104,15 @@ public class TreeComponent : InteractableBaseComponent
             switch (state)
             {
                 case Spawning: 
-                    state = Small; 
+                    SetState(Small);
                     break;
                 case Small:
-                    state = Medium; 
+                    SetState(Medium);
                     break;
                 case Medium:
-                    state = Large; 
+                    SetState(Large);
                     break;
             };
-
-            _renderer.sprite = GetDataByCurrentState()?.sprite;
-            CalculateStateChangeDuration();
         }
 
         if (!Spawning.Equals(state) && _interaction1Enabled)
