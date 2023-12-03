@@ -27,7 +27,7 @@ public abstract class InteractableBaseComponent : MonoBehaviour
         _dataHandlerComponent = GameObject.FindWithTag("DataHandler").GetComponent<DataHandlerComponent>();
     }
 
-    private void OnNewObjectiveStarted(ObjectiveData data)
+    protected virtual void OnNewObjectiveStarted(ObjectiveData data)
     {
         if (data.GetType() != typeof(UpgradeObjectiveData)) return;
         _upgradeEnabled = true;
