@@ -1,3 +1,5 @@
+using System;
+using Data.objective;
 using UnityEngine;
 
 public abstract class InteractableBaseComponent : MonoBehaviour
@@ -10,6 +12,7 @@ public abstract class InteractableBaseComponent : MonoBehaviour
     protected bool _interaction1Enabled;
     protected bool _interaction2Enabled;
     protected bool _isCollidingWithPlayer;
+    protected bool _upgradeEnabled = false;
 
     protected virtual void Start()
     {
@@ -19,8 +22,15 @@ public abstract class InteractableBaseComponent : MonoBehaviour
         GameInputHandlerComponent.OnInteract2PressCalled += OnInteractionButton2Pressed;
         PlayerController.OnPlayerMove += OnPlayerMove;
         DataProvider.OnResourceDataChanged += OnResourceDataChanged;
+        TutorialComponent.OnNewObjectiveStarted += OnNewObjectiveStarted;
 
         _dataHandlerComponent = GameObject.FindWithTag("DataHandler").GetComponent<DataHandlerComponent>();
+    }
+
+    private void OnNewObjectiveStarted(ObjectiveData data)
+    {
+        if (data.GetType() != typeof(UpgradeObjectiveData)) return;
+        _upgradeEnabled = true;
     }
 
     protected virtual void OnPlayerMove(float direction, float velocity)

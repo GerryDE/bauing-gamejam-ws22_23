@@ -31,6 +31,8 @@ public class TreeUpgradeComponent : InteractableBaseComponent
     {
         base.OnInteractionButton2Pressed();
 
+        if (!_upgradeEnabled) return;        
+
         _interactionButton2Pressed = false;
         var data = DataProvider.Instance;
         var treeData = data.TreeData;
@@ -48,6 +50,8 @@ public class TreeUpgradeComponent : InteractableBaseComponent
 
     private bool IsUpgradeable(int nextVersionIndex)
     {
+        if (!_upgradeEnabled) return false;
+
         var data = DataProvider.Instance;
         var treeData = data.TreeData;
         var resourceData = data.ResourceData;
