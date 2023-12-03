@@ -25,7 +25,7 @@ namespace Objective
 
             if (moveLeftGoalReached && moveRightGoalReached)
             {
-                OnObjectiveReached?.Invoke(_data.GetType());
+                OnObjectiveReached?.Invoke(_data);
                 GameInputHandlerComponent.OnMoveCalled -= OnMoveCalled;
             }
         }

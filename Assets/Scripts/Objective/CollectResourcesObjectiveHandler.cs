@@ -21,7 +21,7 @@ namespace Objective
         {
             if (data.WoodAmount < _initialLumberAmount + _data.lumberAmount ||
                 data.StoneAmount < _initialStoneAmount + _data.stoneAmount) return;
-            OnObjectiveReached?.Invoke(_data.GetType());
+            OnObjectiveReached?.Invoke(_data);
             DataProvider.OnResourceDataChanged -= OnResourceDataChanged;
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Objective;
 using UnityEngine;
 using TMPro;
+using Data.objective;
 
 namespace UI
 {
@@ -23,8 +24,9 @@ namespace UI
             DataProvider.OnTutorialObjectiveIndexChanged += OnTutorialObjectiveIndexChanged;
         }
 
-        private void OnObjectiveReached(Type type)
+        private void OnObjectiveReached(ObjectiveData data)
         {
+            Type type = data.GetType();
             if (!_objectsForType.ContainsKey(type)) return;
             foreach (var comp in _objectsForType[type])
             {

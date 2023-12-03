@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TutorialComponent : MonoBehaviour
 {
-    public delegate void NewObjectiveStarted(Type type);
+    public delegate void NewObjectiveStarted(ObjectiveData data);
     public delegate void TutorialCompleted();
     public static TutorialCompleted OnTutorialCompleted;
     public static NewObjectiveStarted OnNewObjectiveStarted;
@@ -22,7 +22,7 @@ public class TutorialComponent : MonoBehaviour
         DataProvider.OnTutorialObjectiveIndexChanged += OnTutorialObjectiveIndexChanged;
     }
 
-    private void OnObjectiveReached(Type type)
+    private void OnObjectiveReached(ObjectiveData data)
     {
         if (DataProvider.Instance.TutorialObjectives.Count > DataProvider.Instance.CurrentTutorialObjectiveIndex + 1)
         {
@@ -63,7 +63,7 @@ public class TutorialComponent : MonoBehaviour
             _objectiveHandler = new TutorialCompletedObjectiveHandler((TutorialCompletedObjectiveData) data);
         }
         
-        OnNewObjectiveStarted?.Invoke(data.GetType());
+        OnNewObjectiveStarted?.Invoke(data);
     }
 
     private void OnDestroy()

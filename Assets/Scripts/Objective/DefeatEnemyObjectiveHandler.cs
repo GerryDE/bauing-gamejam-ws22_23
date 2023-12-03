@@ -23,7 +23,7 @@ namespace Objective
 
         private void OnEnemyDestroyed(int objectId)
         {
-            OnObjectiveReached?.Invoke(_data.GetType());
+            OnObjectiveReached?.Invoke(_data);
             
             EnemyController.OnEnemyDestroyed -= OnEnemyDestroyed;
         }

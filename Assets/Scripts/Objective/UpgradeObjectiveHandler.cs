@@ -19,7 +19,7 @@ namespace Objective
 
         private void OnVersionChanged(int newVersion)
         {
-            OnObjectiveReached?.Invoke(_data.GetType());
+            OnObjectiveReached?.Invoke(_data);
             
             DataProvider.OnFenceVersionChanged -= OnVersionChanged;
             DataProvider.OnMineVersionChanged -= OnVersionChanged;

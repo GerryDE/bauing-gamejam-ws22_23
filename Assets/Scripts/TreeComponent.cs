@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Data.objective;
+using Objective;
 using UnityEngine;
 using UnityEngine.Serialization;
 using static TreeComponent.State;
@@ -40,6 +42,7 @@ public class TreeComponent : InteractableBaseComponent
     private float _stateChangeDuration;
     private float _elapsedStateChangeTime;
     private float _elapsedMiningTime;
+    private bool _allowGrowing = false;
 
     private SpriteRenderer _renderer;
 
@@ -55,6 +58,7 @@ public class TreeComponent : InteractableBaseComponent
     public void SetState(State newState)
     {
         state = newState;
+        _renderer.sprite = GetDataByCurrentState()?.sprite;
         CalculateStateChangeDuration();
     }
 
@@ -69,6 +73,15 @@ public class TreeComponent : InteractableBaseComponent
 
         SetSpawnPosition();
         CalculateStateChangeDuration();
+
+        TutorialComponent.OnNewObjectiveStarted += OnNewObjectiveStarted;
+    }
+
+    private void OnNewObjectiveStarted(ObjectiveData data)
+    {
+        if(data.GetType() != typeof(CollectResourcesObjectiveData)) return;
+        _allowGrowing = true;
+        SetState(Large);
     }
 
     private void Respawn()
@@ -81,6 +94,8 @@ public class TreeComponent : InteractableBaseComponent
 
     private void FixedUpdate()
     {
+        if (!_allowGrowing) return;
+
         _elapsedStateChangeTime += Time.deltaTime;
         if (_elapsedStateChangeTime > _stateChangeDuration)
         {
