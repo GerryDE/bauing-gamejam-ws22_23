@@ -80,7 +80,7 @@ public class TreeComponent : InteractableBaseComponent
         TutorialComponent.OnNewObjectiveStarted += OnNewObjectiveStarted;
     }
 
-    private void OnNewObjectiveStarted(ObjectiveData data)
+    protected override void OnNewObjectiveStarted(ObjectiveData data)
     {
         if(data.GetType() != typeof(CollectResourcesObjectiveData)) return;
         _allowGrowing = true;

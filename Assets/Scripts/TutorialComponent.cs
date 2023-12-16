@@ -19,7 +19,13 @@ public class TutorialComponent : MonoBehaviour
         OnTutorialObjectiveIndexChanged(0);
         
         ObjectiveHandler.OnObjectiveReached += OnObjectiveReached;
+        DynamicObjective.OnDynamicObjectiveStarted += OnDynamicObjectiveStarted;
         DataProvider.OnTutorialObjectiveIndexChanged += OnTutorialObjectiveIndexChanged;
+    }
+
+    private void OnDynamicObjectiveStarted(ObjectiveData data)
+    {
+        SetupObjective(data);
     }
 
     private void OnObjectiveReached(ObjectiveData data)

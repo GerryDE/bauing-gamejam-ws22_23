@@ -11,6 +11,7 @@ namespace UI
     {
         [SerializeField] private TextMeshProUGUI textComponent;
         [SerializeField, Range(0f, 1f)] private float objectiveReachedTransparency;
+        [SerializeField] private float finishedTextSize = 12f;
 
         private Dictionary<Type, List<TextMeshProUGUI>> _objectsForType;
 
@@ -19,9 +20,23 @@ namespace UI
             _objectsForType = new Dictionary<Type, List<TextMeshProUGUI>>();
 
             OnTutorialObjectiveIndexChanged(0);
-                
+
+            DynamicObjective.OnDynamicObjectiveStarted += OnDynamicObjectiveStarted;
             ObjectiveHandler.OnObjectiveReached += OnObjectiveReached;
             DataProvider.OnTutorialObjectiveIndexChanged += OnTutorialObjectiveIndexChanged;
+        }
+
+        private void OnDynamicObjectiveStarted(ObjectiveData data)
+        {
+            var obj = Instantiate(textComponent.gameObject, gameObject.transform);
+            var instanceTextComponent = obj.GetComponent<TextMeshProUGUI>();
+            instanceTextComponent.text = data.GetObjectiveText();
+            if (!_objectsForType.ContainsKey(data.GetType()))
+            {
+                _objectsForType.Add(data.GetType(), new List<TextMeshProUGUI>());
+            }
+            
+            _objectsForType[data.GetType()].Add(instanceTextComponent);
         }
 
         private void OnObjectiveReached(ObjectiveData data)
@@ -33,6 +48,7 @@ namespace UI
                 if (comp.text.StartsWith("<s>")) continue;
                 var text = "<s>" + comp.text + "</s>";
                 comp.text = text;
+                comp.fontSize = finishedTextSize;
                 comp.color = new Color(comp.color.r, comp.color.g, comp.color.b, objectiveReachedTransparency);
             }
         }

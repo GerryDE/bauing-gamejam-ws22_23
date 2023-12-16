@@ -19,6 +19,7 @@ public class DataProvider : MonoBehaviour
     [SerializeField] private List<StatueData> statueData;
 
     [SerializeField] private List<ObjectiveData> tutorialObjectives;
+    [SerializeField] private List<ObjectiveData> dynamicObjectives;
 
     [NonSerialized] public CurrentPlayerData PlayerData;
     [NonSerialized] public CurrentResourceData ResourceData;
@@ -29,6 +30,7 @@ public class DataProvider : MonoBehaviour
     [NonSerialized] public List<StatueData> StatueData;
 
     [NonSerialized] public List<ObjectiveData> TutorialObjectives;
+    [NonSerialized] public List<ObjectiveData> DynamicObjectives;
 
     public delegate void MaxRemainingYearsChanged(int value);
 
@@ -165,7 +167,7 @@ public class DataProvider : MonoBehaviour
             get => _currentRemainingYears;
             set
             {
-                _currentRemainingYears = Math.Max(0, value);
+                _currentRemainingYears = Math.Clamp(value, 0, _maxRemainingYears);
                 OnCurrentRemainingYearsChanged?.Invoke(value);
             }
         }
@@ -304,6 +306,7 @@ public class DataProvider : MonoBehaviour
         MineData = mineData;
         StatueData = statueData;
         TutorialObjectives = tutorialObjectives;
+        DynamicObjectives = dynamicObjectives;
     }
 
     public CostData GetCostData(Interactable interactable, int version)

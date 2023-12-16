@@ -7,7 +7,7 @@ namespace Data.objective
     {
         public override string GetObjectiveText()
         {
-            return "Tutorial completed! Now, protect the Goddess' Statue and defeat the Army of Darkness!";
+            return "Tutorial completed! Now, protect the Goddess'\nStatue and defeat the Army of Darkness!";
         }
     }
 }
