@@ -1,4 +1,6 @@
 using System;
+using Data.objective;
+using Objective;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
@@ -49,8 +51,17 @@ public class FenceController : MonoBehaviour
     {
         FenceRepairComponent.OnRepairFence += OnRepairFence;
         FenceUpgradeComponent.OnUpgradeFence += OnUpgradeFence;
+        TutorialComponent.OnNewObjectiveStarted += OnObjectiveStarted;
 
         currentHp = maxHp;
+    }
+
+    private void OnObjectiveStarted(ObjectiveData data)
+    {
+        if (data.GetType() == typeof(TutorialCompletedObjectiveData))
+        {
+            CurrentHp = MaxHp;
+        }
     }
 
     private void OnUpgradeFence(int newHpValue, int damage, Sprite sprite)
@@ -91,5 +102,6 @@ public class FenceController : MonoBehaviour
     {
         FenceRepairComponent.OnRepairFence -= OnRepairFence;
         FenceUpgradeComponent.OnUpgradeFence -= OnUpgradeFence;
+        ObjectiveHandler.OnObjectiveReached -= OnObjectiveStarted;
     }
 }
