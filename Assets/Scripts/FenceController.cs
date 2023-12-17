@@ -11,6 +11,10 @@ public class FenceController : MonoBehaviour
     [SerializeField] private Color destroyedFenceColor;
     private Collider2D _collider2D;
 
+    public delegate void CurrentHpChanged(int value, int maxHp);
+
+    public static CurrentHpChanged OnCurrentHpChanged;
+
     public int DamageOutput => damageOutput;
 
     [SerializeField] private SpriteRenderer _renderer;
@@ -26,7 +30,11 @@ public class FenceController : MonoBehaviour
     public int CurrentHp
     {
         get => currentHp;
-        private set => currentHp = value;
+        private set
+        {
+            currentHp = value;
+            OnCurrentHpChanged?.Invoke(value, maxHp);
+        }
     }
 
     private void Start()
@@ -70,7 +78,7 @@ public class FenceController : MonoBehaviour
     {
         if (!col.gameObject.layer.Equals(LayerMask.NameToLayer("Enemy"))) return;
 
-        currentHp -= 1;
+        CurrentHp -= 1;
         _progressBarComponent.UpdateValues(currentHp, MaxHp);
 
         if (currentHp > 0) return;

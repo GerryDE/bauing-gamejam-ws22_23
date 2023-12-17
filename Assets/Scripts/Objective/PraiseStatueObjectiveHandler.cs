@@ -15,7 +15,7 @@ namespace Objective
 
         private void OnCurrentRemainingYearsChanged(int value)
         {
-            if (value <= DataProvider.Instance.PlayerData.MaxRemainingYears / 2)
+            if (value <= DataProvider.Instance.PlayerData.MaxRemainingYears * _data.triggerValueInPercent / 100)
             {
                 EnableObjective(_data);
             }

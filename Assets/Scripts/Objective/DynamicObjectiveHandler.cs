@@ -6,17 +6,23 @@ namespace Objective
 {
     public class DynamicObjectiveHandler
     {
-        private List<ObjectiveData> _data;
         private Dictionary<Type, ObjectiveHandler> _handlers;
 
         public DynamicObjectiveHandler(List<ObjectiveData> data)
         {
-            _data = data;
             _handlers = new Dictionary<Type, ObjectiveHandler>();
-            foreach (var objectiveData in _data)
+            foreach (var objectiveData in data)
             {
-                _handlers.Add(typeof(PraiseStatueObjectiveData),
-                    new PraiseStatueObjectiveHandler((PraiseStatueObjectiveData) objectiveData));
+                if (objectiveData.GetType() == typeof(PraiseStatueObjectiveData))
+                {
+                    _handlers.Add(typeof(PraiseStatueObjectiveData),
+                        new PraiseStatueObjectiveHandler((PraiseStatueObjectiveData) objectiveData));
+                }
+                else if (objectiveData.GetType() == typeof(RepairFenceObjectiveData))
+                {
+                    _handlers.Add(typeof(RepairFenceObjectiveData),
+                        new RepairFenceObjectiveHandler((RepairFenceObjectiveData) objectiveData));
+                }
             }
 
             ObjectiveHandler.OnObjectiveReached += OnObjectiveReached;

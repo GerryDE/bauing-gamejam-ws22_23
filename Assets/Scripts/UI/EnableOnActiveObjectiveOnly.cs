@@ -29,6 +29,7 @@ namespace UI
                 { ObjectiveType.Collect, typeof(CollectResourcesObjectiveData) },
                 { ObjectiveType.Upgrade, typeof(UpgradeObjectiveData) },
                 { ObjectiveType.DefeatEnemy, typeof(DefeatEnemyObjectiveData) },
+                { ObjectiveType.Repair, typeof(RepairFenceObjectiveData) },
                 { ObjectiveType.Praise, typeof(PraiseStatueObjectiveData) },
             };
 
