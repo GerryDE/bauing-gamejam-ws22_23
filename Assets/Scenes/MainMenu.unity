@@ -152,9 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62ebd97603734891b1cfbb08e69f5625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainGame: {fileID: 102900000, guid: 2cda990e2423bbf4892e6590ba056729, type: 3}
-  credits: {fileID: 102900000, guid: e85d3de918bb50e4aad60d3cc484d4bd, type: 3}
-  changelog: {fileID: 102900000, guid: 567dda38a992fb84eb5e64fa124ce18f, type: 3}
+  mainGame: SampleScene
+  credits: Credits
+  changelog: Changelog
 --- !u!4 &55995608
 Transform:
   m_ObjectHideFlags: 0

@@ -1,12 +1,11 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneLoaderComponent : MonoBehaviour
 {
-    [SerializeField] private SceneAsset mainGame;
-    [SerializeField] private SceneAsset credits;
-    [SerializeField] private SceneAsset changelog;
+    [SerializeField] private string mainGame = "SampleScene";
+    [SerializeField] private string credits = "Credits";
+    [SerializeField] private string changelog = "Changelog";
 
     private void Start()
     {
@@ -30,8 +29,8 @@ public class SceneLoaderComponent : MonoBehaviour
         LoadScene(changelog);
     }
 
-    private void LoadScene(SceneAsset sceneAsset)
+    private void LoadScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneAsset.name);
+        SceneManager.LoadScene(sceneName);
     }
 }
