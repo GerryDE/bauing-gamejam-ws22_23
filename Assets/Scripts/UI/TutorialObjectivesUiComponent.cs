@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Objective;
-using UnityEngine;
-using TMPro;
 using Data.objective;
+using Objective;
+using TMPro;
+using UnityEngine;
 
 namespace UI
 {
@@ -19,24 +19,21 @@ namespace UI
         {
             _objectsForType = new Dictionary<Type, List<TextMeshProUGUI>>();
 
-            OnTutorialObjectiveIndexChanged(0);
-
-            DynamicObjective.OnDynamicObjectiveStarted += OnDynamicObjectiveStarted;
+            TutorialComponent.OnNewObjectiveStarted += OnNewObjectiveStarted;
             ObjectiveHandler.OnObjectiveReached += OnObjectiveReached;
-            DataProvider.OnTutorialObjectiveIndexChanged += OnTutorialObjectiveIndexChanged;
         }
 
-        private void OnDynamicObjectiveStarted(ObjectiveData data)
+        private void OnNewObjectiveStarted(ObjectiveData data)
         {
-            var obj = Instantiate(textComponent.gameObject, gameObject.transform);
-            var instanceTextComponent = obj.GetComponent<TextMeshProUGUI>();
-            instanceTextComponent.text = data.GetObjectiveText();
-            if (!_objectsForType.ContainsKey(data.GetType()))
+            if (data.GetType() == typeof(TutorialCompletedObjectiveData))
             {
-                _objectsForType.Add(data.GetType(), new List<TextMeshProUGUI>());
+                foreach (Transform child in gameObject.transform)
+                {
+                    Destroy(child.gameObject);
+                }
             }
-            
-            _objectsForType[data.GetType()].Add(instanceTextComponent);
+
+            CreateObjectiveTextObj(data);
         }
 
         private void OnObjectiveReached(ObjectiveData data)
@@ -53,9 +50,8 @@ namespace UI
             }
         }
 
-        private void OnTutorialObjectiveIndexChanged(int newIndex)
+        private void CreateObjectiveTextObj(ObjectiveData data)
         {
-            var data = DataProvider.Instance.TutorialObjectives[newIndex];
             var obj = Instantiate(textComponent.gameObject, gameObject.transform);
             var instanceTextComponent = obj.GetComponent<TextMeshProUGUI>();
             instanceTextComponent.text = data.GetObjectiveText();
@@ -64,8 +60,14 @@ namespace UI
             {
                 _objectsForType.Add(data.GetType(), new List<TextMeshProUGUI>());
             }
-            
+
             _objectsForType[data.GetType()].Add(instanceTextComponent);
+        }
+
+        private void OnDestroy()
+        {
+            TutorialComponent.OnNewObjectiveStarted -= OnNewObjectiveStarted;
+            ObjectiveHandler.OnObjectiveReached -= OnObjectiveReached;
         }
     }
 }

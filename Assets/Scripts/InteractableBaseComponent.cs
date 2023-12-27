@@ -1,4 +1,3 @@
-using System;
 using Data.objective;
 using UnityEngine;
 
@@ -29,7 +28,8 @@ public abstract class InteractableBaseComponent : MonoBehaviour
 
     protected virtual void OnNewObjectiveStarted(ObjectiveData data)
     {
-        if (data.GetType() != typeof(UpgradeObjectiveData)) return;
+        if (data.GetType() != typeof(UpgradeObjectiveData) &&
+            data.GetType() != typeof(TutorialCompletedObjectiveData)) return;
         _upgradeEnabled = true;
     }
 
@@ -73,7 +73,7 @@ public abstract class InteractableBaseComponent : MonoBehaviour
             _interactionButton1Pressed = false;
             _interactionButton2Pressed = false;
         }
-        
+
         _interaction1Enabled = _isCollidingWithPlayer && _interactionButton1Pressed;
         _interaction2Enabled = _isCollidingWithPlayer && _interactionButton2Pressed;
     }

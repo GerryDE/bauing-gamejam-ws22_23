@@ -66,6 +66,8 @@ public class DataProvider : MonoBehaviour
 
     public delegate void TutorialObjectiveIndexChanged(int newIndex);
 
+    public delegate void WaveCountChanged(int newWaveCount);
+
     public static MaxRemainingYearsChanged OnPlayerMaxRemainingYearsChanged;
     public static CurrentRemainingYearsChanged OnCurrentRemainingYearsChanged;
     public static AttackValueChanged OnAttackValueChanged;
@@ -83,12 +85,14 @@ public class DataProvider : MonoBehaviour
     public static MineVersionChanged OnMineVersionChanged;
     public static StatueVersionChanged OnStatueVersionChanged;
     public static TutorialObjectiveIndexChanged OnTutorialObjectiveIndexChanged;
+    public static WaveCountChanged OnWaveCountChanged;
 
     private int _currentFenceVersion;
     private int _currentTreeVersion;
     private int _currentMineVersion;
     private int _currentStatueVersion;
     private int _currentTutorialObjectiveIndex;
+    private int _waveCount;
 
     public int CurrentFenceVersion
     {
@@ -137,6 +141,16 @@ public class DataProvider : MonoBehaviour
         {
             _currentTutorialObjectiveIndex = value;
             OnTutorialObjectiveIndexChanged?.Invoke(value);
+        }
+    }
+
+    public int Wave
+    {
+        get => _waveCount;
+        set
+        {
+            _waveCount = value;
+            OnWaveCountChanged?.Invoke(_waveCount);
         }
     }
 

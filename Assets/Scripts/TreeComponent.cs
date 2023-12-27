@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Data.objective;
-using Objective;
 using UnityEngine;
-using UnityEngine.Serialization;
 using static TreeComponent.State;
 using Random = UnityEngine.Random;
 
@@ -82,7 +79,8 @@ public class TreeComponent : InteractableBaseComponent
 
     protected override void OnNewObjectiveStarted(ObjectiveData data)
     {
-        if(data.GetType() != typeof(CollectResourcesObjectiveData)) return;
+        if (data.GetType() != typeof(CollectResourcesObjectiveData) &&
+            data.GetType() != typeof(TutorialCompletedObjectiveData)) return;
         _allowGrowing = true;
         SetState(Large);
     }
@@ -103,7 +101,7 @@ public class TreeComponent : InteractableBaseComponent
             _elapsedStateChangeTime = 0;
             switch (state)
             {
-                case Spawning: 
+                case Spawning:
                     SetState(Small);
                     break;
                 case Small:
@@ -112,7 +110,9 @@ public class TreeComponent : InteractableBaseComponent
                 case Medium:
                     SetState(Large);
                     break;
-            };
+            }
+
+            ;
         }
 
         if (!Spawning.Equals(state) && _interaction1Enabled)

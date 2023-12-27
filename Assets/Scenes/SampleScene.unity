@@ -15548,6 +15548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b29c74757143a9823682ae2b43233b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skipTutorialData: {fileID: 11400000, guid: 9b5784ceb326eb8d4ba51dc4d2499b0e, type: 2}
 --- !u!224 &1560061345 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8932394335931476811, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}

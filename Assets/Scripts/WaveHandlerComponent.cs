@@ -39,6 +39,7 @@ public class WaveHandlerComponent : MonoBehaviour
     {
         _bossFightEnabled = false;
         _elapsedTime = 0f;
+        DataProvider.Instance.Wave++;
     }
 
     private void OnEnemyDestroyed(int objectId)
@@ -50,9 +51,9 @@ public class WaveHandlerComponent : MonoBehaviour
     {
         if (_bossFightEnabled) return;
 
-        var currentData = data[_dataHandlerComponent.Wave];
+        var currentData = data[DataProvider.Instance.Wave];
         if (currentData.tutorial) return;
-        
+
         _elapsedTime += Time.deltaTime;
         if (_elapsedTime <= currentData.spawnInterval) return;
 
