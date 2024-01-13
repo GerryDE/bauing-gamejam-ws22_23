@@ -7,9 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
-    // In welcher Welle befinden wir uns
-    [SerializeField] int welle = 1;
-
     //Liste der Texte
     [SerializeField] List<TextMeshProUGUI> listTexte = new List<TextMeshProUGUI>();
     // Nach Index was ist was
@@ -42,7 +39,6 @@ public class UIController : MonoBehaviour
         _playerData = DataProvider.Instance.PlayerData;
         _resourceData = DataProvider.Instance.ResourceData;
 
-        DataHandlerComponent.OnWaveCountChanged += UpdateWaveCount;
         //BossComponent.OnBossDestroyed += UpdateWelle;
         GameInputHandlerComponent.OnRestartCalled += OnRestartGame;
         CheckForGameOverComponent.OnGameOver += OnGameOver;
@@ -102,7 +98,7 @@ public class UIController : MonoBehaviour
                     index++;
                     break;
                 case 1:
-                    item.text = texte[index] + ": " + welle + "/3";
+                    item.text = texte[index] + ": " + DataProvider.Instance.Wave + "/3";
                     index++;
                     break;
                 case 2:
@@ -119,15 +115,8 @@ public class UIController : MonoBehaviour
         }
     }
 
-    private void UpdateWaveCount(int newValue)
-    {
-        welle = newValue + 1;
-    }
-
     private void OnDestroy()
     {
-        DataHandlerComponent.OnWaveCountChanged -= UpdateWaveCount;
-        //BossComponent.OnBossDestroyed -= UpdateWelle;
         GameInputHandlerComponent.OnRestartCalled -= OnRestartGame;
     }
 

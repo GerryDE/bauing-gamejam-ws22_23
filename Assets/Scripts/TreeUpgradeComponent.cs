@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Data.objective;
 using UnityEngine;
 
 public class TreeUpgradeComponent : InteractableBaseComponent
@@ -12,6 +13,13 @@ public class TreeUpgradeComponent : InteractableBaseComponent
     {
         base.Start();
         DataProvider.OnTreeVersionChanged += OnTreeVersionChanged;
+    }
+
+    protected override void OnNewObjectiveStarted(ObjectiveData data)
+    {
+        base.OnNewObjectiveStarted(data);
+        if (!_upgradeEnabled) return;
+        upgradeNotificationSprite.enabled = IsUpgradeable(DataProvider.Instance.CurrentTreeVersion + 1);
     }
 
     private void OnTreeVersionChanged(int newVersion)
@@ -31,6 +39,8 @@ public class TreeUpgradeComponent : InteractableBaseComponent
     {
         base.OnInteractionButton2Pressed();
 
+        if (!_upgradeEnabled) return;        
+
         _interactionButton2Pressed = false;
         var data = DataProvider.Instance;
         var treeData = data.TreeData;
@@ -48,6 +58,8 @@ public class TreeUpgradeComponent : InteractableBaseComponent
 
     private bool IsUpgradeable(int nextVersionIndex)
     {
+        if (!_upgradeEnabled) return false;
+
         var data = DataProvider.Instance;
         var treeData = data.TreeData;
         var resourceData = data.ResourceData;

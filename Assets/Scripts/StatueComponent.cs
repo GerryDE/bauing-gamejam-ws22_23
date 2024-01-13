@@ -44,7 +44,8 @@ public class StatueComponent : InteractableBaseComponent
         _progressBarComponent.UpdateValues(_elapsedTime, _prayingDuration);
         if (_elapsedTime <= _prayingDuration) return;
 
-        OnPrayed?.Invoke(1);
+        // OnPrayed?.Invoke(1);
+        DataProvider.Instance.PlayerData.CurrentRemainingYears += 1;
         _elapsedTime = 0;
         _prayCount++;
         _prayingDuration = CalculatePrayingDuration();

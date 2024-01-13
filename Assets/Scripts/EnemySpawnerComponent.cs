@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Objective;
 using TMPro;
 using UnityEngine;
 
@@ -7,11 +8,12 @@ public class EnemySpawnerComponent : MonoBehaviour
 {
     [SerializeField] GameObject prefabHowToKill;
 
-    private void Start()
+    private void Awake()
     {
         WaveHandlerComponent.OnSpawnEnemy += SpawnEnemy;
+        DefeatEnemyObjectiveHandler.OnSpawnEnemy += SpawnEnemy;
         Transform transform = gameObject.GetComponent<Transform>();
-        StartCoroutine(showInfo(prefabHowToKill, transform));
+        // StartCoroutine(showInfo(prefabHowToKill, transform));
     }
 
     private void SpawnEnemy(GameObject enemyPrefab, int maxAmountOfSimultaneouslyLivingEnemies, int killedEnemiesDuringWave, int enemiesToKillUntilBoss)
@@ -27,6 +29,7 @@ public class EnemySpawnerComponent : MonoBehaviour
     private void OnDestroy()
     {
         WaveHandlerComponent.OnSpawnEnemy -= SpawnEnemy;
+        DefeatEnemyObjectiveHandler.OnSpawnEnemy -= SpawnEnemy;
     }
 
     IEnumerator showInfo(GameObject prefabText, Transform parentTrans)
