@@ -1901,6 +1901,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8751882929019493322, guid: 341aae876b120dd799da380188f741cd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1423210002}
+    - targetCorrespondingSourceObject: {fileID: 8751882929019493322, guid: 341aae876b120dd799da380188f741cd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1601635030}
     - targetCorrespondingSourceObject: {fileID: 8751882928964330660, guid: 341aae876b120dd799da380188f741cd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1673474928}
@@ -4720,6 +4723,58 @@ Canvas:
   m_SortingLayerID: 1320368621
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &613444278
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 613444279}
+  - component: {fileID: 613444280}
+  m_Layer: 0
+  m_Name: Damage UI component
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &613444279
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613444278}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1601635030}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &613444280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613444278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9bb31f6ff43466396326442b59407e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyDamageObj: {fileID: 6404134550576950197, guid: d5e72211b07fefb0c90d9f98d34930b2, type: 3}
+  playerDamageObj: {fileID: 7591434756655891327, guid: 661a5f6a28efde8468cabbb496f29bdf, type: 3}
+  yOffset: -1.2
 --- !u!1 &670026964
 GameObject:
   m_ObjectHideFlags: 0
@@ -15825,6 +15880,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1597518395}
   m_CullTransparentMesh: 1
+--- !u!1 &1601635029
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1601635030}
+  m_Layer: 0
+  m_Name: Damage UI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1601635030
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601635029}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 613444279}
+  m_Father: {fileID: 1814396541}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1625468369
 GameObject:
   m_ObjectHideFlags: 0

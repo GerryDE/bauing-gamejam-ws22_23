@@ -36,7 +36,7 @@ public class DamageHandlerComponent : MonoBehaviour
         var enemyData = enemyTransform.gameObject.GetComponent<EnemyController>().Data;
         var fenceData = DataProvider.Instance.GetCurrentFenceData();
         var damageToEnemy = CalculateDamage(fenceData.damage, enemyData.defense);
-        OnDealDamageToEnemy?.Invoke(fenceTransform, damageToEnemy);
+        OnDealDamageToEnemy?.Invoke(enemyTransform, damageToEnemy);
     }
 
     private void OnCollisionBetweenEnemyAndFence(Transform enemyTransform, Transform fenceTransform)
