@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea178e381418950ba07acf1e3c7bda2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 057936deece4ebac19d6c011fc1c659e, type: 2}
+  Data: {fileID: 11400000, guid: 057936deece4ebac19d6c011fc1c659e, type: 2}
   hpBar: {fileID: 1393146753815195446}
   backgroundRenderer: {fileID: 5566265567591396794}
   foregroundRenderer: {fileID: 1387405295878097170}

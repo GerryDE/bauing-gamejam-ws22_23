@@ -78,7 +78,6 @@ public class DataHandlerComponent : MonoBehaviour
         TreeComponent.OnDropWood += OnDropWood;
         StoneComponent.OnStoneDrop += OnStoneDrop;
         StatueComponent.OnPrayed += OnPrayed;
-        EnemyController.OnReducePlayerLifetime += OnReducePlayerLifetime;
         PassingTimeComponent.OnYearPassed += OnYearPassed;
         StatueUpgradeComponent.OnUpgradeStatue += OnUpgradeStatue;
         StoneUpgradeComponent.OnUpgradeMine += OnUpgradeMine;
@@ -110,11 +109,6 @@ public class DataHandlerComponent : MonoBehaviour
         _currentPlayerData.CurrentRemainingYears--;
     }
 
-    private void OnReducePlayerLifetime(int amount)
-    {
-        _currentPlayerData.CurrentRemainingYears -= amount;
-    }
-
     private void OnPrayed(int amount)
     {
         _currentPlayerData.CurrentRemainingYears =
@@ -138,7 +132,6 @@ public class DataHandlerComponent : MonoBehaviour
         TreeComponent.OnDropWood -= OnDropWood;
         StoneComponent.OnStoneDrop -= OnStoneDrop;
         StatueComponent.OnPrayed -= OnPrayed;
-        EnemyController.OnReducePlayerLifetime -= OnReducePlayerLifetime;
         PassingTimeComponent.OnYearPassed -= OnYearPassed;
         StatueUpgradeComponent.OnUpgradeStatue -= OnUpgradeStatue;
         StoneUpgradeComponent.OnUpgradeMine -= OnUpgradeMine;

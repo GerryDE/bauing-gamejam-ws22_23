@@ -154,6 +154,11 @@ public class DataProvider : MonoBehaviour
         }
     }
 
+    public FenceData GetCurrentFenceData()
+    {
+        return FenceData[CurrentFenceVersion];
+    }
+
     public class CurrentPlayerData
     {
         private int _maxRemainingYears;

@@ -9,6 +9,7 @@ namespace Data
         public CostData upgradeCost;
         public int maxHp = 50;
         public int damage = 1;
+        public int defense = 1;
 
         [Header("Repair")]
         public CostData repairCost;

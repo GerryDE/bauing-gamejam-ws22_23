@@ -15,7 +15,10 @@ public class FenceController : MonoBehaviour
 
     public delegate void CurrentHpChanged(int value, int maxHp);
 
+    public delegate void CollisionBetweenFenceAndEnemy(Transform fenceTransform, Transform enemyTransform);
+
     public static CurrentHpChanged OnCurrentHpChanged;
+    public static CollisionBetweenFenceAndEnemy OnCollisionBetweenFenceAndEnemy;
 
     public int DamageOutput => damageOutput;
 
@@ -52,8 +55,15 @@ public class FenceController : MonoBehaviour
         FenceRepairComponent.OnRepairFence += OnRepairFence;
         FenceUpgradeComponent.OnUpgradeFence += OnUpgradeFence;
         TutorialComponent.OnNewObjectiveStarted += OnObjectiveStarted;
+        DamageHandlerComponent.OnDealDamageToFence += OnDealDamageToFence;
 
         currentHp = maxHp;
+    }
+
+    private void OnDealDamageToFence(Transform enemyTransform, int damageValue)
+    {
+        if (!enemyTransform.GetInstanceID().Equals(transform.GetInstanceID())) return;
+        ReduceHp(damageValue);
     }
 
     private void OnObjectiveStarted(ObjectiveData data)
@@ -88,11 +98,15 @@ public class FenceController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (!col.gameObject.layer.Equals(LayerMask.NameToLayer("Enemy"))) return;
+        OnCollisionBetweenFenceAndEnemy?.Invoke(transform, col.transform);
+    }
 
-        CurrentHp -= 1;
-        _progressBarComponent.UpdateValues(currentHp, MaxHp);
+    private void ReduceHp(int value)
+    {
+        CurrentHp -= value;
+        _progressBarComponent.UpdateValues(CurrentHp, MaxHp);
 
-        if (currentHp > 0) return;
+        if (CurrentHp > 0) return;
         _collider2D.enabled = false;
         _renderer.color = destroyedFenceColor;
         _progressBarComponent.Disable();
