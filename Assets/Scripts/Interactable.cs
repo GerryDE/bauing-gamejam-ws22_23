@@ -3,8 +3,10 @@ namespace AssemblyCSharp.Assets.Scripts
 {
     public enum Interactable
     {
-        Fence_Repair,
-        Fence_Upgrade,
+        Fence_0_Repair,
+        Fence_0_Upgrade,
+        Fence_1_Repair,
+        Fence_1_Upgrade,
         Tree_Cut,
         Tree_Upgrade,
         Stone_Mine,

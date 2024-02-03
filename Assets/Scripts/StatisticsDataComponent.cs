@@ -59,12 +59,12 @@ public class StatisticsDataComponent : MonoBehaviour
         IncrementUpgradeData();
     }
 
-    private void OnUpgradeFence(int newHpValue, int newDamage, Sprite sprite)
+    private void OnUpgradeFence(int index, int newHpValue, int newDamage, Sprite sprite)
     {
         IncrementUpgradeData();
     }
 
-    private void OnRepairFence(int amount)
+    private void OnRepairFence(int index, int amount)
     {
         data.FenceRepairAmount++;
     }

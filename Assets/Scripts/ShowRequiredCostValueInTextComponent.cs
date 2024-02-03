@@ -30,10 +30,15 @@ public class ShowRequiredLumberCostValueInTextComponent : MonoBehaviour
         int count = 0;
         switch (Interactable)
         {
-            case Interactable.Fence_Repair:
-            case Interactable.Fence_Upgrade:
-                version = dataProvider.CurrentFenceVersion;
-                count = dataProvider.FenceData.Count;
+            case Interactable.Fence_0_Repair:
+            case Interactable.Fence_0_Upgrade:
+                version = dataProvider.GetCurrentFenceVersion(0);
+                count = dataProvider.FenceData[0].data.Count;
+                break;
+            case Interactable.Fence_1_Repair:
+            case Interactable.Fence_1_Upgrade:
+                version = dataProvider.GetCurrentFenceVersion(1);
+                count = dataProvider.FenceData[0].data.Count;
                 break;
             case Interactable.Tree_Upgrade:
                 version = dataProvider.CurrentTreeVersion;

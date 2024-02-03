@@ -12,7 +12,7 @@ public class DataProvider : MonoBehaviour
     [SerializeField] private PlayerData initialCurrentPlayerData;
     [SerializeField] private ResourceData initialResourceData;
 
-    [SerializeField] private List<FenceData> fenceData;
+    [SerializeField] private List<FenceDataIndex> fenceData;
     [SerializeField] private List<TreeData> treeData;
     [SerializeField] private List<MineData> mineData;
     [SerializeField] private List<StatueData> statueData;
@@ -20,7 +20,7 @@ public class DataProvider : MonoBehaviour
     [NonSerialized] public CurrentPlayerData PlayerData;
     [NonSerialized] public CurrentResourceData ResourceData;
 
-    [NonSerialized] public List<FenceData> FenceData;
+    [NonSerialized] public List<FenceDataIndex> FenceData;
     [NonSerialized] public List<TreeData> TreeData;
     [NonSerialized] public List<MineData> MineData;
     [NonSerialized] public List<StatueData> StatueData;
@@ -49,7 +49,7 @@ public class DataProvider : MonoBehaviour
 
     public delegate void ResourceDataChanged(CurrentResourceData data);
 
-    public delegate void FenceVersionChanged(int newVersion);
+    public delegate void FenceVersionChanged(int index, int newVersion);
 
     public delegate void TreeVersionChanged(int newVersion);
 
@@ -79,14 +79,15 @@ public class DataProvider : MonoBehaviour
     private int _currentMineVersion;
     private int _currentStatueVersion;
 
-    public int CurrentFenceVersion
+    public int GetCurrentFenceVersion(int index)
     {
-        get => _currentFenceVersion;
-        set
-        {
-            _currentFenceVersion = value;
-            OnFenceVersionChanged?.Invoke(value);
-        }
+        return FenceData[index].version;
+    }
+
+    public void SetCurrentFenceVersion(int index, int value)
+    {
+        fenceData[index].version = value;
+        OnFenceVersionChanged?.Invoke(index, value);
     }
 
     public int CurrentTreeVersion
@@ -290,8 +291,10 @@ public class DataProvider : MonoBehaviour
     {
         Dictionary<Interactable, CostData> data = new Dictionary<Interactable, CostData>
         {
-            { Interactable.Fence_Repair, FenceData[version].repairCost },
-            { Interactable.Fence_Upgrade, FenceData[version].upgradeCost },
+            { Interactable.Fence_0_Repair, FenceData[0].data[version].repairCost },
+            { Interactable.Fence_0_Upgrade, FenceData[0].data[version].upgradeCost },
+            { Interactable.Fence_1_Repair, FenceData[1].data[version].repairCost },
+            { Interactable.Fence_1_Upgrade, FenceData[1].data[version].upgradeCost },
             { Interactable.Tree_Upgrade, TreeData[version].upgradeCost },
             { Interactable.Stone_Upgrade, MineData[version].upgradeCost },
             { Interactable.Statue_Upgrade, StatueData[version].upgradeCost }
@@ -299,4 +302,11 @@ public class DataProvider : MonoBehaviour
 
         return data[interactable];
     }
+}
+
+[Serializable]
+public class FenceDataIndex
+{
+    [SerializeField] public List<FenceData> data;
+    [SerializeField] public int version;
 }

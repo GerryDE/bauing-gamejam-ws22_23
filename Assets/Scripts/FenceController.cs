@@ -46,8 +46,10 @@ public class FenceController : MonoBehaviour
         currentHp = maxHp;
     }
 
-    private void OnUpgradeFence(int newHpValue, int damage, Sprite sprite)
+    private void OnUpgradeFence(int index, int newHpValue, int damage, Sprite sprite)
     {
+        if (index != fenceIndex) return;
+        
         MaxHp = newHpValue;
         CurrentHp = MaxHp;
         damageOutput = damage;
@@ -58,8 +60,9 @@ public class FenceController : MonoBehaviour
         _progressBarComponent.UpdateValues(currentHp, MaxHp);
     }
 
-    private void OnRepairFence(int amount)
+    private void OnRepairFence(int index, int amount)
     {
+        if (index != fenceIndex) return;
         currentHp = Math.Min(currentHp + amount, maxHp);
         _progressBarComponent.Enable();
         _progressBarComponent.UpdateValues(currentHp, MaxHp);
