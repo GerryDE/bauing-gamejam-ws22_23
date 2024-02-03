@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fac0a34377d4009822cc358ffc6658a, type: 3}
-  m_Name: SkipTutorialData
+  m_Script: {fileID: 11500000, guid: be9bcc4367b6dd74cb3d2a0747761893, type: 3}
+  m_Name: CostData_statue_base
   m_EditorClassIdentifier: 
-  shallBeSkipped: 1
+  lumberCost: 5
+  stoneCost: 5

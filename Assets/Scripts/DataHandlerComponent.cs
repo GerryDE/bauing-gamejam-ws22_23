@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static Data.StatueData;
 
 public class DataHandlerComponent : MonoBehaviour
 {
@@ -98,9 +99,21 @@ public class DataHandlerComponent : MonoBehaviour
         PlayUpgradingAudioClip();
     }
 
-    private void OnUpgradeStatue(int newAgeValue, Sprite sprite)
+    private void OnUpgradeStatue(UpgradeableStat stat, float value)
     {
-        DataProvider.Instance.PlayerData.MaxRemainingYears = newAgeValue;
+        var data = DataProvider.Instance.PlayerData;
+        switch (stat)
+        {
+            case UpgradeableStat.MaxHp:
+                DataProvider.Instance.PlayerData.MaxRemainingYears = (int) value;
+                break;
+            case UpgradeableStat.Atk: data.AttackValue = (int) value;
+                break;
+            case UpgradeableStat.Def: data.DefenseValue = (int) value;
+                break;
+            case UpgradeableStat.Speed: data.MoveSpeed = value;
+                break;
+        }
         PlayUpgradingAudioClip();
     }
 

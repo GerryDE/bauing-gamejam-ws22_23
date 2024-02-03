@@ -1079,7 +1079,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4745784774325099242, guid: 45e9525d38a1e3863b85cfdc36442825, type: 3}
       propertyPath: m_Name
-      value: text_maxAge
+      value: text_stat
       objectReference: {fileID: 0}
     - target: {fileID: 4816696573164994672, guid: 45e9525d38a1e3863b85cfdc36442825, type: 3}
       propertyPath: m_Pivot.x
@@ -1585,6 +1585,9 @@ PrefabInstance:
     - {fileID: 4934181383868861038, guid: 45e9525d38a1e3863b85cfdc36442825, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4745784774325099242, guid: 45e9525d38a1e3863b85cfdc36442825, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2063203517}
     - targetCorrespondingSourceObject: {fileID: 2537870790091546763, guid: 45e9525d38a1e3863b85cfdc36442825, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1717268934}
@@ -17463,6 +17466,27 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8932394335931476811, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
   m_PrefabInstance: {fileID: 1730676222}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2063203513 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4745784774325099242, guid: 45e9525d38a1e3863b85cfdc36442825, type: 3}
+  m_PrefabInstance: {fileID: 185279658}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2063203517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063203513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d42839cbd9245cc8c84f425c67a5e53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxRemainingYearsText: Max rem. years
+  atkText: Attack
+  defText: Defense
+  speedText: Move speed
 --- !u!1 &2064249684 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3807700196154225560, guid: 395c7d61bf08f2dd7994f3fb1dd0e89e, type: 3}
@@ -17969,6 +17993,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
+      propertyPath: initialStatueData
+      value: 
+      objectReference: {fileID: 11400000, guid: 09738306886663e3e90182b8963b9cad, type: 2}
     - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
       propertyPath: mineData.Array.size
       value: 3

@@ -10,24 +10,26 @@ public class DataProvider : MonoBehaviour
     // Make sure that this component only exists once in the project to the keep the Singleton approach
     public static DataProvider Instance { get; private set; }
 
-    [SerializeField] private PlayerData initialCurrentPlayerData;
+    [SerializeField] public PlayerData initialCurrentPlayerData;
     [SerializeField] private ResourceData initialResourceData;
 
     [SerializeField] private List<FenceData> fenceData;
     [SerializeField] private List<TreeData> treeData;
     [SerializeField] private List<MineData> mineData;
-    [SerializeField] private List<StatueData> statueData;
+    [SerializeField] private StatueData initialStatueData;
 
     [SerializeField] private List<ObjectiveData> tutorialObjectives;
     [SerializeField] private List<ObjectiveData> dynamicObjectives;
 
     [NonSerialized] public CurrentPlayerData PlayerData;
+    [NonSerialized] public CurrentResourceData InitialResourceData;
     [NonSerialized] public CurrentResourceData ResourceData;
 
     [NonSerialized] public List<FenceData> FenceData;
     [NonSerialized] public List<TreeData> TreeData;
     [NonSerialized] public List<MineData> MineData;
-    [NonSerialized] public List<StatueData> StatueData;
+    [NonSerialized] public StatueData CurrentStatueData;
+    [NonSerialized] public StatueData NextStatueData;
 
     [NonSerialized] public List<ObjectiveData> TutorialObjectives;
     [NonSerialized] public List<ObjectiveData> DynamicObjectives;
@@ -176,7 +178,9 @@ public class DataProvider : MonoBehaviour
             get => _maxRemainingYears;
             set
             {
+                _currentRemainingYears += value - _maxRemainingYears;
                 _maxRemainingYears = value;
+                OnCurrentRemainingYearsChanged?.Invoke(value);
                 OnPlayerMaxRemainingYearsChanged?.Invoke(value);
             }
         }
@@ -314,6 +318,12 @@ public class DataProvider : MonoBehaviour
             ThrowForce = initialCurrentPlayerData.throwBackForce
         };
 
+        InitialResourceData = new CurrentResourceData
+        {
+            WoodAmount = initialResourceData.woodAmount,
+            StoneAmount = initialResourceData.stoneAmount
+        };
+
         ResourceData = new CurrentResourceData
         {
             WoodAmount = initialResourceData.woodAmount,
@@ -323,22 +333,22 @@ public class DataProvider : MonoBehaviour
         FenceData = fenceData;
         TreeData = treeData;
         MineData = mineData;
-        StatueData = statueData;
+        CurrentStatueData = initialStatueData.Copy();
         TutorialObjectives = tutorialObjectives;
         DynamicObjectives = dynamicObjectives;
     }
 
     public CostData GetCostData(Interactable interactable, int version)
     {
-        Dictionary<Interactable, CostData> data = new Dictionary<Interactable, CostData>
+        switch (interactable)
         {
-            { Interactable.Fence_Repair, FenceData[version].repairCost },
-            { Interactable.Fence_Upgrade, FenceData[version].upgradeCost },
-            { Interactable.Tree_Upgrade, TreeData[version].upgradeCost },
-            { Interactable.Stone_Upgrade, MineData[version].upgradeCost },
-            { Interactable.Statue_Upgrade, StatueData[version].upgradeCost }
-        };
+            case Interactable.Fence_Repair: return FenceData[version].repairCost;
+            case Interactable.Fence_Upgrade: return FenceData[version].upgradeCost;
+            case Interactable.Tree_Upgrade: return TreeData[version].upgradeCost;
+            case Interactable.Stone_Upgrade: return MineData[version].upgradeCost;
+            case Interactable.Statue_Upgrade: return NextStatueData.upgradeCost;
+        }
 
-        return data[interactable];
+        return null;
     }
 }
