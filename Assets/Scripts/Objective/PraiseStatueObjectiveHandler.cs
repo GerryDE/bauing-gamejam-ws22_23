@@ -13,6 +13,11 @@ namespace Objective
             DataProvider.OnCurrentRemainingYearsChanged += OnCurrentRemainingYearsChanged;
         }
 
+        ~PraiseStatueObjectiveHandler()
+        {
+            DataProvider.OnCurrentRemainingYearsChanged -= OnCurrentRemainingYearsChanged;
+        }
+
         private void OnCurrentRemainingYearsChanged(int value)
         {
             if (value <= DataProvider.Instance.PlayerData.MaxRemainingYears * _data.triggerValueInPercent / 100)

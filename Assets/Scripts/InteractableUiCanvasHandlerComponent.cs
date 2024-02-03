@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace AssemblyCSharp.Assets.Scripts
 {
@@ -37,7 +36,7 @@ namespace AssemblyCSharp.Assets.Scripts
                     break;
                 case Interactable.Statue_Upgrade:
                     version = data.CurrentStatueVersion;
-                    count = data.StatueData.Count;
+                    count = -1; // use -1 when no max version exists
                     break;
             }
 
@@ -46,7 +45,7 @@ namespace AssemblyCSharp.Assets.Scripts
                 version++;
             }
 
-            if (version < count)
+            if (version < count || count == -1)
             {
                 int currentLumberAmount = data.ResourceData.WoodAmount;
                 int currentStoneAmount = data.ResourceData.StoneAmount;
@@ -87,7 +86,7 @@ namespace AssemblyCSharp.Assets.Scripts
                     costData = data.MineData[version].upgradeCost;
                     break;
                 case Interactable.Statue_Upgrade:
-                    costData = data.StatueData[version].upgradeCost;
+                    costData = data.NextStatueData.upgradeCost;
                     break;
             }
 

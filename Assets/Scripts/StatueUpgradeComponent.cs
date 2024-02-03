@@ -1,10 +1,10 @@
 using System;
-using System.Collections.Generic;
+using Data;
 using UnityEngine;
 
 public class StatueUpgradeComponent : InteractableBaseComponent
 {
-    public delegate void UpgradeStatue(int newAgeValue, Sprite sprite);
+    public delegate void UpgradeStatue(StatueData.UpgradeableStat stat, float value);
 
     public static UpgradeStatue OnUpgradeStatue;
 
@@ -12,6 +12,26 @@ public class StatueUpgradeComponent : InteractableBaseComponent
     {
         base.Start();
         DataProvider.OnStatueVersionChanged += OnStatueVersionChanged;
+        
+        GenerateNextStatueData();
+    }
+
+    private static void GenerateNextStatueData()
+    {
+        var dataProvider = DataProvider.Instance;
+        var currentStatueData = dataProvider.CurrentStatueData;
+        var nextStatueVersion = dataProvider.CurrentStatueVersion + 1;
+
+        var nextStatueData = currentStatueData.Copy();
+        nextStatueData.upgradeCost.lumberCost = (int)(currentStatueData.baseUpgradeCost.lumberCost *
+                                                    Math.Pow(nextStatueVersion,
+                                                        currentStatueData.lumberCostMultiplier));
+        nextStatueData.upgradeCost.stoneCost = (int)(currentStatueData.baseUpgradeCost.stoneCost *
+                                                   Math.Pow(nextStatueVersion,
+                                                       currentStatueData.stoneCostMultiplier));
+        nextStatueData.SetStatValue(nextStatueVersion);
+        
+        DataProvider.Instance.NextStatueData = nextStatueData;
     }
 
     private void OnStatueVersionChanged(int newVersion)
@@ -31,32 +51,30 @@ public class StatueUpgradeComponent : InteractableBaseComponent
     {
         base.OnInteractionButton2Pressed();
         var data = DataProvider.Instance;
-        var statueData = data.StatueData;
+        var currentStatueData = data.CurrentStatueData;
 
         _interactionButton2Pressed = false;
-        if (!_isCollidingWithPlayer || data.CurrentStatueVersion >= statueData.Count - 1) return;
+        if (!_isCollidingWithPlayer) return;
 
-        var nextUpgradeData = statueData[data.CurrentStatueVersion + 1];
-        var resourceData = DataProvider.Instance.ResourceData;
-        if (resourceData.WoodAmount < nextUpgradeData.upgradeCost.lumberCost ||
-            resourceData.StoneAmount < nextUpgradeData.upgradeCost.stoneCost) return;
-        resourceData.WoodAmount -= nextUpgradeData.upgradeCost.lumberCost;
-        resourceData.StoneAmount -= nextUpgradeData.upgradeCost.stoneCost;
-        OnUpgradeStatue?.Invoke(nextUpgradeData.maxAge, nextUpgradeData.sprite);
+        var nextStatueData = data.NextStatueData;
+        var resourceData = data.ResourceData;
+        if (resourceData.WoodAmount < nextStatueData.upgradeCost.lumberCost ||
+            resourceData.StoneAmount < nextStatueData.upgradeCost.stoneCost) return;
+        resourceData.WoodAmount -= nextStatueData.upgradeCost.lumberCost;
+        resourceData.StoneAmount -= nextStatueData.upgradeCost.stoneCost;
+        OnUpgradeStatue?.Invoke(nextStatueData.statToUpgrade, nextStatueData.statValue);
         data.CurrentStatueVersion++;
+        GenerateNextStatueData();
         _dataHandlerComponent.PlayUpgradingAudioClip();
     }
 
-    private bool IsUpgradeable(int nextVersionIndex)
+    private static bool IsUpgradeable(int nextVersionIndex)
     {
-        var data = DataProvider.Instance.StatueData;
+        var data = DataProvider.Instance.NextStatueData;
         var resourceData = DataProvider.Instance.ResourceData;
-
-        if (nextVersionIndex >= data.Count) return false;
-
-        var nextUpgradeData = data[nextVersionIndex];
-        var isUpgradable = resourceData.WoodAmount >= nextUpgradeData.upgradeCost.lumberCost &&
-            resourceData.StoneAmount >= nextUpgradeData.upgradeCost.stoneCost;
+        
+        var isUpgradable = resourceData.WoodAmount >= data.upgradeCost.lumberCost &&
+                           resourceData.StoneAmount >= data.upgradeCost.stoneCost;
         return isUpgradable;
     }
 

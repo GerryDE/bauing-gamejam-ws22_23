@@ -44,7 +44,7 @@ public class StatisticsDataComponent : MonoBehaviour
         data.CloudsScreenLeftAmount++;
     }
 
-    private void OnUpgradeStatue(int newAgeValue, Sprite sprite)
+    private void OnUpgradeStatue(StatueData.UpgradeableStat stat, float value)
     {
         IncrementUpgradeData();
     }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Data;
 using UnityEngine;
 using TMPro;
 
@@ -6,7 +7,7 @@ using TMPro;
 public class ShowStatueUpgradeDataInTextComponent : MonoBehaviour
 {
     private enum Version { CurrentVersion, NextVersion };
-    private enum Value { Level, MaxAge, Arrow }
+    private enum Value { Level, StatValue, Arrow }
 
     [SerializeField] private Version version;
     [SerializeField] private Value value;
@@ -18,24 +19,41 @@ public class ShowStatueUpgradeDataInTextComponent : MonoBehaviour
         _textComponent = GetComponent<TextMeshProUGUI>();
 
         var versionIndex = DataProvider.Instance.CurrentStatueVersion;
+        var nextStatueData = DataProvider.Instance.NextStatueData;
+
+        
+        float statValue;
         if (version.Equals(Version.NextVersion))
         {
-            versionIndex++;
+            statValue = nextStatueData.statValue;
         }
-
-        var statueData = DataProvider.Instance.StatueData;
-        if (statueData.Count <= versionIndex)
+        else
         {
-            _textComponent.SetText("");
-            return;
+            var statType = nextStatueData.statToUpgrade;
+            var playerData = DataProvider.Instance.PlayerData;
+            switch (statType)
+            {
+                case StatueData.UpgradeableStat.MaxHp: statValue = playerData.MaxRemainingYears;
+                    break;
+                case StatueData.UpgradeableStat.Atk: statValue = playerData.AttackValue;
+                    break;
+                case StatueData.UpgradeableStat.Def: statValue = playerData.DefenseValue;
+                    break;
+                case StatueData.UpgradeableStat.Speed: statValue = playerData.MoveSpeed;
+                    break;
+                default:
+                    statValue = 0;
+                    break;
+            }
         }
 
-        var level = statueData.Count <= versionIndex + 1 ? "MAX" : (versionIndex + 1).ToString();
-        var currentStatueData = statueData[versionIndex];
+        var statueData = DataProvider.Instance.NextStatueData;
+
+        var level = (versionIndex + 1).ToString();
         var values = new Dictionary<Value, string>
         {
             { Value.Level, level },
-            { Value.MaxAge, currentStatueData.maxAge.ToString() },
+            { Value.StatValue, statValue.ToString() },
             { Value.Arrow, "--->" }
         };
 
