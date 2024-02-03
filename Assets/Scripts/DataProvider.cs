@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using AssemblyCSharp.Assets.Scripts;
 using Data;
+using Data.objective;
 using UnityEngine;
 
 public class DataProvider : MonoBehaviour
@@ -17,6 +18,9 @@ public class DataProvider : MonoBehaviour
     [SerializeField] private List<MineData> mineData;
     [SerializeField] private List<StatueData> statueData;
 
+    [SerializeField] private List<ObjectiveData> tutorialObjectives;
+    [SerializeField] private List<ObjectiveData> dynamicObjectives;
+
     [NonSerialized] public CurrentPlayerData PlayerData;
     [NonSerialized] public CurrentResourceData ResourceData;
 
@@ -24,6 +28,9 @@ public class DataProvider : MonoBehaviour
     [NonSerialized] public List<TreeData> TreeData;
     [NonSerialized] public List<MineData> MineData;
     [NonSerialized] public List<StatueData> StatueData;
+
+    [NonSerialized] public List<ObjectiveData> TutorialObjectives;
+    [NonSerialized] public List<ObjectiveData> DynamicObjectives;
 
     public delegate void MaxRemainingYearsChanged(int value);
 
@@ -57,6 +64,10 @@ public class DataProvider : MonoBehaviour
 
     public delegate void StatueVersionChanged(int newVersion);
 
+    public delegate void TutorialObjectiveIndexChanged(int newIndex);
+
+    public delegate void WaveCountChanged(int newWaveCount);
+
     public static MaxRemainingYearsChanged OnPlayerMaxRemainingYearsChanged;
     public static CurrentRemainingYearsChanged OnCurrentRemainingYearsChanged;
     public static AttackValueChanged OnAttackValueChanged;
@@ -73,11 +84,15 @@ public class DataProvider : MonoBehaviour
     public static TreeVersionChanged OnTreeVersionChanged;
     public static MineVersionChanged OnMineVersionChanged;
     public static StatueVersionChanged OnStatueVersionChanged;
+    public static TutorialObjectiveIndexChanged OnTutorialObjectiveIndexChanged;
+    public static WaveCountChanged OnWaveCountChanged;
 
     private int _currentFenceVersion;
     private int _currentTreeVersion;
     private int _currentMineVersion;
     private int _currentStatueVersion;
+    private int _currentTutorialObjectiveIndex;
+    private int _waveCount;
 
     public int GetCurrentFenceVersion(int index)
     {
@@ -120,6 +135,26 @@ public class DataProvider : MonoBehaviour
         }
     }
 
+    public int CurrentTutorialObjectiveIndex
+    {
+        get => _currentTutorialObjectiveIndex;
+        set
+        {
+            _currentTutorialObjectiveIndex = value;
+            OnTutorialObjectiveIndexChanged?.Invoke(value);
+        }
+    }
+
+    public int Wave
+    {
+        get => _waveCount;
+        set
+        {
+            _waveCount = value;
+            OnWaveCountChanged?.Invoke(_waveCount);
+        }
+    }
+
     public class CurrentPlayerData
     {
         private int _maxRemainingYears;
@@ -147,7 +182,7 @@ public class DataProvider : MonoBehaviour
             get => _currentRemainingYears;
             set
             {
-                _currentRemainingYears = Math.Max(0, value);
+                _currentRemainingYears = Math.Clamp(value, 0, _maxRemainingYears);
                 OnCurrentRemainingYearsChanged?.Invoke(value);
             }
         }
@@ -285,6 +320,8 @@ public class DataProvider : MonoBehaviour
         TreeData = treeData;
         MineData = mineData;
         StatueData = statueData;
+        TutorialObjectives = tutorialObjectives;
+        DynamicObjectives = dynamicObjectives;
     }
 
     public CostData GetCostData(Interactable interactable, int version)

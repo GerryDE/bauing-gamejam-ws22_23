@@ -9,7 +9,11 @@ namespace DefaultNamespace
         public delegate void GameFinished();
         public static GameFinished OnGameFinished;
 
-        private void OnDestroy()
+        private void Awake() {
+            BossComponent.OnBossDestroyed += OnBossDestroyed;
+        }
+
+        private void OnBossDestroyed()
         {
             OnGameFinished?.Invoke();
             SceneManager.LoadScene("WinScreen");

@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using Data.objective;
 using UnityEngine;
-using UnityEngine.Serialization;
 using static TreeComponent.State;
 using Random = UnityEngine.Random;
 
@@ -33,6 +32,8 @@ public class TreeComponent : InteractableBaseComponent
 
     [SerializeField] private Range spawnRange;
     [SerializeField] private State state = Spawning;
+    [SerializeField] private GameObject disableOnSpawningStateObj;
+
     private ProgressBarComponent _progressBarComponent;
 
     [Range(0f, 1f)] [SerializeField] private float stateChangeDurationVariance = 0.2f;
@@ -40,6 +41,7 @@ public class TreeComponent : InteractableBaseComponent
     private float _stateChangeDuration;
     private float _elapsedStateChangeTime;
     private float _elapsedMiningTime;
+    private bool _allowGrowing = false;
 
     private SpriteRenderer _renderer;
 
@@ -55,7 +57,9 @@ public class TreeComponent : InteractableBaseComponent
     public void SetState(State newState)
     {
         state = newState;
+        _renderer.sprite = GetDataByCurrentState()?.sprite;
         CalculateStateChangeDuration();
+        disableOnSpawningStateObj.SetActive(!Spawning.Equals(state));
     }
 
     protected override void Start()
@@ -69,37 +73,46 @@ public class TreeComponent : InteractableBaseComponent
 
         SetSpawnPosition();
         CalculateStateChangeDuration();
+
+        TutorialComponent.OnNewObjectiveStarted += OnNewObjectiveStarted;
+    }
+
+    protected override void OnNewObjectiveStarted(ObjectiveData data)
+    {
+        if (data.GetType() != typeof(CollectResourcesObjectiveData) &&
+            data.GetType() != typeof(TutorialCompletedObjectiveData)) return;
+        _allowGrowing = true;
+        SetState(Large);
     }
 
     private void Respawn()
     {
-        state = Spawning;
-        _renderer.sprite = null;
+        SetState(Spawning);
         SetSpawnPosition();
-        CalculateStateChangeDuration();
     }
 
     private void FixedUpdate()
     {
+        if (!_allowGrowing) return;
+
         _elapsedStateChangeTime += Time.deltaTime;
         if (_elapsedStateChangeTime > _stateChangeDuration)
         {
             _elapsedStateChangeTime = 0;
             switch (state)
             {
-                case Spawning: 
-                    state = Small; 
+                case Spawning:
+                    SetState(Small);
                     break;
                 case Small:
-                    state = Medium; 
+                    SetState(Medium);
                     break;
                 case Medium:
-                    state = Large; 
+                    SetState(Large);
                     break;
-            };
+            }
 
-            _renderer.sprite = GetDataByCurrentState()?.sprite;
-            CalculateStateChangeDuration();
+            ;
         }
 
         if (!Spawning.Equals(state) && _interaction1Enabled)

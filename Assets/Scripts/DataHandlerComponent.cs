@@ -3,23 +3,11 @@ using UnityEngine;
 
 public class DataHandlerComponent : MonoBehaviour
 {
-    [SerializeField] private int waveCount = 1;
-
     private DataProvider.CurrentPlayerData _currentPlayerData;
     private DataProvider.CurrentResourceData _resourceData;
 
     [SerializeField] AfterEffects postProcessingCameraScript;
     [SerializeField] UIController uiScript;
-
-    public int Wave
-    {
-        get => waveCount;
-        set
-        {
-            waveCount = value;
-            OnWaveCountChanged.Invoke(waveCount);
-        }
-    }
 
     [SerializeField] private AudioClip attackAudioClip;
     [SerializeField] private AudioClip attackPlayerAudioClip;
@@ -76,9 +64,6 @@ public class DataHandlerComponent : MonoBehaviour
     /// 4 Upgrading
     /// 5 Woodcutting
     /// </summary>
-    public delegate void WaveCountChanged(int newWaveCount);
-
-    public static WaveCountChanged OnWaveCountChanged;
     private AudioSource _audioSource;
 
     private void Update()
@@ -95,12 +80,10 @@ public class DataHandlerComponent : MonoBehaviour
         StatueComponent.OnPrayed += OnPrayed;
         EnemyController.OnReducePlayerLifetime += OnReducePlayerLifetime;
         PassingTimeComponent.OnYearPassed += OnYearPassed;
-        BossComponent.OnBossDestroyed += OnBossDestroyed;
         StatueUpgradeComponent.OnUpgradeStatue += OnUpgradeStatue;
         StoneUpgradeComponent.OnUpgradeMine += OnUpgradeMine;
         TreeUpgradeComponent.OnUpgradeTree += OnUpgradeTree;
 
-        OnWaveCountChanged?.Invoke(waveCount);
         _audioSource = gameObject.GetComponent<AudioSource>();
     }
 
@@ -120,11 +103,6 @@ public class DataHandlerComponent : MonoBehaviour
     {
         DataProvider.Instance.PlayerData.MaxRemainingYears = newAgeValue;
         PlayUpgradingAudioClip();
-    }
-
-    private void OnBossDestroyed()
-    {
-        Wave++;
     }
 
     private void OnYearPassed()
@@ -162,7 +140,6 @@ public class DataHandlerComponent : MonoBehaviour
         StatueComponent.OnPrayed -= OnPrayed;
         EnemyController.OnReducePlayerLifetime -= OnReducePlayerLifetime;
         PassingTimeComponent.OnYearPassed -= OnYearPassed;
-        BossComponent.OnBossDestroyed -= OnBossDestroyed;
         StatueUpgradeComponent.OnUpgradeStatue -= OnUpgradeStatue;
         StoneUpgradeComponent.OnUpgradeMine -= OnUpgradeMine;
         TreeUpgradeComponent.OnUpgradeTree -= OnUpgradeTree;

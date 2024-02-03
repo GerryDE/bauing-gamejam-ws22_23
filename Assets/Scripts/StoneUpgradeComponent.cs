@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Data.objective;
 using UnityEngine;
 
 public class StoneUpgradeComponent : InteractableBaseComponent
@@ -12,6 +13,13 @@ public class StoneUpgradeComponent : InteractableBaseComponent
     {
         base.Start();
         DataProvider.OnMineVersionChanged += OnMineVersionChanged;
+    }
+
+    protected override void OnNewObjectiveStarted(ObjectiveData data)
+    {
+        base.OnNewObjectiveStarted(data);
+        if (!_upgradeEnabled) return;
+        upgradeNotificationSprite.enabled = IsUpgradeable(DataProvider.Instance.CurrentMineVersion + 1);
     }
 
     void OnMineVersionChanged(int newVersion)
@@ -32,6 +40,8 @@ public class StoneUpgradeComponent : InteractableBaseComponent
     {
         base.OnInteractionButton2Pressed();
 
+        if (!_upgradeEnabled) return;
+
         var data = DataProvider.Instance;
         var mineData = data.MineData;
 
@@ -50,6 +60,8 @@ public class StoneUpgradeComponent : InteractableBaseComponent
 
     private bool IsUpgradeable(int nextVersionIndex)
     {
+        if (!_upgradeEnabled) return false;
+
         var data = DataProvider.Instance.MineData;
         var resourceData = DataProvider.Instance.ResourceData;
 
