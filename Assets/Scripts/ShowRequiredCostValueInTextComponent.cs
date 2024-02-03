@@ -50,7 +50,7 @@ public class ShowRequiredLumberCostValueInTextComponent : MonoBehaviour
                 break;
             case Interactable.Statue_Upgrade:
                 version = dataProvider.CurrentStatueVersion;
-                count = dataProvider.StatueData.Count;
+                count = -1;
                 break;
         }
 
@@ -60,7 +60,7 @@ public class ShowRequiredLumberCostValueInTextComponent : MonoBehaviour
         }
 
         string text = "-";
-        if (version < count)
+        if (version < count || count == -1)
         {
             CostData currentCostData = DataProvider.Instance.GetCostData(Interactable, version);
             switch (Currency)

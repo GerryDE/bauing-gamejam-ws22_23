@@ -16,6 +16,8 @@ namespace Objective
         private static void ResetData()
         {
             var dataProvider = DataProvider.Instance;
+            dataProvider.ResourceData.WoodAmount = dataProvider.InitialResourceData.WoodAmount;
+            dataProvider.ResourceData.StoneAmount = dataProvider.InitialResourceData.StoneAmount;
             dataProvider.ResourceData.WoodAmount = 0;
             dataProvider.ResourceData.StoneAmount = 0;
             foreach (var fenceDataIndex in dataProvider.FenceData)
@@ -25,7 +27,7 @@ namespace Objective
             dataProvider.CurrentTreeVersion = 0;
             dataProvider.CurrentMineVersion = 0;
             dataProvider.CurrentStatueVersion = 0;
-            dataProvider.PlayerData.MaxRemainingYears = dataProvider.StatueData[0].maxAge;
+            dataProvider.PlayerData.MaxRemainingYears = dataProvider.initialCurrentPlayerData.maxRemainingYears;
             dataProvider.PlayerData.CurrentRemainingYears = dataProvider.PlayerData.MaxRemainingYears;
         }
     }

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static Data.StatueData;
 
 public class DataHandlerComponent : MonoBehaviour
 {
@@ -78,7 +79,6 @@ public class DataHandlerComponent : MonoBehaviour
         TreeComponent.OnDropWood += OnDropWood;
         StoneComponent.OnStoneDrop += OnStoneDrop;
         StatueComponent.OnPrayed += OnPrayed;
-        EnemyController.OnReducePlayerLifetime += OnReducePlayerLifetime;
         PassingTimeComponent.OnYearPassed += OnYearPassed;
         StatueUpgradeComponent.OnUpgradeStatue += OnUpgradeStatue;
         StoneUpgradeComponent.OnUpgradeMine += OnUpgradeMine;
@@ -99,20 +99,27 @@ public class DataHandlerComponent : MonoBehaviour
         PlayUpgradingAudioClip();
     }
 
-    private void OnUpgradeStatue(int newAgeValue, Sprite sprite)
+    private void OnUpgradeStatue(UpgradeableStat stat, float value)
     {
-        DataProvider.Instance.PlayerData.MaxRemainingYears = newAgeValue;
+        var data = DataProvider.Instance.PlayerData;
+        switch (stat)
+        {
+            case UpgradeableStat.MaxHp:
+                DataProvider.Instance.PlayerData.MaxRemainingYears = (int) value;
+                break;
+            case UpgradeableStat.Atk: data.AttackValue = (int) value;
+                break;
+            case UpgradeableStat.Def: data.DefenseValue = (int) value;
+                break;
+            case UpgradeableStat.Speed: data.MoveSpeed = value;
+                break;
+        }
         PlayUpgradingAudioClip();
     }
 
     private void OnYearPassed()
     {
         _currentPlayerData.CurrentRemainingYears--;
-    }
-
-    private void OnReducePlayerLifetime(int amount)
-    {
-        _currentPlayerData.CurrentRemainingYears -= amount;
     }
 
     private void OnPrayed(int amount)
@@ -138,7 +145,6 @@ public class DataHandlerComponent : MonoBehaviour
         TreeComponent.OnDropWood -= OnDropWood;
         StoneComponent.OnStoneDrop -= OnStoneDrop;
         StatueComponent.OnPrayed -= OnPrayed;
-        EnemyController.OnReducePlayerLifetime -= OnReducePlayerLifetime;
         PassingTimeComponent.OnYearPassed -= OnYearPassed;
         StatueUpgradeComponent.OnUpgradeStatue -= OnUpgradeStatue;
         StoneUpgradeComponent.OnUpgradeMine -= OnUpgradeMine;

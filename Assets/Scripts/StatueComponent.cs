@@ -5,7 +5,6 @@ public class StatueComponent : InteractableBaseComponent
 {
     [SerializeField] private float startingPrayingDuration = 1f;
     [SerializeField] private float prayingDurationMultiplicator = 0.9f;
-    [SerializeField] private SpriteRenderer _renderer;
 
     private float _elapsedTime;
     private float _prayingDuration;
@@ -19,14 +18,8 @@ public class StatueComponent : InteractableBaseComponent
     protected override void Start()
     {
         base.Start();
-        StatueUpgradeComponent.OnUpgradeStatue += OnUpgradeStatue;
         _progressBarComponent = GetComponent<ProgressBarComponent>();
         _prayingDuration = CalculatePrayingDuration();
-    }
-
-    private void OnUpgradeStatue(int newAgeValue, Sprite sprite)
-    {
-        _renderer.sprite = sprite;
     }
 
     private void FixedUpdate()
@@ -55,11 +48,5 @@ public class StatueComponent : InteractableBaseComponent
     private float CalculatePrayingDuration()
     {
         return (startingPrayingDuration * Mathf.Pow(prayingDurationMultiplicator, _prayCount));
-    }
-
-    protected override void OnDestroy()
-    {
-        base.OnDestroy();
-        StatueUpgradeComponent.OnUpgradeStatue -= OnUpgradeStatue;
     }
 }

@@ -1,5 +1,6 @@
+using System;
+using Data;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
@@ -11,25 +12,34 @@ public class PlayerController : MonoBehaviour
 
     public delegate void PlayerMove(float direction, float velocity);
 
+    public delegate void CollisionBetweenPlayerAndEnemy(Transform playerTransform, Transform enemyTransform);
+
     public static PlayerMove OnPlayerMove;
+    public static CollisionBetweenPlayerAndEnemy OnCollisionBetweenPlayerAndEnemy;
 
     private void Awake()
     {
         YoungToOldTransitionComponent.OnYoungOldTransitionChanged += OnYoungOldTransitionChanged;
         GameInputHandlerComponent.OnMoveCalled += OnMoveCalled;
+        DamageHandlerComponent.OnDealDamageToPlayer += OnDealDamageToPlayer;
 
         _rigidbody = GetComponent<Rigidbody2D>();
+    }
+
+    private void OnDealDamageToPlayer(Transform playerTransform, int damageValue)
+    {
+        if (!playerTransform.GetInstanceID().Equals(transform.GetInstanceID())) return;
+        DataProvider.Instance.PlayerData.CurrentRemainingYears -= damageValue;
     }
 
     void OnMoveCalled(float velocity)
     {
         _velocity = velocity;
-        if (System.Math.Abs(_velocity) > 0.01f)
+        if (Math.Abs(_velocity) > 0.01f)
         {
             _direction = _velocity;
         }
     }
-
 
     private void OnYoungOldTransitionChanged(float newValue)
     {
@@ -49,6 +59,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!col.gameObject.layer.Equals(LayerMask.NameToLayer("Enemy"))) return;
         _rigidbody.AddForce(DataProvider.Instance.PlayerData.ThrowForce);
+        OnCollisionBetweenPlayerAndEnemy?.Invoke(transform, col.transform);
     }
 
     private void OnDestroy()
