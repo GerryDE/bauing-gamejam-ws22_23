@@ -64,8 +64,7 @@ public class FenceController : MonoBehaviour
             CurrentHp = MaxHp;
         }
     }
-
-    private void OnUpgradeFence(int newHpValue, int damage, Sprite sprite)
+    
     private void OnUpgradeFence(int index, int newHpValue, int damage, Sprite sprite)
     {
         if (index != fenceIndex) return;

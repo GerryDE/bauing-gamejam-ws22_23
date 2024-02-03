@@ -23,7 +23,7 @@ namespace Objective
             }
         }
         
-        private void OnRepairFence(int amount)
+        private void OnRepairFence(int index, int amount)
         {
             if (!_objectiveStarted) return;
             OnObjectiveReached.Invoke(_data);

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fac0a34377d4009822cc358ffc6658a, type: 3}
   m_Name: SkipTutorialData
   m_EditorClassIdentifier: 
-  shallBeSkipped: 0
+  shallBeSkipped: 1

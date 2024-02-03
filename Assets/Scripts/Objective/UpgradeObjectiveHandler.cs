@@ -26,5 +26,15 @@ namespace Objective
             DataProvider.OnTreeVersionChanged -= OnVersionChanged;
             DataProvider.OnStatueVersionChanged -= OnVersionChanged;
         }
+        
+        private void OnVersionChanged(int index, int newVersion)
+        {
+            OnObjectiveReached?.Invoke(_data);
+            
+            DataProvider.OnFenceVersionChanged -= OnVersionChanged;
+            DataProvider.OnMineVersionChanged -= OnVersionChanged;
+            DataProvider.OnTreeVersionChanged -= OnVersionChanged;
+            DataProvider.OnStatueVersionChanged -= OnVersionChanged;
+        }
     }
 }
