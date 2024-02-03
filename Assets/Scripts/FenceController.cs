@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(ProgressBarComponent))]
 public class FenceController : MonoBehaviour
 {
+    public int fenceIndex;
     [SerializeField, Range(0, 1000)] private int maxHp = 100;
     [SerializeField] private int currentHp;
     [SerializeField] private int damageOutput = 1;
