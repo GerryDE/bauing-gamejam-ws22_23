@@ -21,10 +21,15 @@ namespace AssemblyCSharp.Assets.Scripts
             int count = 0;
             switch (Interactable)
             {
-                case Interactable.Fence_Repair:
-                case Interactable.Fence_Upgrade:
-                    version = data.CurrentFenceVersion;
-                    count = data.FenceData.Count;
+                case Interactable.Fence_0_Repair:
+                case Interactable.Fence_0_Upgrade:
+                    version = data.GetCurrentFenceVersion(0);
+                    count = data.FenceData[0].data.Count;
+                    break;
+                case Interactable.Fence_1_Repair:
+                case Interactable.Fence_1_Upgrade:
+                    version = data.GetCurrentFenceVersion(1);
+                    count = data.FenceData[1].data.Count;
                     break;
                 case Interactable.Tree_Upgrade:
                     version = data.CurrentTreeVersion;
@@ -73,11 +78,17 @@ namespace AssemblyCSharp.Assets.Scripts
             var data = DataProvider.Instance;
             switch (Interactable)
             {
-                case Interactable.Fence_Repair:
-                    costData = data.FenceData[version].repairCost;
+                case Interactable.Fence_0_Repair:
+                    costData = data.FenceData[0].data[version].repairCost;
                     break;
-                case Interactable.Fence_Upgrade:
-                    costData = data.FenceData[version].upgradeCost;
+                case Interactable.Fence_0_Upgrade:
+                    costData = data.FenceData[0].data[version].upgradeCost;
+                    break;
+                case Interactable.Fence_1_Repair:
+                    costData = data.FenceData[1].data[version].repairCost;
+                    break;
+                case Interactable.Fence_1_Upgrade:
+                    costData = data.FenceData[1].data[version].upgradeCost;
                     break;
                 case Interactable.Tree_Upgrade:
                     costData = data.TreeData[version].upgradeCost;

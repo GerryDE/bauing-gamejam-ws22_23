@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Data;
+using Data.upgradeable_objects.statue;
 using UnityEngine;
 using TMPro;
 
@@ -26,6 +27,7 @@ public class ShowStatueUpgradeDataInTextComponent : MonoBehaviour
         if (version.Equals(Version.NextVersion))
         {
             statValue = nextStatueData.statValue;
+            versionIndex++;
         }
         else
         {

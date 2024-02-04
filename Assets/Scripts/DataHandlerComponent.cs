@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-using static Data.StatueData;
+using static Data.upgradeable_objects.statue.StatueData;
 
 public class DataHandlerComponent : MonoBehaviour
 {

@@ -7,6 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(ProgressBarComponent))]
 public class FenceController : MonoBehaviour
 {
+    public int fenceIndex;
     [SerializeField, Range(0, 1000)] private int maxHp = 100;
     [SerializeField] private int currentHp;
     [SerializeField] private int damageOutput = 1;
@@ -15,7 +16,7 @@ public class FenceController : MonoBehaviour
 
     public delegate void CurrentHpChanged(int value, int maxHp);
 
-    public delegate void CollisionBetweenFenceAndEnemy(Transform fenceTransform, Transform enemyTransform);
+    public delegate void CollisionBetweenFenceAndEnemy(int index, Transform fenceTransform, Transform enemyTransform);
 
     public static CurrentHpChanged OnCurrentHpChanged;
     public static CollisionBetweenFenceAndEnemy OnCollisionBetweenFenceAndEnemy;
@@ -73,9 +74,11 @@ public class FenceController : MonoBehaviour
             CurrentHp = MaxHp;
         }
     }
-
-    private void OnUpgradeFence(int newHpValue, int damage, Sprite sprite)
+    
+    private void OnUpgradeFence(int index, int newHpValue, int damage, Sprite sprite)
     {
+        if (index != fenceIndex) return;
+        
         MaxHp = newHpValue;
         CurrentHp = MaxHp;
         damageOutput = damage;
@@ -86,8 +89,9 @@ public class FenceController : MonoBehaviour
         _progressBarComponent.UpdateValues(currentHp, MaxHp);
     }
 
-    private void OnRepairFence(int amount)
+    private void OnRepairFence(int index, int amount)
     {
+        if (index != fenceIndex) return;
         currentHp = Math.Min(currentHp + amount, maxHp);
         _progressBarComponent.Enable();
         _progressBarComponent.UpdateValues(currentHp, MaxHp);
@@ -98,7 +102,7 @@ public class FenceController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (!col.gameObject.layer.Equals(LayerMask.NameToLayer("Enemy"))) return;
-        OnCollisionBetweenFenceAndEnemy?.Invoke(transform, col.transform);
+        OnCollisionBetweenFenceAndEnemy?.Invoke(fenceIndex, transform, col.transform);
     }
 
     private void ReduceHp(int value)

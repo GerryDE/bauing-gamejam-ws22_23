@@ -22,7 +22,7 @@ public class EnemyController : MonoBehaviour
     private Vector2 _throwBackForce;
 
     public delegate void CollisionBetweenEnemyAndPlayer(Transform enemyTransform, Transform playerTransform);
-    public delegate void CollisionBetweenEnemyAndFence(Transform enemyTransform, Transform fenceTransform);
+    public delegate void CollisionBetweenEnemyAndFence(int index, Transform enemyTransform, Transform fenceTransform);
     public delegate void EnemyDestroyed(int objectId);
 
     public static CollisionBetweenEnemyAndPlayer OnCollisionBetweenEnemyAndPlayer;
@@ -68,7 +68,12 @@ public class EnemyController : MonoBehaviour
     {
         if (col.gameObject.layer.Equals(LayerMask.NameToLayer("Fence")))
         {
-            OnCollisionBetweenEnemyAndFence(transform, col.transform);
+            var fenceIndex = 0;
+            if (col.transform.TryGetComponent<FenceController>(out var fenceController))
+            {
+                fenceIndex = fenceController.fenceIndex;
+            }
+            OnCollisionBetweenEnemyAndFence(fenceIndex, transform, col.transform);
             _rigidbody.AddForce(_throwBackForce);
             _dataHandlerComponent.PlayAttackAudioClip();
             hpBar.UpdateValues(_currentHp, _maxHp);

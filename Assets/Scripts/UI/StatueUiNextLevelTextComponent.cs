@@ -1,4 +1,5 @@
 using Data;
+using Data.upgradeable_objects.statue;
 using TMPro;
 using UnityEngine;
 

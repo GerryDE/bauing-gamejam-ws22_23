@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using AssemblyCSharp.Assets.Scripts;
 using Data;
 using Data.objective;
+using Data.upgradeable_objects.statue;
 using UnityEngine;
 
 public class DataProvider : MonoBehaviour
@@ -13,7 +14,7 @@ public class DataProvider : MonoBehaviour
     [SerializeField] public PlayerData initialCurrentPlayerData;
     [SerializeField] private ResourceData initialResourceData;
 
-    [SerializeField] private List<FenceData> fenceData;
+    [SerializeField] private List<FenceDataIndex> fenceData;
     [SerializeField] private List<TreeData> treeData;
     [SerializeField] private List<MineData> mineData;
     [SerializeField] private StatueData initialStatueData;
@@ -25,7 +26,7 @@ public class DataProvider : MonoBehaviour
     [NonSerialized] public CurrentResourceData InitialResourceData;
     [NonSerialized] public CurrentResourceData ResourceData;
 
-    [NonSerialized] public List<FenceData> FenceData;
+    [NonSerialized] public List<FenceDataIndex> FenceData;
     [NonSerialized] public List<TreeData> TreeData;
     [NonSerialized] public List<MineData> MineData;
     [NonSerialized] public StatueData CurrentStatueData;
@@ -58,7 +59,7 @@ public class DataProvider : MonoBehaviour
 
     public delegate void ResourceDataChanged(CurrentResourceData data);
 
-    public delegate void FenceVersionChanged(int newVersion);
+    public delegate void FenceVersionChanged(int index, int newVersion);
 
     public delegate void TreeVersionChanged(int newVersion);
 
@@ -96,14 +97,15 @@ public class DataProvider : MonoBehaviour
     private int _currentTutorialObjectiveIndex;
     private int _waveCount;
 
-    public int CurrentFenceVersion
+    public int GetCurrentFenceVersion(int index)
     {
-        get => _currentFenceVersion;
-        set
-        {
-            _currentFenceVersion = value;
-            OnFenceVersionChanged?.Invoke(value);
-        }
+        return FenceData[index].version;
+    }
+
+    public void SetCurrentFenceVersion(int index, int value)
+    {
+        fenceData[index].version = value;
+        OnFenceVersionChanged?.Invoke(index, value);
     }
 
     public int CurrentTreeVersion
@@ -155,12 +157,7 @@ public class DataProvider : MonoBehaviour
             OnWaveCountChanged?.Invoke(_waveCount);
         }
     }
-
-    public FenceData GetCurrentFenceData()
-    {
-        return FenceData[CurrentFenceVersion];
-    }
-
+    
     public class CurrentPlayerData
     {
         private int _maxRemainingYears;
@@ -342,8 +339,10 @@ public class DataProvider : MonoBehaviour
     {
         switch (interactable)
         {
-            case Interactable.Fence_Repair: return FenceData[version].repairCost;
-            case Interactable.Fence_Upgrade: return FenceData[version].upgradeCost;
+            case Interactable.Fence_0_Repair: return FenceData[0].data[version].repairCost;
+            case Interactable.Fence_0_Upgrade: return FenceData[0].data[version].upgradeCost;
+            case Interactable.Fence_1_Repair: return FenceData[1].data[version].repairCost;
+            case Interactable.Fence_1_Upgrade: return FenceData[1].data[version].upgradeCost;
             case Interactable.Tree_Upgrade: return TreeData[version].upgradeCost;
             case Interactable.Stone_Upgrade: return MineData[version].upgradeCost;
             case Interactable.Statue_Upgrade: return NextStatueData.upgradeCost;
@@ -351,4 +350,11 @@ public class DataProvider : MonoBehaviour
 
         return null;
     }
+}
+
+[Serializable]
+public class FenceDataIndex
+{
+    [SerializeField] public List<FenceData> data;
+    [SerializeField] public int version;
 }
