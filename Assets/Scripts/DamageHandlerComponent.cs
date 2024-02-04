@@ -31,18 +31,20 @@ public class DamageHandlerComponent : MonoBehaviour
         OnDealDamageToPlayer?.Invoke(playerTransform, damageToPlayer);
     }
 
-    private void OnCollisionBetweenFenceAndEnemy(Transform fenceTransform, Transform enemyTransform)
+    private void OnCollisionBetweenFenceAndEnemy(int index, Transform fenceTransform, Transform enemyTransform)
     {
         var enemyData = enemyTransform.gameObject.GetComponent<EnemyController>().Data;
-        var fenceData = DataProvider.Instance.GetCurrentFenceData();
+        var fenceDataIndex = DataProvider.Instance.FenceData[index];
+        var fenceData = fenceDataIndex.data[fenceDataIndex.version];
         var damageToEnemy = CalculateDamage(fenceData.damage, enemyData.defense);
         OnDealDamageToEnemy?.Invoke(enemyTransform, damageToEnemy);
     }
 
-    private void OnCollisionBetweenEnemyAndFence(Transform enemyTransform, Transform fenceTransform)
+    private void OnCollisionBetweenEnemyAndFence(int index, Transform enemyTransform, Transform fenceTransform)
     {
         var enemyData = enemyTransform.gameObject.GetComponent<EnemyController>().Data;
-        var fenceData = DataProvider.Instance.GetCurrentFenceData();
+        var fenceDataIndex = DataProvider.Instance.FenceData[index];
+        var fenceData = fenceDataIndex.data[fenceDataIndex.version];
         var damageToFence = CalculateDamage(enemyData.attack, fenceData.defense);
         OnDealDamageToFence?.Invoke(fenceTransform, damageToFence);
     }
@@ -57,7 +59,12 @@ public class DamageHandlerComponent : MonoBehaviour
 
     private int CalculateDamage(int attack, int defense)
     {
-        return (int)Math.Max(1, Math.Pow(attack - defense, damageMultiplier));
+        if (attack <= 0)
+        {
+            return 0;
+        }
+        
+        return (int) Math.Max(1, Math.Pow(attack - defense, damageMultiplier));
     }
 
     private void OnDestroy()

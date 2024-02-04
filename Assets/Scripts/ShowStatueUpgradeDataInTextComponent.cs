@@ -26,6 +26,7 @@ public class ShowStatueUpgradeDataInTextComponent : MonoBehaviour
         if (version.Equals(Version.NextVersion))
         {
             statValue = nextStatueData.statValue;
+            versionIndex++;
         }
         else
         {

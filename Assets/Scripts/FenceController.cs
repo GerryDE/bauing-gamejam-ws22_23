@@ -16,7 +16,7 @@ public class FenceController : MonoBehaviour
 
     public delegate void CurrentHpChanged(int value, int maxHp);
 
-    public delegate void CollisionBetweenFenceAndEnemy(Transform fenceTransform, Transform enemyTransform);
+    public delegate void CollisionBetweenFenceAndEnemy(int index, Transform fenceTransform, Transform enemyTransform);
 
     public static CurrentHpChanged OnCurrentHpChanged;
     public static CollisionBetweenFenceAndEnemy OnCollisionBetweenFenceAndEnemy;
@@ -102,7 +102,7 @@ public class FenceController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (!col.gameObject.layer.Equals(LayerMask.NameToLayer("Enemy"))) return;
-        OnCollisionBetweenFenceAndEnemy?.Invoke(transform, col.transform);
+        OnCollisionBetweenFenceAndEnemy?.Invoke(fenceIndex, transform, col.transform);
     }
 
     private void ReduceHp(int value)

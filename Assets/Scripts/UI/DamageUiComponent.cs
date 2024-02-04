@@ -29,6 +29,7 @@ namespace UI
 
         private void InstantiateDamageUiObject(GameObject obj, Vector3 pos, int value)
         {
+            if (value == 0) return;
             var instance = Instantiate(obj, Vector3.zero, Quaternion.identity, transform);
             instance.transform.position += Vector3.up * yOffset;
             instance.transform.position += Vector3.right * pos.x;
