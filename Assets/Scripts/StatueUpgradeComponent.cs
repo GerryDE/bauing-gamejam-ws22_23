@@ -1,5 +1,6 @@
 using System;
 using Data;
+using Data.upgradeable_objects.statue;
 using UnityEngine;
 
 public class StatueUpgradeComponent : InteractableBaseComponent

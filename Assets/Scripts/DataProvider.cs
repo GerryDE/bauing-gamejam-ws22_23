@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using AssemblyCSharp.Assets.Scripts;
 using Data;
 using Data.objective;
+using Data.upgradeable_objects.statue;
 using UnityEngine;
 
 public class DataProvider : MonoBehaviour

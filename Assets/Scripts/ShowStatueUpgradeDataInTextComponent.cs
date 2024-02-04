@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Data;
+using Data.upgradeable_objects.statue;
 using UnityEngine;
 using TMPro;
 
