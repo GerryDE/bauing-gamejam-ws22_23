@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1806021322665229079}
   - component: {fileID: 1806021322665229072}
   - component: {fileID: 4849114260762904019}
+  - component: {fileID: 822766344571091590}
   m_Layer: 7
   m_Name: enemy_sprite
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1806021322665229078}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.167, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -106,6 +107,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &822766344571091590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806021322665229078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb856ee7dd449beaab8e2d008cbbc36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1806021324276434788
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,6 +244,7 @@ MonoBehaviour:
   hpBar: {fileID: 1393146753815195446}
   backgroundRenderer: {fileID: 5566265567591396794}
   foregroundRenderer: {fileID: 1387405295878097170}
+  enemySprite: {fileID: 1806021322665229072}
 --- !u!1 &2763040216644070364
 GameObject:
   m_ObjectHideFlags: 0
