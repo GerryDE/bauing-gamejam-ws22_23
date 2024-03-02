@@ -882,11 +882,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3233357592532846358, guid: 145a916a68c456681a19d27829a54f5d, type: 3}
       propertyPath: m_text
-      value: Rate [sec]
+      value: Drop rate [sec]
       objectReference: {fileID: 0}
     - target: {fileID: 3684108275531007011, guid: 145a916a68c456681a19d27829a54f5d, type: 3}
       propertyPath: m_text
-      value: Drops
+      value: Drop amount
       objectReference: {fileID: 0}
     - target: {fileID: 3717964869944075010, guid: 145a916a68c456681a19d27829a54f5d, type: 3}
       propertyPath: m_AnchorMax.y
