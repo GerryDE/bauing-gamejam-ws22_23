@@ -1,10 +1,11 @@
 using System;
 using Data.upgradeable_objects.statue;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI
 {
-    [RequireComponent(typeof(SpriteRenderer))]
+    [RequireComponent(typeof(Image))]
     public class StatueNextLevelSpriteComponent : MonoBehaviour
     {
         [SerializeField] private Sprite remainingYearsSprite;
@@ -12,11 +13,11 @@ namespace UI
         [SerializeField] private Sprite defenseSprite;
         [SerializeField] private Sprite speedSprite;
 
-        private SpriteRenderer _renderer;
+        private Image _image;
 
         private void Awake()
         {
-            _renderer = GetComponent<SpriteRenderer>();
+            _image = GetComponent<Image>();
             UpdateSprite();
             
             StatueUpgradeComponent.OnUpgradeStatue += OnUpgradeStatue;
@@ -34,7 +35,7 @@ namespace UI
 
         private void UpdateSprite()
         {
-            _renderer.sprite = DataProvider.Instance.NextStatueData.statToUpgrade switch
+            _image.sprite = DataProvider.Instance.NextStatueData.statToUpgrade switch
             {
                 StatueData.UpgradeableStat.MaxHp => remainingYearsSprite,
                 StatueData.UpgradeableStat.Atk => attackSprite,
