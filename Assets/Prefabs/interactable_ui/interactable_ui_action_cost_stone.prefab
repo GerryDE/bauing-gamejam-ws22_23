@@ -88,6 +88,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: f252c4cdc13fbe4e79063f19007a9f1f, type: 3}
+    - target: {fileID: 5433440105474254107, guid: e52dbba3ef24b821c89dd271c37f9137, type: 3}
+      propertyPath: Currency
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5433440105474254107, guid: e52dbba3ef24b821c89dd271c37f9137, type: 3}
+      propertyPath: Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6127006665553744427, guid: e52dbba3ef24b821c89dd271c37f9137, type: 3}
+      propertyPath: currency
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6321463794563587530, guid: e52dbba3ef24b821c89dd271c37f9137, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
