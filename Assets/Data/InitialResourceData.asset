@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9407896ffe9e4a8faec576741107f880, type: 3}
   m_Name: InitialResourceData
   m_EditorClassIdentifier: 
-  woodAmount: 9999
-  stoneAmount: 9999
+  woodAmount: 0
+  stoneAmount: 0
