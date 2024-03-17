@@ -50,7 +50,7 @@ namespace AssemblyCSharp.Assets.Scripts
                 version++;
             }
 
-            if (version < count || count == -1)
+            if (version < count || count == -1 || !Upgrade)
             {
                 int currentLumberAmount = data.ResourceData.WoodAmount;
                 int currentStoneAmount = data.ResourceData.StoneAmount;
