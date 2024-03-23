@@ -1,4 +1,5 @@
 using System;
+using Animations;
 using Data;
 using DefaultNamespace;
 using Unity.VisualScripting;
@@ -12,6 +13,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private EnemyHpBar hpBar;
     [SerializeField] private SpriteRenderer backgroundRenderer;
     [SerializeField] private SpriteRenderer foregroundRenderer;
+    [SerializeField] private SpriteRenderer enemySprite;
 
 
 
@@ -20,6 +22,7 @@ public class EnemyController : MonoBehaviour
     private int _currentHp;
     private float _moveSpeed;
     private Vector2 _throwBackForce;
+    private bool _dying;
 
     public delegate void CollisionBetweenEnemyAndPlayer(Transform enemyTransform, Transform playerTransform);
     public delegate void CollisionBetweenEnemyAndFence(int index, Transform enemyTransform, Transform fenceTransform);
@@ -30,6 +33,7 @@ public class EnemyController : MonoBehaviour
     public static EnemyDestroyed OnEnemyDestroyed;
 
     private DataHandlerComponent _dataHandlerComponent;
+    private static readonly int Kill = Animator.StringToHash("kill");
 
     private void Awake()
     {
@@ -42,6 +46,7 @@ public class EnemyController : MonoBehaviour
         _throwBackForce = Data.throwBackForce;
 
         DamageHandlerComponent.OnDealDamageToEnemy += OnDealDamageToEnemy;
+        EnemyAnimationComponent.OnEnemyDeathAnimationFinished += OnEnemyDeathAnimationFinished;
     }
 
     private void OnDealDamageToEnemy(Transform enemyTransform, int damageValue)
@@ -52,7 +57,7 @@ public class EnemyController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rigidbody.velocity = new Vector2(_moveSpeed * Time.deltaTime, _rigidbody.velocity.y);
+        _rigidbody.velocity = new Vector2(_moveSpeed * Time.deltaTime, 0f) * (_dying ? -2f : 1f);
     }
 
     private void ReduceHp(int value)
@@ -60,6 +65,28 @@ public class EnemyController : MonoBehaviour
         _currentHp -= value;
         
         if (_currentHp > 0) return;
+        if (enemySprite.gameObject.TryGetComponent<Animator>(out var animator))
+        {
+            _dying = true;
+            animator.SetTrigger(Kill);
+            GetComponent<Collider2D>().enabled = false;
+            backgroundRenderer.enabled = false;
+            foregroundRenderer.enabled = false;
+        }
+        else
+        {
+            DestroyEnemy();
+        }
+    }
+    
+    private void OnEnemyDeathAnimationFinished(int objectId)
+    {
+        if (objectId != gameObject.GetInstanceID()) return;
+        DestroyEnemy();
+    }
+
+    private void DestroyEnemy()
+    {
         OnEnemyDestroyed?.Invoke(gameObject.GetInstanceID());
         Destroy(gameObject);
     }
@@ -91,5 +118,6 @@ public class EnemyController : MonoBehaviour
     private void OnDestroy()
     {
         DamageHandlerComponent.OnDealDamageToEnemy -= OnDealDamageToEnemy;
+        EnemyAnimationComponent.OnEnemyDeathAnimationFinished -= OnEnemyDeathAnimationFinished;
     }
 }

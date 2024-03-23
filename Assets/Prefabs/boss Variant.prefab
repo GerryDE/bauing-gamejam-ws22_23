@@ -26,7 +26,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1806021322665229079, guid: be29476555061cb15a17ac504aa4c812, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1806021324276434784, guid: be29476555061cb15a17ac504aa4c812, type: 3}
       propertyPath: m_RootOrder
@@ -104,8 +104,11 @@ PrefabInstance:
       propertyPath: damageOutput
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4849114260762904019, guid: be29476555061cb15a17ac504aa4c812, type: 3}
+    - target: {fileID: 4849114260762904019, guid: be29476555061cb15a17ac504aa4c812, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 2000516adf71bd172ba69a781d622d1d, type: 2}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
