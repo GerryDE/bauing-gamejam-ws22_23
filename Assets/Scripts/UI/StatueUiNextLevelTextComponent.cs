@@ -1,3 +1,4 @@
+using System;
 using Data;
 using Data.upgradeable_objects.statue;
 using TMPro;
@@ -35,24 +36,19 @@ namespace UI
 
         private void UpdateText()
         {
-            switch (DataProvider.Instance.NextStatueData.statToUpgrade)
+            _textComponent.text = DataProvider.Instance.NextStatueData.statToUpgrade switch
             {
-                case StatueData.UpgradeableStat.MaxHp:
-                    _textComponent.text = maxRemainingYearsText;
-                    break;
-                case StatueData.UpgradeableStat.Atk:
-                    _textComponent.text = atkText;
-                    break;
-                case StatueData.UpgradeableStat.Def:
-                    _textComponent.text = defText;
-                    break;
-                case StatueData.UpgradeableStat.Speed:
-                    _textComponent.text = speedText;
-                    break;
-                default:
-                    _textComponent.text = "<Unknown stat type>";
-                    break;
-            }
+                StatueData.UpgradeableStat.MaxHp => maxRemainingYearsText,
+                StatueData.UpgradeableStat.Atk => atkText,
+                StatueData.UpgradeableStat.Def => defText,
+                StatueData.UpgradeableStat.Speed => speedText,
+                _ => "<Unknown stat type>"
+            };
+        }
+
+        private void OnDestroy()
+        {
+            StatueUpgradeComponent.OnUpgradeStatue -= OnUpgradeStatue;
         }
     }
 }

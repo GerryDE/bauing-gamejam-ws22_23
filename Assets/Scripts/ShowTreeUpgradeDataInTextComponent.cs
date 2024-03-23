@@ -32,7 +32,7 @@ public class ShowTreeUpgradeDataInTextComponent : MonoBehaviour
 
         var level = treeData.Count <= versionIndex + 1 ? "MAX" : (versionIndex + 1).ToString();
         var currentTreeData = treeData[versionIndex];
-        var dropAmount = currentTreeData.smallDropAmount + " - " + currentTreeData.largeDropAmount;
+        var dropAmount = currentTreeData.smallDropAmount + "-" + currentTreeData.largeDropAmount;
         var values = new Dictionary<Value, string>
         {
             { Value.Level, level },
