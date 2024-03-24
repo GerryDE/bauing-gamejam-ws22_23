@@ -18,8 +18,6 @@ namespace Objective
             var dataProvider = DataProvider.Instance;
             dataProvider.ResourceData.WoodAmount = dataProvider.InitialResourceData.WoodAmount;
             dataProvider.ResourceData.StoneAmount = dataProvider.InitialResourceData.StoneAmount;
-            dataProvider.ResourceData.WoodAmount = 0;
-            dataProvider.ResourceData.StoneAmount = 0;
             foreach (var fenceDataIndex in dataProvider.FenceData)
             {
                 fenceDataIndex.version = 0;
