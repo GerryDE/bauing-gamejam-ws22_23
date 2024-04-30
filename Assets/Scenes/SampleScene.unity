@@ -55615,7 +55615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
       propertyPath: data.Array.data[1].enemiesToKillUntilBoss
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
       propertyPath: data.Array.data[2].enemiesToKillUntilBoss
