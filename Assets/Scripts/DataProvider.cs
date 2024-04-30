@@ -11,17 +11,25 @@ public class DataProvider : MonoBehaviour
     // Make sure that this component only exists once in the project to the keep the Singleton approach
     public static DataProvider Instance { get; private set; }
 
+    [Header("Player related data")]
     [SerializeField] public PlayerData initialCurrentPlayerData;
     [SerializeField] private ResourceData initialResourceData;
 
+    [Header("Interactable data")]
     [SerializeField] private List<FenceDataIndex> fenceData;
     [SerializeField] private List<TreeData> treeData;
     [SerializeField] private List<MineData> mineData;
     [SerializeField] private StatueData initialStatueData;
 
+    [Header("Objective data")]
     [SerializeField] private List<ObjectiveData> tutorialObjectives;
     [SerializeField] private List<ObjectiveData> dynamicObjectives;
 
+    [Header("Audio data")] 
+    [SerializeField] private AudioClip defaultBgm;
+    [SerializeField] private AudioClip enemyBgm;
+    [SerializeField] private AudioClip bossBgm;
+    
     [NonSerialized] public CurrentPlayerData PlayerData;
     [NonSerialized] public CurrentResourceData InitialResourceData;
     [NonSerialized] public CurrentResourceData ResourceData;
@@ -34,6 +42,10 @@ public class DataProvider : MonoBehaviour
 
     [NonSerialized] public List<ObjectiveData> TutorialObjectives;
     [NonSerialized] public List<ObjectiveData> DynamicObjectives;
+    
+    public AudioClip DefaultBgm => defaultBgm;
+    public AudioClip EnemyBgm => enemyBgm;
+    public AudioClip BossBgm => bossBgm;
 
     public delegate void MaxRemainingYearsChanged(int value);
 
