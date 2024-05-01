@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Audio
 {
@@ -15,7 +16,9 @@ namespace Audio
 
         [SerializeField] private AudioSource audioSource1;
         [SerializeField] private AudioSource audioSource2;
-        [SerializeField] private float fadeDuration = 2f;
+        [SerializeField] private float fadeOutDuration = 2f;
+        [SerializeField] private float fadeInDuration = 1f;
+        [SerializeField] private float fadeInDelay = 1f;
         [SerializeField] private float maxVolume = 0.5f;
 
         private AudioSource _mainAudioSource;
@@ -53,16 +56,29 @@ namespace Audio
         {
             _fadeAudioSource.clip = newAudioClip;
             _fadeAudioSource.Play();
-            StartCoroutine(Fade());
+            StartCoroutine(FadeOut());
+            StartCoroutine(FadeIn());
         }
 
-        private IEnumerator Fade()
+        private IEnumerator FadeOut()
         {
             var timeElapsed = 0f;
             while (_mainAudioSource.volume > 0f)
             {
-                _mainAudioSource.volume = Mathf.Lerp(maxVolume, 0f, timeElapsed / fadeDuration);
-                _fadeAudioSource.volume = Mathf.Lerp(0f, maxVolume, timeElapsed / fadeDuration);
+                _mainAudioSource.volume = Vector3.Slerp(maxVolume * Vector3.right, 0f * Vector3.right, timeElapsed / fadeOutDuration).x;
+                timeElapsed += Time.deltaTime;
+                yield return null;
+            }
+        }
+        
+        private IEnumerator FadeIn()
+        {
+            yield return new WaitForSeconds(fadeInDelay);
+            
+            var timeElapsed = 0f;
+            while (_fadeAudioSource.volume < maxVolume)
+            {
+                _fadeAudioSource.volume = Vector3.Slerp(0f * Vector3.right, maxVolume * Vector3.right, timeElapsed / fadeInDuration).x;
                 timeElapsed += Time.deltaTime;
                 yield return null;
             }
