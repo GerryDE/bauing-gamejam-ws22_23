@@ -15,4 +15,4 @@ MonoBehaviour:
   upgradeCost: {fileID: 11400000, guid: 3dab62f764ae44007980c5402b227ade, type: 2}
   miningDuaration: 0.7
   dropAmount: 1
-  sprite: {fileID: 21300000, guid: f0057e799a83b1c30a5a7be4544aab27, type: 3}
+  sprite: {fileID: 21300000, guid: 2b9387cdfef30e6bb9ad28855d326079, type: 3}
