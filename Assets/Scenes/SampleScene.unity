@@ -9483,14 +9483,14 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 300158482}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -13375,6 +13375,10 @@ PrefabInstance:
       propertyPath: Interactable
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6542546416075169695, guid: d72e70c0c9183dca18f176b11f41cac9, type: 3}
+      propertyPath: UseNextVersionValue
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6683140161248626031, guid: d72e70c0c9183dca18f176b11f41cac9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -13450,6 +13454,10 @@ PrefabInstance:
     - target: {fileID: 7257884984391573381, guid: d72e70c0c9183dca18f176b11f41cac9, type: 3}
       propertyPath: Interactable
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7257884984391573381, guid: d72e70c0c9183dca18f176b11f41cac9, type: 3}
+      propertyPath: UseNextVersionValue
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7417920041150737077, guid: d72e70c0c9183dca18f176b11f41cac9, type: 3}
       propertyPath: m_AnchorMax.y
@@ -23570,7 +23578,7 @@ GameObject:
   - component: {fileID: 1073473959}
   - component: {fileID: 1073473958}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: LeftDustParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23664,7 +23672,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -23731,7 +23739,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5.31
+      scalar: 5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -24279,16 +24287,16 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 5
+    type: 6
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: -2.67, y: 0, z: 0}
-    m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 0, y: 3.5, z: 1}
-    placementMode: 0
+    m_Position: {x: 0, y: 0, z: 0}
+    m_Rotation: {x: -0, y: 180, z: 0}
+    m_Scale: {x: 1, y: 1.69, z: 1}
+    placementMode: 2
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
     m_MeshSpawn:
@@ -24347,7 +24355,7 @@ ParticleSystem:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-    m_Mesh: {fileID: 0}
+    m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
     m_MeshRenderer: {fileID: 0}
     m_SkinnedMeshRenderer: {fileID: 0}
     m_Sprite: {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
@@ -24355,7 +24363,7 @@ ParticleSystem:
     m_UseMeshMaterialIndex: 0
     m_UseMeshColors: 1
     alignToDirection: 0
-    m_Texture: {fileID: 0}
+    m_Texture: {fileID: 10904, guid: 0000000000000000f000000000000000, type: 0}
     m_TextureClipChannel: 3
     m_TextureClipThreshold: 0
     m_TextureUVChannel: 0
@@ -24485,7 +24493,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50
+      scalar: 100
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -25216,7 +25224,7 @@ ParticleSystem:
     z:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 3.95
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -28379,7 +28387,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1073473957}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -8.84, y: -0.7, z: 0}
+  m_LocalPosition: {x: -8.84, y: -1.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -29563,6 +29571,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -12
       objectReference: {fileID: 0}
+    - target: {fileID: 6542546416075169695, guid: d72e70c0c9183dca18f176b11f41cac9, type: 3}
+      propertyPath: UseNextVersionValue
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6683140161248626031, guid: d72e70c0c9183dca18f176b11f41cac9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -29634,6 +29646,10 @@ PrefabInstance:
     - target: {fileID: 7191177434350247691, guid: d72e70c0c9183dca18f176b11f41cac9, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7257884984391573381, guid: d72e70c0c9183dca18f176b11f41cac9, type: 3}
+      propertyPath: UseNextVersionValue
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7417920041150737077, guid: d72e70c0c9183dca18f176b11f41cac9, type: 3}
       propertyPath: m_AnchorMax.y
@@ -39964,7 +39980,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -40949,7 +40965,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -60461,7 +60477,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
       propertyPath: data.Array.data[1].enemiesToKillUntilBoss
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
       propertyPath: data.Array.data[2].enemiesToKillUntilBoss
