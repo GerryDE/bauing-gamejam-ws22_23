@@ -57784,6 +57784,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 48cf87cd17e0d090fa296c0e7322735b, type: 3}
     - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
+      propertyPath: finalBossBgm
+      value: 
+      objectReference: {fileID: 8300000, guid: e74021b1bd43d03f3b5a18043c8ab4a4, type: 3}
+    - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
       propertyPath: initialStatueData
       value: 
       objectReference: {fileID: 11400000, guid: 09738306886663e3e90182b8963b9cad, type: 2}

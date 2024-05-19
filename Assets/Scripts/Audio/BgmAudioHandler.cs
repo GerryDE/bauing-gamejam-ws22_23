@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -11,7 +12,8 @@ namespace Audio
         {
             DEFAULT,
             ENEMY,
-            BOSS
+            BOSS,
+            FINAL_BOSS
         }
 
         [SerializeField] private AudioSource audioSource1;
@@ -40,7 +42,12 @@ namespace Audio
 
         private void OnSpawnEnemy(GameObject enemyPrefab, int maxAmountOfSimultaneouslyLivingEnemies, int killedEnemies, int enemiesToKillUntilBoss)
         {
-            if (enemyPrefab.GetComponent<BossComponent>() != null && _currentBgm != CurrentBgm.BOSS)
+            if (enemyPrefab.GetComponent<FinalBossComponent>() != null && _currentBgm != CurrentBgm.FINAL_BOSS)
+            {
+                _currentBgm = CurrentBgm.FINAL_BOSS;
+                Fade(DataProvider.Instance.FinalBossBgm);
+            }
+            else if (enemyPrefab.GetComponent<BossComponent>() != null && _currentBgm != CurrentBgm.BOSS)
             {
                 _currentBgm = CurrentBgm.BOSS;
                 Fade(DataProvider.Instance.BossBgm);

@@ -29,6 +29,7 @@ public class DataProvider : MonoBehaviour
     [SerializeField] private AudioClip defaultBgm;
     [SerializeField] private AudioClip enemyBgm;
     [SerializeField] private AudioClip bossBgm;
+    [SerializeField] private AudioClip finalBossBgm;
     
     [NonSerialized] public CurrentPlayerData PlayerData;
     [NonSerialized] public CurrentResourceData InitialResourceData;
@@ -46,6 +47,7 @@ public class DataProvider : MonoBehaviour
     public AudioClip DefaultBgm => defaultBgm;
     public AudioClip EnemyBgm => enemyBgm;
     public AudioClip BossBgm => bossBgm;
+    public AudioClip FinalBossBgm => finalBossBgm;
 
     public delegate void MaxRemainingYearsChanged(int value);
 
