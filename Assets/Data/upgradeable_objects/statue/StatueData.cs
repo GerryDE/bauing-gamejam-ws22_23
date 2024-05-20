@@ -15,6 +15,28 @@ namespace Data.upgradeable_objects.statue
             Def,
             Speed
         }
+        
+        [System.Serializable]
+        public struct Stat
+        {
+            public UpgradeableStat StatType;
+            public int BaseValue;
+            public float Multiplier;
+            public int Version;
+
+            public Stat(UpgradeableStat statType, int baseValue, float multiplier, int version)
+            {
+                StatType = statType;
+                BaseValue = baseValue;
+                Multiplier = multiplier;
+                Version = version;
+            }
+        }
+
+        public Stat maxHpStat;
+        public Stat atkStat;
+        public Stat defStat;
+        public Stat speedStat;
 
         public CostData baseUpgradeCost;
         public CostData upgradeCost;
@@ -25,7 +47,7 @@ namespace Data.upgradeable_objects.statue
         public int baseMaxHpValue = 50;
         public int baseAtkValue = 1;
         public int baseDefValue = 1;
-        public int baseSpeedValue = 25;
+        public int baseSpeedValue = 300;
         public float statMultiplier = 1.5f;
 
         public UpgradeableStat statToUpgrade;
@@ -39,6 +61,7 @@ namespace Data.upgradeable_objects.statue
         public void SetStatValue(int x)
         {
             statValue = (int) GetBaseValue() * (int) Math.Pow(x, statMultiplier);
+            Debug.Log("Value will change to " + statValue);
         }
 
         private float GetBaseValue()

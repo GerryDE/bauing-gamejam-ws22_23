@@ -12,6 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b78ecee02e8e4ad4997cf9369810414a, type: 3}
   m_Name: StatueData
   m_EditorClassIdentifier: 
+  maxHpStat:
+    StatType: 0
+    BaseValue: 50
+    Multiplier: 1.5
+    Version: 0
+  atkStat:
+    StatType: 1
+    BaseValue: 1
+    Multiplier: 2
+    Version: 0
+  defStat:
+    StatType: 2
+    BaseValue: 1
+    Multiplier: 2
+    Version: 0
+  speedStat:
+    StatType: 3
+    BaseValue: 300
+    Multiplier: 1.25
+    Version: 0
   baseUpgradeCost: {fileID: 11400000, guid: 24301a3c4c610f5fe83a1fa53fcc692d, type: 2}
   upgradeCost: {fileID: 11400000, guid: d59decb1439db356b8592cfecb271825, type: 2}
   lumberCostMultiplier: 1.5
@@ -20,7 +40,7 @@ MonoBehaviour:
   baseMaxHpValue: 50
   baseAtkValue: 1
   baseDefValue: 1
-  baseSpeedValue: 25
+  baseSpeedValue: 300
   statMultiplier: 1.5
   statToUpgrade: 0
   statValue: 0
