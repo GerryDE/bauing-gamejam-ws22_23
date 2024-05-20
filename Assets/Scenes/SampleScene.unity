@@ -6701,11 +6701,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7048523069484514205, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 50
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 7048523069484514205, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -18.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8932394335931476811, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_Pivot.x
@@ -8697,11 +8697,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7048523069484514205, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 50
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 7048523069484514205, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -18.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8932394335931476811, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_Pivot.x
@@ -9297,11 +9297,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7048523069484514205, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 50
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 7048523069484514205, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -18.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8932394335931476811, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_Pivot.x
@@ -9945,11 +9945,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7048523069484514205, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 50
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 7048523069484514205, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -18.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8932394335931476811, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_Pivot.x
@@ -10275,11 +10275,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7048523069484514205, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 50
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 7048523069484514205, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -18.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8932394335931476811, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_Pivot.x
@@ -23202,12 +23202,8 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7048523069484514205, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 7048523069484514205, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8932394335931476811, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_Pivot.x
@@ -23279,7 +23275,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8932394335931476811, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8932394335931476811, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -30111,11 +30107,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7048523069484514205, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 50
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 7048523069484514205, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -18.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8932394335931476811, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_Pivot.x
@@ -47894,11 +47890,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7048523069484514205, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 50
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 7048523069484514205, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8932394335931476811, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_Pivot.x
@@ -47970,7 +47966,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8932394335931476811, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8932394335931476811, guid: 4a250e331c603fe219c3920c3e240e61, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -60477,7 +60473,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
       propertyPath: data.Array.data[1].enemiesToKillUntilBoss
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3546891448737068496, guid: 29688846d5e648d309661e6784cc0585, type: 3}
       propertyPath: data.Array.data[2].enemiesToKillUntilBoss
