@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static Data.upgradeable_objects.statue.StatueData.UpgradeableStat;
 using Random = UnityEngine.Random;
 
 namespace Data.upgradeable_objects.statue
@@ -15,8 +16,8 @@ namespace Data.upgradeable_objects.statue
             Def,
             Speed
         }
-        
-        [System.Serializable]
+
+        [Serializable]
         public struct Stat
         {
             public UpgradeableStat StatType;
@@ -44,40 +45,36 @@ namespace Data.upgradeable_objects.statue
         public float stoneCostMultiplier = 1.5f;
 
         public List<UpgradeableStat> upgradeableStats;
-        public int baseMaxHpValue = 50;
-        public int baseAtkValue = 1;
-        public int baseDefValue = 1;
-        public int baseSpeedValue = 300;
-        public float statMultiplier = 1.5f;
 
         public UpgradeableStat statToUpgrade;
         public int statValue;
 
-        public UpgradeableStat GetRandomUpgradeableStat()
+        private UpgradeableStat GetRandomUpgradeableStat()
         {
             return upgradeableStats[Random.Range(0, upgradeableStats.Count)];
         }
 
         public void SetStatValue(int x)
         {
-            statValue = (int) GetBaseValue() * (int) Math.Pow(x, statMultiplier);
+            statValue = (int)(GetBaseValue() * Mathf.Pow(GetStat().Multiplier, x));
             Debug.Log("Value will change to " + statValue);
         }
 
-        private float GetBaseValue()
+        private int GetBaseValue()
         {
-            switch (statToUpgrade)
+            return GetStat().BaseValue;
+        }
+
+        private Stat GetStat()
+        {
+            return statToUpgrade switch
             {
-                case UpgradeableStat.MaxHp:
-                    return baseMaxHpValue;
-                case UpgradeableStat.Atk:
-                    return baseAtkValue;
-                case UpgradeableStat.Def:
-                    return baseDefValue;
-                case UpgradeableStat.Speed:
-                    return baseSpeedValue;
-                default: return 0f;
-            }
+                MaxHp => maxHpStat,
+                Atk => atkStat,
+                Def => defStat,
+                Speed => speedStat,
+                _ => throw new ArgumentOutOfRangeException()
+            };
         }
 
         public StatueData Copy()
@@ -89,11 +86,10 @@ namespace Data.upgradeable_objects.statue
             copy.stoneCostMultiplier = stoneCostMultiplier;
             copy.upgradeableStats = upgradeableStats;
             copy.statToUpgrade = GetRandomUpgradeableStat();
-            copy.baseMaxHpValue = baseMaxHpValue;
-            copy.baseAtkValue = baseAtkValue;
-            copy.baseDefValue = baseDefValue;
-            copy.baseSpeedValue = baseSpeedValue;
-            copy.statMultiplier = statMultiplier;
+            copy.maxHpStat = maxHpStat;
+            copy.atkStat = atkStat;
+            copy.defStat = defStat;
+            copy.speedStat = speedStat;
             copy.statValue = statValue;
             return copy;
         }
