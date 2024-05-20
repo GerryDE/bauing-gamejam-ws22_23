@@ -59,12 +59,7 @@ public class DamageHandlerComponent : MonoBehaviour
 
     private int CalculateDamage(int attack, int defense)
     {
-        if (attack <= 0)
-        {
-            return 0;
-        }
-        
-        return (int) Math.Max(1, Math.Pow(attack - defense, damageMultiplier));
+        return attack <= 0 ? 0 : Math.Max(1, (int) Mathf.Pow(attack - defense, damageMultiplier));
     }
 
     private void OnDestroy()
