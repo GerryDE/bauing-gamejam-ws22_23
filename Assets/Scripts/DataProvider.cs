@@ -11,16 +11,29 @@ public class DataProvider : MonoBehaviour
     // Make sure that this component only exists once in the project to the keep the Singleton approach
     public static DataProvider Instance { get; private set; }
 
-    [SerializeField] public PlayerData initialCurrentPlayerData;
+    [Header("Player related data")] [SerializeField]
+    public PlayerData initialCurrentPlayerData;
+
     [SerializeField] private ResourceData initialResourceData;
 
-    [SerializeField] private List<FenceDataIndex> fenceData;
+    [Header("Interactable data")] [SerializeField]
+    private List<FenceDataIndex> fenceData;
+
     [SerializeField] private List<TreeData> treeData;
     [SerializeField] private List<MineData> mineData;
     [SerializeField] private StatueData initialStatueData;
 
-    [SerializeField] private List<ObjectiveData> tutorialObjectives;
+    [Header("Objective data")] [SerializeField]
+    private List<ObjectiveData> tutorialObjectives;
+
     [SerializeField] private List<ObjectiveData> dynamicObjectives;
+
+    [Header("Audio data")] [SerializeField]
+    private AudioClip defaultBgm;
+
+    [SerializeField] private AudioClip enemyBgm;
+    [SerializeField] private AudioClip bossBgm;
+    [SerializeField] private AudioClip finalBossBgm;
 
     [NonSerialized] public CurrentPlayerData PlayerData;
     [NonSerialized] public CurrentResourceData InitialResourceData;
@@ -35,6 +48,11 @@ public class DataProvider : MonoBehaviour
     [NonSerialized] public List<ObjectiveData> TutorialObjectives;
     [NonSerialized] public List<ObjectiveData> DynamicObjectives;
 
+    public AudioClip DefaultBgm => defaultBgm;
+    public AudioClip EnemyBgm => enemyBgm;
+    public AudioClip BossBgm => bossBgm;
+    public AudioClip FinalBossBgm => finalBossBgm;
+
     public delegate void MaxRemainingYearsChanged(int value);
 
     public delegate void CurrentRemainingYearsChanged(int value);
@@ -44,6 +62,14 @@ public class DataProvider : MonoBehaviour
     public delegate void DefenseValueChanged(int value);
 
     public delegate void MoveSpeedChanged(float value);
+
+    public delegate void MaxHpLevelChanged(int value);
+
+    public delegate void AttackLevelChanged(int value);
+
+    public delegate void DefenseLevelChanged(int value);
+
+    public delegate void SpeedLevelChanged(int value);
 
     public delegate void RemainingYearsForStayingYoungChanged(int value);
 
@@ -76,6 +102,12 @@ public class DataProvider : MonoBehaviour
     public static AttackValueChanged OnAttackValueChanged;
     public static DefenseValueChanged OnDefenseValueChanged;
     public static MoveSpeedChanged OnMoveSpeedChanged;
+
+    public static MaxHpLevelChanged OnMaxHpLevelChanged;
+    public static AttackLevelChanged OnAttackLevelChanged;
+    public static DefenseLevelChanged OnDefenseLevelChanged;
+    public static SpeedLevelChanged OnSpeedLevelChanged;
+
     public static RemainingYearsForStayingYoungChanged OnRemainingYearsForStayingYoungChanged;
     public static RemainingYearsBecomingOldChanged OnRemainingYearsBecomingOldChanged;
     public static MinSpeedPercentageChanged OnMinSpeedPercentageChanged;
@@ -157,7 +189,7 @@ public class DataProvider : MonoBehaviour
             OnWaveCountChanged?.Invoke(_waveCount);
         }
     }
-    
+
     public class CurrentPlayerData
     {
         private int _maxRemainingYears;
@@ -169,6 +201,10 @@ public class DataProvider : MonoBehaviour
         private int _remainingYearsUntilBecomingOld;
         private float _minSpeedPercentage;
         private Vector2 _throwForce;
+        private int _maxHpLevel;
+        private int _attackLevel;
+        private int _defenseLevel;
+        private int _speedLevel;
 
         public int MaxRemainingYears
         {
@@ -259,6 +295,47 @@ public class DataProvider : MonoBehaviour
             {
                 _throwForce = value;
                 OnThrowForceChanged?.Invoke(value);
+            }
+        }
+
+        public int MaxHpLevel
+        {
+            get => _maxHpLevel;
+            set
+            {
+                _maxHpLevel = value;
+                OnMaxHpLevelChanged?.Invoke(value);
+            }
+        }
+
+        public int AttackLevel
+        {
+            get => _attackLevel;
+            set
+            {
+                _attackLevel = value;
+                OnAttackLevelChanged?.Invoke(value);
+            }
+        }
+
+        public int DefenseLevel
+        {
+            get => _defenseLevel;
+            set
+            {
+                _defenseLevel = value;
+                OnDefenseLevelChanged?.Invoke(value);
+            }
+        }
+
+        public int SpeedLevel
+        {
+            get => _speedLevel;
+            set
+            {
+                _speedLevel = value;
+                Debug.Log("Speed level changed to " + value);
+                OnSpeedLevelChanged?.Invoke(value);
             }
         }
     }

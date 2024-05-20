@@ -1,7 +1,7 @@
 using System;
-using Data;
 using Data.upgradeable_objects.statue;
 using UnityEngine;
+using static Data.upgradeable_objects.statue.StatueData.UpgradeableStat;
 
 public class StatueUpgradeComponent : InteractableBaseComponent
 {
@@ -13,7 +13,7 @@ public class StatueUpgradeComponent : InteractableBaseComponent
     {
         base.Start();
         DataProvider.OnStatueVersionChanged += OnStatueVersionChanged;
-        
+
         GenerateNextStatueData();
     }
 
@@ -22,16 +22,37 @@ public class StatueUpgradeComponent : InteractableBaseComponent
         var dataProvider = DataProvider.Instance;
         var currentStatueData = dataProvider.CurrentStatueData;
         var nextStatueVersion = dataProvider.CurrentStatueVersion + 1;
-
         var nextStatueData = currentStatueData.Copy();
-        nextStatueData.upgradeCost.lumberCost = (int)(currentStatueData.baseUpgradeCost.lumberCost *
-                                                    Math.Pow(nextStatueVersion,
-                                                        currentStatueData.lumberCostMultiplier));
-        nextStatueData.upgradeCost.stoneCost = (int)(currentStatueData.baseUpgradeCost.stoneCost *
-                                                   Math.Pow(nextStatueVersion,
-                                                       currentStatueData.stoneCostMultiplier));
-        nextStatueData.SetStatValue(nextStatueVersion);
-        
+
+        var lumberCost = nextStatueData.baseUpgradeCost.lumberCost;
+        var lumberCostMultiplier = nextStatueData.lumberCostMultiplier;
+        var stoneCost = nextStatueData.baseUpgradeCost.stoneCost;
+        var stoneCostMultiplier = nextStatueData.stoneCostMultiplier;
+
+        dataProvider.CurrentStatueData = dataProvider.NextStatueData;
+
+        nextStatueData.upgradeCost.lumberCost = (int)(lumberCost *
+                                                      Math.Pow(nextStatueVersion,
+                                                          lumberCostMultiplier));
+        nextStatueData.upgradeCost.stoneCost = (int)(stoneCost *
+                                                     Math.Pow(nextStatueVersion,
+                                                         stoneCostMultiplier));
+        dataProvider.CurrentStatueData = nextStatueData;
+
+        var playerData = dataProvider.PlayerData;
+        var nextStatVersion = nextStatueData.statToUpgrade switch
+        {
+            MaxHp => playerData.MaxHpLevel,
+            Atk => playerData.AttackLevel,
+            Def => playerData.DefenseLevel,
+            Speed => playerData.SpeedLevel,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+        nextStatVersion++;
+        Debug.Log("Generating next upgrade data with stat " + nextStatueData.statToUpgrade + " value for level " +
+                  nextStatVersion + "...");
+        nextStatueData.SetStatValue(nextStatVersion);
+
         DataProvider.Instance.NextStatueData = nextStatueData;
     }
 
@@ -63,6 +84,24 @@ public class StatueUpgradeComponent : InteractableBaseComponent
             resourceData.StoneAmount < nextStatueData.upgradeCost.stoneCost) return;
         resourceData.WoodAmount -= nextStatueData.upgradeCost.lumberCost;
         resourceData.StoneAmount -= nextStatueData.upgradeCost.stoneCost;
+        switch (currentStatueData.statToUpgrade)
+        {
+            case MaxHp:
+                data.PlayerData.MaxHpLevel++;
+                break;
+            case Atk:
+                data.PlayerData.AttackLevel++;
+                break;
+            case Def:
+                data.PlayerData.DefenseLevel++;
+                break;
+            case Speed:
+                data.PlayerData.SpeedLevel++;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+
         OnUpgradeStatue?.Invoke(nextStatueData.statToUpgrade, nextStatueData.statValue);
         data.CurrentStatueVersion++;
         GenerateNextStatueData();
@@ -73,7 +112,7 @@ public class StatueUpgradeComponent : InteractableBaseComponent
     {
         var data = DataProvider.Instance.NextStatueData;
         var resourceData = DataProvider.Instance.ResourceData;
-        
+
         var isUpgradable = resourceData.WoodAmount >= data.upgradeCost.lumberCost &&
                            resourceData.StoneAmount >= data.upgradeCost.stoneCost;
         return isUpgradable;
