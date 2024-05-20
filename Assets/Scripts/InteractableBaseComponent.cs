@@ -86,5 +86,6 @@ public abstract class InteractableBaseComponent : MonoBehaviour
         GameInputHandlerComponent.OnInteract2PressCalled -= OnInteractionButton2Pressed;
         PlayerController.OnPlayerMove -= OnPlayerMove;
         DataProvider.OnResourceDataChanged -= OnResourceDataChanged;
+        TutorialComponent.OnNewObjectiveStarted -= OnNewObjectiveStarted;
     }
 }
