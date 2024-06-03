@@ -57,7 +57,6 @@ namespace Data.upgradeable_objects.statue
         public void SetStatValue(int x)
         {
             statValue = (int)(GetBaseValue() * Mathf.Pow(GetStat().Multiplier, x));
-            Debug.Log("Value will change to " + statValue);
         }
 
         private int GetBaseValue()
