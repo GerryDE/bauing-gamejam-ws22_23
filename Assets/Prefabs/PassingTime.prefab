@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3807700196154225558}
   - component: {fileID: 3807700196154225559}
+  - component: {fileID: 4410141532098887793}
   m_Layer: 0
   m_Name: PassingTime
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3807700196154225559
 MonoBehaviour:
@@ -45,3 +46,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yearPassedDuration: 60
+--- !u!114 &4410141532098887793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3807700196154225560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6f2b7d0b7da2efaa84e8fda72d6f41b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
