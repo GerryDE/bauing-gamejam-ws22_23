@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using AssemblyCSharp.Assets.Scripts;
 using Data;
+using Data.EnemySpawning;
 using Data.objective;
 using Data.upgradeable_objects.statue;
 using UnityEngine;
@@ -31,6 +32,9 @@ public class DataProvider : MonoBehaviour
     [Header("Audio data")] [SerializeField]
     private AudioClip defaultBgm;
 
+    [Header("Enemy wave data")] [SerializeField]
+    private List<EnemySpawnWaveData> enemySpawnWaveData;
+
     [SerializeField] private AudioClip enemyBgm;
     [SerializeField] private AudioClip bossBgm;
     [SerializeField] private AudioClip finalBossBgm;
@@ -52,6 +56,8 @@ public class DataProvider : MonoBehaviour
     public AudioClip EnemyBgm => enemyBgm;
     public AudioClip BossBgm => bossBgm;
     public AudioClip FinalBossBgm => finalBossBgm;
+    
+    public List<EnemySpawnWaveData> EnemySpawnWaveDataList => enemySpawnWaveData;
 
     public delegate void MaxRemainingYearsChanged(int value);
 

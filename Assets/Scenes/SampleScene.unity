@@ -27043,6 +27043,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
+      propertyPath: enemySpawnWaveData.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
       propertyPath: tutorialObjectives.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -27058,6 +27062,22 @@ PrefabInstance:
       propertyPath: fenceData.Array.data[0].version
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
+      propertyPath: enemySpawnWaveData.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: b24d789ef9ef8690cb7e99829210fd9b, type: 2}
+    - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
+      propertyPath: enemySpawnWaveData.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: b24d789ef9ef8690cb7e99829210fd9b, type: 2}
+    - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
+      propertyPath: enemySpawnWaveData.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: b24d789ef9ef8690cb7e99829210fd9b, type: 2}
+    - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
+      propertyPath: enemySpawnWaveData.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: b24d789ef9ef8690cb7e99829210fd9b, type: 2}
     - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
       propertyPath: tutorialObjectives.Array.data[0]
       value: 
