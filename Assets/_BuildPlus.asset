@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a43cedfec2e042dba78bb08974a8ab9, type: 3}
+  m_Name: _BuildPlus
+  m_EditorClassIdentifier: 
+  build:
+    xmlVersion: 0
+    versions:
+    - major: 1
+      minor: 0
+      build: 0
+      revision: 
+      dateString: 2023.05.19.0000
+      yanked: 0
+      unreleased: 0
+      notes:
+      - category: 1
+        description: '#43 Include attack + defense stats for the Player + Enemies'
+      - category: 1
+        description: '#41 Start actions by pressing a button instead of holding it'
+      - category: 3
+        description: '#38 Game Over will not be triggered on Final boss battle'
+      - category: 6
+        description: Release v1.0.0 Inital Changelog with some Notes
+    editorSettings:
+      saveToPlayerSettings: 1
+      saveToPackageJson: 0
+      packageJsonPath: 
+      buildPathScheme: '{p_path}/Build/{p_name}_{ver}'
+      saveToChangelogMd: 1
+    releaseNotes: "RELEASE NOTES\r\n\r\nv1.0.0 (2023.05.19.0000)\r\n  FEATURES\r\n   
+      * #43 Include attack + defense stats for the Player + Enemies\r\n    * #41
+      Start actions by pressing a button instead of holding it\r\n  FIXES\r\n   
+      * #38 Game Over will not be triggered on Final boss battle\r\n  GENERAL\r\n   
+      * Release v1.0.0 Inital Changelog with some Notes\r\n\r\n"
+    todo:
+      major: 0
+      minor: 0
+      build: 0
+      revision: 
+      dateString: 
+      yanked: 0
+      unreleased: 0
+      notes: []

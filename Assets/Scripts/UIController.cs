@@ -7,9 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
-    // In welcher Welle befinden wir uns
-    [SerializeField] int welle = 1;
-
     //Liste der Texte
     [SerializeField] List<TextMeshProUGUI> listTexte = new List<TextMeshProUGUI>();
     // Nach Index was ist was
@@ -22,9 +19,9 @@ public class UIController : MonoBehaviour
     [SerializeField] String[] texte;
 
     [SerializeField] TextMeshProUGUI gameOverText;
-    [SerializeField] TextMeshProUGUI tryAgainText;
+    [SerializeField] GameObject tryAgainTextObj;
 
-    private bool fadeIn, fadeOut = false;
+    private bool fadeIn = false;
     [SerializeField] float fadeAmount = 0f;
     [SerializeField] float fadeSpeed;
 
@@ -42,9 +39,9 @@ public class UIController : MonoBehaviour
         _playerData = DataProvider.Instance.PlayerData;
         _resourceData = DataProvider.Instance.ResourceData;
 
-        DataHandlerComponent.OnWaveCountChanged += UpdateWaveCount;
-        BossComponent.OnBossDestroyed += UpdateWelle;
-        PlayerController.OnRestartGame += OnRestartGame;
+        //BossComponent.OnBossDestroyed += UpdateWelle;
+        GameInputHandlerComponent.OnRestartCalled += OnRestartGame;
+        CheckForGameOverComponent.OnGameOver += OnGameOver;
 
         InitTexteUndWerte();
         // gameOverText.enabled = false;
@@ -52,21 +49,22 @@ public class UIController : MonoBehaviour
         textPopup = prefabPopupText.GetComponent<TextMeshPro>();
     }
 
+    private void OnGameOver()
+    {
+        if (_gameOverTriggered) return;
+        _gameOverTriggered = true;
+        StartCoroutine(EndGameScreen());
+    }
+
     private void OnRestartGame()
     {
-        if (!tryAgainText.enabled) return;
+        if (!tryAgainTextObj.activeSelf) return;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void Update()
     {
         InitTexteUndWerte();
-
-        if (_playerData.CurrentRemainingYears <= 0 && !_gameOverTriggered)
-        {
-            _gameOverTriggered = true;
-            StartCoroutine(EndGameScreen());
-        }
 
         if (fadeIn)
         {
@@ -100,7 +98,7 @@ public class UIController : MonoBehaviour
                     index++;
                     break;
                 case 1:
-                    item.text = texte[index] + ": " + welle + "/3";
+                    item.text = texte[index] + ": " + DataProvider.Instance.Wave + "/3";
                     index++;
                     break;
                 case 2:
@@ -117,21 +115,9 @@ public class UIController : MonoBehaviour
         }
     }
 
-    private void UpdateWaveCount(int newValue)
-    {
-        welle = newValue + 1;
-    }
-
-    private void UpdateWelle()
-    {
-        welle++;
-    }
-
     private void OnDestroy()
     {
-        DataHandlerComponent.OnWaveCountChanged -= UpdateWaveCount;
-        BossComponent.OnBossDestroyed -= UpdateWelle;
-        PlayerController.OnRestartGame -= OnRestartGame;
+        GameInputHandlerComponent.OnRestartCalled -= OnRestartGame;
     }
 
     IEnumerator EndGameScreen()
@@ -139,7 +125,7 @@ public class UIController : MonoBehaviour
         gameOverText.enabled = true;
         fadeIn = true;
         yield return new WaitForSeconds(2f);
-        tryAgainText.enabled = true;
+        tryAgainTextObj.SetActive(true);
     }
 
     IEnumerator FadeOutText(float fadeTime, TextMeshPro textGameObject, GameObject gameObject)
@@ -152,7 +138,7 @@ public class UIController : MonoBehaviour
             yield return new WaitForSeconds(fadeTime / 10000);
         }
 
-        Destroy(gameObject);
+        //Destroy(gameObject);
         yield break;
     }
 }

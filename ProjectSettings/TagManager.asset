@@ -22,7 +22,7 @@ TagManager:
   - TreeWithTreeCollision
   - Tilemap
   - PlayerCollider
-  - 
+  - FenceTrigger2
   - 
   - 
   - 

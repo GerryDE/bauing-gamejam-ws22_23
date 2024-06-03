@@ -42,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1806021322665229079, guid: be29476555061cb15a17ac504aa4c812, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.71
+      value: -0.65
       objectReference: {fileID: 0}
     - target: {fileID: 1806021324276434784, guid: be29476555061cb15a17ac504aa4c812, type: 3}
       propertyPath: m_RootOrder
@@ -93,6 +93,10 @@ PrefabInstance:
       value: finalBoss
       objectReference: {fileID: 0}
     - target: {fileID: 1806021324276434789, guid: be29476555061cb15a17ac504aa4c812, type: 3}
+      propertyPath: Data
+      value: 
+      objectReference: {fileID: 11400000, guid: 613ba5c628893d954a107bf16edd53b0, type: 2}
+    - target: {fileID: 1806021324276434789, guid: be29476555061cb15a17ac504aa4c812, type: 3}
       propertyPath: data
       value: 
       objectReference: {fileID: 11400000, guid: 613ba5c628893d954a107bf16edd53b0, type: 2}
@@ -115,7 +119,7 @@ PrefabInstance:
     - target: {fileID: 4849114260762904019, guid: be29476555061cb15a17ac504aa4c812, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 6384d670bfecc3bab8921c3703b1bc17, type: 2}
+      objectReference: {fileID: 22100000, guid: f911f6cc3d2b5ae35997440bf52dc461, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -123,6 +127,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1806021324276434788, guid: be29476555061cb15a17ac504aa4c812, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5624392074895200308}
+    - targetCorrespondingSourceObject: {fileID: 1806021324276434788, guid: be29476555061cb15a17ac504aa4c812, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8041460247872929588}
   m_SourcePrefab: {fileID: 100100000, guid: be29476555061cb15a17ac504aa4c812, type: 3}
 --- !u!1 &267851758946750762 stripped
 GameObject:
@@ -139,5 +146,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c27345fae194a72b68b00b7633fc992, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8041460247872929588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267851758946750762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b288395eed9f4f53b3bbba7c4282de77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

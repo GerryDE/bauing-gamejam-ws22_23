@@ -10,22 +10,18 @@ public class FenceRepairComponent : InteractableBaseComponent
         public int woodCost, stoneCost, healAmount;
     }
 
-    public delegate void RepairFence(int amount);
+    public delegate void RepairFence(int fenceIndex, int amount);
 
     public static RepairFence OnRepairFence;
 
-    [SerializeField] private List<Data> data;
     private FenceController _fenceController;
-
-    public List<Data> GetData()
-    {
-        return data;
-    }
+    private int _index;
 
     protected override void Start()
     {
         base.Start();
         _fenceController = transform.parent.gameObject.GetComponent<FenceController>();
+        _index = _fenceController.fenceIndex;
     }
 
     protected override void OnInteractionButton1Pressed()
@@ -34,14 +30,15 @@ public class FenceRepairComponent : InteractableBaseComponent
         _interactionButton1Pressed = false;
 
         if (!_isCollidingWithPlayer) return;
-        var currentFenceData = data[_dataHandlerComponent.CurrentFenceVersion];
-        var resourceData = DataProvider.Instance.ResourceData;
-        if (resourceData.WoodAmount < currentFenceData.woodCost ||
-            resourceData.StoneAmount < currentFenceData.stoneCost ||
+        var data = DataProvider.Instance;
+        var currentFenceData = data.FenceData[_index].data[data.FenceData[_index].version];
+        var resourceData = data.ResourceData;
+        if (resourceData.WoodAmount < currentFenceData.repairCost.lumberCost ||
+            resourceData.StoneAmount < currentFenceData.repairCost.stoneCost ||
             _fenceController.CurrentHp >= _fenceController.MaxHp) return;
-        resourceData.WoodAmount -= currentFenceData.woodCost;
-        resourceData.StoneAmount -= currentFenceData.stoneCost;
-        OnRepairFence?.Invoke(currentFenceData.healAmount);
+        resourceData.WoodAmount -= currentFenceData.repairCost.lumberCost;
+        resourceData.StoneAmount -= currentFenceData.repairCost.stoneCost;
+        OnRepairFence?.Invoke(_index, currentFenceData.repairHealAmount);
         _dataHandlerComponent.PlayUpgradingAudioClip();
     }
 }

@@ -1,66 +1,14 @@
 using System;
 using UnityEngine;
+using static Data.upgradeable_objects.statue.StatueData;
 
 public class DataHandlerComponent : MonoBehaviour
 {
-    [SerializeField] private int waveCount = 1;
-    [SerializeField] private int currentFenceVersion;
-    [SerializeField] private int currentStatueVersion;
-    [SerializeField] private int currentMineVersion;
-
     private DataProvider.CurrentPlayerData _currentPlayerData;
     private DataProvider.CurrentResourceData _resourceData;
 
-    public int CurrentMineVersion
-    {
-        get => currentMineVersion;
-        set
-        {
-            currentMineVersion = value;
-            OnMineVersionChanged?.Invoke(currentMineVersion);
-        }
-    }
-
-    [SerializeField] private int currentTreeVersion;
-
-    public int CurrentTreeVersion
-    {
-        get => currentTreeVersion;
-        set
-        {
-            currentTreeVersion = value;
-            OnTreeVersionChanged?.Invoke(currentTreeVersion);
-        }
-    }
-
     [SerializeField] AfterEffects postProcessingCameraScript;
     [SerializeField] UIController uiScript;
-
-    public int Wave
-    {
-        get => waveCount;
-        set
-        {
-            waveCount = value;
-            OnWaveCountChanged.Invoke(waveCount);
-        }
-    }
-
-    public int CurrentFenceVersion
-    {
-        get => currentFenceVersion;
-        set => currentFenceVersion = value;
-    }
-
-    public int CurrentStatueVersion
-    {
-        get => currentStatueVersion;
-        set
-        {
-            currentStatueVersion = value;
-            OnStatueVersionChanged?.Invoke(value);
-        }
-    }
 
     [SerializeField] private AudioClip attackAudioClip;
     [SerializeField] private AudioClip attackPlayerAudioClip;
@@ -117,18 +65,6 @@ public class DataHandlerComponent : MonoBehaviour
     /// 4 Upgrading
     /// 5 Woodcutting
     /// </summary>
-    public delegate void WaveCountChanged(int newValue);
-
-    public delegate void StatueVersionChanged(int newValue);
-
-    public delegate void MineVersionChanged(int newValue);
-
-    public delegate void TreeVersionChanged(int newVersion);
-
-    public static WaveCountChanged OnWaveCountChanged;
-    public static StatueVersionChanged OnStatueVersionChanged;
-    public static MineVersionChanged OnMineVersionChanged;
-    public static TreeVersionChanged OnTreeVersionChanged;
     private AudioSource _audioSource;
 
     private void Update()
@@ -143,48 +79,47 @@ public class DataHandlerComponent : MonoBehaviour
         TreeComponent.OnDropWood += OnDropWood;
         StoneComponent.OnStoneDrop += OnStoneDrop;
         StatueComponent.OnPrayed += OnPrayed;
-        EnemyController.OnReducePlayerLifetime += OnReducePlayerLifetime;
         PassingTimeComponent.OnYearPassed += OnYearPassed;
-        BossComponent.OnBossDestroyed += OnBossDestroyed;
         StatueUpgradeComponent.OnUpgradeStatue += OnUpgradeStatue;
         StoneUpgradeComponent.OnUpgradeMine += OnUpgradeMine;
         TreeUpgradeComponent.OnUpgradeTree += OnUpgradeTree;
 
-        OnWaveCountChanged?.Invoke(waveCount);
         _audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     private void OnUpgradeTree()
     {
-        CurrentTreeVersion++;
+        DataProvider.Instance.CurrentTreeVersion++;
         PlayUpgradingAudioClip();
     }
 
     private void OnUpgradeMine(float newMiningDuration, int newDropAmount, Sprite sprite)
     {
-        CurrentMineVersion++;
+        DataProvider.Instance.CurrentMineVersion++;
         PlayUpgradingAudioClip();
     }
 
-    private void OnUpgradeStatue(int newAgeValue, Sprite sprite)
+    private void OnUpgradeStatue(UpgradeableStat stat, float value)
     {
-        DataProvider.Instance.PlayerData.MaxRemainingYears = newAgeValue;
+        var data = DataProvider.Instance.PlayerData;
+        switch (stat)
+        {
+            case UpgradeableStat.MaxHp:
+                DataProvider.Instance.PlayerData.MaxRemainingYears = (int) value;
+                break;
+            case UpgradeableStat.Atk: data.AttackValue = (int) value;
+                break;
+            case UpgradeableStat.Def: data.DefenseValue = (int) value;
+                break;
+            case UpgradeableStat.Speed: data.MoveSpeed = value;
+                break;
+        }
         PlayUpgradingAudioClip();
-    }
-
-    private void OnBossDestroyed()
-    {
-        Wave++;
     }
 
     private void OnYearPassed()
     {
         _currentPlayerData.CurrentRemainingYears--;
-    }
-
-    private void OnReducePlayerLifetime(int amount)
-    {
-        _currentPlayerData.CurrentRemainingYears -= amount;
     }
 
     private void OnPrayed(int amount)
@@ -210,9 +145,7 @@ public class DataHandlerComponent : MonoBehaviour
         TreeComponent.OnDropWood -= OnDropWood;
         StoneComponent.OnStoneDrop -= OnStoneDrop;
         StatueComponent.OnPrayed -= OnPrayed;
-        EnemyController.OnReducePlayerLifetime -= OnReducePlayerLifetime;
         PassingTimeComponent.OnYearPassed -= OnYearPassed;
-        BossComponent.OnBossDestroyed -= OnBossDestroyed;
         StatueUpgradeComponent.OnUpgradeStatue -= OnUpgradeStatue;
         StoneUpgradeComponent.OnUpgradeMine -= OnUpgradeMine;
         TreeUpgradeComponent.OnUpgradeTree -= OnUpgradeTree;

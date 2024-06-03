@@ -6,8 +6,16 @@ namespace DefaultNamespace
 {
     public class FinalBossComponent : MonoBehaviour
     {
-        private void OnDestroy()
+        public delegate void GameFinished();
+        public static GameFinished OnGameFinished;
+
+        private void Awake() {
+            BossComponent.OnBossDestroyed += OnBossDestroyed;
+        }
+
+        private void OnBossDestroyed()
         {
+            OnGameFinished?.Invoke();
             SceneManager.LoadScene("WinScreen");
         }
     }

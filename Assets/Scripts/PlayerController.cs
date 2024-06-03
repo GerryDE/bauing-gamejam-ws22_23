@@ -1,5 +1,6 @@
+using System;
+using Data;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
@@ -9,30 +10,35 @@ public class PlayerController : MonoBehaviour
     private float _moveSpeedMultiplier = 1f;
     private float _direction;
 
-    public delegate void InteractionButton1Hold();
-
-    public delegate void InteractionButton1Released();
-
-    public delegate void InteractionButton1Pressed();
-
-    public delegate void InteractionButton2Pressed();
-
-    public delegate void RestartGame();
-
     public delegate void PlayerMove(float direction, float velocity);
 
-    public static InteractionButton1Hold OnInteractionButton1Hold;
-    public static InteractionButton1Released OnInteractionButton1Released;
-    public static InteractionButton1Pressed OnInteractionButton1Pressed;
-    public static InteractionButton2Pressed OnInteractionButton2Pressed;
+    public delegate void CollisionBetweenPlayerAndEnemy(Transform playerTransform, Transform enemyTransform);
+
     public static PlayerMove OnPlayerMove;
-    public static RestartGame OnRestartGame;
+    public static CollisionBetweenPlayerAndEnemy OnCollisionBetweenPlayerAndEnemy;
 
     private void Awake()
     {
         YoungToOldTransitionComponent.OnYoungOldTransitionChanged += OnYoungOldTransitionChanged;
+        GameInputHandlerComponent.OnMoveCalled += OnMoveCalled;
+        DamageHandlerComponent.OnDealDamageToPlayer += OnDealDamageToPlayer;
 
         _rigidbody = GetComponent<Rigidbody2D>();
+    }
+
+    private void OnDealDamageToPlayer(Transform playerTransform, int damageValue)
+    {
+        if (!playerTransform.GetInstanceID().Equals(transform.GetInstanceID())) return;
+        DataProvider.Instance.PlayerData.CurrentRemainingYears -= damageValue;
+    }
+
+    void OnMoveCalled(float velocity)
+    {
+        _velocity = velocity;
+        if (Math.Abs(_velocity) > 0.01f)
+        {
+            _direction = _velocity;
+        }
     }
 
     private void OnYoungOldTransitionChanged(float newValue)
@@ -49,59 +55,16 @@ public class PlayerController : MonoBehaviour
         OnPlayerMove?.Invoke(_direction, _velocity);
     }
 
-    public void OnMove(InputValue value)
-    {
-        _velocity = value.Get<float>();
-        if (_velocity != 0f)
-        {
-            _direction = _velocity;
-        }
-    }
-
-    public void OnInteract1Hold(InputValue value)
-    {
-        var floatValue = value.Get<float>();
-        if (floatValue > 0f)
-        {
-            OnInteractionButton1Hold?.Invoke();
-        }
-        else
-        {
-            OnInteractionButton1Released?.Invoke();
-        }
-    }
-
-    public void OnInteract1Press(InputValue value)
-    {
-        var floatValue = value.Get<float>();
-        if (floatValue > 0f)
-        {
-            OnInteractionButton1Pressed?.Invoke();
-        }
-    }
-
-    public void OnInteract2Press(InputValue value)
-    {
-        var floatValue = value.Get<float>();
-        if (floatValue > 0f)
-        {
-            OnInteractionButton2Pressed?.Invoke();
-        }
-    }
-
-    public void OnRestart(InputValue value)
-    {
-        OnRestartGame?.Invoke();
-    }
-
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (!col.gameObject.layer.Equals(LayerMask.NameToLayer("Enemy"))) return;
         _rigidbody.AddForce(DataProvider.Instance.PlayerData.ThrowForce);
+        OnCollisionBetweenPlayerAndEnemy?.Invoke(transform, col.transform);
     }
 
     private void OnDestroy()
     {
         YoungToOldTransitionComponent.OnYoungOldTransitionChanged -= OnYoungOldTransitionChanged;
+        GameInputHandlerComponent.OnMoveCalled -= OnMoveCalled;
     }
 }

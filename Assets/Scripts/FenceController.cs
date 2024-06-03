@@ -1,15 +1,25 @@
 using System;
+using Data.objective;
+using Objective;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(ProgressBarComponent))]
 public class FenceController : MonoBehaviour
 {
+    public int fenceIndex;
     [SerializeField, Range(0, 1000)] private int maxHp = 100;
     [SerializeField] private int currentHp;
     [SerializeField] private int damageOutput = 1;
     [SerializeField] private Color destroyedFenceColor;
     private Collider2D _collider2D;
+
+    public delegate void CurrentHpChanged(int value, int maxHp);
+
+    public delegate void CollisionBetweenFenceAndEnemy(int index, Transform fenceTransform, Transform enemyTransform);
+
+    public static CurrentHpChanged OnCurrentHpChanged;
+    public static CollisionBetweenFenceAndEnemy OnCollisionBetweenFenceAndEnemy;
 
     public int DamageOutput => damageOutput;
 
@@ -26,7 +36,11 @@ public class FenceController : MonoBehaviour
     public int CurrentHp
     {
         get => currentHp;
-        private set => currentHp = value;
+        private set
+        {
+            currentHp = value;
+            OnCurrentHpChanged?.Invoke(value, maxHp);
+        }
     }
 
     private void Start()
@@ -41,12 +55,30 @@ public class FenceController : MonoBehaviour
     {
         FenceRepairComponent.OnRepairFence += OnRepairFence;
         FenceUpgradeComponent.OnUpgradeFence += OnUpgradeFence;
+        TutorialComponent.OnNewObjectiveStarted += OnObjectiveStarted;
+        DamageHandlerComponent.OnDealDamageToFence += OnDealDamageToFence;
 
         currentHp = maxHp;
     }
 
-    private void OnUpgradeFence(int newHpValue, int damage, Sprite sprite)
+    private void OnDealDamageToFence(Transform enemyTransform, int damageValue)
     {
+        if (!enemyTransform.GetInstanceID().Equals(transform.GetInstanceID())) return;
+        ReduceHp(damageValue);
+    }
+
+    private void OnObjectiveStarted(ObjectiveData data)
+    {
+        if (data.GetType() == typeof(TutorialCompletedObjectiveData))
+        {
+            CurrentHp = MaxHp;
+        }
+    }
+    
+    private void OnUpgradeFence(int index, int newHpValue, int damage, Sprite sprite)
+    {
+        if (index != fenceIndex) return;
+        
         MaxHp = newHpValue;
         CurrentHp = MaxHp;
         damageOutput = damage;
@@ -57,8 +89,9 @@ public class FenceController : MonoBehaviour
         _progressBarComponent.UpdateValues(currentHp, MaxHp);
     }
 
-    private void OnRepairFence(int amount)
+    private void OnRepairFence(int index, int amount)
     {
+        if (index != fenceIndex) return;
         currentHp = Math.Min(currentHp + amount, maxHp);
         _progressBarComponent.Enable();
         _progressBarComponent.UpdateValues(currentHp, MaxHp);
@@ -69,11 +102,15 @@ public class FenceController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (!col.gameObject.layer.Equals(LayerMask.NameToLayer("Enemy"))) return;
+        OnCollisionBetweenFenceAndEnemy?.Invoke(fenceIndex, transform, col.transform);
+    }
 
-        currentHp -= 1;
-        _progressBarComponent.UpdateValues(currentHp, MaxHp);
+    private void ReduceHp(int value)
+    {
+        CurrentHp -= value;
+        _progressBarComponent.UpdateValues(CurrentHp, MaxHp);
 
-        if (currentHp > 0) return;
+        if (CurrentHp > 0) return;
         _collider2D.enabled = false;
         _renderer.color = destroyedFenceColor;
         _progressBarComponent.Disable();
@@ -83,5 +120,6 @@ public class FenceController : MonoBehaviour
     {
         FenceRepairComponent.OnRepairFence -= OnRepairFence;
         FenceUpgradeComponent.OnUpgradeFence -= OnUpgradeFence;
+        ObjectiveHandler.OnObjectiveReached -= OnObjectiveStarted;
     }
 }

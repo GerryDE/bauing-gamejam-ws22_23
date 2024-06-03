@@ -1,5 +1,9 @@
 using System;
+using System.Collections.Generic;
+using AssemblyCSharp.Assets.Scripts;
 using Data;
+using Data.objective;
+using Data.upgradeable_objects.statue;
 using UnityEngine;
 
 public class DataProvider : MonoBehaviour
@@ -7,11 +11,47 @@ public class DataProvider : MonoBehaviour
     // Make sure that this component only exists once in the project to the keep the Singleton approach
     public static DataProvider Instance { get; private set; }
 
-    [SerializeField] private PlayerData initialCurrentPlayerData;
+    [Header("Player related data")] [SerializeField]
+    public PlayerData initialCurrentPlayerData;
+
     [SerializeField] private ResourceData initialResourceData;
 
-    public CurrentPlayerData PlayerData;
-    public CurrentResourceData ResourceData;
+    [Header("Interactable data")] [SerializeField]
+    private List<FenceDataIndex> fenceData;
+
+    [SerializeField] private List<TreeData> treeData;
+    [SerializeField] private List<MineData> mineData;
+    [SerializeField] private StatueData initialStatueData;
+
+    [Header("Objective data")] [SerializeField]
+    private List<ObjectiveData> tutorialObjectives;
+
+    [SerializeField] private List<ObjectiveData> dynamicObjectives;
+
+    [Header("Audio data")] [SerializeField]
+    private AudioClip defaultBgm;
+
+    [SerializeField] private AudioClip enemyBgm;
+    [SerializeField] private AudioClip bossBgm;
+    [SerializeField] private AudioClip finalBossBgm;
+
+    [NonSerialized] public CurrentPlayerData PlayerData;
+    [NonSerialized] public CurrentResourceData InitialResourceData;
+    [NonSerialized] public CurrentResourceData ResourceData;
+
+    [NonSerialized] public List<FenceDataIndex> FenceData;
+    [NonSerialized] public List<TreeData> TreeData;
+    [NonSerialized] public List<MineData> MineData;
+    [NonSerialized] public StatueData CurrentStatueData;
+    [NonSerialized] public StatueData NextStatueData;
+
+    [NonSerialized] public List<ObjectiveData> TutorialObjectives;
+    [NonSerialized] public List<ObjectiveData> DynamicObjectives;
+
+    public AudioClip DefaultBgm => defaultBgm;
+    public AudioClip EnemyBgm => enemyBgm;
+    public AudioClip BossBgm => bossBgm;
+    public AudioClip FinalBossBgm => finalBossBgm;
 
     public delegate void MaxRemainingYearsChanged(int value);
 
@@ -22,6 +62,14 @@ public class DataProvider : MonoBehaviour
     public delegate void DefenseValueChanged(int value);
 
     public delegate void MoveSpeedChanged(float value);
+
+    public delegate void MaxHpLevelChanged(int value);
+
+    public delegate void AttackLevelChanged(int value);
+
+    public delegate void DefenseLevelChanged(int value);
+
+    public delegate void SpeedLevelChanged(int value);
 
     public delegate void RemainingYearsForStayingYoungChanged(int value);
 
@@ -35,17 +83,112 @@ public class DataProvider : MonoBehaviour
 
     public delegate void StoneAmountChanged(int value);
 
+    public delegate void ResourceDataChanged(CurrentResourceData data);
+
+    public delegate void FenceVersionChanged(int index, int newVersion);
+
+    public delegate void TreeVersionChanged(int newVersion);
+
+    public delegate void MineVersionChanged(int newVersion);
+
+    public delegate void StatueVersionChanged(int newVersion);
+
+    public delegate void TutorialObjectiveIndexChanged(int newIndex);
+
+    public delegate void WaveCountChanged(int newWaveCount);
+
     public static MaxRemainingYearsChanged OnPlayerMaxRemainingYearsChanged;
     public static CurrentRemainingYearsChanged OnCurrentRemainingYearsChanged;
     public static AttackValueChanged OnAttackValueChanged;
     public static DefenseValueChanged OnDefenseValueChanged;
     public static MoveSpeedChanged OnMoveSpeedChanged;
+
+    public static MaxHpLevelChanged OnMaxHpLevelChanged;
+    public static AttackLevelChanged OnAttackLevelChanged;
+    public static DefenseLevelChanged OnDefenseLevelChanged;
+    public static SpeedLevelChanged OnSpeedLevelChanged;
+
     public static RemainingYearsForStayingYoungChanged OnRemainingYearsForStayingYoungChanged;
     public static RemainingYearsBecomingOldChanged OnRemainingYearsBecomingOldChanged;
     public static MinSpeedPercentageChanged OnMinSpeedPercentageChanged;
     public static ThrowForceChanged OnThrowForceChanged;
     public static WoodAmountChanged OnWoodAmountChanged;
     public static StoneAmountChanged OnStoneAmountChanged;
+    public static ResourceDataChanged OnResourceDataChanged;
+    public static FenceVersionChanged OnFenceVersionChanged;
+    public static TreeVersionChanged OnTreeVersionChanged;
+    public static MineVersionChanged OnMineVersionChanged;
+    public static StatueVersionChanged OnStatueVersionChanged;
+    public static TutorialObjectiveIndexChanged OnTutorialObjectiveIndexChanged;
+    public static WaveCountChanged OnWaveCountChanged;
+
+    private int _currentFenceVersion;
+    private int _currentTreeVersion;
+    private int _currentMineVersion;
+    private int _currentStatueVersion;
+    private int _currentTutorialObjectiveIndex;
+    private int _waveCount;
+
+    public int GetCurrentFenceVersion(int index)
+    {
+        return FenceData[index].version;
+    }
+
+    public void SetCurrentFenceVersion(int index, int value)
+    {
+        fenceData[index].version = value;
+        OnFenceVersionChanged?.Invoke(index, value);
+    }
+
+    public int CurrentTreeVersion
+    {
+        get => _currentTreeVersion;
+        set
+        {
+            _currentTreeVersion = value;
+            OnTreeVersionChanged?.Invoke(value);
+        }
+    }
+
+    public int CurrentMineVersion
+    {
+        get => _currentMineVersion;
+        set
+        {
+            _currentMineVersion = value;
+            OnMineVersionChanged?.Invoke(value);
+        }
+    }
+
+    public int CurrentStatueVersion
+    {
+        get => _currentStatueVersion;
+        set
+        {
+            _currentStatueVersion = value;
+            OnStatueVersionChanged?.Invoke(value);
+        }
+    }
+
+    public int CurrentTutorialObjectiveIndex
+    {
+        get => _currentTutorialObjectiveIndex;
+        set
+        {
+            _currentTutorialObjectiveIndex = value;
+            OnTutorialObjectiveIndexChanged?.Invoke(value);
+        }
+    }
+
+    public int Wave
+    {
+        get => _waveCount;
+        set
+        {
+            _waveCount = value;
+            OnWaveCountChanged?.Invoke(_waveCount);
+        }
+    }
 
     public class CurrentPlayerData
     {
@@ -58,13 +201,19 @@ public class DataProvider : MonoBehaviour
         private int _remainingYearsUntilBecomingOld;
         private float _minSpeedPercentage;
         private Vector2 _throwForce;
+        private int _maxHpLevel;
+        private int _attackLevel;
+        private int _defenseLevel;
+        private int _speedLevel;
 
         public int MaxRemainingYears
         {
             get => _maxRemainingYears;
             set
             {
+                _currentRemainingYears += value - _maxRemainingYears;
                 _maxRemainingYears = value;
+                OnCurrentRemainingYearsChanged?.Invoke(value);
                 OnPlayerMaxRemainingYearsChanged?.Invoke(value);
             }
         }
@@ -74,7 +223,7 @@ public class DataProvider : MonoBehaviour
             get => _currentRemainingYears;
             set
             {
-                _currentRemainingYears = Math.Max(0, value);
+                _currentRemainingYears = Math.Clamp(value, 0, _maxRemainingYears);
                 OnCurrentRemainingYearsChanged?.Invoke(value);
             }
         }
@@ -148,6 +297,47 @@ public class DataProvider : MonoBehaviour
                 OnThrowForceChanged?.Invoke(value);
             }
         }
+
+        public int MaxHpLevel
+        {
+            get => _maxHpLevel;
+            set
+            {
+                _maxHpLevel = value;
+                OnMaxHpLevelChanged?.Invoke(value);
+            }
+        }
+
+        public int AttackLevel
+        {
+            get => _attackLevel;
+            set
+            {
+                _attackLevel = value;
+                OnAttackLevelChanged?.Invoke(value);
+            }
+        }
+
+        public int DefenseLevel
+        {
+            get => _defenseLevel;
+            set
+            {
+                _defenseLevel = value;
+                OnDefenseLevelChanged?.Invoke(value);
+            }
+        }
+
+        public int SpeedLevel
+        {
+            get => _speedLevel;
+            set
+            {
+                _speedLevel = value;
+                Debug.Log("Speed level changed to " + value);
+                OnSpeedLevelChanged?.Invoke(value);
+            }
+        }
     }
 
     public class CurrentResourceData
@@ -162,6 +352,7 @@ public class DataProvider : MonoBehaviour
             {
                 _woodAmount = value;
                 OnWoodAmountChanged?.Invoke(value);
+                OnResourceDataChanged?.Invoke(this);
             }
         }
 
@@ -172,6 +363,7 @@ public class DataProvider : MonoBehaviour
             {
                 _stoneAmount = value;
                 OnStoneAmountChanged?.Invoke(value);
+                OnResourceDataChanged?.Invoke(this);
             }
         }
     }
@@ -200,10 +392,46 @@ public class DataProvider : MonoBehaviour
             ThrowForce = initialCurrentPlayerData.throwBackForce
         };
 
+        InitialResourceData = new CurrentResourceData
+        {
+            WoodAmount = initialResourceData.woodAmount,
+            StoneAmount = initialResourceData.stoneAmount
+        };
+
         ResourceData = new CurrentResourceData
         {
             WoodAmount = initialResourceData.woodAmount,
             StoneAmount = initialResourceData.stoneAmount
         };
+
+        FenceData = fenceData;
+        TreeData = treeData;
+        MineData = mineData;
+        CurrentStatueData = initialStatueData.Copy();
+        TutorialObjectives = tutorialObjectives;
+        DynamicObjectives = dynamicObjectives;
     }
+
+    public CostData GetCostData(Interactable interactable, int version)
+    {
+        switch (interactable)
+        {
+            case Interactable.Fence_0_Repair: return FenceData[0].data[version].repairCost;
+            case Interactable.Fence_0_Upgrade: return FenceData[0].data[version].upgradeCost;
+            case Interactable.Fence_1_Repair: return FenceData[1].data[version].repairCost;
+            case Interactable.Fence_1_Upgrade: return FenceData[1].data[version].upgradeCost;
+            case Interactable.Tree_Upgrade: return TreeData[version].upgradeCost;
+            case Interactable.Stone_Upgrade: return MineData[version].upgradeCost;
+            case Interactable.Statue_Upgrade: return NextStatueData.upgradeCost;
+        }
+
+        return null;
+    }
+}
+
+[Serializable]
+public class FenceDataIndex
+{
+    [SerializeField] public List<FenceData> data;
+    [SerializeField] public int version;
 }

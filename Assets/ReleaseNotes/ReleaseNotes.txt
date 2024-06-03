@@ -1,0 +1,8 @@
+RELEASE NOTES
+
+Changes since v1.0.0 (Game Jam Release)
+
+  FEATURES
+      #40 Show textboxes that inform the Player about changes of the next upgrades
+      #42 Show visual feedback to the Player when an object can be upgraded
+    
