@@ -8,8 +8,7 @@ namespace Objective
     {
         private DefeatEnemyObjectiveData _data;
 
-        public delegate void SpawnEnemy(GameObject enemyPrefab, int maxAmountOfSimultaneouslyLivingEnemies,
-            int killedEnemiesDuringWave, int enemiesToKillUntilBoss);
+        public delegate void SpawnEnemy(GameObject enemyPrefab, int maxAmountOfSimultaneouslyLivingEnemies);
 
         public static SpawnEnemy OnSpawnEnemy;
 
@@ -17,7 +16,7 @@ namespace Objective
         {
             _data = data;
             
-            OnSpawnEnemy?.Invoke(_data.enemyObj, 1, 0, 1);
+            OnSpawnEnemy?.Invoke(_data.enemyObj, 1);
             EnemyController.OnEnemyDestroyed += OnEnemyDestroyed;
         }
 

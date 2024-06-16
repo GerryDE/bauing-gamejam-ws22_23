@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using static Data.EnemySpawning.EnemyType;
 
@@ -11,8 +12,12 @@ namespace Data.EnemySpawning
     [CreateAssetMenu(fileName = "Assets/Data/EnemySpawning/EnemySpawnSubWaveData", menuName = "Data/Enemy spawning/Enemy Spawn Sub-wave")]
     public class EnemySpawnSubWaveData : ScriptableObject
     {
-        public int spawnAmount = 3;
-        public EnemyType enemyType = ENEMY_1;
+        public List<GameObject> enemies;
         public SpawnIntervalRange spawnIntervalRange;
+
+        public int EnemyAmount()
+        {
+            return enemies.Count;
+        }
     }
 }

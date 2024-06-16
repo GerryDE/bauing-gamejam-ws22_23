@@ -10,12 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed04f13b997c46b3bdca350f383caf75, type: 3}
-  m_Name: Sub wave 1
+  m_Name: Sub wave Boss 1
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 1806021324276434788, guid: be29476555061cb15a17ac504aa4c812, type: 3}
-  - {fileID: 1806021324276434788, guid: be29476555061cb15a17ac504aa4c812, type: 3}
-  - {fileID: 1806021324276434788, guid: be29476555061cb15a17ac504aa4c812, type: 3}
+  - {fileID: 7866932865955879141, guid: b269a59c572df88d48a959922170a03b, type: 3}
   spawnIntervalRange:
     min: 5
     max: 5

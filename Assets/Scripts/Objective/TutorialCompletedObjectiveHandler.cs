@@ -9,7 +9,7 @@ namespace Objective
         public TutorialCompletedObjectiveHandler(TutorialCompletedObjectiveData data)
         {
             _data = data;
-            DataProvider.Instance.Wave = 1;
+            DataProvider.Instance.WaveCount = 1;
             ResetData();
         }
 

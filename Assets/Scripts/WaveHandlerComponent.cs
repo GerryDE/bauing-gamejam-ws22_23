@@ -1,230 +1,88 @@
-using System.Collections.Generic;
-using Data.EnemySpawning;
 using UnityEngine;
+using static UnityEngine.Debug;
 
 public class WaveHandlerComponent : MonoBehaviour
 {
-    // public enum EnemyType
-    // {
-    //     ENEMY_1
-    // }
-    //
-    // [Serializable]
-    // public struct SpawnIntervalRange
-    // {
-    //     [Range(0f, 100f)]
-    //     public float min, max;
-    // }
-    //
-    // [Serializable]
-    // private struct SubWave
-    // {
-    //     public int spawnAmount;
-    //     public EnemyType EnemyType;
-    //     public SpawnIntervalRange spawnIntervalRange;
-    // }
-    //
-    // [Serializable]
-    // private struct WaveData
-    // {
-    //     public bool tutorial;
-    //     public int enemiesToKillUntilBoss;
-    //     public float spawnInterval;
-    //     public SpawnIntervalRange SpawnIntervalRange;
-    //     public int maxAmountOfSimultaneouslyLivingEnemies;
-    //     public List<SubWave> subWaves;
-    //     public GameObject bossPrefab;
-    // }
-
-    [SerializeField] private GameObject enemyPrefab;
-    private List<EnemySpawnWaveData> _spawnWaveData;
-
-    private DataHandlerComponent _dataHandlerComponent;
     private float _elapsedTime;
-    private int _killedEnemiesDuringWave;
-    private bool _bossFightEnabled;
     private float _timeBetweenSpawn;
+    private bool _activeSubWave;
+    private int _subWaveEnemyCount;
+    private int _enemiesDestroyedDuringSubWave;
+    private DataProvider _dataProvider;
 
-    public delegate void SpawnEnemy(GameObject enemyPrefab, int maxAmountOfSimultaneouslyLivingEnemies,
-        int killedEnemies, int enemiesToKillUntilBoss);
+    public delegate void SpawnEnemy(GameObject enemyPrefab, int maxAmountOfSimultaneouslyLivingEnemies);
+
+    public delegate void EnemySubWaveDefeated();
 
     public static SpawnEnemy OnSpawnEnemy;
+    public static EnemySubWaveDefeated OnEnemySubWaveDefeated;
 
     private void Start()
     {
+        _dataProvider = DataProvider.Instance;
+        if (!_dataProvider)
+        {
+            LogError("DataProvider not found!");
+        }
+
         EnemyController.OnEnemyDestroyed += OnEnemyDestroyed;
-        BossComponent.OnBossDestroyed += OnBossDestroyed;
-
-        _spawnWaveData = DataProvider.Instance.EnemySpawnWaveDataList;
-
-        _dataHandlerComponent = GameObject.FindWithTag("DataHandler").GetComponent<DataHandlerComponent>();
-    }
-
-    private void OnBossDestroyed()
-    {
-        _bossFightEnabled = false;
-        _elapsedTime = 0f;
-        DataProvider.Instance.Wave++;
     }
 
     private void OnEnemyDestroyed(int objectId)
     {
-        _killedEnemiesDuringWave++;
+        _enemiesDestroyedDuringSubWave++;
+
+        if (_enemiesDestroyedDuringSubWave < _dataProvider.CurrentSubWaveData().enemies.Count) return;
+
+        _activeSubWave = false;
+        _enemiesDestroyedDuringSubWave = 0;
+        OnEnemySubWaveDefeated?.Invoke();
+
+        if (_dataProvider.SubWaveCount + 1 < _dataProvider.CurrentWaveData().subWaves.Count)
+        {
+            _dataProvider.SubWaveCount++;
+        }
+        else
+        {
+            _dataProvider.SubWaveCount = 0;
+            if (_dataProvider.WaveCount + 1 >= _dataProvider.EnemySpawnWaveDataList.Count) return;
+            _dataProvider.WaveCount++;
+        }
+
+        _elapsedTime = 0;
     }
 
     private void FixedUpdate()
     {
-        if (_bossFightEnabled) return;
+        if (!_dataProvider) return;
 
-        var currentData = _spawnWaveData[DataProvider.Instance.Wave];
-        if (currentData.tutorial) return;
+        var currentWaveData = _dataProvider.CurrentWaveData();
+        if (currentWaveData.tutorial) return;
+
+        var subWaveCount = _dataProvider.SubWaveCount;
+        if (!_activeSubWave && subWaveCount < currentWaveData.subWaves.Count &&
+            _elapsedTime >= currentWaveData.subWaveIntervalRange.min)
+        {
+            _activeSubWave = true;
+            _subWaveEnemyCount = 0;
+            _elapsedTime = 0;
+        }
+
+        if (_activeSubWave)
+        {
+            var currentSubWave = _dataProvider.CurrentSubWaveData();
+            if (_subWaveEnemyCount < currentSubWave.enemies.Count)
+            {
+                if (_elapsedTime >= currentSubWave.spawnIntervalRange.min)
+                {
+                    OnSpawnEnemy?.Invoke(currentSubWave.enemies[_subWaveEnemyCount],
+                        currentWaveData.maxAmountOfSimultaneouslyLivingEnemies);
+                    _subWaveEnemyCount++;
+                    _elapsedTime = 0;
+                }
+            }
+        }
 
         _elapsedTime += Time.deltaTime;
-        if (_elapsedTime <= currentData.spawnIntervalRange.min) return;
-
-        var maxAmountOfSimultaneouslyLivingEnemies = currentData.maxAmountOfSimultaneouslyLivingEnemies;
-        if (_killedEnemiesDuringWave < currentData.enemiesToKillUntilBoss)
-        {
-            OnSpawnEnemy?.Invoke(enemyPrefab, maxAmountOfSimultaneouslyLivingEnemies, _killedEnemiesDuringWave,
-                currentData.enemiesToKillUntilBoss);
-            _elapsedTime = 0f;
-        }
-        else
-        {
-            _bossFightEnabled = true;
-            _killedEnemiesDuringWave = 0;
-            OnSpawnEnemy?.Invoke(currentData.bossPrefab, maxAmountOfSimultaneouslyLivingEnemies,
-                _killedEnemiesDuringWave, currentData.enemiesToKillUntilBoss);
-        }
-
-        _elapsedTime = 0f;
     }
-
-    private void OnDestroy()
-    {
-        EnemyController.OnEnemyDestroyed -= OnEnemyDestroyed;
-        BossComponent.OnBossDestroyed -= OnBossDestroyed;
-    }
-
-    // //Coroutines to better support the spawnValues
-    // private IEnumerator FirstWave()
-    // {
-    //     int counter = 0;
-    //     while (true)
-    //     {
-    //         var currentData = data[_dataHandlerComponent.Wave];
-    //         _timeBetweenSpawn = UnityEngine.Random.Range(currentData.rangeBegin -= currentData.rangeDecuct * 0.8f * counter, currentData.rangeEnd -= currentData.rangeDecuct * counter);
-    //         counter++;
-    //         Debug.Log("Time Between Spawn: " + _timeBetweenSpawn);
-    //         //Is Counting Time, no need to count up DeltaTime
-    //         yield return new WaitForSeconds(_timeBetweenSpawn);
-    //         //If Bossfight is Enabled after killing x Amount of Enemies Start Next Wave
-    //         if (_bossFightEnabled)
-    //         {
-    //             StartCoroutine("SecondWave");
-    //             yield break;
-    //         }
-    //
-    //         //This is Obsolete because Coroutine Waits for x Seconds
-    //         //if (_elapsedTime <= currentData.spawnInterval) return;
-    //
-    //         var maxAmountOfSimultaneouslyLivingEnemies = currentData.maxAmountOfSimultaneouslyLivingEnemies;
-    //
-    //         if (_killedEnemiesDuringWave < currentData.enemiesToKillUntilBoss)
-    //         {
-    //             OnSpawnEnemy?.Invoke(enemyPrefab, maxAmountOfSimultaneouslyLivingEnemies, _killedEnemiesDuringWave,
-    //                 currentData.enemiesToKillUntilBoss);
-    //             //_elapsedTime = 0f;
-    //             yield return new WaitForSeconds(0);
-    //         }
-    //         else
-    //         {
-    //             _bossFightEnabled = true;
-    //             _killedEnemiesDuringWave = 0;
-    //             OnSpawnEnemy?.Invoke(currentData.bossPrefab, maxAmountOfSimultaneouslyLivingEnemies,
-    //                 _killedEnemiesDuringWave, currentData.enemiesToKillUntilBoss);
-    //             yield return new WaitForSeconds(15);
-    //         }
-    //     }
-    // }
-    //
-    // private IEnumerator SecondWave()
-    // {
-    //     StopCoroutine("FirstWave");
-    //     int counter = 0;
-    //     while (true)
-    //     {
-    //         var currentData = data[_dataHandlerComponent.Wave];
-    //         _timeBetweenSpawn = UnityEngine.Random.Range(currentData.rangeBegin * 0.8f * counter, currentData.rangeEnd -= currentData.rangeDecuct * counter);
-    //         Debug.Log("Time Between Spawn: " + _timeBetweenSpawn);
-    //         //Is Counting Time, no need to count up DeltaTime
-    //         yield return new WaitForSeconds(_timeBetweenSpawn);
-    //         //If Bossfight is Enabled after killing x Amount of Enemies Start Next Wave
-    //         if (_bossFightEnabled)
-    //         {
-    //             StartCoroutine("ThirdWave");
-    //             yield break;
-    //         }
-    //         
-    //         //This is Obsolete because Coroutine Waits for x Seconds
-    //         //if (_elapsedTime <= currentData.spawnInterval) return;
-    //
-    //         var maxAmountOfSimultaneouslyLivingEnemies = currentData.maxAmountOfSimultaneouslyLivingEnemies;
-    //
-    //         if (_killedEnemiesDuringWave < currentData.enemiesToKillUntilBoss)
-    //         {
-    //             OnSpawnEnemy?.Invoke(enemyPrefab, maxAmountOfSimultaneouslyLivingEnemies, _killedEnemiesDuringWave,
-    //                 currentData.enemiesToKillUntilBoss);
-    //             //_elapsedTime = 0f;
-    //             yield return new WaitForSeconds(0);
-    //         }
-    //         else
-    //         {
-    //             _bossFightEnabled = true;
-    //             _killedEnemiesDuringWave = 0;
-    //             OnSpawnEnemy?.Invoke(currentData.bossPrefab, maxAmountOfSimultaneouslyLivingEnemies,
-    //                 _killedEnemiesDuringWave, currentData.enemiesToKillUntilBoss);
-    //             yield return new WaitForSeconds(20);
-    //         }
-    //     }
-    // }
-    // private IEnumerator ThirdWave()
-    // {
-    //     StopCoroutine("SecondWave");
-    //     int counter = 0;
-    //     while (true)
-    //     {
-    //         var currentData = data[_dataHandlerComponent.Wave];
-    //         _timeBetweenSpawn = UnityEngine.Random.Range(currentData.rangeBegin * 0.8f * counter, currentData.rangeEnd -= currentData.rangeDecuct * counter);
-    //         Debug.Log("Time Between Spawn: " + _timeBetweenSpawn);
-    //         //Is Counting Time, no need to count up DeltaTime
-    //         yield return new WaitForSeconds(_timeBetweenSpawn);
-    //         //If Bossfight is Enabled after killing x Amount of Enemies Start Next Wave
-    //         if (_bossFightEnabled)
-    //         {
-    //             yield break;
-    //         }
-    //
-    //         //This is Obsolete because Coroutine Waits for x Seconds
-    //         //if (_elapsedTime <= currentData.spawnInterval) return;
-    //
-    //         var maxAmountOfSimultaneouslyLivingEnemies = currentData.maxAmountOfSimultaneouslyLivingEnemies;
-    //
-    //         if (_killedEnemiesDuringWave < currentData.enemiesToKillUntilBoss)
-    //         {
-    //             OnSpawnEnemy?.Invoke(enemyPrefab, maxAmountOfSimultaneouslyLivingEnemies, _killedEnemiesDuringWave,
-    //                 currentData.enemiesToKillUntilBoss);
-    //             //_elapsedTime = 0f;
-    //             yield return new WaitForSeconds(0);
-    //         }
-    //         else
-    //         {
-    //             _bossFightEnabled = true;
-    //             _killedEnemiesDuringWave = 0;
-    //             OnSpawnEnemy?.Invoke(currentData.bossPrefab, maxAmountOfSimultaneouslyLivingEnemies,
-    //                 _killedEnemiesDuringWave, currentData.enemiesToKillUntilBoss);
-    //             yield return new WaitForSeconds(_timeBetweenSpawn);
-    //         }
-    //     }
-    // }
 }

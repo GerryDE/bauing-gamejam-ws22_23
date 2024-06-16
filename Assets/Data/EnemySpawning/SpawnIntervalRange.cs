@@ -6,7 +6,7 @@ namespace Data.EnemySpawning
     [Serializable]
     public struct SpawnIntervalRange
     {
-        [Range(0f, 100f)]
-        public float min, max;
+        public float min;
+        public float max;
     }
 }

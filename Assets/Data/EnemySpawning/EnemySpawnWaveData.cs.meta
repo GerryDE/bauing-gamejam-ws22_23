@@ -4,7 +4,7 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - bossPrefab: {fileID: 7866932865955879141, guid: b269a59c572df88d48a959922170a03b, type: 3}
+  - bossPrefab: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

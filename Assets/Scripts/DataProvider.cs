@@ -102,6 +102,8 @@ public class DataProvider : MonoBehaviour
     public delegate void TutorialObjectiveIndexChanged(int newIndex);
 
     public delegate void WaveCountChanged(int newWaveCount);
+    
+    public delegate void SubWaveCountChanged(int newSubWaveCount);
 
     public static MaxRemainingYearsChanged OnPlayerMaxRemainingYearsChanged;
     public static CurrentRemainingYearsChanged OnCurrentRemainingYearsChanged;
@@ -127,6 +129,7 @@ public class DataProvider : MonoBehaviour
     public static StatueVersionChanged OnStatueVersionChanged;
     public static TutorialObjectiveIndexChanged OnTutorialObjectiveIndexChanged;
     public static WaveCountChanged OnWaveCountChanged;
+    public static SubWaveCountChanged OnSubWaveCountChanged;
 
     private int _currentFenceVersion;
     private int _currentTreeVersion;
@@ -134,6 +137,7 @@ public class DataProvider : MonoBehaviour
     private int _currentStatueVersion;
     private int _currentTutorialObjectiveIndex;
     private int _waveCount;
+    private int _subWaveCount;
 
     public int GetCurrentFenceVersion(int index)
     {
@@ -186,13 +190,49 @@ public class DataProvider : MonoBehaviour
         }
     }
 
-    public int Wave
+    public int WaveCount
     {
         get => _waveCount;
         set
         {
             _waveCount = value;
             OnWaveCountChanged?.Invoke(_waveCount);
+        }
+    }
+    
+    public int SubWaveCount
+    {
+        get => _subWaveCount;
+        set
+        {
+            _subWaveCount = value;
+            OnSubWaveCountChanged?.Invoke(_subWaveCount);
+        }
+    }
+
+    public EnemySpawnWaveData CurrentWaveData()
+    {
+        return enemySpawnWaveData[_waveCount];
+    }
+    
+    public EnemySpawnSubWaveData CurrentSubWaveData()
+    {
+        return CurrentWaveData().subWaves[_subWaveCount];
+    }
+
+    public class SubWave
+    {
+        private int _count;
+        private List<int> _assignedEnemyIds;
+        
+        public int Count
+        {
+            get => _count;
+            set
+            {
+                _count = value;
+                OnSubWaveCountChanged?.Invoke(value);
+            }
         }
     }
 

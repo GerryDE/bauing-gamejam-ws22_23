@@ -38,9 +38,10 @@ namespace Audio
             _fadeAudioSource = audioSource2;
             
             WaveHandlerComponent.OnSpawnEnemy += OnSpawnEnemy;
+            WaveHandlerComponent.OnEnemySubWaveDefeated += OnEnemySubWaveDefeated;
         }
 
-        private void OnSpawnEnemy(GameObject enemyPrefab, int maxAmountOfSimultaneouslyLivingEnemies, int killedEnemies, int enemiesToKillUntilBoss)
+        private void OnSpawnEnemy(GameObject enemyPrefab, int maxAmountOfSimultaneouslyLivingEnemies)
         {
             if (enemyPrefab.GetComponent<FinalBossComponent>() != null && _currentBgm != CurrentBgm.FINAL_BOSS)
             {
@@ -57,6 +58,12 @@ namespace Audio
                 _currentBgm = CurrentBgm.ENEMY;
                 Fade(DataProvider.Instance.EnemyBgm);
             }
+        }
+        
+        private void OnEnemySubWaveDefeated()
+        {
+            _currentBgm = CurrentBgm.DEFAULT;
+            Fade(DataProvider.Instance.DefaultBgm);
         }
 
         private void Fade(AudioClip newAudioClip)
