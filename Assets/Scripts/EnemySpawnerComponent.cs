@@ -16,14 +16,9 @@ public class EnemySpawnerComponent : MonoBehaviour
         // StartCoroutine(showInfo(prefabHowToKill, transform));
     }
 
-    private void SpawnEnemy(GameObject enemyPrefab, int maxAmountOfSimultaneouslyLivingEnemies, int killedEnemiesDuringWave, int enemiesToKillUntilBoss)
+    private void SpawnEnemy(GameObject enemyPrefab, int maxAmountOfSimultaneouslyLivingEnemies)
     {
-        var length = transform.childCount;
-        if (length < maxAmountOfSimultaneouslyLivingEnemies &&
-           length + killedEnemiesDuringWave < enemiesToKillUntilBoss)
-        {
-            Instantiate(enemyPrefab, transform);
-        }
+        Instantiate(enemyPrefab, transform);
     }
 
     private void OnDestroy()

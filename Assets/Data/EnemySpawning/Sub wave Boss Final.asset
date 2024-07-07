@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed04f13b997c46b3bdca350f383caf75, type: 3}
+  m_Name: Sub wave Boss Final
+  m_EditorClassIdentifier: 
+  enemies:
+  - {fileID: 267851758946750762, guid: a52292cbf15a476bd8003030d2292d7c, type: 3}
+  spawnIntervalRange:
+    min: 4
+    max: 7

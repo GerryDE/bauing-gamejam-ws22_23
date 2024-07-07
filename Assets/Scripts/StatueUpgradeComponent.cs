@@ -49,8 +49,6 @@ public class StatueUpgradeComponent : InteractableBaseComponent
             _ => throw new ArgumentOutOfRangeException()
         };
         nextStatVersion++;
-        Debug.Log("Generating next upgrade data with stat " + nextStatueData.statToUpgrade + " value for level " +
-                  nextStatVersion + "...");
         nextStatueData.SetStatValue(nextStatVersion);
 
         DataProvider.Instance.NextStatueData = nextStatueData;

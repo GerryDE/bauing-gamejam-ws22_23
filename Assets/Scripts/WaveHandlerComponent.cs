@@ -1,83 +1,109 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Debug;
 
 public class WaveHandlerComponent : MonoBehaviour
 {
-    [Serializable]
-    private struct WaveData
-    {
-        public bool tutorial;
-        public int enemiesToKillUntilBoss;
-        public float spawnInterval;
-        public int maxAmountOfSimultaneouslyLivingEnemies;
-        public GameObject bossPrefab;
-    }
+	public delegate void SpawnEnemy(GameObject enemyPrefab, int maxAmountOfSimultaneouslyLivingEnemies);
 
-    [SerializeField] private GameObject enemyPrefab;
-    [SerializeField] private List<WaveData> data;
-
-    private DataHandlerComponent _dataHandlerComponent;
-    private float _elapsedTime;
-    private int _killedEnemiesDuringWave;
-    private bool _bossFightEnabled;
-
-    public delegate void SpawnEnemy(GameObject enemyPrefab, int maxAmountOfSimultaneouslyLivingEnemies,
-        int killedEnemies, int enemiesToKillUntilBoss);
+    public delegate void EnemySubWaveDefeated();
 
     public static SpawnEnemy OnSpawnEnemy;
+    public static EnemySubWaveDefeated OnEnemySubWaveDefeated;
+    
+    private float _elapsedTime;
+    private float _timeBetweenSpawn;
+    private bool _activeSubWave;
+    private int _subWaveEnemyCount;
+    private int _enemiesDestroyedDuringSubWave;
+    private DataProvider _dataProvider;
+    private float _subWaveInterval;
+    private float _spawnInterval;
 
     private void Start()
     {
+        _dataProvider = DataProvider.Instance;
+        if (!_dataProvider)
+        {
+            LogError("DataProvider not found!");
+        }
+
         EnemyController.OnEnemyDestroyed += OnEnemyDestroyed;
-        BossComponent.OnBossDestroyed += OnBossDestroyed;
-
-        _dataHandlerComponent = GameObject.FindWithTag("DataHandler").GetComponent<DataHandlerComponent>();
-    }
-
-    private void OnBossDestroyed()
-    {
-        _bossFightEnabled = false;
-        _elapsedTime = 0f;
-        DataProvider.Instance.Wave++;
+        
+        GenerateRandomSubWaveInterval();
+        GenerateRandomSpawnInterval();
     }
 
     private void OnEnemyDestroyed(int objectId)
     {
-        _killedEnemiesDuringWave++;
+        _enemiesDestroyedDuringSubWave++;
+
+        if (_enemiesDestroyedDuringSubWave < _dataProvider.CurrentSubWaveData().enemies.Count) return;
+
+        _activeSubWave = false;
+        _enemiesDestroyedDuringSubWave = 0;
+        OnEnemySubWaveDefeated?.Invoke();
+
+        if (_dataProvider.SubWaveCount + 1 < _dataProvider.CurrentWaveData().subWaves.Count)
+        {
+            _dataProvider.SubWaveCount++;
+        }
+        else
+        {
+            _dataProvider.SubWaveCount = 0;
+            if (_dataProvider.WaveCount + 1 >= _dataProvider.EnemySpawnWaveDataList.Count) return;
+            _dataProvider.WaveCount++;
+        }
+
+        _elapsedTime = 0;
     }
 
     private void FixedUpdate()
     {
-        if (_bossFightEnabled) return;
+        if (!_dataProvider) return;
 
-        var currentData = data[DataProvider.Instance.Wave];
-        if (currentData.tutorial) return;
+        var currentWaveData = _dataProvider.CurrentWaveData();
+        if (currentWaveData.tutorial) return;
+
+        var subWaveCount = _dataProvider.SubWaveCount;
+        if (!_activeSubWave && subWaveCount < currentWaveData.subWaves.Count &&
+            _elapsedTime >= _subWaveInterval)
+        {
+            _activeSubWave = true;
+            _subWaveEnemyCount = 0;
+            _elapsedTime = 0;
+            GenerateRandomSubWaveInterval();
+        }
+
+        if (_activeSubWave)
+        {
+            var currentSubWave = _dataProvider.CurrentSubWaveData();
+            if (_subWaveEnemyCount < currentSubWave.enemies.Count)
+            {
+                if (_elapsedTime >= _spawnInterval)
+                {
+                    OnSpawnEnemy?.Invoke(currentSubWave.enemies[_subWaveEnemyCount],
+                        currentWaveData.maxAmountOfSimultaneouslyLivingEnemies);
+                    _subWaveEnemyCount++;
+                    _elapsedTime = 0;
+                    GenerateRandomSpawnInterval();
+                }
+            }
+        }
 
         _elapsedTime += Time.deltaTime;
-        if (_elapsedTime <= currentData.spawnInterval) return;
-
-        var maxAmountOfSimultaneouslyLivingEnemies = currentData.maxAmountOfSimultaneouslyLivingEnemies;
-        if (_killedEnemiesDuringWave < currentData.enemiesToKillUntilBoss)
-        {
-            OnSpawnEnemy?.Invoke(enemyPrefab, maxAmountOfSimultaneouslyLivingEnemies, _killedEnemiesDuringWave,
-                currentData.enemiesToKillUntilBoss);
-            _elapsedTime = 0f;
-        }
-        else
-        {
-            _bossFightEnabled = true;
-            _killedEnemiesDuringWave = 0;
-            OnSpawnEnemy?.Invoke(currentData.bossPrefab, maxAmountOfSimultaneouslyLivingEnemies,
-                _killedEnemiesDuringWave, currentData.enemiesToKillUntilBoss);
-        }
-
-        _elapsedTime = 0f;
     }
 
-    private void OnDestroy()
+    private void GenerateRandomSubWaveInterval() 
     {
-        EnemyController.OnEnemyDestroyed -= OnEnemyDestroyed;
-        BossComponent.OnBossDestroyed -= OnBossDestroyed;
+		var range = _dataProvider.CurrentWaveData().subWaveIntervalRange;
+		float value = Random.Range(range.min, range.max);
+        _subWaveInterval = value;
+    }
+    
+    private void GenerateRandomSpawnInterval() 
+    {
+		var range = _dataProvider.CurrentSubWaveData().spawnIntervalRange;
+		var value = Random.Range(range.min, range.max);
+        _spawnInterval = value;
     }
 }

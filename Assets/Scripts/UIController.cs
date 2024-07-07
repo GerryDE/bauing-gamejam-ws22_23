@@ -98,7 +98,7 @@ public class UIController : MonoBehaviour
                     index++;
                     break;
                 case 1:
-                    item.text = texte[index] + ": " + DataProvider.Instance.Wave + "/3";
+                    item.text = texte[index] + ": " + DataProvider.Instance.WaveCount + "/3";
                     index++;
                     break;
                 case 2:
