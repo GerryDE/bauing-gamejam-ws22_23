@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorial: 0
   subWaveIntervalRange:
-    min: 20
-    max: 20
+    min: 18
+    max: 30
   maxAmountOfSimultaneouslyLivingEnemies: 3
   subWaves:
   - {fileID: 11400000, guid: c974a61c43ef370e9951972dc8adb85e, type: 2}

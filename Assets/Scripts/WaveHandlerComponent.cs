@@ -3,19 +3,21 @@ using static UnityEngine.Debug;
 
 public class WaveHandlerComponent : MonoBehaviour
 {
+	public delegate void SpawnEnemy(GameObject enemyPrefab, int maxAmountOfSimultaneouslyLivingEnemies);
+
+    public delegate void EnemySubWaveDefeated();
+
+    public static SpawnEnemy OnSpawnEnemy;
+    public static EnemySubWaveDefeated OnEnemySubWaveDefeated;
+    
     private float _elapsedTime;
     private float _timeBetweenSpawn;
     private bool _activeSubWave;
     private int _subWaveEnemyCount;
     private int _enemiesDestroyedDuringSubWave;
     private DataProvider _dataProvider;
-
-    public delegate void SpawnEnemy(GameObject enemyPrefab, int maxAmountOfSimultaneouslyLivingEnemies);
-
-    public delegate void EnemySubWaveDefeated();
-
-    public static SpawnEnemy OnSpawnEnemy;
-    public static EnemySubWaveDefeated OnEnemySubWaveDefeated;
+    private float _subWaveInterval;
+    private float _spawnInterval;
 
     private void Start()
     {
@@ -26,6 +28,9 @@ public class WaveHandlerComponent : MonoBehaviour
         }
 
         EnemyController.OnEnemyDestroyed += OnEnemyDestroyed;
+        
+        GenerateRandomSubWaveInterval();
+        GenerateRandomSpawnInterval();
     }
 
     private void OnEnemyDestroyed(int objectId)
@@ -61,11 +66,12 @@ public class WaveHandlerComponent : MonoBehaviour
 
         var subWaveCount = _dataProvider.SubWaveCount;
         if (!_activeSubWave && subWaveCount < currentWaveData.subWaves.Count &&
-            _elapsedTime >= currentWaveData.subWaveIntervalRange.min)
+            _elapsedTime >= _subWaveInterval)
         {
             _activeSubWave = true;
             _subWaveEnemyCount = 0;
             _elapsedTime = 0;
+            GenerateRandomSubWaveInterval();
         }
 
         if (_activeSubWave)
@@ -73,16 +79,31 @@ public class WaveHandlerComponent : MonoBehaviour
             var currentSubWave = _dataProvider.CurrentSubWaveData();
             if (_subWaveEnemyCount < currentSubWave.enemies.Count)
             {
-                if (_elapsedTime >= currentSubWave.spawnIntervalRange.min)
+                if (_elapsedTime >= _spawnInterval)
                 {
                     OnSpawnEnemy?.Invoke(currentSubWave.enemies[_subWaveEnemyCount],
                         currentWaveData.maxAmountOfSimultaneouslyLivingEnemies);
                     _subWaveEnemyCount++;
                     _elapsedTime = 0;
+                    GenerateRandomSpawnInterval();
                 }
             }
         }
 
         _elapsedTime += Time.deltaTime;
+    }
+
+    private void GenerateRandomSubWaveInterval() 
+    {
+		var range = _dataProvider.CurrentWaveData().subWaveIntervalRange;
+		float value = Random.Range(range.min, range.max);
+        _subWaveInterval = value;
+    }
+    
+    private void GenerateRandomSpawnInterval() 
+    {
+		var range = _dataProvider.CurrentSubWaveData().spawnIntervalRange;
+		var value = Random.Range(range.min, range.max);
+        _spawnInterval = value;
     }
 }

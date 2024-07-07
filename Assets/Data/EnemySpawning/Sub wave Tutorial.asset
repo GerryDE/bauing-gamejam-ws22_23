@@ -15,5 +15,5 @@ MonoBehaviour:
   enemies:
   - {fileID: 1806021324276434788, guid: be29476555061cb15a17ac504aa4c812, type: 3}
   spawnIntervalRange:
-    min: 5
-    max: 5
+    min: 4
+    max: 7

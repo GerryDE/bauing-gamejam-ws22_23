@@ -379,7 +379,6 @@ public class DataProvider : MonoBehaviour
             set
             {
                 _speedLevel = value;
-                Debug.Log("Speed level changed to " + value);
                 OnSpeedLevelChanged?.Invoke(value);
             }
         }
