@@ -29,12 +29,11 @@ public class DataProvider : MonoBehaviour
 
     [SerializeField] private List<ObjectiveData> dynamicObjectives;
 
-    [Header("Audio data")] [SerializeField]
-    private AudioClip defaultBgm;
-
     [Header("Enemy wave data")] [SerializeField]
     private List<EnemySpawnWaveData> enemySpawnWaveData;
 
+    [Header("Audio data")] [SerializeField]
+    private AudioClip defaultBgm;
     [SerializeField] private AudioClip enemyBgm;
     [SerializeField] private AudioClip bossBgm;
     [SerializeField] private AudioClip finalBossBgm;

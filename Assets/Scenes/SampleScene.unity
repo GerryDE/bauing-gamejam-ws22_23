@@ -26941,19 +26941,19 @@ PrefabInstance:
     - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
       propertyPath: bossBgm
       value: 
-      objectReference: {fileID: 8300000, guid: da5f88cf331d92b908fbedc184846e76, type: 3}
+      objectReference: {fileID: 8300000, guid: ad0c76472a21ea68ab25bfc8ef9e1ae6, type: 3}
     - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
       propertyPath: enemyBgm
       value: 
-      objectReference: {fileID: 8300000, guid: 9c470bea8e99fafc89f3e2b105084071, type: 3}
+      objectReference: {fileID: 8300000, guid: ad0c76472a21ea68ab25bfc8ef9e1ae6, type: 3}
     - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
       propertyPath: defaultBgm
       value: 
-      objectReference: {fileID: 8300000, guid: 48cf87cd17e0d090fa296c0e7322735b, type: 3}
+      objectReference: {fileID: 8300000, guid: b7db601d31f73c9e28f11a209ca5e609, type: 3}
     - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
       propertyPath: finalBossBgm
       value: 
-      objectReference: {fileID: 8300000, guid: e74021b1bd43d03f3b5a18043c8ab4a4, type: 3}
+      objectReference: {fileID: 8300000, guid: ad0c76472a21ea68ab25bfc8ef9e1ae6, type: 3}
     - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
       propertyPath: initialStatueData
       value: 
