@@ -5213,6 +5213,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: enemy hp gauge (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5272462059623165947, guid: f5b866f2185f54a14a4bcb7db9a401b2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5584192936023311988, guid: f5b866f2185f54a14a4bcb7db9a401b2, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -7671,6 +7675,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: enemy hp gauge (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5272462059623165947, guid: f5b866f2185f54a14a4bcb7db9a401b2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5584192936023311988, guid: f5b866f2185f54a14a4bcb7db9a401b2, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -8230,6 +8238,10 @@ PrefabInstance:
     - target: {fileID: 4405528159425730256, guid: f5b866f2185f54a14a4bcb7db9a401b2, type: 3}
       propertyPath: m_Name
       value: enemy hp gauge (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5272462059623165947, guid: f5b866f2185f54a14a4bcb7db9a401b2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5584192936023311988, guid: f5b866f2185f54a14a4bcb7db9a401b2, type: 3}
       propertyPath: m_AnchorMax.x
@@ -17976,7 +17988,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1833602441, guid: 843bec4df2bff618a900c3232cba76d4, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1833602441, guid: 843bec4df2bff618a900c3232cba76d4, type: 3}
       propertyPath: m_ApplyToSortingLayers.Array.size
@@ -19287,6 +19299,10 @@ PrefabInstance:
     - target: {fileID: 4405528159425730256, guid: f5b866f2185f54a14a4bcb7db9a401b2, type: 3}
       propertyPath: m_Name
       value: enemy hp gauge (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5272462059623165947, guid: f5b866f2185f54a14a4bcb7db9a401b2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5584192936023311988, guid: f5b866f2185f54a14a4bcb7db9a401b2, type: 3}
       propertyPath: m_AnchorMax.x
@@ -25097,6 +25113,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: enemy hp gauge (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5272462059623165947, guid: f5b866f2185f54a14a4bcb7db9a401b2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5584192936023311988, guid: f5b866f2185f54a14a4bcb7db9a401b2, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -27982,9 +28002,17 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3529423105781077742, guid: f5b866f2185f54a14a4bcb7db9a401b2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4405528159425730256, guid: f5b866f2185f54a14a4bcb7db9a401b2, type: 3}
       propertyPath: m_Name
       value: enemy hp gauge
+      objectReference: {fileID: 0}
+    - target: {fileID: 5272462059623165947, guid: f5b866f2185f54a14a4bcb7db9a401b2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5584192936023311988, guid: f5b866f2185f54a14a4bcb7db9a401b2, type: 3}
       propertyPath: m_AnchorMax.x
