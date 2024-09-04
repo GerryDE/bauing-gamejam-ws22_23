@@ -15122,7 +15122,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -18817,7 +18817,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!223 &1363114108
 Canvas:
   m_ObjectHideFlags: 0
@@ -28384,15 +28384,15 @@ PrefabInstance:
     - target: {fileID: 935356300631845555, guid: a3707011a3566c3abb9b4a4f7e015d82, type: 3}
       propertyPath: attackAudioClip
       value: 
-      objectReference: {fileID: 8300000, guid: c169d378a4a7f044b8b13ddd2371b44b, type: 3}
+      objectReference: {fileID: 8300000, guid: 58b40c880388b7046b9c414a317459c5, type: 3}
     - target: {fileID: 935356300631845555, guid: a3707011a3566c3abb9b4a4f7e015d82, type: 3}
       propertyPath: miningAudioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 30a4a6014cc576a42a5ff3781bac05cb, type: 3}
+      objectReference: {fileID: 8300000, guid: c05b81730cf9ab3488383efe65cf8035, type: 3}
     - target: {fileID: 935356300631845555, guid: a3707011a3566c3abb9b4a4f7e015d82, type: 3}
       propertyPath: praisingAudioClip
       value: 
-      objectReference: {fileID: 8300000, guid: beb05e71f24d50f48a0242a92a86ee1e, type: 3}
+      objectReference: {fileID: 8300000, guid: 02ef2b0ee772e194ba7caaf5e8449930, type: 3}
     - target: {fileID: 935356300631845555, guid: a3707011a3566c3abb9b4a4f7e015d82, type: 3}
       propertyPath: upgradingAudioClip
       value: 
@@ -28400,7 +28400,7 @@ PrefabInstance:
     - target: {fileID: 935356300631845555, guid: a3707011a3566c3abb9b4a4f7e015d82, type: 3}
       propertyPath: woodCuttingAudioClip
       value: 
-      objectReference: {fileID: 8300000, guid: baf25f1aa9a74e14dbb73181935d90f7, type: 3}
+      objectReference: {fileID: 8300000, guid: 693238f2a73935849bdd6bfd02122acf, type: 3}
     - target: {fileID: 935356300631845555, guid: a3707011a3566c3abb9b4a4f7e015d82, type: 3}
       propertyPath: attackPlayerAudioClip
       value: 
