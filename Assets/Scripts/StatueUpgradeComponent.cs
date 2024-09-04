@@ -31,12 +31,12 @@ public class StatueUpgradeComponent : InteractableBaseComponent
 
         dataProvider.CurrentStatueData = dataProvider.NextStatueData;
 
-        nextStatueData.upgradeCost.lumberCost = (int)(lumberCost *
+        nextStatueData.upgradeCost.lumberCost = Math.Min(999, (int)(lumberCost *
                                                       Math.Pow(nextStatueVersion,
-                                                          lumberCostMultiplier));
-        nextStatueData.upgradeCost.stoneCost = (int)(stoneCost *
+                                                          lumberCostMultiplier)));
+        nextStatueData.upgradeCost.stoneCost = Math.Min(999, (int)(stoneCost *
                                                      Math.Pow(nextStatueVersion,
-                                                         stoneCostMultiplier));
+                                                         stoneCostMultiplier)));
         dataProvider.CurrentStatueData = nextStatueData;
 
         var playerData = dataProvider.PlayerData;
