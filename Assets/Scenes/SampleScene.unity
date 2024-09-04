@@ -28299,6 +28299,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PassingTime
       objectReference: {fileID: 0}
+    - target: {fileID: 3807700196154225560, guid: 395c7d61bf08f2dd7994f3fb1dd0e89e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29510,6 +29514,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2822138286276495708, guid: 094e44910d14f7460bc71a9246b1e967, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7876889403371760472, guid: 094e44910d14f7460bc71a9246b1e967, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7876889403371760472, guid: 094e44910d14f7460bc71a9246b1e967, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7876889403371760472, guid: 094e44910d14f7460bc71a9246b1e967, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8002585907414053816, guid: 094e44910d14f7460bc71a9246b1e967, type: 3}
