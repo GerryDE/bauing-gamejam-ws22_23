@@ -1,5 +1,4 @@
-﻿using System;
-namespace AssemblyCSharp.Assets.Scripts
+﻿namespace AssemblyCSharp.Assets.Scripts
 {
     public enum Currency
     {
