@@ -20,27 +20,22 @@ MonoBehaviour:
   atkStat:
     StatType: 1
     BaseValue: 1
-    Multiplier: 2
+    Multiplier: 1.5
     Version: 0
   defStat:
     StatType: 2
     BaseValue: 1
-    Multiplier: 2
+    Multiplier: 1.5
     Version: 0
   speedStat:
     StatType: 3
     BaseValue: 300
-    Multiplier: 1.25
+    Multiplier: 1.05
     Version: 0
   baseUpgradeCost: {fileID: 11400000, guid: 24301a3c4c610f5fe83a1fa53fcc692d, type: 2}
   upgradeCost: {fileID: 11400000, guid: d59decb1439db356b8592cfecb271825, type: 2}
   lumberCostMultiplier: 1.5
   stoneCostMultiplier: 1.5
   upgradeableStats: 00000000010000000200000003000000
-  baseMaxHpValue: 50
-  baseAtkValue: 1
-  baseDefValue: 1
-  baseSpeedValue: 300
-  statMultiplier: 1.5
   statToUpgrade: 0
   statValue: 0
