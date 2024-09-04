@@ -394,7 +394,7 @@ public class DataProvider : MonoBehaviour
             get => _woodAmount;
             set
             {
-                _woodAmount = value;
+                _woodAmount = Math.Min(999, value);
                 OnWoodAmountChanged?.Invoke(value);
                 OnResourceDataChanged?.Invoke(this);
             }
@@ -405,7 +405,7 @@ public class DataProvider : MonoBehaviour
             get => _stoneAmount;
             set
             {
-                _stoneAmount = value;
+                _stoneAmount = Math.Min(999, value);
                 OnStoneAmountChanged?.Invoke(value);
                 OnResourceDataChanged?.Invoke(this);
             }
