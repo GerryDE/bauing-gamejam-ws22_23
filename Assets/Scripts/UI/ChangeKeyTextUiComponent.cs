@@ -8,8 +8,8 @@ public class ChangeKeyTextUiComponent : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI keyText1;
     [SerializeField] private TextMeshProUGUI keyText2;
-    [SerializeField] private float displayDuration;
-    [SerializeField] private float transitionSpeed;
+    [SerializeField] private float displayDuration = 2f;
+    [SerializeField] private float transitionSpeed = 1f;
 
     private float _elapsedTime;
     private TextMeshProUGUI _currentKeyText;
