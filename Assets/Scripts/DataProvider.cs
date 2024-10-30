@@ -103,6 +103,8 @@ public class DataProvider : MonoBehaviour
     public delegate void WaveCountChanged(int newWaveCount);
     
     public delegate void SubWaveCountChanged(int newSubWaveCount);
+    
+    public delegate void UseAlternateLayoutChanged(bool useAlternateLayout);
 
     public static MaxRemainingYearsChanged OnPlayerMaxRemainingYearsChanged;
     public static CurrentRemainingYearsChanged OnCurrentRemainingYearsChanged;
@@ -130,6 +132,8 @@ public class DataProvider : MonoBehaviour
     public static WaveCountChanged OnWaveCountChanged;
     public static SubWaveCountChanged OnSubWaveCountChanged;
 
+    public static UseAlternateLayoutChanged OnUseAlternateLayoutChanged;
+
     private int _currentFenceVersion;
     private int _currentTreeVersion;
     private int _currentMineVersion;
@@ -137,6 +141,7 @@ public class DataProvider : MonoBehaviour
     private int _currentTutorialObjectiveIndex;
     private int _waveCount;
     private int _subWaveCount;
+    private bool _useAlternateLayout;
 
     public int GetCurrentFenceVersion(int index)
     {
@@ -206,6 +211,16 @@ public class DataProvider : MonoBehaviour
         {
             _subWaveCount = value;
             OnSubWaveCountChanged?.Invoke(_subWaveCount);
+        }
+    }
+
+    public bool UseAlternateLayout
+    {
+        get => _useAlternateLayout;
+        set
+        {
+            _useAlternateLayout = value;
+            OnUseAlternateLayoutChanged?.Invoke(value);
         }
     }
 

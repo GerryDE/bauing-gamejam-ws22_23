@@ -18,8 +18,11 @@ namespace UI
         {
             foreach (var obj in uiObjects)
             {
-                obj.gameObject.SetActive(obj.layer == 
+                if (!obj.gameObject.activeSelf)
+                {
+                    obj.gameObject.SetActive(obj.layer == 
                                          LayerMask.LayerToName(other.gameObject.layer));
+                }
             }
         }
 
