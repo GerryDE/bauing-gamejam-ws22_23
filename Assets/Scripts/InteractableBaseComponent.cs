@@ -58,6 +58,7 @@ public abstract class InteractableBaseComponent : MonoBehaviour
     protected virtual void OnInteractionButton1Released()
     {
         _interactionButton1Holding = false;
+        _interactionButton1Pressed = true;
     }
 
     protected virtual void OnResourceDataChanged(DataProvider.CurrentResourceData resourceData)
@@ -72,9 +73,10 @@ public abstract class InteractableBaseComponent : MonoBehaviour
         {
             _interactionButton1Pressed = false;
             _interactionButton2Pressed = false;
+            _interactionButton1Holding = false;
         }
 
-        _interaction1Enabled = _isCollidingWithPlayer && _interactionButton1Pressed;
+        _interaction1Enabled = _isCollidingWithPlayer && (_interactionButton1Pressed || _interactionButton1Holding);
         _interaction2Enabled = _isCollidingWithPlayer && _interactionButton2Pressed;
     }
 
