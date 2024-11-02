@@ -546,7 +546,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.84}
   m_SizeDelta: {x: 1063, y: 598}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &222887093
@@ -1583,6 +1583,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: background
       objectReference: {fileID: 0}
+    - target: {fileID: 210214840610094996, guid: 6d9db2e2cd9f0b3c196b27b1f2523524, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 210214840610094998, guid: 6d9db2e2cd9f0b3c196b27b1f2523524, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1726,7 +1730,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 401496140}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: -0.31, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2316,6 +2320,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 898446182142449332, guid: d3df90f7fc026df5a97c0bc0aa0053c4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.6
+      objectReference: {fileID: 0}
     - target: {fileID: 1859226363091296406, guid: d3df90f7fc026df5a97c0bc0aa0053c4, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2375,6 +2383,18 @@ PrefabInstance:
     - target: {fileID: 1859226363746122232, guid: d3df90f7fc026df5a97c0bc0aa0053c4, type: 3}
       propertyPath: m_SortingLayerID
       value: 578132587
+      objectReference: {fileID: 0}
+    - target: {fileID: 2603347142392625165, guid: d3df90f7fc026df5a97c0bc0aa0053c4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4510559331624172127, guid: d3df90f7fc026df5a97c0bc0aa0053c4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4870353159019852535, guid: d3df90f7fc026df5a97c0bc0aa0053c4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
