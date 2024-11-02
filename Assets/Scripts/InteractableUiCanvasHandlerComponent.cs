@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace AssemblyCSharp.Assets.Scripts
 {
@@ -11,6 +12,15 @@ namespace AssemblyCSharp.Assets.Scripts
         [SerializeField] bool Upgrade = true;
 
         private CanvasGroup _canvasGroup;
+
+        private void Start() {
+            DataProvider.OnResourceDataChanged += OnResourceDataChanged;
+        }
+
+        private void OnResourceDataChanged(DataProvider.CurrentResourceData resourceData)
+        {
+            OnEnable();
+        }
 
         private void OnEnable()
         {
@@ -102,6 +112,10 @@ namespace AssemblyCSharp.Assets.Scripts
             }
 
             return costData;
+        }
+
+        private void OnDestroy() {
+            DataProvider.OnResourceDataChanged -= OnResourceDataChanged;
         }
     }
 }

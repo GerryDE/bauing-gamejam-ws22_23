@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class ShowCurrentCostValueInTextComponent : MonoBehaviour
 {
@@ -19,6 +20,22 @@ public class ShowCurrentCostValueInTextComponent : MonoBehaviour
     void Start()
     {
         textComponent = GetComponent<TextMeshProUGUI>();
+        DataProvider.OnResourceDataChanged += OnResourceDataChanged;
+    }
+
+    private void OnResourceDataChanged(DataProvider.CurrentResourceData resourceData)
+    {
+        string text = "0";
+        switch (currency)
+        {
+            case Currency.Lumber:
+                text = resourceData.WoodAmount.ToString();
+                break;
+            case Currency.Stone:
+                text = resourceData.StoneAmount.ToString();
+                break;
+        }
+        textComponent.text = text;
     }
 
     private void OnEnable() {
@@ -36,5 +53,9 @@ public class ShowCurrentCostValueInTextComponent : MonoBehaviour
                 break;
         }
         textComponent.text = text;
+    }
+
+    private void OnDestroy() {
+        DataProvider.OnResourceDataChanged -= OnResourceDataChanged;
     }
 }
