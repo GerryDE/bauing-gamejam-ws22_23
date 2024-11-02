@@ -138,7 +138,7 @@ public class UIController : MonoBehaviour
             yield return new WaitForSeconds(fadeTime / 10000);
         }
 
-        //Destroy(gameObject);
+        Destroy(gameObject);
         yield break;
     }
 }
