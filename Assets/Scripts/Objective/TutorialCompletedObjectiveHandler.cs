@@ -11,6 +11,7 @@ namespace Objective
             _data = data;
             DataProvider.Instance.WaveCount = 1;
             ResetData();
+            OnObjectiveReached?.Invoke(data);
         }
 
         private static void ResetData()

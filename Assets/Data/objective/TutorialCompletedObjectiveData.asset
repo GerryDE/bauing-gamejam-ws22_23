@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f839c2bb17174b939c3bd4f8d8bef465, type: 3}
   m_Name: TutorialCompletedObjectiveData
   m_EditorClassIdentifier: 
+  tutorialCompleted: 1

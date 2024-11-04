@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Data.objective
@@ -8,5 +9,7 @@ namespace Data.objective
         {
             return "<Default objective text>";
         }
+
+        public bool tutorialCompleted;
     }
 }

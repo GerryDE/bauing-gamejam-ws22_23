@@ -42,6 +42,12 @@ namespace UI
             if (!_objectsForType.ContainsKey(type)) return;
             foreach (var comp in _objectsForType[type])
             {
+                if (data.tutorialCompleted)
+                {
+                    Destroy(comp.transform.gameObject);
+                    continue;
+                }
+
                 if (comp.text.StartsWith("<s>")) continue;
                 var text = "<s>" + comp.text + "</s>";
                 comp.text = text;
