@@ -21,6 +21,11 @@ public class ProgressBarComponent : MonoBehaviour
         foreground.gameObject.transform.localScale = new Vector3(Mathf.Min(currentTime / requiredTime, 1f), foreground.gameObject.transform.localScale.y, 0f);
     }
 
+    public void Reset()
+    {
+        foreground.gameObject.transform.localScale = new Vector3(1f, foreground.gameObject.transform.localScale.y, 0f);
+    }
+
     public void Enable()
     {
         background.enabled = true;

@@ -72,6 +72,10 @@ public class FenceController : MonoBehaviour
         if (data.GetType() == typeof(TutorialCompletedObjectiveData))
         {
             CurrentHp = MaxHp;
+            _collider2D.enabled = true;
+            _renderer.color = new Color(1f, 1f ,1f, 1f);
+            _progressBarComponent.Enable();
+            _progressBarComponent.Reset();
         }
     }
     
