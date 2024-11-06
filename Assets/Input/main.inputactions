@@ -893,6 +893,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "VolumeChange",
+                    "type": "Value",
+                    "id": "3bf7e92e-0b81-480c-847e-bce167fcb39f",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -994,6 +1003,39 @@
                     "action": "StartGame",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "Volume Up/Down",
+                    "id": "cd06d388-66ed-454a-8911-727d22330d3b",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VolumeChange",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "6e206715-8335-4fc8-9589-b2180c2e94d4",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VolumeChange",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "1f287b69-b6fc-4879-b849-21bb9fe9f820",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VolumeChange",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }

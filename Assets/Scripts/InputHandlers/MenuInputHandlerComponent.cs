@@ -19,6 +19,7 @@ public class MenuInputHandlerComponent : MonoBehaviour
     public delegate void ChangelogTriggered();
 
     public delegate void StartGameTriggered();
+    public delegate void VolumeChangeTriggered(float value);
 
     public static ScrollbarButtonTriggered OnScrollbarButtonTriggered;
     public static ExitButtonTriggered OnExitButtonTriggered;
@@ -27,6 +28,7 @@ public class MenuInputHandlerComponent : MonoBehaviour
     public static CreditsTriggered OnCreditsTriggered;
     public static ChangelogTriggered OnChangelogTriggered;
     public static StartGameTriggered OnStartGameTriggered;
+    public static VolumeChangeTriggered OnVolumeChangeTriggered;
 
     private void Awake()
     {
@@ -66,5 +68,11 @@ public class MenuInputHandlerComponent : MonoBehaviour
     public void OnStartGame(InputValue value)
     {
         OnStartGameTriggered?.Invoke();
+    }
+
+    public void OnVolumeChange(InputValue value)
+    {
+        var floatValue = value.Get<float>();
+        OnVolumeChangeTriggered?.Invoke(floatValue);
     }
 }

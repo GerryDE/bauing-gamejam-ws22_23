@@ -156,6 +156,7 @@ public class DataProvider : MonoBehaviour
         set
         {
             volumeData = value;
+            volumeData.volume = Mathf.Clamp(volumeData.volume, 0f, 1f);
             OnVolumeDataChanged?.Invoke(value);
         }
     }
