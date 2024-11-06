@@ -9453,7 +9453,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4610381316174552467, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4610381316174552467, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18088,7 +18088,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 51227242892978170, guid: 5f851b1f25e932380bd3bee791d69854, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 51227242892978170, guid: 5f851b1f25e932380bd3bee791d69854, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18125,6 +18125,10 @@ PrefabInstance:
     - target: {fileID: 51227242892978170, guid: 5f851b1f25e932380bd3bee791d69854, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 51227242892978171, guid: 5f851b1f25e932380bd3bee791d69854, type: 3}
+      propertyPath: m_Size.x
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5122318941712017953, guid: 5f851b1f25e932380bd3bee791d69854, type: 3}
       propertyPath: m_LocalPosition.y
@@ -19448,7 +19452,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4610381316174552467, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.5
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 4610381316174552467, guid: f297d0b8e7f75018c841d81fc23735b7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -32849,7 +32853,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1323007477120522196, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1323007477120522196, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: m_LocalPosition.y
@@ -32897,15 +32901,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5638562125698998869, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.5
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5638562126478627347, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.5
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 5638562126990180921, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5844666295765787565, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: m_LocalPosition.y
@@ -32929,7 +32933,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8961414575285790006, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: spawnRange.min
-      value: -3.5
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 8961414575285790006, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: disableOnSpawningStateObj
@@ -32945,7 +32949,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8961414575573603696, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: spawnRange.min
-      value: -1.5
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8961414575573603696, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: disableOnSpawningStateObj
@@ -32961,7 +32965,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8961414576468440348, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: spawnRange.min
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8961414576468440348, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: disableOnSpawningStateObj
