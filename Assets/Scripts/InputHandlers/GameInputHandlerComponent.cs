@@ -14,6 +14,7 @@ public class GameInputHandlerComponent : MonoBehaviour {
     public delegate void Interact2PressCalled();
     public delegate void RestartCalled();
     public delegate void PauseCalled();
+    public delegate void VolumeChangeCalled(float volume);
 
     public static MoveCalled OnMoveCalled;
     public static Interact1HoldCalled OnInteract1HoldCalled;
@@ -22,6 +23,7 @@ public class GameInputHandlerComponent : MonoBehaviour {
     public static Interact2PressCalled OnInteract2PressCalled;
     public static RestartCalled OnRestartCalled;
     public static PauseCalled OnPauseCalled;
+    public static VolumeChangeCalled OnVolumeChangeCalled;
 
     // Pause
     public delegate void ResumeCalled();
@@ -55,6 +57,12 @@ public class GameInputHandlerComponent : MonoBehaviour {
     public void OnResumeGame(InputValue value)
     {
         OnResumeCalled?.Invoke();
+    }
+
+    public void OnChangeVolume(InputValue value)
+    {
+        var floatValue = value.Get<float>();
+        OnVolumeChangeCalled?.Invoke(floatValue);
     }
 
     public void OnMove(InputValue value)

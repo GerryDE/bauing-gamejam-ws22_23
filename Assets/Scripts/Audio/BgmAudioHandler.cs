@@ -33,6 +33,8 @@ namespace Audio
             _mainAudioSource = audioSource1;
             _mainAudioSource.clip = DataProvider.Instance.DefaultBgm;
             _maxVolume = GetMaxVolume(DataProvider.Instance.VolumeData);
+            audioSource1.volume = _maxVolume;
+            audioSource2.volume = _maxVolume;
             _mainAudioSource.volume = _maxVolume;
             _mainAudioSource.Play();
 
@@ -41,11 +43,23 @@ namespace Audio
             WaveHandlerComponent.OnSpawnEnemy += OnSpawnEnemy;
             WaveHandlerComponent.OnEnemySubWaveDefeated += OnEnemySubWaveDefeated;
             DataProvider.OnVolumeDataChanged += OnVolumeDataChanged;
+            ChangeVolumeMenuComponent.OnVolumeChanged += OnVolumeChanged;
+        }
+
+        private void OnVolumeChanged(float volume)
+        {
+            _maxVolume = GetMaxVolume(DataProvider.Instance.VolumeData);
+            audioSource1.volume = _maxVolume;
+            audioSource2.volume = _maxVolume;
+            _mainAudioSource.volume = _maxVolume;
         }
 
         private void OnVolumeDataChanged(AudioVolumeData volumeData)
         {
             _maxVolume = GetMaxVolume(DataProvider.Instance.VolumeData);
+            audioSource1.volume = _maxVolume;
+            audioSource2.volume = _maxVolume;
+            _mainAudioSource.volume = _maxVolume;
         }
 
         private void OnSpawnEnemy(GameObject enemyPrefab, int maxAmountOfSimultaneouslyLivingEnemies)

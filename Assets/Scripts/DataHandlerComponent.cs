@@ -85,9 +85,15 @@ public class DataHandlerComponent : MonoBehaviour
         StoneUpgradeComponent.OnUpgradeMine += OnUpgradeMine;
         TreeUpgradeComponent.OnUpgradeTree += OnUpgradeTree;
         DataProvider.OnVolumeDataChanged += OnVolumeDataChanged;
+        ChangeVolumeMenuComponent.OnVolumeChanged += OnVolumeChanged;
 
         _audioSource = gameObject.GetComponent<AudioSource>();
         _audioSource.volume = GetMaxVolume(DataProvider.Instance.VolumeData) * audioVolumeMultiplier;
+    }
+
+    private void OnVolumeChanged(float volume)
+    {
+        _audioSource.volume = volume * audioVolumeMultiplier;
     }
 
     private void OnVolumeDataChanged(AudioVolumeData volumeData)

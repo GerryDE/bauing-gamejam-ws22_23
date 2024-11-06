@@ -14,6 +14,7 @@ public class ChangeVolumeMenuComponent : MonoBehaviour
     void Start()
     {
         MenuInputHandlerComponent.OnVolumeChangeTriggered += OnVolumeChangeTriggered;
+        GameInputHandlerComponent.OnVolumeChangeCalled += OnVolumeChangeTriggered;
     }
 
     private void OnVolumeChangeTriggered(float value)
@@ -35,5 +36,6 @@ public class ChangeVolumeMenuComponent : MonoBehaviour
     private void OnDestroy() 
     {
         MenuInputHandlerComponent.OnVolumeChangeTriggered -= OnVolumeChangeTriggered;
+        GameInputHandlerComponent.OnVolumeChangeCalled -= OnVolumeChangeTriggered;
     }
 }
