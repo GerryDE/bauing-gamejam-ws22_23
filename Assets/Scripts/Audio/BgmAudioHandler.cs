@@ -21,8 +21,8 @@ namespace Audio
         [SerializeField] private float fadeOutDuration = 2f;
         [SerializeField] private float fadeInDuration = 1f;
         [SerializeField] private float fadeInDelay = 1f;
-        [SerializeField] private float maxVolume = 0.5f;
 
+        private float _maxVolume = 0.5f;
         private AudioSource _mainAudioSource;
         private AudioSource _fadeAudioSource;
         
@@ -32,13 +32,20 @@ namespace Audio
         {
             _mainAudioSource = audioSource1;
             _mainAudioSource.clip = DataProvider.Instance.DefaultBgm;
-            _mainAudioSource.volume = maxVolume;
+            _maxVolume = GetMaxVolume(DataProvider.Instance.VolumeData);
+            _mainAudioSource.volume = _maxVolume;
             _mainAudioSource.Play();
 
             _fadeAudioSource = audioSource2;
             
             WaveHandlerComponent.OnSpawnEnemy += OnSpawnEnemy;
             WaveHandlerComponent.OnEnemySubWaveDefeated += OnEnemySubWaveDefeated;
+            DataProvider.OnVolumeDataChanged += OnVolumeDataChanged;
+        }
+
+        private void OnVolumeDataChanged(AudioVolumeData volumeData)
+        {
+            _maxVolume = GetMaxVolume(DataProvider.Instance.VolumeData);
         }
 
         private void OnSpawnEnemy(GameObject enemyPrefab, int maxAmountOfSimultaneouslyLivingEnemies)
@@ -79,7 +86,7 @@ namespace Audio
             var timeElapsed = 0f;
             while (_mainAudioSource.volume > 0f)
             {
-                _mainAudioSource.volume = Vector3.Slerp(maxVolume * Vector3.right, 0f * Vector3.right, timeElapsed / fadeOutDuration).x;
+                _mainAudioSource.volume = Vector3.Slerp(_maxVolume * Vector3.right, 0f * Vector3.right, timeElapsed / fadeOutDuration).x;
                 timeElapsed += Time.deltaTime;
                 yield return null;
             }
@@ -90,14 +97,18 @@ namespace Audio
             yield return new WaitForSeconds(fadeInDelay);
             
             var timeElapsed = 0f;
-            while (_fadeAudioSource.volume < maxVolume)
+            while (_fadeAudioSource.volume < _maxVolume)
             {
-                _fadeAudioSource.volume = Vector3.Slerp(0f * Vector3.right, maxVolume * Vector3.right, timeElapsed / fadeInDuration).x;
+                _fadeAudioSource.volume = Vector3.Slerp(0f * Vector3.right, _maxVolume * Vector3.right, timeElapsed / fadeInDuration).x;
                 timeElapsed += Time.deltaTime;
                 yield return null;
             }
 
             (_mainAudioSource, _fadeAudioSource) = (_fadeAudioSource, _mainAudioSource);
+        }
+
+        private float GetMaxVolume(AudioVolumeData volumeData) {
+            return volumeData.muted ? 0f : volumeData.volume;
         }
 
         private void OnDestroy()

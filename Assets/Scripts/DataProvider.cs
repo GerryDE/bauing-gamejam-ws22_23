@@ -38,6 +38,9 @@ public class DataProvider : MonoBehaviour
     [SerializeField] private AudioClip bossBgm;
     [SerializeField] private AudioClip finalBossBgm;
 
+    [Header("Volume data")] [SerializeField]
+    private AudioVolumeData volumeData;
+
     [NonSerialized] public CurrentPlayerData PlayerData;
     [NonSerialized] public CurrentResourceData InitialResourceData;
     [NonSerialized] public CurrentResourceData ResourceData;
@@ -106,6 +109,8 @@ public class DataProvider : MonoBehaviour
     
     public delegate void UseAlternateLayoutChanged(bool useAlternateLayout);
 
+    public delegate void VolumeDataChanged(AudioVolumeData volumeData);
+
     public static MaxRemainingYearsChanged OnPlayerMaxRemainingYearsChanged;
     public static CurrentRemainingYearsChanged OnCurrentRemainingYearsChanged;
     public static AttackValueChanged OnAttackValueChanged;
@@ -134,6 +139,8 @@ public class DataProvider : MonoBehaviour
 
     public static UseAlternateLayoutChanged OnUseAlternateLayoutChanged;
 
+    public static VolumeDataChanged OnVolumeDataChanged;
+
     private int _currentFenceVersion;
     private int _currentTreeVersion;
     private int _currentMineVersion;
@@ -142,6 +149,16 @@ public class DataProvider : MonoBehaviour
     private int _waveCount;
     private int _subWaveCount;
     private bool _useAlternateLayout;
+
+    public AudioVolumeData VolumeData
+    {
+        get => volumeData;
+        set
+        {
+            volumeData = value;
+            OnVolumeDataChanged?.Invoke(value);
+        }
+    }
 
     public int GetCurrentFenceVersion(int index)
     {

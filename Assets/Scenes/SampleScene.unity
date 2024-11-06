@@ -6854,7 +6854,6 @@ MonoBehaviour:
   fadeOutDuration: 2
   fadeInDuration: 1
   fadeInDelay: 1
-  maxVolume: 0.5
 --- !u!82 &300158484
 AudioSource:
   m_ObjectHideFlags: 0
@@ -21293,7 +21292,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1432895314}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -30868,6 +30867,10 @@ PrefabInstance:
       propertyPath: defaultBgm
       value: 
       objectReference: {fileID: 8300000, guid: b7db601d31f73c9e28f11a209ca5e609, type: 3}
+    - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
+      propertyPath: volumeData
+      value: 
+      objectReference: {fileID: 11400000, guid: 167960ba6f09fac4abc08821f80b90e7, type: 2}
     - target: {fileID: 8395751598911206515, guid: 5f27840193526956e9a279f352ace8ce, type: 3}
       propertyPath: finalBossBgm
       value: 

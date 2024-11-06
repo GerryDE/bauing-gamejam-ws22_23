@@ -16,6 +16,7 @@ public class DataHandlerComponent : MonoBehaviour
     [SerializeField] private AudioClip praisingAudioClip;
     [SerializeField] private AudioClip woodCuttingAudioClip;
     [SerializeField] private AudioClip upgradingAudioClip;
+    [SerializeField, Range(0f, 1f)] private float audioVolumeMultiplier = 0.25f;
 
     public void PlayAttackAudioClip()
     {
@@ -83,9 +84,20 @@ public class DataHandlerComponent : MonoBehaviour
         StatueUpgradeComponent.OnUpgradeStatue += OnUpgradeStatue;
         StoneUpgradeComponent.OnUpgradeMine += OnUpgradeMine;
         TreeUpgradeComponent.OnUpgradeTree += OnUpgradeTree;
+        DataProvider.OnVolumeDataChanged += OnVolumeDataChanged;
 
         _audioSource = gameObject.GetComponent<AudioSource>();
+        _audioSource.volume = GetMaxVolume(DataProvider.Instance.VolumeData) * audioVolumeMultiplier;
     }
+
+    private void OnVolumeDataChanged(AudioVolumeData volumeData)
+    {
+        _audioSource.volume = GetMaxVolume(volumeData) * audioVolumeMultiplier;
+    }
+
+    private float GetMaxVolume(AudioVolumeData volumeData) {
+            return volumeData.muted ? 0f : volumeData.volume;
+        }
 
     private void OnUpgradeTree()
     {
