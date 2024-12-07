@@ -24,7 +24,7 @@ public class MenuInputHandlerComponent : MonoBehaviour
     public static ScrollbarButtonTriggered OnScrollbarButtonTriggered;
     public static ExitButtonTriggered OnExitButtonTriggered;
     public static RestartButtonTriggered OnRestartButtonTriggered;
-    public static SkipTutorialTriggered OnSkipTutorialTriggered;
+    public static SkipTutorialTriggered OnSkipTutorialButtonTriggered;
     public static CreditsTriggered OnCreditsTriggered;
     public static ChangelogTriggered OnChangelogTriggered;
     public static StartGameTriggered OnStartGameTriggered;
@@ -52,7 +52,7 @@ public class MenuInputHandlerComponent : MonoBehaviour
 
     public void OnSkipTutorial(InputValue value)
     {
-        OnSkipTutorialTriggered?.Invoke();
+        OnSkipTutorialButtonTriggered?.Invoke();
     }
 
     public void OnCredits(InputValue value)

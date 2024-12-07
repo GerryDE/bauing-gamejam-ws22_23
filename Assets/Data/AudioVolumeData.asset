@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86056b7eb034bf692a2fa21939515735, type: 3}
   m_Name: AudioVolumeData
   m_EditorClassIdentifier: 
-  volume: 1
-  muted: 0
+  _volume: 0.1404685

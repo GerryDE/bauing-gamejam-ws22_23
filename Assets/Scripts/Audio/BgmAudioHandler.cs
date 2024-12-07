@@ -28,7 +28,7 @@ namespace Audio
         
         private CurrentBgm _currentBgm = CurrentBgm.DEFAULT;
         
-        void Start()
+        public void Start()
         {
             _mainAudioSource = audioSource1;
             _mainAudioSource.clip = DataProvider.Instance.DefaultBgm;
@@ -42,19 +42,10 @@ namespace Audio
             
             WaveHandlerComponent.OnSpawnEnemy += OnSpawnEnemy;
             WaveHandlerComponent.OnEnemySubWaveDefeated += OnEnemySubWaveDefeated;
-            DataProvider.OnVolumeDataChanged += OnVolumeDataChanged;
-            ChangeVolumeMenuComponent.OnVolumeChanged += OnVolumeChanged;
+            AudioVolumeData.OnVolumeChanged += OnVolumeChanged;
         }
 
         private void OnVolumeChanged(float volume)
-        {
-            _maxVolume = GetMaxVolume(DataProvider.Instance.VolumeData);
-            audioSource1.volume = _maxVolume;
-            audioSource2.volume = _maxVolume;
-            _mainAudioSource.volume = _maxVolume;
-        }
-
-        private void OnVolumeDataChanged(AudioVolumeData volumeData)
         {
             _maxVolume = GetMaxVolume(DataProvider.Instance.VolumeData);
             audioSource1.volume = _maxVolume;
@@ -122,12 +113,14 @@ namespace Audio
         }
 
         private float GetMaxVolume(AudioVolumeData volumeData) {
-            return volumeData.muted ? 0f : volumeData.volume;
+            return volumeData.Volume;
         }
 
-        private void OnDestroy()
+        public void OnDestroy()
         {
-            WaveHandlerComponent.OnSpawnEnemy -= OnSpawnEnemy;
+            WaveHandlerComponent.OnSpawnEnemy += OnSpawnEnemy;
+            WaveHandlerComponent.OnEnemySubWaveDefeated += OnEnemySubWaveDefeated;
+            AudioVolumeData.OnVolumeChanged += OnVolumeChanged;
         }
     }
 }

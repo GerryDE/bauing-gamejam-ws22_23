@@ -85,7 +85,7 @@ public class DataHandlerComponent : MonoBehaviour
         StoneUpgradeComponent.OnUpgradeMine += OnUpgradeMine;
         TreeUpgradeComponent.OnUpgradeTree += OnUpgradeTree;
         DataProvider.OnVolumeDataChanged += OnVolumeDataChanged;
-        ChangeVolumeMenuComponent.OnVolumeChanged += OnVolumeChanged;
+        AudioVolumeData.OnVolumeChanged += OnVolumeChanged;
 
         _audioSource = gameObject.GetComponent<AudioSource>();
         _audioSource.volume = GetMaxVolume(DataProvider.Instance.VolumeData) * audioVolumeMultiplier;
@@ -102,7 +102,7 @@ public class DataHandlerComponent : MonoBehaviour
     }
 
     private float GetMaxVolume(AudioVolumeData volumeData) {
-            return volumeData.muted ? 0f : volumeData.volume;
+            return volumeData.Volume;
         }
 
     private void OnUpgradeTree()
@@ -167,5 +167,7 @@ public class DataHandlerComponent : MonoBehaviour
         StatueUpgradeComponent.OnUpgradeStatue -= OnUpgradeStatue;
         StoneUpgradeComponent.OnUpgradeMine -= OnUpgradeMine;
         TreeUpgradeComponent.OnUpgradeTree -= OnUpgradeTree;
+        DataProvider.OnVolumeDataChanged -= OnVolumeDataChanged;
+        AudioVolumeData.OnVolumeChanged -= OnVolumeChanged;
     }
 }

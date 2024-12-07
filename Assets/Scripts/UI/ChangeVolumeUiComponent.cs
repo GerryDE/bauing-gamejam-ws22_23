@@ -14,24 +14,32 @@ public class ChangeVolumeUiComponent : MonoBehaviour
     void Start()
     {
         _slider = GetComponent<Slider>();
-        _slider.value = Mathf.Clamp(volumeData.volume, 0f, 1f);
-        DataProvider.OnVolumeDataChanged += OnVolumeDataChanged;
-        ChangeVolumeMenuComponent.OnVolumeChanged += OnVolumeChanged;
+        _slider.value = volumeData.Volume;
+
+        _slider.onValueChanged.AddListener(delegate { OnSliderValueChanged(); });
+
+        AudioVolumeData.OnVolumeChanged += OnVolumeChanged;
+        MenuInputHandlerComponent.OnVolumeChangeTriggered += OnVolumeChangeTriggered;
+        GameInputHandlerComponent.OnVolumeChangeCalled += OnVolumeChangeTriggered;
+    }
+
+    private void OnVolumeChangeTriggered(float value)
+    {
+        volumeData.Volume += value * 0.1f;
+    }
+
+    private void OnSliderValueChanged()
+    {
+        volumeData.Volume = _slider.value;
     }
 
     private void OnVolumeChanged(float volume)
     {
-        _slider.value = Mathf.Clamp(volume, 0f, 1f);
-    }
-
-    private void OnVolumeDataChanged(AudioVolumeData volumeData)
-    {
-        _slider.value = volumeData.volume;
+        _slider.value = volume;
     }
 
     private void OnDestroy() 
     {
-        DataProvider.OnVolumeDataChanged -= OnVolumeDataChanged;
-        ChangeVolumeMenuComponent.OnVolumeChanged -= OnVolumeChanged;
+        AudioVolumeData.OnVolumeChanged -= OnVolumeChanged;
     }
 }

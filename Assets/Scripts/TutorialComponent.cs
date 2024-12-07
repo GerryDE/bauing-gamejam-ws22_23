@@ -20,7 +20,7 @@ public class TutorialComponent : MonoBehaviour
     {
         _objectiveHandler = null;
 
-        if (skipTutorialData.shallBeSkipped)
+        if (skipTutorialData.ShallBeSkipped)
         {
             DataProvider.Instance.CurrentTutorialObjectiveIndex = DataProvider.Instance.TutorialObjectives.Count - 1;
         }
