@@ -32861,7 +32861,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8961414575285790006, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: state
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8961414575285790006, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: spawnRange.max
@@ -32877,7 +32877,7 @@ PrefabInstance:
       objectReference: {fileID: 1813389495}
     - target: {fileID: 8961414575573603696, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: state
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8961414575573603696, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: spawnRange.max
@@ -32893,7 +32893,7 @@ PrefabInstance:
       objectReference: {fileID: 1655245408}
     - target: {fileID: 8961414576468440348, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: state
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8961414576468440348, guid: a8b0638b7a71a4537ab8575eea0b2afa, type: 3}
       propertyPath: spawnRange.max
