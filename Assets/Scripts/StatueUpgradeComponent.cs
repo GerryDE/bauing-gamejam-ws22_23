@@ -1,4 +1,5 @@
 using System;
+using Data.objective;
 using Data.upgradeable_objects.statue;
 using UnityEngine;
 using static Data.upgradeable_objects.statue.StatueData.UpgradeableStat;
@@ -63,13 +64,23 @@ public class StatueUpgradeComponent : InteractableBaseComponent
     protected override void OnResourceDataChanged(DataProvider.CurrentResourceData resourceData)
     {
         base.OnResourceDataChanged(resourceData);
-        if (upgradeNotificationSprite == null) return;
+        if (upgradeNotificationSprite == null || !_upgradeEnabled) return;
+        upgradeNotificationSprite.enabled = IsUpgradeable(DataProvider.Instance.CurrentStatueVersion + 1);
+    }
+
+    protected override void OnNewObjectiveStarted(ObjectiveData data)
+    {
+        base.OnNewObjectiveStarted(data);
+        if (!_upgradeEnabled) return;
         upgradeNotificationSprite.enabled = IsUpgradeable(DataProvider.Instance.CurrentStatueVersion + 1);
     }
 
     protected override void OnInteractionButton2Pressed()
     {
         base.OnInteractionButton2Pressed();
+
+         if (!_upgradeEnabled) return; 
+
         var data = DataProvider.Instance;
         var currentStatueData = data.CurrentStatueData;
 

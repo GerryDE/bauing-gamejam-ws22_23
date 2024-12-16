@@ -62,7 +62,7 @@ public class TreeComponent : InteractableBaseComponent
         disableOnSpawningStateObj.SetActive(!Spawning.Equals(state));
     }
 
-    protected override void Start()
+    protected void Awake()
     {
         _progressBarComponent = GetComponent<ProgressBarComponent>();
         base.Start();
@@ -75,10 +75,18 @@ public class TreeComponent : InteractableBaseComponent
         CalculateStateChangeDuration();
 
         TutorialComponent.OnNewObjectiveStarted += OnNewObjectiveStarted;
+        TutorialComponent.OnTutorialCompleted += OnTutorialCompleted;
+    }
+
+    private void OnTutorialCompleted()
+    {
+        _allowGrowing = true;
+        SetState(Large);
     }
 
     protected override void OnNewObjectiveStarted(ObjectiveData data)
     {
+        base.OnNewObjectiveStarted(data);
         if (data.GetType() != typeof(CollectResourcesObjectiveData) &&
             data.GetType() != typeof(TutorialCompletedObjectiveData)) return;
         _allowGrowing = true;

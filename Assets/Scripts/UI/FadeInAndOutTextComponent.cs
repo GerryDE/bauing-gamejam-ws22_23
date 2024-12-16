@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using System;
 using UnityEngine.AI;
+using Data;
+using Data.objective;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class FadeInAndOutTextComponent : MonoBehaviour
@@ -11,6 +13,7 @@ public class FadeInAndOutTextComponent : MonoBehaviour
     [SerializeField] private float fadeInDuration;
     [SerializeField] private float fadeOutDuration;
     [SerializeField] private float displayDuration;
+    [SerializeField] private SkipTutorialData skipTutorialData;
 
     private TextMeshProUGUI _textComponent;
     private float _elapsedTime;
@@ -21,10 +24,25 @@ public class FadeInAndOutTextComponent : MonoBehaviour
         _textComponent = GetComponent<TextMeshProUGUI>();
         _textComponent.enabled = false;
         TutorialComponent.OnTutorialCompleted += OnTutorialCompleted;
+        TutorialComponent.OnNewObjectiveStarted += OnNewObjectiveStarted;
+    }
+
+    private void OnNewObjectiveStarted(ObjectiveData data)
+    {
+        if (data.GetType() == typeof(TutorialCompletedObjectiveData))
+            _textComponent.enabled = true;
+            _textComponent.alpha = 0f;
+            _elapsedTime = 0f;
     }
 
     private void OnTutorialCompleted()
     {
+        Debug.Log("Skip tutorial: " + skipTutorialData.ShallBeSkipped);
+
+        if (skipTutorialData.ShallBeSkipped) {
+            return;
+        }
+
         _textComponent.enabled = true;
         _textComponent.alpha = 0f;
         _elapsedTime = 0f;

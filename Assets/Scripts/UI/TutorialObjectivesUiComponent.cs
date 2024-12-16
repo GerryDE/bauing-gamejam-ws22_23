@@ -15,7 +15,7 @@ namespace UI
 
         private Dictionary<Type, List<TextMeshProUGUI>> _objectsForType;
 
-        private void Start()
+        private void Awake()
         {
             _objectsForType = new Dictionary<Type, List<TextMeshProUGUI>>();
 

@@ -23,6 +23,7 @@ public class TutorialComponent : MonoBehaviour
         if (skipTutorialData.ShallBeSkipped)
         {
             DataProvider.Instance.CurrentTutorialObjectiveIndex = DataProvider.Instance.TutorialObjectives.Count - 1;
+            OnTutorialCompleted?.Invoke();
         }
 
         OnTutorialObjectiveIndexChanged(DataProvider.Instance.CurrentTutorialObjectiveIndex);
@@ -45,7 +46,6 @@ public class TutorialComponent : MonoBehaviour
         }
         else
         {
-            OnTutorialCompleted?.Invoke();
             _objectiveHandler = null;
         }
     }
@@ -84,6 +84,7 @@ public class TutorialComponent : MonoBehaviour
     private void OnDestroy()
     {
         ObjectiveHandler.OnObjectiveReached -= OnObjectiveReached;
+        DynamicObjective.OnDynamicObjectiveStarted -= OnDynamicObjectiveStarted;
         DataProvider.OnTutorialObjectiveIndexChanged -= OnTutorialObjectiveIndexChanged;
     }
 }

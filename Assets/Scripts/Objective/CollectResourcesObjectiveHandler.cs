@@ -1,5 +1,6 @@
 using System;
 using Data.objective;
+using UnityEngine;
 
 namespace Objective
 {
@@ -15,6 +16,7 @@ namespace Objective
             _initialStoneAmount = DataProvider.Instance.ResourceData.StoneAmount;
 
             DataProvider.OnResourceDataChanged += OnResourceDataChanged;
+            Debug.Log("CollectResourcesObjectiveHandler");
         }
 
         private void OnResourceDataChanged(DataProvider.CurrentResourceData data)
