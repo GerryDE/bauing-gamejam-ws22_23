@@ -16,7 +16,7 @@ public class TutorialComponent : MonoBehaviour
 
     private ObjectiveHandler _objectiveHandler;
 
-    private void Start()
+    private void OnEnable()
     {
         _objectiveHandler = null;
 
@@ -26,11 +26,13 @@ public class TutorialComponent : MonoBehaviour
             OnTutorialCompleted?.Invoke();
         }
 
-        OnTutorialObjectiveIndexChanged(DataProvider.Instance.CurrentTutorialObjectiveIndex);
-
         ObjectiveHandler.OnObjectiveReached += OnObjectiveReached;
         DynamicObjective.OnDynamicObjectiveStarted += OnDynamicObjectiveStarted;
         DataProvider.OnTutorialObjectiveIndexChanged += OnTutorialObjectiveIndexChanged;
+    }
+
+    private void Start() {
+        OnTutorialObjectiveIndexChanged(DataProvider.Instance.CurrentTutorialObjectiveIndex);
     }
 
     private void OnDynamicObjectiveStarted(ObjectiveData data)
@@ -81,7 +83,7 @@ public class TutorialComponent : MonoBehaviour
         OnNewObjectiveStarted?.Invoke(data);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         ObjectiveHandler.OnObjectiveReached -= OnObjectiveReached;
         DynamicObjective.OnDynamicObjectiveStarted -= OnDynamicObjectiveStarted;

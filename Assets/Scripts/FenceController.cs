@@ -51,7 +51,7 @@ public class FenceController : MonoBehaviour
         _progressBarComponent.UpdateValues(currentHp, MaxHp);
     }
 
-    private void Awake()
+    private void OnEnable()
     {
         FenceRepairComponent.OnRepairFence += OnRepairFence;
         FenceUpgradeComponent.OnUpgradeFence += OnUpgradeFence;
@@ -120,7 +120,7 @@ public class FenceController : MonoBehaviour
         _progressBarComponent.Disable();
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         FenceRepairComponent.OnRepairFence -= OnRepairFence;
         FenceUpgradeComponent.OnUpgradeFence -= OnUpgradeFence;

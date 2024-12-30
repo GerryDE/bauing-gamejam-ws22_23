@@ -79,7 +79,7 @@ public class TreeComponent : InteractableBaseComponent
     private void OnTutorialCompleted()
     {
         _allowGrowing = true;
-        SetState(Large);
+        // SetState(Large);
     }
 
     protected override void OnNewObjectiveStarted(ObjectiveData data)

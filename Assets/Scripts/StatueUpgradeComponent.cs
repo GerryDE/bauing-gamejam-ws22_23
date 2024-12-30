@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Data.objective;
 using Data.upgradeable_objects.statue;
 using UnityEngine;
@@ -119,8 +120,10 @@ public class StatueUpgradeComponent : InteractableBaseComponent
         _dataHandlerComponent.PlayUpgradingAudioClip();
     }
 
-    private static bool IsUpgradeable(int nextVersionIndex)
+    private bool IsUpgradeable(int nextVersionIndex)
     {
+        if (!_upgradeEnabled) return false;
+
         var data = DataProvider.Instance.NextStatueData;
         var resourceData = DataProvider.Instance.ResourceData;
 
