@@ -10,11 +10,13 @@ public class StatueUpgradeComponent : InteractableBaseComponent
 
     public static UpgradeStatue OnUpgradeStatue;
 
-    protected override void Start()
+    protected override void OnEnable()
     {
-        base.Start();
+        base.OnEnable();
         DataProvider.OnStatueVersionChanged += OnStatueVersionChanged;
+    }
 
+    private void Start() {
         GenerateNextStatueData();
     }
 
@@ -127,8 +129,9 @@ public class StatueUpgradeComponent : InteractableBaseComponent
         return isUpgradable;
     }
 
-    protected override void OnDestroy()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         DataProvider.OnStatueVersionChanged -= OnStatueVersionChanged;
     }
 }

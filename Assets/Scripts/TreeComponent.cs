@@ -62,20 +62,18 @@ public class TreeComponent : InteractableBaseComponent
         disableOnSpawningStateObj.SetActive(!Spawning.Equals(state));
     }
 
-    protected void Awake()
-    {
-        _progressBarComponent = GetComponent<ProgressBarComponent>();
-        base.Start();
-
-
-        _renderer = GetComponent<SpriteRenderer>();
-        _renderer.sprite = GetDataByCurrentState()?.sprite;
-
-        SetSpawnPosition();
-        CalculateStateChangeDuration();
-
+    protected override void OnEnable() {
+        base.OnEnable();
         TutorialComponent.OnNewObjectiveStarted += OnNewObjectiveStarted;
         TutorialComponent.OnTutorialCompleted += OnTutorialCompleted;
+    }
+
+    private void Start() {
+        _progressBarComponent = GetComponent<ProgressBarComponent>();
+        _renderer = GetComponent<SpriteRenderer>();
+        _renderer.sprite = GetDataByCurrentState()?.sprite;
+        SetSpawnPosition();
+        CalculateStateChangeDuration();
     }
 
     private void OnTutorialCompleted()
@@ -235,5 +233,11 @@ public class TreeComponent : InteractableBaseComponent
         var defaultStateChangeDuration = GetDataByCurrentState().Value.defaultStateChangeDuration;
         _stateChangeDuration = Random.Range(defaultStateChangeDuration * (1f - stateChangeDurationVariance),
             defaultStateChangeDuration * (1f + stateChangeDurationVariance));
+    }
+
+    protected override void OnDisable() {
+        base.OnDisable();
+        TutorialComponent.OnNewObjectiveStarted += OnNewObjectiveStarted;
+        TutorialComponent.OnTutorialCompleted += OnTutorialCompleted;
     }
 }

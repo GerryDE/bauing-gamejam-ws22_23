@@ -17,9 +17,9 @@ public class FenceRepairComponent : InteractableBaseComponent
     private FenceController _fenceController;
     private int _index;
 
-    protected override void Start()
+    protected override void OnEnable()
     {
-        base.Start();
+        base.OnEnable();
         _fenceController = transform.parent.gameObject.GetComponent<FenceController>();
         _index = _fenceController.fenceIndex;
     }

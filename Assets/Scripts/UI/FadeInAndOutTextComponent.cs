@@ -37,8 +37,6 @@ public class FadeInAndOutTextComponent : MonoBehaviour
 
     private void OnTutorialCompleted()
     {
-        Debug.Log("Skip tutorial: " + skipTutorialData.ShallBeSkipped);
-
         if (skipTutorialData.ShallBeSkipped) {
             return;
         }

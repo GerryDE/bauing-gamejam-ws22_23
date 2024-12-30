@@ -9,9 +9,8 @@ public class StoneUpgradeComponent : InteractableBaseComponent
 
     public static UpgradeMine OnUpgradeMine;
 
-    protected override void Start()
-    {
-        base.Start();
+    protected override void OnEnable() {
+        base.OnEnable();
         DataProvider.OnMineVersionChanged += OnMineVersionChanged;
     }
 
@@ -73,8 +72,9 @@ public class StoneUpgradeComponent : InteractableBaseComponent
         return isUpgradable;
     }
 
-    protected override void OnDestroy()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         DataProvider.OnMineVersionChanged -= OnMineVersionChanged;
     }
 }

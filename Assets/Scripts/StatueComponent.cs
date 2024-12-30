@@ -15,9 +15,9 @@ public class StatueComponent : InteractableBaseComponent
 
     public static Prayed OnPrayed;
 
-    protected override void Start()
+    protected override void OnEnable()
     {
-        base.Start();
+        base.OnEnable();
         _progressBarComponent = GetComponent<ProgressBarComponent>();
         _prayingDuration = CalculatePrayingDuration();
     }

@@ -9,9 +9,8 @@ public class TreeUpgradeComponent : InteractableBaseComponent
 
     public static UpgradeTree OnUpgradeTree;
 
-    protected override void Start()
-    {
-        base.Start();
+    protected override void OnEnable() {
+        base.OnEnable();
         DataProvider.OnTreeVersionChanged += OnTreeVersionChanged;
     }
 
@@ -72,8 +71,9 @@ public class TreeUpgradeComponent : InteractableBaseComponent
         return isUpgradable;
     }
 
-    protected override void OnDestroy()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         DataProvider.OnTreeVersionChanged -= OnTreeVersionChanged;
     }
 }

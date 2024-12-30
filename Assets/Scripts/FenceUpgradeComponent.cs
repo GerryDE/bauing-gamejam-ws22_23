@@ -17,9 +17,9 @@ public class FenceUpgradeComponent : InteractableBaseComponent
 
     public static UpgradeFence OnUpgradeFence;
 
-    protected override void Start()
+    protected override void OnEnable()
     {
-        base.Start();
+        base.OnEnable();
 
         _index = GetFenceIndex();
         DataProvider.OnFenceVersionChanged += OnFenceVersionChanged;
@@ -72,8 +72,9 @@ public class FenceUpgradeComponent : InteractableBaseComponent
         return isUpgradable;
     }
 
-    protected override void OnDestroy()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         DataProvider.OnFenceVersionChanged -= OnFenceVersionChanged;
     }
     

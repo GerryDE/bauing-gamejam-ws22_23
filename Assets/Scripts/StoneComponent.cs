@@ -19,13 +19,12 @@ public class StoneComponent : InteractableBaseComponent
 
     public static StoneDrop OnStoneDrop;
 
-    protected override void Start()
-    {
-        base.Start();
+    protected override void OnEnable() {
+        base.OnEnable();
         _progressBarComponent = GetComponent<ProgressBarComponent>();
-        StoneUpgradeComponent.OnUpgradeMine += OnUpgradeMine;
         _currentBaseMiningDuration = startingMiningDuration;
         _miningDuration = CalculateMiningDuration();
+        StoneUpgradeComponent.OnUpgradeMine += OnUpgradeMine;
     }
 
     private void OnUpgradeMine(float newMiningDuration, int newDropAmount, Sprite sprite)
@@ -61,9 +60,9 @@ public class StoneComponent : InteractableBaseComponent
         return (_currentBaseMiningDuration * Mathf.Pow(miningDurationMultiplicator, _minedStonesCount));
     }
 
-    protected override void OnDestroy()
+    protected override void OnDisable()
     {
-        base.OnDestroy();
+        base.OnDisable();
         StoneUpgradeComponent.OnUpgradeMine -= OnUpgradeMine;
     }
 }

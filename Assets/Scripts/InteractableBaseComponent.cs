@@ -13,7 +13,7 @@ public abstract class InteractableBaseComponent : MonoBehaviour
     protected bool _isCollidingWithPlayer;
     protected bool _upgradeEnabled = false;
 
-    protected virtual void Start()
+    protected virtual void OnEnable()
     {
         GameInputHandlerComponent.OnInteract1HoldCalled += OnInteractionButton1Hold;
         GameInputHandlerComponent.OnInteract1ReleasedCalled += OnInteractionButton1Released;
@@ -80,7 +80,7 @@ public abstract class InteractableBaseComponent : MonoBehaviour
         _interaction2Enabled = _isCollidingWithPlayer && _interactionButton2Pressed;
     }
 
-    protected virtual void OnDestroy()
+    protected virtual void OnDisable()
     {
         GameInputHandlerComponent.OnInteract1HoldCalled -= OnInteractionButton1Hold;
         GameInputHandlerComponent.OnInteract1ReleasedCalled -= OnInteractionButton1Released;

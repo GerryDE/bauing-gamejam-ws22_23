@@ -34,16 +34,18 @@ public class UIController : MonoBehaviour
     private static DataProvider.CurrentPlayerData _playerData;
     private static DataProvider.CurrentResourceData _resourceData;
 
-    private void Start()
+    private void OnEnable()
     {
-        _playerData = DataProvider.Instance.PlayerData;
-        _resourceData = DataProvider.Instance.ResourceData;
-
         //BossComponent.OnBossDestroyed += UpdateWelle;
         GameInputHandlerComponent.OnRestartCalled += OnRestartGame;
         CheckForGameOverComponent.OnGameOver += OnGameOver;
+    }
 
-        InitTexteUndWerte();
+    private void Start() {
+        _playerData = DataProvider.Instance.PlayerData;
+        _resourceData = DataProvider.Instance.ResourceData;
+
+        // InitTexteUndWerte();
         // gameOverText.enabled = false;
         // tryAgainText.enabled = false;
         textPopup = prefabPopupText.GetComponent<TextMeshPro>();
@@ -64,7 +66,7 @@ public class UIController : MonoBehaviour
 
     private void Update()
     {
-        InitTexteUndWerte();
+        // InitTexteUndWerte();
 
         if (fadeIn)
         {
