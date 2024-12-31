@@ -19,8 +19,6 @@ namespace UI
         {
             _image = GetComponent<Image>();
             UpdateSprite();
-            
-            StatueUpgradeComponent.OnUpgradeStatue += OnUpgradeStatue;
         }
 
         private void OnUpgradeStatue(StatueData.UpgradeableStat stat, float value)
@@ -31,6 +29,7 @@ namespace UI
         private void OnEnable()
         {
             UpdateSprite();
+            StatueUpgradeComponent.OnUpgradeStatue += OnUpgradeStatue;
         }
 
         private void UpdateSprite()
@@ -45,7 +44,7 @@ namespace UI
             };
         }
         
-        private void OnDestroy()
+        private void OnDisable()
         {
             StatueUpgradeComponent.OnUpgradeStatue -= OnUpgradeStatue;
         }

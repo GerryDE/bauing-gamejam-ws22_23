@@ -14,7 +14,7 @@ public class SkipTutorialOnClickComponent : MonoBehaviour, IPointerClickHandler
 
     private Toggle _toggle;
 
-    public void Start() {
+    public void OnEnable() {
         _toggle = GetComponent<Toggle>();
 
         data.ShallBeSkipped = false;
@@ -32,5 +32,9 @@ public class SkipTutorialOnClickComponent : MonoBehaviour, IPointerClickHandler
     {
         data.ShallBeSkipped = !data.ShallBeSkipped;
         _toggle.isOn = data.ShallBeSkipped;
+    }
+    
+    private void OnDisable() {
+        MenuInputHandlerComponent.OnSkipTutorialButtonTriggered -= OnSkipTutorialButtonTriggered;
     }
 }

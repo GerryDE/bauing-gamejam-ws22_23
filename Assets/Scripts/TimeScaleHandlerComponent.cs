@@ -3,7 +3,7 @@ using static GameStateHandlerComponent;
 
 public class TimeScaleHandlerComponent : MonoBehaviour
 {
-    private void Awake()
+    private void OnEnable()
     {
         OnGameStatePauseEntered += OnGameStatePause;
         OnGameStateResumeEntered += OnGameStateResume;
@@ -19,7 +19,7 @@ public class TimeScaleHandlerComponent : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         OnGameStatePauseEntered -= OnGameStatePause;
         OnGameStateResumeEntered -= OnGameStateResume;

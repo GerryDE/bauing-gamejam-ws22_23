@@ -12,7 +12,7 @@ namespace UI
 
         private Slider _slider;
 
-        private void Start()
+        private void OnEnable()
         {
             _slider = GetComponent<Slider>();
             UpdateComponents(0);
@@ -29,7 +29,7 @@ namespace UI
             _slider.value = playerData.CurrentRemainingYears / (float)playerData.MaxRemainingYears;
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             DataProvider.OnCurrentRemainingYearsChanged -= UpdateComponents;
             DataProvider.OnPlayerMaxRemainingYearsChanged -= UpdateComponents;

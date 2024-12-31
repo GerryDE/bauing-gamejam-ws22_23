@@ -7,7 +7,7 @@ public class EnableChildOnPauseComponent : MonoBehaviour
 {
     [SerializeField] private GameObject obj;
 
-    private void Awake()
+    private void OnEnable()
     {
         GameStateHandlerComponent.OnGameStatePauseEntered += OnGameStatePause;
         GameStateHandlerComponent.OnGameStateResumeEntered += OnGameStateResume;
@@ -23,7 +23,7 @@ public class EnableChildOnPauseComponent : MonoBehaviour
         obj.SetActive(false);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         GameStateHandlerComponent.OnGameStatePauseEntered -= OnGameStatePause;
         GameStateHandlerComponent.OnGameStateResumeEntered -= OnGameStateResume;

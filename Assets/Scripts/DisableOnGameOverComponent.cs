@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DisableOnGameOverComponent : MonoBehaviour
 {
-    private void Awake()
+    private void OnEnable()
     {
         CheckForGameOverComponent.OnGameOver += OnGameOver;
     }
@@ -12,5 +12,9 @@ public class DisableOnGameOverComponent : MonoBehaviour
     {
         if (this == null) return;
         gameObject.SetActive(false);
+    }
+
+    private void OnDisable() {
+        CheckForGameOverComponent.OnGameOver -= OnGameOver;
     }
 }

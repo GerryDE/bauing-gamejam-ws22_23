@@ -7,7 +7,7 @@ public class WinScreenComponent : MonoBehaviour
     [SerializeField] private UnityEngine.Object mainMenuScene;
     [SerializeField] private UnityEngine.Object mainGameScene;
 
-    private void Awake()
+    private void OnEnable()
     {
         MenuInputHandlerComponent.OnExitButtonTriggered += OnExitButtonTriggered;
         MenuInputHandlerComponent.OnRestartButtonTriggered += OnRestartButtonTriggered;
@@ -21,5 +21,10 @@ public class WinScreenComponent : MonoBehaviour
     private void OnRestartButtonTriggered()
     {
         SceneManager.LoadScene(mainGameScene.name);
+    }
+
+    private void OnDisable() {
+        MenuInputHandlerComponent.OnExitButtonTriggered -= OnExitButtonTriggered;
+        MenuInputHandlerComponent.OnRestartButtonTriggered -= OnRestartButtonTriggered;
     }
 }

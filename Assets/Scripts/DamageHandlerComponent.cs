@@ -15,7 +15,7 @@ public class DamageHandlerComponent : MonoBehaviour
     public static DealDamageToEnemy OnDealDamageToEnemy;
     public static DealDamageToFence OnDealDamageToFence;
 
-    private void Start()
+    private void OnEnable()
     {
         PlayerController.OnCollisionBetweenPlayerAndEnemy += OnCollisionBetweenPlayerAndEnemy;
         FenceController.OnCollisionBetweenFenceAndEnemy += OnCollisionBetweenFenceAndEnemy;
@@ -62,7 +62,7 @@ public class DamageHandlerComponent : MonoBehaviour
         return attack <= 0 ? 0 : Math.Max(1, (int) Mathf.Pow(attack - defense, damageMultiplier));
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         PlayerController.OnCollisionBetweenPlayerAndEnemy -= OnCollisionBetweenPlayerAndEnemy;
         FenceController.OnCollisionBetweenFenceAndEnemy -= OnCollisionBetweenFenceAndEnemy;

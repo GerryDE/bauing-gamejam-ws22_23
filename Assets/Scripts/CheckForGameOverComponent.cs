@@ -6,7 +6,7 @@ public class CheckForGameOverComponent : MonoBehaviour
     public delegate void GameOver();
     public static GameOver OnGameOver;
 
-    private void Awake()
+    private void OnEnable()
     {
         DataProvider.OnCurrentRemainingYearsChanged += OnCurrentRemainingYearsChanged;
     }
@@ -19,7 +19,7 @@ public class CheckForGameOverComponent : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         DataProvider.OnCurrentRemainingYearsChanged -= OnCurrentRemainingYearsChanged;
     }

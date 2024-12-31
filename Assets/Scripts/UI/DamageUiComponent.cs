@@ -10,7 +10,7 @@ namespace UI
         [SerializeField] private GameObject playerDamageObj;
         [SerializeField] private float yOffset;
         
-        private void Start()
+        private void OnEnable()
         {
             DamageHandlerComponent.OnDealDamageToEnemy += ShowEnemyDamage;
             DamageHandlerComponent.OnDealDamageToPlayer += ShowPlayerDamage;
@@ -37,7 +37,7 @@ namespace UI
             instance.SetActive(true);
         }
         
-        private void OnDestroy()
+        private void OnDisable()
         {
             DamageHandlerComponent.OnDealDamageToEnemy -= ShowEnemyDamage;
             DamageHandlerComponent.OnDealDamageToPlayer -= ShowPlayerDamage;

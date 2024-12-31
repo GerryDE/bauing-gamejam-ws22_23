@@ -32,7 +32,7 @@ public class GameStateHandlerComponent : MonoBehaviour
         }
     }
 
-    private void Awake()
+    private void OnEnable()
     {
         GameInputHandlerComponent.OnPauseCalled += OnPauseButtonPressed;
         GameInputHandlerComponent.OnResumeCalled += OnResumeButtonPressed;
@@ -52,7 +52,7 @@ public class GameStateHandlerComponent : MonoBehaviour
     private void OnGameOver()
     {
         GlobalGameState = GameState.RUNNING;
-        OnDestroy();
+        OnDisable();
     }
 
     private void Start()
@@ -82,7 +82,7 @@ public class GameStateHandlerComponent : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         GameInputHandlerComponent.OnPauseCalled -= OnPauseButtonPressed;
         GameInputHandlerComponent.OnResumeCalled -= OnResumeButtonPressed;

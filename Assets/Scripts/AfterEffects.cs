@@ -12,7 +12,7 @@ public class AfterEffects : MonoBehaviour
     [SerializeField] float fadeSpeed;
     private float fadeAmount = 0;
 
-    private void Awake()
+    private void OnEnable()
     {
         DataProvider.OnCurrentRemainingYearsChanged += OnRemainingYearsChanged;
 
@@ -71,7 +71,7 @@ public class AfterEffects : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         DataProvider.OnCurrentRemainingYearsChanged -= OnRemainingYearsChanged;
     }

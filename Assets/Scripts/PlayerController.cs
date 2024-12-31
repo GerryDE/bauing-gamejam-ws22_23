@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerMove OnPlayerMove;
     public static CollisionBetweenPlayerAndEnemy OnCollisionBetweenPlayerAndEnemy;
 
-    private void Awake()
+    private void OnEnable()
     {
         YoungToOldTransitionComponent.OnYoungOldTransitionChanged += OnYoungOldTransitionChanged;
         GameInputHandlerComponent.OnMoveCalled += OnMoveCalled;
@@ -62,9 +62,10 @@ public class PlayerController : MonoBehaviour
         OnCollisionBetweenPlayerAndEnemy?.Invoke(transform, col.transform);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         YoungToOldTransitionComponent.OnYoungOldTransitionChanged -= OnYoungOldTransitionChanged;
         GameInputHandlerComponent.OnMoveCalled -= OnMoveCalled;
+        DamageHandlerComponent.OnDealDamageToPlayer -= OnDealDamageToPlayer;
     }
 }

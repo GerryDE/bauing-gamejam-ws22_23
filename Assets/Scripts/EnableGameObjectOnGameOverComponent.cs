@@ -5,7 +5,7 @@ public class EnableGameObjectOnGameOverComponent : MonoBehaviour
 {
     [SerializeField] private GameObject obj;
 
-    private void Awake()
+    private void OnEnable()
     {
         CheckForGameOverComponent.OnGameOver += OnGameOver;
     }
@@ -15,7 +15,7 @@ public class EnableGameObjectOnGameOverComponent : MonoBehaviour
         obj.SetActive(true);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         CheckForGameOverComponent.OnGameOver -= OnGameOver;
     }

@@ -9,7 +9,7 @@ namespace DefaultNamespace
         public delegate void GameFinished();
         public static GameFinished OnGameFinished;
 
-        private void Awake() {
+        private void OnEnable() {
             BossComponent.OnBossDestroyed += OnBossDestroyed;
         }
 
@@ -17,6 +17,10 @@ namespace DefaultNamespace
         {
             OnGameFinished?.Invoke();
             SceneManager.LoadScene("WinScreen");
+        }
+
+        private void OnDisable() {
+            BossComponent.OnBossDestroyed -= OnBossDestroyed;
         }
     }
 }

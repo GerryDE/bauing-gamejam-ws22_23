@@ -8,7 +8,7 @@ namespace Animations
     {
         private Animator _animator;
 
-        private void Start()
+        private void OnEnable()
         {
             PlayerController.OnPlayerMove += OnMove;
 
@@ -21,7 +21,7 @@ namespace Animations
             _animator.SetFloat("direction", direction);
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             PlayerController.OnPlayerMove -= OnMove;
         }

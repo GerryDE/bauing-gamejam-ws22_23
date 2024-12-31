@@ -19,7 +19,7 @@ public class WaveHandlerComponent : MonoBehaviour
     private float _subWaveInterval;
     private float _spawnInterval;
 
-    private void Start()
+    private void OnEnable()
     {
         _dataProvider = DataProvider.Instance;
         if (!_dataProvider)
@@ -105,5 +105,9 @@ public class WaveHandlerComponent : MonoBehaviour
 		var range = _dataProvider.CurrentSubWaveData().spawnIntervalRange;
 		var value = Random.Range(range.min, range.max);
         _spawnInterval = value;
+    }
+
+    private void OnDisable() {
+        EnemyController.OnEnemyDestroyed -= OnEnemyDestroyed;
     }
 }

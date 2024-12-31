@@ -11,7 +11,7 @@ public class ChangeVolumeUiComponent : MonoBehaviour
 
     private Slider _slider;
     
-    void Start()
+    void OnEnable()
     {
         _slider = GetComponent<Slider>();
         _slider.value = volumeData.Volume;
@@ -38,8 +38,10 @@ public class ChangeVolumeUiComponent : MonoBehaviour
         _slider.value = volume;
     }
 
-    private void OnDestroy() 
+    private void OnDisable() 
     {
         AudioVolumeData.OnVolumeChanged -= OnVolumeChanged;
+        MenuInputHandlerComponent.OnVolumeChangeTriggered -= OnVolumeChangeTriggered;
+        GameInputHandlerComponent.OnVolumeChangeCalled -= OnVolumeChangeTriggered;
     }
 }

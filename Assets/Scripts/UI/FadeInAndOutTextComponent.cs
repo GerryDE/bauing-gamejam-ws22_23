@@ -19,7 +19,7 @@ public class FadeInAndOutTextComponent : MonoBehaviour
     private float _elapsedTime;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         _textComponent = GetComponent<TextMeshProUGUI>();
         _textComponent.enabled = false;
@@ -70,7 +70,8 @@ public class FadeInAndOutTextComponent : MonoBehaviour
         }
     }
 
-    private void OnDestroy() {
+    private void OnDisable() {
         TutorialComponent.OnTutorialCompleted -= OnTutorialCompleted;
+        TutorialComponent.OnNewObjectiveStarted -= OnNewObjectiveStarted;
     }
 }

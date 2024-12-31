@@ -28,6 +28,11 @@ namespace Objective
             ObjectiveHandler.OnObjectiveReached += OnObjectiveReached;
         }
 
+        ~DynamicObjectiveHandler()
+        {
+            ObjectiveHandler.OnObjectiveReached -= OnObjectiveReached;
+        }
+
         private void OnObjectiveReached(ObjectiveData data)
         {
             if (_handlers.ContainsKey(data.GetType()))

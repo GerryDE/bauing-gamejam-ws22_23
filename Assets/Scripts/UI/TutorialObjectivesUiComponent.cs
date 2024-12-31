@@ -15,7 +15,7 @@ namespace UI
 
         private Dictionary<Type, List<TextMeshProUGUI>> _objectsForType;
 
-        private void Awake()
+        private void OnEnable()
         {
             _objectsForType = new Dictionary<Type, List<TextMeshProUGUI>>();
 
@@ -70,7 +70,7 @@ namespace UI
             _objectsForType[data.GetType()].Add(instanceTextComponent);
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             TutorialComponent.OnNewObjectiveStarted -= OnNewObjectiveStarted;
             ObjectiveHandler.OnObjectiveReached -= OnObjectiveReached;

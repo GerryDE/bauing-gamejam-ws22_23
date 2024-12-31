@@ -7,7 +7,7 @@ public class EnableTextOnPauseComponent : MonoBehaviour
 {
     private TextMeshPro textComponent;
 
-    private void Awake()
+    private void OnEnable()
     {
         GameStateHandlerComponent.OnGameStatePauseEntered += OnGameStatePause;
         GameStateHandlerComponent.OnGameStateResumeEntered += OnGameStateResume;
@@ -25,7 +25,7 @@ public class EnableTextOnPauseComponent : MonoBehaviour
         textComponent.enabled = false;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         GameStateHandlerComponent.OnGameStatePauseEntered -= OnGameStatePause;
         GameStateHandlerComponent.OnGameStateResumeEntered -= OnGameStateResume;

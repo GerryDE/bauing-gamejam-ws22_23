@@ -6,7 +6,7 @@ public class BossComponent : MonoBehaviour
 
     public static BossDestroyed OnBossDestroyed;
 
-    private void Start()
+    private void OnEnable()
     {
         EnemyController.OnEnemyDestroyed += HandleBossDestroyed;
     }
@@ -19,7 +19,7 @@ public class BossComponent : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         EnemyController.OnEnemyDestroyed -= HandleBossDestroyed;
     }
