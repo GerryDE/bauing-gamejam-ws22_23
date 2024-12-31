@@ -82,7 +82,7 @@ public class StatueUpgradeComponent : InteractableBaseComponent
     {
         base.OnInteractionButton2Pressed();
 
-         if (!_upgradeEnabled) return; 
+        if (!_upgradeEnabled) return; 
 
         var data = DataProvider.Instance;
         var currentStatueData = data.CurrentStatueData;

@@ -15,7 +15,7 @@ MonoBehaviour:
   maxHpStat:
     StatType: 0
     BaseValue: 50
-    Multiplier: 1.5
+    Multiplier: 1.25
     Version: 0
   atkStat:
     StatType: 1
@@ -36,6 +36,6 @@ MonoBehaviour:
   upgradeCost: {fileID: 11400000, guid: d59decb1439db356b8592cfecb271825, type: 2}
   lumberCostMultiplier: 1.5
   stoneCostMultiplier: 1.5
-  upgradeableStats: 00000000010000000200000003000000
+  upgradeableStats: 00000000
   statToUpgrade: 0
   statValue: 0

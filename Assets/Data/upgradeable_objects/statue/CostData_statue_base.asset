@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be9bcc4367b6dd74cb3d2a0747761893, type: 3}
   m_Name: CostData_statue_base
   m_EditorClassIdentifier: 
-  lumberCost: 5
-  stoneCost: 5
+  lumberCost: 10
+  stoneCost: 10

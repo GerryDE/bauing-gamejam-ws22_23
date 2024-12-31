@@ -13,7 +13,7 @@ namespace UI
 
         private TextMeshProUGUI _textComponent;
 
-        public void Start() 
+        public void OnEnable() 
         {
             _textComponent = GetComponent<TextMeshProUGUI>();
 

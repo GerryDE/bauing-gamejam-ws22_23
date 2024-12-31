@@ -37,7 +37,7 @@ public class TreeUpgradeComponent : InteractableBaseComponent
     protected override void OnInteractionButton2Pressed()
     {
         base.OnInteractionButton2Pressed();
-
+        
         if (!_upgradeEnabled) return;        
 
         _interactionButton2Pressed = false;

@@ -30,11 +30,12 @@ namespace Audio
         
         public void Start()
         {
+            Debug.Log("Handler started");
             _mainAudioSource = audioSource1;
             _mainAudioSource.clip = DataProvider.Instance.DefaultBgm;
             _maxVolume = GetMaxVolume(DataProvider.Instance.VolumeData);
             audioSource1.volume = _maxVolume;
-            audioSource2.volume = _maxVolume;
+            audioSource2.volume = 0f;
             _mainAudioSource.volume = _maxVolume;
             _mainAudioSource.Play();
 
@@ -47,14 +48,15 @@ namespace Audio
 
         private void OnVolumeChanged(float volume)
         {
+            Debug.Log("Volume changed");
             _maxVolume = GetMaxVolume(DataProvider.Instance.VolumeData);
-            audioSource1.volume = _maxVolume;
-            audioSource2.volume = _maxVolume;
-            _mainAudioSource.volume = _maxVolume;
+            audioSource1.volume = audioSource1 == _mainAudioSource ? volume : 0f;
+            audioSource2.volume = audioSource2 == _mainAudioSource ? volume : 0f;
         }
 
         private void OnSpawnEnemy(GameObject enemyPrefab, int maxAmountOfSimultaneouslyLivingEnemies)
         {
+            Debug.Log("Enemy spawned");
             if (enemyPrefab.GetComponent<FinalBossComponent>() != null && _currentBgm != CurrentBgm.FINAL_BOSS)
             {
                 _currentBgm = CurrentBgm.FINAL_BOSS;
@@ -74,6 +76,8 @@ namespace Audio
         
         private void OnEnemySubWaveDefeated()
         {
+            Debug.Log("Enemy sub wave defeated");
+            if (_currentBgm == CurrentBgm.DEFAULT) return;
             _currentBgm = CurrentBgm.DEFAULT;
             Fade(DataProvider.Instance.DefaultBgm);
         }

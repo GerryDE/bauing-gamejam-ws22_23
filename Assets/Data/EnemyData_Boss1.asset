@@ -15,5 +15,5 @@ MonoBehaviour:
   maxHp: 50
   attack: 1
   defense: 1
-  moveSpeed: 50
+  moveSpeed: 85
   throwBackForce: {x: -700, y: 0}

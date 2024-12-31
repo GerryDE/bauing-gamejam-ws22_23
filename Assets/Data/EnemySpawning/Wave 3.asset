@@ -18,8 +18,12 @@ MonoBehaviour:
     max: 30
   maxAmountOfSimultaneouslyLivingEnemies: 3
   subWaves:
-  - {fileID: 11400000, guid: c974a61c43ef370e9951972dc8adb85e, type: 2}
-  - {fileID: 11400000, guid: c974a61c43ef370e9951972dc8adb85e, type: 2}
-  - {fileID: 11400000, guid: c974a61c43ef370e9951972dc8adb85e, type: 2}
-  - {fileID: 11400000, guid: c974a61c43ef370e9951972dc8adb85e, type: 2}
+  - {fileID: 11400000, guid: 6b58a1f3a13557a1ca771d424a164504, type: 2}
+  - {fileID: 11400000, guid: 6b58a1f3a13557a1ca771d424a164504, type: 2}
+  - {fileID: 11400000, guid: 6b58a1f3a13557a1ca771d424a164504, type: 2}
+  - {fileID: 11400000, guid: 6b58a1f3a13557a1ca771d424a164504, type: 2}
+  - {fileID: 11400000, guid: 6b58a1f3a13557a1ca771d424a164504, type: 2}
+  - {fileID: 11400000, guid: 6b58a1f3a13557a1ca771d424a164504, type: 2}
+  - {fileID: 11400000, guid: 6b58a1f3a13557a1ca771d424a164504, type: 2}
+  - {fileID: 11400000, guid: 6b58a1f3a13557a1ca771d424a164504, type: 2}
   - {fileID: 11400000, guid: e67720ab831585bbdbcd2503be3f688e, type: 2}

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be9bcc4367b6dd74cb3d2a0747761893, type: 3}
   m_Name: CostData_tree_lv3
   m_EditorClassIdentifier: 
-  lumberCost: 25
+  lumberCost: 30
   stoneCost: 10

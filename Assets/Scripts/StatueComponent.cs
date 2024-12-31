@@ -38,7 +38,7 @@ public class StatueComponent : InteractableBaseComponent
         if (_elapsedTime <= _prayingDuration) return;
 
         OnPrayed?.Invoke(1);
-        DataProvider.Instance.PlayerData.CurrentRemainingYears += 1;
+        // DataProvider.Instance.PlayerData.CurrentRemainingYears += 1;
         _elapsedTime = 0;
         _prayCount++;
         _prayingDuration = CalculatePrayingDuration();
@@ -47,6 +47,6 @@ public class StatueComponent : InteractableBaseComponent
 
     private float CalculatePrayingDuration()
     {
-        return (startingPrayingDuration * Mathf.Pow(prayingDurationMultiplicator, _prayCount));
+        return startingPrayingDuration * Mathf.Pow(prayingDurationMultiplicator, _prayCount);
     }
 }

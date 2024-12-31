@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be9bcc4367b6dd74cb3d2a0747761893, type: 3}
   m_Name: fence_repair_lv1
   m_EditorClassIdentifier: 
-  lumberCost: 2
-  stoneCost: 2
+  lumberCost: 5
+  stoneCost: 3

@@ -14,18 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeCost: {fileID: 11400000, guid: a1eeae6525225bac8932e42f6c51eb3e, type: 2}
   spawingDropAmount: 0
-  spawningDefaultStateChangeDuration: 5
+  spawningDefaultStateChangeDuration: 6
   spawningMiningDuration: 0
   spawningSprite: {fileID: 0}
-  smallDropAmount: 3
-  smallDefaultStateChangeDuration: 5
+  smallDropAmount: 5
+  smallDefaultStateChangeDuration: 6
   smallMiningDuration: 0.5
   smallSprite: {fileID: 21300000, guid: 2a4349b76e9ed6426ac389a0bdd1333e, type: 3}
-  mediumDropAmount: 6
-  mediumDefaultStateChangeDuration: 5
+  mediumDropAmount: 7
+  mediumDefaultStateChangeDuration: 6
   mediumMiningDuration: 1
   mediumSprite: {fileID: 21300000, guid: b3418d93f38e1b273839309bd7c95a2c, type: 3}
   largeDropAmount: 10
-  largeDefaultStateChangeDuration: 5
+  largeDefaultStateChangeDuration: 6
   largeMiningDuration: 1.5
   largeSprite: {fileID: 21300000, guid: ed1352b3596d826c89cd41363f2ecbd8, type: 3}

@@ -17,12 +17,12 @@ MonoBehaviour:
   spawningDefaultStateChangeDuration: 8
   spawningMiningDuration: 0
   spawningSprite: {fileID: 0}
-  smallDropAmount: 2
+  smallDropAmount: 3
   smallDefaultStateChangeDuration: 8
   smallMiningDuration: 0.8
   smallSprite: {fileID: 21300000, guid: 2a4349b76e9ed6426ac389a0bdd1333e, type: 3}
   mediumDropAmount: 5
-  mediumDefaultStateChangeDuration: 15
+  mediumDefaultStateChangeDuration: 8
   mediumMiningDuration: 1.5
   mediumSprite: {fileID: 21300000, guid: b3418d93f38e1b273839309bd7c95a2c, type: 3}
   largeDropAmount: 7
