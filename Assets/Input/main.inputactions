@@ -1004,17 +1004,6 @@
                 },
                 {
                     "name": "",
-                    "id": "5b1d3476-5b55-468c-a1b6-c3246e0ff6c9",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SkipTutorial",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "3bc3405c-2e4c-4cda-8f59-79784b6a6002",
                     "path": "<Keyboard>/t",
                     "interactions": "",
