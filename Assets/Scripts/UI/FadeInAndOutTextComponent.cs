@@ -72,5 +72,6 @@ public class FadeInAndOutTextComponent : MonoBehaviour
 
     private void OnDestroy() {
         TutorialComponent.OnTutorialCompleted -= OnTutorialCompleted;
+        TutorialComponent.OnNewObjectiveStarted -= OnNewObjectiveStarted;
     }
 }

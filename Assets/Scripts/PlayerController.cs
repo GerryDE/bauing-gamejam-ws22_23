@@ -66,5 +66,6 @@ public class PlayerController : MonoBehaviour
     {
         YoungToOldTransitionComponent.OnYoungOldTransitionChanged -= OnYoungOldTransitionChanged;
         GameInputHandlerComponent.OnMoveCalled -= OnMoveCalled;
+        DamageHandlerComponent.OnDealDamageToPlayer -= OnDealDamageToPlayer;
     }
 }

@@ -122,9 +122,9 @@ namespace Audio
 
         public void OnDestroy()
         {
-            WaveHandlerComponent.OnSpawnEnemy += OnSpawnEnemy;
-            WaveHandlerComponent.OnEnemySubWaveDefeated += OnEnemySubWaveDefeated;
-            AudioVolumeData.OnVolumeChanged += OnVolumeChanged;
+            WaveHandlerComponent.OnSpawnEnemy -= OnSpawnEnemy;
+            WaveHandlerComponent.OnEnemySubWaveDefeated -= OnEnemySubWaveDefeated;
+            AudioVolumeData.OnVolumeChanged -= OnVolumeChanged;
         }
     }
 }
