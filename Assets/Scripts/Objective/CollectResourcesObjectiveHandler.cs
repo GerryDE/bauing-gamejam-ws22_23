@@ -18,11 +18,6 @@ namespace Objective
             DataProvider.OnResourceDataChanged += OnResourceDataChanged;
         }
 
-        ~CollectResourcesObjectiveHandler()
-        {
-            DataProvider.OnResourceDataChanged -= OnResourceDataChanged;
-        }
-
         private void OnResourceDataChanged(DataProvider.CurrentResourceData data)
         {
             if (data.WoodAmount < _initialLumberAmount + _data.lumberAmount ||

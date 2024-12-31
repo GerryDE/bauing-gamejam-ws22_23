@@ -35,7 +35,7 @@ public class EnemyController : MonoBehaviour
     private DataHandlerComponent _dataHandlerComponent;
     private static readonly int Kill = Animator.StringToHash("kill");
 
-    private void OnEnable()
+    private void Awake()
     {
         _dataHandlerComponent = GameObject.FindWithTag("DataHandler").GetComponent<DataHandlerComponent>();
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -115,7 +115,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         DamageHandlerComponent.OnDealDamageToEnemy -= OnDealDamageToEnemy;
         EnemyAnimationComponent.OnEnemyDeathAnimationFinished -= OnEnemyDeathAnimationFinished;

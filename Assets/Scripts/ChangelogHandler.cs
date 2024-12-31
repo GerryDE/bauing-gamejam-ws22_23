@@ -17,7 +17,7 @@ public class ChangelogHandler : MonoBehaviour
     [Header("Scene to Load to (Main Menu)")]
     [SerializeField] string mainMenuScene;
 
-    private void OnEnable()
+    private void Awake()
     {
         MenuInputHandlerComponent.OnScrollbarButtonTriggered += OnScrollbarButtonTriggered;
         MenuInputHandlerComponent.OnExitButtonTriggered += OnExitButtonTriggered;
@@ -50,7 +50,7 @@ public class ChangelogHandler : MonoBehaviour
         changelogText.text = textAsset.text;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         MenuInputHandlerComponent.OnScrollbarButtonTriggered -= OnScrollbarButtonTriggered;
         MenuInputHandlerComponent.OnExitButtonTriggered -= OnExitButtonTriggered;

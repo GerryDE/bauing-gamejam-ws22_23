@@ -7,7 +7,7 @@ public class SceneLoaderComponent : MonoBehaviour
     [SerializeField] private string credits = "Credits";
     [SerializeField] private string changelog = "Changelog";
 
-    private void OnEnable()
+    private void Start()
     {
         MenuInputHandlerComponent.OnStartGameTriggered += OnStartGameTriggered;
         MenuInputHandlerComponent.OnCreditsTriggered += OnCreditsTriggered;
@@ -32,11 +32,5 @@ public class SceneLoaderComponent : MonoBehaviour
     private void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
-    }
-
-    private void OnDisable() {
-        MenuInputHandlerComponent.OnStartGameTriggered -= OnStartGameTriggered;
-        MenuInputHandlerComponent.OnCreditsTriggered -= OnCreditsTriggered;
-        MenuInputHandlerComponent.OnChangelogTriggered -= OnChangelogTriggered;
     }
 }

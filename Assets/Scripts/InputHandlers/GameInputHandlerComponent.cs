@@ -30,7 +30,7 @@ public class GameInputHandlerComponent : MonoBehaviour {
 
     public static ResumeCalled OnResumeCalled;
 
-    private void OnEnable()
+    private void Awake()
     {
         GameStateHandlerComponent.OnGameStatePauseEntered += OnGameStatePause;
         GameStateHandlerComponent.OnGameStateResumeEntered += OnGameStateResume;
@@ -106,7 +106,7 @@ public class GameInputHandlerComponent : MonoBehaviour {
         OnRestartCalled.Invoke();
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         GameStateHandlerComponent.OnGameStatePauseEntered -= OnGameStatePause;
         GameStateHandlerComponent.OnGameStateResumeEntered -= OnGameStateResume;

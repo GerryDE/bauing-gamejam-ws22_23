@@ -28,7 +28,7 @@ namespace Audio
         
         private CurrentBgm _currentBgm = CurrentBgm.DEFAULT;
         
-        public void OnEnable()
+        public void Start()
         {
             Debug.Log("Handler started");
             _mainAudioSource = audioSource1;
@@ -120,7 +120,7 @@ namespace Audio
             return volumeData.Volume;
         }
 
-        public void OnDisable()
+        public void OnDestroy()
         {
             WaveHandlerComponent.OnSpawnEnemy += OnSpawnEnemy;
             WaveHandlerComponent.OnEnemySubWaveDefeated += OnEnemySubWaveDefeated;

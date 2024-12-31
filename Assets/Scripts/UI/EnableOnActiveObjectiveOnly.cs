@@ -21,7 +21,7 @@ namespace UI
         [SerializeField] private ObjectiveType objectiveType;
         private Dictionary<ObjectiveType, Type> _objectiveTypeDictionary;
         
-        private void OnEnable()
+        private void Awake()
         {
             _objectiveTypeDictionary = new Dictionary<ObjectiveType, Type>()
             {
@@ -55,7 +55,7 @@ namespace UI
             }
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             TutorialComponent.OnNewObjectiveStarted -= OnNewObjectiveStarted;
             ObjectiveHandler.OnObjectiveReached -= OnObjectiveReached;

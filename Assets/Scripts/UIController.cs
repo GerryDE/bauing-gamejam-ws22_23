@@ -117,10 +117,9 @@ public class UIController : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         GameInputHandlerComponent.OnRestartCalled -= OnRestartGame;
-        CheckForGameOverComponent.OnGameOver -= OnGameOver;
     }
 
     IEnumerator EndGameScreen()

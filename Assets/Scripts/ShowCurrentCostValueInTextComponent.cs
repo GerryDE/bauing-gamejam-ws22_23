@@ -16,6 +16,13 @@ public class ShowCurrentCostValueInTextComponent : MonoBehaviour
 
     private TextMeshProUGUI textComponent;
 
+    // Start is called before the first frame update
+    void Start()
+    {
+        textComponent = GetComponent<TextMeshProUGUI>();
+        DataProvider.OnResourceDataChanged += OnResourceDataChanged;
+    }
+
     private void OnResourceDataChanged(DataProvider.CurrentResourceData resourceData)
     {
         string text = "0";
@@ -46,10 +53,9 @@ public class ShowCurrentCostValueInTextComponent : MonoBehaviour
                 break;
         }
         textComponent.text = text;
-        DataProvider.OnResourceDataChanged += OnResourceDataChanged;
     }
 
-    private void OnDisable() {
+    private void OnDestroy() {
         DataProvider.OnResourceDataChanged -= OnResourceDataChanged;
     }
 }

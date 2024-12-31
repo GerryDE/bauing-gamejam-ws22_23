@@ -9,7 +9,7 @@ public class EnemyGaugesUiHandler : MonoBehaviour
     [SerializeField] private Slider slider;
 
     // Start is called before the first frame update
-    public void OnEnable()
+    public void Start()
     {
         SetupSlidersForCurrentWave();
 
@@ -76,7 +76,7 @@ public class EnemyGaugesUiHandler : MonoBehaviour
         }
     }
 
-    public void OnDisable()
+    public void OnDestroy()
     {
         EnemyController.OnEnemyDestroyed -= OnEnemyDestroyed;
         BossComponent.OnBossDestroyed -= OnBossDestroyed;

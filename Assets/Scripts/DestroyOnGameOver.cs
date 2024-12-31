@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DestroyOnGameOverComponent : MonoBehaviour
 {
-    private void OnEnable()
+    private void Awake()
     {
         CheckForGameOverComponent.OnGameOver += OnGameOver;
     }
@@ -11,9 +11,5 @@ public class DestroyOnGameOverComponent : MonoBehaviour
     private void OnGameOver()
     {
         Destroy(this);
-    }
-
-    private void OnDisable() {
-        CheckForGameOverComponent.OnGameOver -= OnGameOver;
     }
 }

@@ -16,6 +16,7 @@ public class ChangeKeyTextUiComponent : MonoBehaviour
     private void Start() 
     {
         OnUseAlternateLayoutChanged(DataProvider.Instance.UseAlternateLayout);
+        DataProvider.OnUseAlternateLayoutChanged += OnUseAlternateLayoutChanged;
     }
 
     private void OnEnable() {
@@ -26,8 +27,6 @@ public class ChangeKeyTextUiComponent : MonoBehaviour
 
         Color nextKeyColor = _nextKeyText.color;
         _nextKeyText.color = new Color(nextKeyColor.r, nextKeyColor.g, nextKeyColor.b, 0f);
-
-        DataProvider.OnUseAlternateLayoutChanged += OnUseAlternateLayoutChanged;
     }
 
     private void FixedUpdate()
@@ -52,7 +51,7 @@ public class ChangeKeyTextUiComponent : MonoBehaviour
         }
     }
 
-    private void OnDisable() {
+    private void OnDestroy() {
         DataProvider.OnUseAlternateLayoutChanged -= OnUseAlternateLayoutChanged;
     }
 }

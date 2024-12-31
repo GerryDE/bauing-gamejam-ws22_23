@@ -15,6 +15,12 @@ public class ShowRequiredLumberCostValueInTextComponent : MonoBehaviour
     private DataHandlerComponent _dataHandlerComponent;
     private TextMeshProUGUI textComponent;
 
+    void Start()
+    {
+        textComponent = GetComponent<TextMeshProUGUI>();
+        _dataHandlerComponent = GameObject.FindWithTag("DataHandler").GetComponent<DataHandlerComponent>();
+    }
+
     private void OnEnable() {
         textComponent = GetComponent<TextMeshProUGUI>();
         _dataHandlerComponent = GameObject.FindWithTag("DataHandler").GetComponent<DataHandlerComponent>();

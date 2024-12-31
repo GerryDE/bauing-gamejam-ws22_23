@@ -28,9 +28,5 @@ namespace UI
                 _textComponent.text = data.StoneAmount.ToString();
             }
         }
-
-        private void OnDisable() {
-            DataProvider.OnResourceDataChanged -= OnResourceDataChanged;
-        }
     }
 }

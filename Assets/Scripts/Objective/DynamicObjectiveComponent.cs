@@ -6,12 +6,12 @@ namespace Objective
     public class DynamicObjectiveComponent : MonoBehaviour
     {
         private DynamicObjectiveHandler _handler;
-        private void OnEnable()
+        private void Start()
         {
             _handler = new DynamicObjectiveHandler(DataProvider.Instance.DynamicObjectives);
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             _handler = null;
         }

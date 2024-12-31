@@ -8,7 +8,7 @@ public class EnemySpawnerComponent : MonoBehaviour
 {
     [SerializeField] GameObject prefabHowToKill;
 
-    private void OnEnable()
+    private void Awake()
     {
         WaveHandlerComponent.OnSpawnEnemy += SpawnEnemy;
         DefeatEnemyObjectiveHandler.OnSpawnEnemy += SpawnEnemy;
@@ -21,7 +21,7 @@ public class EnemySpawnerComponent : MonoBehaviour
         Instantiate(enemyPrefab, transform);
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         WaveHandlerComponent.OnSpawnEnemy -= SpawnEnemy;
         DefeatEnemyObjectiveHandler.OnSpawnEnemy -= SpawnEnemy;

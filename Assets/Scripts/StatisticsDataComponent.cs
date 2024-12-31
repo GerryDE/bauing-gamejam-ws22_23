@@ -11,7 +11,7 @@ public class StatisticsDataComponent : MonoBehaviour
 
     [SerializeField] private StatisticsData data;
 
-    private void OnEnable()
+    private void Awake()
     {
         if (Instance != null && Instance != this)
         {
@@ -118,7 +118,7 @@ public class StatisticsDataComponent : MonoBehaviour
         data.UpgradeAmount = 0;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         TreeComponent.OnDropWood -= OnDropWood;
         StoneComponent.OnStoneDrop -= OnStoneDrop;

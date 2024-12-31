@@ -13,6 +13,10 @@ namespace AssemblyCSharp.Assets.Scripts
 
         private CanvasGroup _canvasGroup;
 
+        private void Start() {
+            DataProvider.OnResourceDataChanged += OnResourceDataChanged;
+        }
+
         private void OnResourceDataChanged(DataProvider.CurrentResourceData resourceData)
         {
             OnEnable();
@@ -76,8 +80,6 @@ namespace AssemblyCSharp.Assets.Scripts
             {
                 gameObject.SetActive(false);
             }
-
-            DataProvider.OnResourceDataChanged += OnResourceDataChanged;
         }
 
         private CostData GetCostData(int version)
@@ -112,7 +114,7 @@ namespace AssemblyCSharp.Assets.Scripts
             return costData;
         }
 
-        private void OnDisable() {
+        private void OnDestroy() {
             DataProvider.OnResourceDataChanged -= OnResourceDataChanged;
         }
     }

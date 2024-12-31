@@ -72,7 +72,7 @@ public class DataHandlerComponent : MonoBehaviour
     {
     }
 
-    private void OnEnable()
+    private void Start()
     {
         _currentPlayerData = DataProvider.Instance.PlayerData;
         _resourceData = DataProvider.Instance.ResourceData;
@@ -158,7 +158,7 @@ public class DataHandlerComponent : MonoBehaviour
         uiScript.giveFeedbackWithValues(amount, "Wood");
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         TreeComponent.OnDropWood -= OnDropWood;
         StoneComponent.OnStoneDrop -= OnStoneDrop;

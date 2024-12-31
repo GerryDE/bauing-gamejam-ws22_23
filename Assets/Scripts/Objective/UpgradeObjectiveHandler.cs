@@ -17,14 +17,6 @@ namespace Objective
             DataProvider.OnStatueVersionChanged += OnVersionChanged;
         }
 
-        ~UpgradeObjectiveHandler()
-        {
-            DataProvider.OnFenceVersionChanged -= OnVersionChanged;
-            DataProvider.OnMineVersionChanged -= OnVersionChanged;
-            DataProvider.OnTreeVersionChanged -= OnVersionChanged;
-            DataProvider.OnStatueVersionChanged -= OnVersionChanged;
-        }
-
         private void OnVersionChanged(int newVersion)
         {
             OnObjectiveReached?.Invoke(_data);

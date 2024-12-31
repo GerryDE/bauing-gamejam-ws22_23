@@ -124,7 +124,6 @@ public class FenceController : MonoBehaviour
     {
         FenceRepairComponent.OnRepairFence -= OnRepairFence;
         FenceUpgradeComponent.OnUpgradeFence -= OnUpgradeFence;
-        TutorialComponent.OnNewObjectiveStarted -= OnObjectiveStarted;
-        DamageHandlerComponent.OnDealDamageToFence -= OnDealDamageToFence;
+        ObjectiveHandler.OnObjectiveReached -= OnObjectiveStarted;
     }
 }

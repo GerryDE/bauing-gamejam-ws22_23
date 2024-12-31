@@ -8,7 +8,7 @@ public class PlayerSpriteComponent : MonoBehaviour
 
     private SpriteRenderer _renderer;
 
-    private void OnEnable()
+    private void Start()
     {
         YoungToOldTransitionComponent.OnYoungOldTransitionChanged += OnYoungOldTransitionChanged;
 
@@ -21,7 +21,7 @@ public class PlayerSpriteComponent : MonoBehaviour
         oldSpriteRenderer.color = new Color(1f, 1f, 1f, 1f - newValue);
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         YoungToOldTransitionComponent.OnYoungOldTransitionChanged -= OnYoungOldTransitionChanged;
     }

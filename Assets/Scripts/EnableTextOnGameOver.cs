@@ -7,7 +7,7 @@ public class EnableTextOnGameOver : MonoBehaviour
 {
     private TextMeshProUGUI _text;
 
-    private void OnEnable()
+    private void Awake()
     {
         CheckForGameOverComponent.OnGameOver += OnGameOver;
 
@@ -19,7 +19,7 @@ public class EnableTextOnGameOver : MonoBehaviour
         _text.enabled = true;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         CheckForGameOverComponent.OnGameOver -= OnGameOver;
     }

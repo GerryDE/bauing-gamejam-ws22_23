@@ -6,7 +6,7 @@ public class YoungToOldTransitionComponent : MonoBehaviour
 
     public static YoungOldTransitionChanged OnYoungOldTransitionChanged;
 
-    private void OnEnable()
+    private void Awake()
     {
         DataProvider.OnCurrentRemainingYearsChanged += OnRemainingYearsChanged;
     }
@@ -38,7 +38,7 @@ public class YoungToOldTransitionComponent : MonoBehaviour
         OnYoungOldTransitionChanged?.Invoke(transitionValue);
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         DataProvider.OnCurrentRemainingYearsChanged -= OnRemainingYearsChanged;
     }

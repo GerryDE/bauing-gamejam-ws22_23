@@ -14,12 +14,6 @@ namespace Objective
             FenceRepairComponent.OnRepairFence += OnRepairFence;
         }
 
-        ~RepairFenceObjectiveHandler()
-        {
-            FenceController.OnCurrentHpChanged -= OnCurrentFenceHpChanged;
-            FenceRepairComponent.OnRepairFence -= OnRepairFence;
-        }
-
         private void OnCurrentFenceHpChanged(int value, int maxHp)
         {
             if (value <= maxHp * _data.triggerValueInPercent / 100)

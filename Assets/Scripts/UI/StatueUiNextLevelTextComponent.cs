@@ -20,6 +20,8 @@ namespace UI
         {
             _textComponent = GetComponent<TextMeshProUGUI>();
             UpdateText();
+
+            StatueUpgradeComponent.OnUpgradeStatue += OnUpgradeStatue;
         }
 
         private void OnUpgradeStatue(StatueData.UpgradeableStat stat, float value)
@@ -30,7 +32,6 @@ namespace UI
         private void OnEnable()
         {
             UpdateText();
-            StatueUpgradeComponent.OnUpgradeStatue += OnUpgradeStatue;
         }
 
         private void UpdateText()
@@ -45,7 +46,7 @@ namespace UI
             };
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             StatueUpgradeComponent.OnUpgradeStatue -= OnUpgradeStatue;
         }
