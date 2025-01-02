@@ -33,7 +33,7 @@ namespace UI
             var instance = Instantiate(obj, Vector3.zero, Quaternion.identity, transform);
             instance.transform.position += Vector3.up * yOffset;
             instance.transform.position += Vector3.right * pos.x;
-            instance.GetComponentInChildren<TextMeshPro>().text = "-" + value;
+            instance.GetComponentInChildren<TextMeshProUGUI>().text = "-" + value;
             instance.SetActive(true);
         }
         
