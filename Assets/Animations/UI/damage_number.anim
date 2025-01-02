@@ -24,15 +24,15 @@ AnimationClip:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 6.515837
-        outSlope: 6.515837
+        inSlope: 573.94653
+        outSlope: 573.94653
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.04761905
+        outWeight: 0.09579112
       - serializedVersion: 3
         time: 0.5
-        value: 1
+        value: 100
         inSlope: 0.8056659
         outSlope: 0.8056659
         tangentMode: 0
@@ -63,11 +63,11 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.5
         value: 0
-        inSlope: -6.271929
-        outSlope: -6.271929
+        inSlope: -0.1697723
+        outSlope: -0.1697723
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.05396825
+        inWeight: 0.7001339
         outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -75,7 +75,7 @@ AnimationClip:
     attribute: m_fontColor.a
     path: 
     classID: 114
-    script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+    script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
     flags: 0
   m_PPtrCurves: []
   m_SampleRate: 60
@@ -114,15 +114,15 @@ AnimationClip:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 6.515837
-        outSlope: 6.515837
+        inSlope: 573.94653
+        outSlope: 573.94653
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.04761905
+        outWeight: 0.09579112
       - serializedVersion: 3
         time: 0.5
-        value: 1
+        value: 100
         inSlope: 0.8056659
         outSlope: 0.8056659
         tangentMode: 0
@@ -153,11 +153,11 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.5
         value: 0
-        inSlope: -6.271929
-        outSlope: -6.271929
+        inSlope: -0.1697723
+        outSlope: -0.1697723
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.05396825
+        inWeight: 0.7001339
         outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -165,7 +165,7 @@ AnimationClip:
     attribute: m_fontColor.a
     path: 
     classID: 114
-    script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+    script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
     flags: 0
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0

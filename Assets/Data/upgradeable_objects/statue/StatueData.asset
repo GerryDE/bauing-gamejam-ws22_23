@@ -34,8 +34,8 @@ MonoBehaviour:
     Version: 0
   baseUpgradeCost: {fileID: 11400000, guid: 24301a3c4c610f5fe83a1fa53fcc692d, type: 2}
   upgradeCost: {fileID: 11400000, guid: d59decb1439db356b8592cfecb271825, type: 2}
-  lumberCostMultiplier: 1.5
-  stoneCostMultiplier: 1.5
+  lumberCostMultiplier: 2
+  stoneCostMultiplier: 2
   upgradeableStats: 00000000
   statToUpgrade: 0
   statValue: 0
