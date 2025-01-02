@@ -60,6 +60,7 @@ public class StatueUpgradeComponent : InteractableBaseComponent
 
     private void OnStatueVersionChanged(int newVersion)
     {
+        GenerateNextStatueData();
         if (upgradeNotificationSprite == null) return;
         upgradeNotificationSprite.enabled = IsUpgradeable(newVersion + 1);
     }

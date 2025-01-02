@@ -18,11 +18,25 @@ public class ShowStatueUpgradeDataInTextComponent : MonoBehaviour
     private void OnEnable()
     {
         _textComponent = GetComponent<TextMeshProUGUI>();
+        SetData();
+        DataProvider.OnStatueVersionChanged += OnStatueVersionChanged;
+    }
 
+    private void OnStatueVersionChanged(int newVersion)
+    {
+        SetData();
+    }
+
+    private void OnDisable() {
+        DataProvider.OnStatueVersionChanged -= OnStatueVersionChanged;
+    }
+
+    private void SetData()
+    {
         var versionIndex = DataProvider.Instance.CurrentStatueVersion;
         var nextStatueData = DataProvider.Instance.NextStatueData;
 
-        
+
         float statValue;
         if (version.Equals(Version.NextVersion))
         {
@@ -35,13 +49,17 @@ public class ShowStatueUpgradeDataInTextComponent : MonoBehaviour
             var playerData = DataProvider.Instance.PlayerData;
             switch (statType)
             {
-                case StatueData.UpgradeableStat.MaxHp: statValue = playerData.MaxRemainingYears;
+                case StatueData.UpgradeableStat.MaxHp:
+                    statValue = playerData.MaxRemainingYears;
                     break;
-                case StatueData.UpgradeableStat.Atk: statValue = playerData.AttackValue;
+                case StatueData.UpgradeableStat.Atk:
+                    statValue = playerData.AttackValue;
                     break;
-                case StatueData.UpgradeableStat.Def: statValue = playerData.DefenseValue;
+                case StatueData.UpgradeableStat.Def:
+                    statValue = playerData.DefenseValue;
                     break;
-                case StatueData.UpgradeableStat.Speed: statValue = playerData.MoveSpeed;
+                case StatueData.UpgradeableStat.Speed:
+                    statValue = playerData.MoveSpeed;
                     break;
                 default:
                     statValue = 0;

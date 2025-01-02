@@ -17,7 +17,22 @@ public class ShowFenceUpgradeDataInTextComponent : MonoBehaviour
     private void OnEnable()
     {
         _textComponent = GetComponent<TextMeshProUGUI>();
+        SetLevel();
+        DataProvider.OnFenceVersionChanged += OnFenceVersionChanged;
+    }
 
+    private void OnFenceVersionChanged(int index, int newVersion)
+    {
+        if (index != this.index) return;
+        SetLevel();
+    }
+
+    private void OnDisable() {
+        DataProvider.OnFenceVersionChanged -= OnFenceVersionChanged;
+    }
+
+    private void SetLevel()
+    {
         var fenceData = DataProvider.Instance.FenceData[index];
         var versionIndex = fenceData.version;
         if (version.Equals(Version.NextVersion))

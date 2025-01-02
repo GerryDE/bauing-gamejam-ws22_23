@@ -16,7 +16,22 @@ public class ShowMineUpgradeDataInTextComponent : MonoBehaviour
     private void OnEnable()
     {
         _textComponent = GetComponent<TextMeshProUGUI>();
+        SetData();
+        DataProvider.OnMineVersionChanged += OnMineVersionChanged;
+    }
 
+    private void OnMineVersionChanged(int newVersion)
+    {
+        SetData();
+    }
+
+    private void OnDisable()
+    {
+
+    }
+
+    private void SetData()
+    {
         var versionIndex = DataProvider.Instance.CurrentMineVersion;
         if (version.Equals(Version.NextVersion))
         {

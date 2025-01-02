@@ -15,18 +15,37 @@ public class ShowRequiredLumberCostValueInTextComponent : MonoBehaviour
     private DataHandlerComponent _dataHandlerComponent;
     private TextMeshProUGUI textComponent;
 
-    void Start()
-    {
-        textComponent = GetComponent<TextMeshProUGUI>();
+    private void OnEnable() {
         _dataHandlerComponent = GameObject.FindWithTag("DataHandler").GetComponent<DataHandlerComponent>();
+        HandleRequiredCost(0);
+        DataProvider.OnFenceVersionChanged += OnInteractableVersionChanged;
+        DataProvider.OnTreeVersionChanged += OnInteractableVersionChanged;
+        DataProvider.OnMineVersionChanged += OnInteractableVersionChanged;
+        DataProvider.OnStatueVersionChanged += OnInteractableVersionChanged;
     }
 
-    private void OnEnable() {
+    private void OnInteractableVersionChanged(int index, int newVersion)
+    {
+        HandleRequiredCost(newVersion);
+    }
+
+    private void OnInteractableVersionChanged(int newVersion)
+    {
+        HandleRequiredCost(newVersion);
+    }
+
+    private void OnDisable() {
+        DataProvider.OnFenceVersionChanged -= OnInteractableVersionChanged;
+        DataProvider.OnTreeVersionChanged -= OnInteractableVersionChanged;
+        DataProvider.OnMineVersionChanged -= OnInteractableVersionChanged;
+        DataProvider.OnStatueVersionChanged -= OnInteractableVersionChanged;
+    }
+
+    private void HandleRequiredCost(int version)
+    {
         textComponent = GetComponent<TextMeshProUGUI>();
-        _dataHandlerComponent = GameObject.FindWithTag("DataHandler").GetComponent<DataHandlerComponent>();
         var dataProvider = DataProvider.Instance;
 
-        int version = 0;
         int count = 0;
         switch (Interactable)
         {

@@ -79,7 +79,7 @@ public class TreeComponent : InteractableBaseComponent
     private void OnTutorialCompleted()
     {
         _allowGrowing = true;
-        // SetState(Large);
+        SetState(Large);
     }
 
     protected override void OnNewObjectiveStarted(ObjectiveData data)
@@ -88,7 +88,7 @@ public class TreeComponent : InteractableBaseComponent
         if (data.GetType() != typeof(CollectResourcesObjectiveData) &&
             data.GetType() != typeof(TutorialCompletedObjectiveData)) return;
         _allowGrowing = true;
-        // SetState(Large);
+        SetState(Large);
     }
 
     private void Respawn()

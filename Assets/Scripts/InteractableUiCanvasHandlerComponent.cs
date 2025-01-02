@@ -13,16 +13,18 @@ namespace AssemblyCSharp.Assets.Scripts
 
         private CanvasGroup _canvasGroup;
 
-        private void Start() {
-            DataProvider.OnResourceDataChanged += OnResourceDataChanged;
-        }
-
         private void OnResourceDataChanged(DataProvider.CurrentResourceData resourceData)
         {
-            OnEnable();
+            HandleUi();
         }
 
         private void OnEnable()
+        {
+            HandleUi();
+            DataProvider.OnResourceDataChanged += OnResourceDataChanged;
+        }
+
+        private void HandleUi()
         {
             var data = DataProvider.Instance;
             _canvasGroup = GetComponent<CanvasGroup>();
@@ -114,7 +116,7 @@ namespace AssemblyCSharp.Assets.Scripts
             return costData;
         }
 
-        private void OnDestroy() {
+        private void OnDisable() {
             DataProvider.OnResourceDataChanged -= OnResourceDataChanged;
         }
     }

@@ -16,7 +16,21 @@ public class ShowTreeUpgradeDataInTextComponent : MonoBehaviour
     private void OnEnable()
     {
         _textComponent = GetComponent<TextMeshProUGUI>();
+        SetLevel();
+        DataProvider.OnTreeVersionChanged += OnTreeVersionChanged;
+    }
 
+    private void OnTreeVersionChanged(int newVersion)
+    {
+        SetLevel();
+    }
+
+    private void OnDisable() {
+        DataProvider.OnTreeVersionChanged -= OnTreeVersionChanged;
+    }
+
+    private void SetLevel()
+    {
         var versionIndex = DataProvider.Instance.CurrentTreeVersion;
         if (version.Equals(Version.NextVersion))
         {
