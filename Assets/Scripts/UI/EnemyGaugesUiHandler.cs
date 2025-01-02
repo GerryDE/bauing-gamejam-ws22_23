@@ -16,6 +16,26 @@ public class EnemyGaugesUiHandler : MonoBehaviour
         EnemyController.OnEnemyDestroyed += OnEnemyDestroyed;
         BossComponent.OnBossDestroyed += OnBossDestroyed;
         DataProvider.OnWaveCountChanged += OnWaveCountChanged;
+        WaveHandlerComponent.OnEnemySubWaveDefeated += OnEnemySubWaveDefeated;
+    }
+
+    private void OnEnemySubWaveDefeated()
+    {
+        foreach (Transform child in gameObject.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        var data = DataProvider.Instance;
+        var currentWaveData = data.CurrentWaveData();
+        var subWaveCount = data.SubWaveCount;
+        for (int i = 0; i < currentWaveData.subWaves.Count; i++)
+        {
+            var sliderObj = Instantiate(slider.gameObject);
+            sliderObj.transform.SetParent(gameObject.transform);
+            sliderObj.GetComponent<Slider>().value = i < currentWaveData.subWaves.Count - 1 - subWaveCount  ? 1 : 0;
+            sliderObj.transform.localScale = Vector3.one;
+        }
     }
 
     private void OnBossDestroyed()
@@ -30,17 +50,9 @@ public class EnemyGaugesUiHandler : MonoBehaviour
     {
         var data = DataProvider.Instance;
         var currentSubWave = data.CurrentSubWaveData();
-        var currentSubWaveCount = data.SubWaveCount;
         int offset = 0;
-        if (data.CurrentWaveData().subWaves.Count - currentSubWaveCount < GetSlidersCount()
-            && GetCurrentSlider(1).value > 0f) {
-                offset = 1;
-            }
         Slider slider = GetCurrentSlider(offset);
         slider.value = Mathf.Max(0f, slider.value - 1f / currentSubWave.enemies.Count);
-        if (slider.value < 1f / currentSubWave.enemies.Count) {
-            slider.value = 0f;
-        }
     }
 
     private Slider GetCurrentSlider(int offset)
@@ -81,5 +93,6 @@ public class EnemyGaugesUiHandler : MonoBehaviour
         EnemyController.OnEnemyDestroyed -= OnEnemyDestroyed;
         BossComponent.OnBossDestroyed -= OnBossDestroyed;
         DataProvider.OnWaveCountChanged -= OnWaveCountChanged;
+        WaveHandlerComponent.OnEnemySubWaveDefeated -= OnEnemySubWaveDefeated;
     }
 }
