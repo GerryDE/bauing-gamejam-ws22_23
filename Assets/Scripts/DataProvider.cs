@@ -449,11 +449,12 @@ public class DataProvider : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
         else
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
 
         PlayerData = new CurrentPlayerData

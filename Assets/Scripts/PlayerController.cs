@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerMove OnPlayerMove;
     public static CollisionBetweenPlayerAndEnemy OnCollisionBetweenPlayerAndEnemy;
 
-    private void Awake()
+    private void Start()
     {
         YoungToOldTransitionComponent.OnYoungOldTransitionChanged += OnYoungOldTransitionChanged;
         GameInputHandlerComponent.OnMoveCalled += OnMoveCalled;
@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!DataProvider.Instance) return;
+
         _rigidbody.velocity =
             new Vector2(
                 _velocity * _moveSpeedMultiplier * (Time.deltaTime * DataProvider.Instance.PlayerData.MoveSpeed), 0f);
