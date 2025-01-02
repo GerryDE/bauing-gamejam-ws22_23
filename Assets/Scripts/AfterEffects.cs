@@ -51,24 +51,16 @@ public class AfterEffects : MonoBehaviour
 
     IEnumerator VignetteOnDeath()
     {
-        while (true)
+        while (fadeAmount <= 0.3f)
         {
-            if (fadeAmount >= 5f)
-            {
-                while (fadeAmount <= 300f)
-                {
-                    fadeAmount += fadeSpeed * Time.deltaTime * 50;
-                    vignette.intensity.Override(fadeAmount);
-                    yield return null;
-                }
-
-                yield break;
-            }
-
             fadeAmount += fadeSpeed * Time.deltaTime;
             vignette.intensity.Override(fadeAmount);
+            Debug.Log(vignette.intensity);
             yield return null;
         }
+
+        yield break;
+    
     }
 
     private void OnDestroy()

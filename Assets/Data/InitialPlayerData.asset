@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: InitialPlayerData
   m_EditorClassIdentifier: 
   maxRemainingYears: 50
-  currentRemainingYears: 50
+  currentRemainingYears: 1
   attack: 1
   defense: 1
   moveSpeed: 300
