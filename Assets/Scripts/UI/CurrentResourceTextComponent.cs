@@ -28,5 +28,9 @@ namespace UI
                 _textComponent.text = data.StoneAmount.ToString();
             }
         }
+
+        private void OnDestroy() {
+             DataProvider.OnResourceDataChanged -= OnResourceDataChanged;
+        }
     }
 }
