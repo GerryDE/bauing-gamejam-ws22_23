@@ -43,7 +43,7 @@ public class TreeComponent : InteractableBaseComponent
     private bool _allowGrowing = false;
 
     [SerializeField]
-    private SpriteRenderer renderer;
+    private SpriteRenderer spriteRenderer;
 
     public State GetState()
     {
@@ -57,7 +57,7 @@ public class TreeComponent : InteractableBaseComponent
     public void SetState(State newState)
     {
         state = newState;
-        renderer.sprite = GetDataByCurrentState()?.sprite;
+        spriteRenderer.sprite = GetDataByCurrentState()?.sprite;
         CalculateStateChangeDuration();
         disableOnSpawningStateObj.SetActive(!Spawning.Equals(state));
     }
@@ -71,7 +71,7 @@ public class TreeComponent : InteractableBaseComponent
     private void Start() {
         _progressBarComponent = GetComponent<ProgressBarComponent>();
         // _renderer = GetComponent<SpriteRenderer>();
-        renderer.sprite = GetDataByCurrentState()?.sprite;
+        spriteRenderer.sprite = GetDataByCurrentState()?.sprite;
         SetSpawnPosition();
         CalculateStateChangeDuration();
     }

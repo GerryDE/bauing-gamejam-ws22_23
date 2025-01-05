@@ -80,6 +80,10 @@ public abstract class InteractableBaseComponent : MonoBehaviour
         _interaction2Enabled = _isCollidingWithPlayer && _interactionButton2Pressed;
     }
 
+    private void OnTriggerExit2D(Collider2D other) {
+        _isCollidingWithPlayer = false;
+    }
+
     protected virtual void OnDisable()
     {
         GameInputHandlerComponent.OnInteract1HoldCalled -= OnInteractionButton1Hold;

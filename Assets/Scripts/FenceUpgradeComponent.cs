@@ -47,6 +47,7 @@ public class FenceUpgradeComponent : InteractableBaseComponent
 
         _interactionButton2Pressed = false;
         if (!_isCollidingWithPlayer || data.GetCurrentFenceVersion(_index) >= fenceData.data.Count - 1) return;
+        Debug.Log("AAA");
 
         var nextUpgradeData = fenceData.data[fenceData.version + 1];
         var resourceData = DataProvider.Instance.ResourceData;
