@@ -5,7 +5,6 @@ using UnityEngine;
 using static TreeComponent.State;
 using Random = UnityEngine.Random;
 
-[RequireComponent(typeof(SpriteRenderer))]
 public class TreeComponent : InteractableBaseComponent
 {
     public enum State
@@ -43,7 +42,8 @@ public class TreeComponent : InteractableBaseComponent
     private float _elapsedMiningTime;
     private bool _allowGrowing = false;
 
-    private SpriteRenderer _renderer;
+    [SerializeField]
+    private SpriteRenderer renderer;
 
     public State GetState()
     {
@@ -57,7 +57,7 @@ public class TreeComponent : InteractableBaseComponent
     public void SetState(State newState)
     {
         state = newState;
-        _renderer.sprite = GetDataByCurrentState()?.sprite;
+        renderer.sprite = GetDataByCurrentState()?.sprite;
         CalculateStateChangeDuration();
         disableOnSpawningStateObj.SetActive(!Spawning.Equals(state));
     }
@@ -70,8 +70,8 @@ public class TreeComponent : InteractableBaseComponent
 
     private void Start() {
         _progressBarComponent = GetComponent<ProgressBarComponent>();
-        _renderer = GetComponent<SpriteRenderer>();
-        _renderer.sprite = GetDataByCurrentState()?.sprite;
+        // _renderer = GetComponent<SpriteRenderer>();
+        renderer.sprite = GetDataByCurrentState()?.sprite;
         SetSpawnPosition();
         CalculateStateChangeDuration();
     }
