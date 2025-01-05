@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using TMPro;
 
 namespace AssemblyCSharp.Assets.Scripts
 {
@@ -10,6 +11,10 @@ namespace AssemblyCSharp.Assets.Scripts
         [SerializeField, Range(0f, 1f)] float EnoughResourcesAlpha = 1f;
         [SerializeField] Interactable Interactable;
         [SerializeField] bool Upgrade = true;
+        [SerializeField] GameObject lumberCostObj;
+        [SerializeField] GameObject stoneCostObj;
+        [SerializeField] Color EnoughResourcesColor;
+        [SerializeField] Color notEnoughResourcesColor;
 
         private CanvasGroup _canvasGroup;
 
@@ -69,7 +74,19 @@ namespace AssemblyCSharp.Assets.Scripts
                 int requiredLumberAmount = GetCostData(version).lumberCost;
                 int requiredStoneAmount = GetCostData(version).stoneCost;
 
-                if (currentLumberAmount >= requiredLumberAmount && currentStoneAmount >= requiredStoneAmount)
+                bool isEnoughLumberAmount = currentLumberAmount >= requiredLumberAmount;
+                foreach (var textComp in lumberCostObj.GetComponentsInChildren<TextMeshProUGUI>())
+                {
+                    textComp.color = isEnoughLumberAmount ? EnoughResourcesColor : notEnoughResourcesColor;
+                }
+
+                bool isEnoughStoneAmount = currentStoneAmount >= requiredStoneAmount;
+                foreach (var textComp in stoneCostObj.GetComponentsInChildren<TextMeshProUGUI>())
+                {
+                    textComp.color = isEnoughStoneAmount ? EnoughResourcesColor : notEnoughResourcesColor;
+                }
+
+                if (isEnoughLumberAmount && isEnoughStoneAmount)
                 {
                     _canvasGroup.alpha = EnoughResourcesAlpha;
                 }
