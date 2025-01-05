@@ -27,6 +27,20 @@ namespace AssemblyCSharp.Assets.Scripts
         {
             HandleUi();
             DataProvider.OnResourceDataChanged += OnResourceDataChanged;
+            DataProvider.OnMineVersionChanged += HandleUi;
+            DataProvider.OnFenceVersionChanged += HandleUi;
+            DataProvider.OnTreeVersionChanged += HandleUi;
+            DataProvider.OnStatueVersionChanged += HandleUi;
+        }
+
+        private void HandleUi(int index, int newVersion)
+        {
+            HandleUi();
+        }
+
+        private void HandleUi(int newVersion)
+        {
+            HandleUi();
         }
 
         private void HandleUi()
@@ -135,6 +149,10 @@ namespace AssemblyCSharp.Assets.Scripts
 
         private void OnDisable() {
             DataProvider.OnResourceDataChanged -= OnResourceDataChanged;
+             DataProvider.OnMineVersionChanged -= HandleUi;
+            DataProvider.OnFenceVersionChanged -= HandleUi;
+            DataProvider.OnTreeVersionChanged -= HandleUi;
+            DataProvider.OnStatueVersionChanged -= HandleUi;
         }
     }
 }
