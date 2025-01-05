@@ -1,5 +1,6 @@
 ﻿using System;
 using Data;
+using Data.objective;
 using Data.upgradeable_objects.statue;
 using DefaultNamespace;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class StatisticsDataComponent : MonoBehaviour
 
     [SerializeField] private StatisticsData data;
 
-    private void Awake()
+    private void OnEnable()
     {
         if (Instance != null && Instance != this)
         {
@@ -21,6 +22,15 @@ public class StatisticsDataComponent : MonoBehaviour
         {
             Instance = this;
         }
+
+        ResetData();
+
+        TutorialComponent.OnNewObjectiveStarted += OnTutorialCompleted;
+    }
+
+    private void OnTutorialCompleted(ObjectiveData objectiveData)
+    {
+        if (objectiveData.GetType() != typeof(TutorialCompletedObjectiveData)) return;
 
         TreeComponent.OnDropWood += OnDropWood;
         StoneComponent.OnStoneDrop += OnStoneDrop;
@@ -38,6 +48,7 @@ public class StatisticsDataComponent : MonoBehaviour
         FinalBossComponent.OnGameFinished += WritePlayTime;
 
         ResetData();
+        Debug.Log("RAWR");
     }
 
     private void OnResetCloudPosition()

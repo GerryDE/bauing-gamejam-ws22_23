@@ -38865,6 +38865,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 433506517}
     m_Modifications:
+    - target: {fileID: 1881440530201354696, guid: 0d2db6063132907beb0abb947ee778e5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881440530201354696, guid: 0d2db6063132907beb0abb947ee778e5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881440530201354696, guid: 0d2db6063132907beb0abb947ee778e5, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5313208124505128575, guid: 0d2db6063132907beb0abb947ee778e5, type: 3}
       propertyPath: m_Name
       value: enemy hp gauge
