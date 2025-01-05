@@ -47,7 +47,7 @@ public class ChangelogHandler : MonoBehaviour
     //Load Text from Changelog into Scene from Data
     private void LoadChangelogText()
     {
-        changelogText.text = textAsset.text;
+        // changelogText.text = textAsset.text;
     }
 
     private void OnDestroy()
