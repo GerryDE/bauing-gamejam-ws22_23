@@ -11,6 +11,7 @@ public abstract class InteractableBaseComponent : MonoBehaviour
     protected bool _interaction1Enabled;
     protected bool _interaction2Enabled;
     protected bool _isCollidingWithPlayer;
+    protected bool _interactionAllowed = false;
     protected bool _upgradeEnabled = false;
 
     protected virtual void OnEnable()
@@ -28,9 +29,16 @@ public abstract class InteractableBaseComponent : MonoBehaviour
 
     protected virtual void OnNewObjectiveStarted(ObjectiveData data)
     {
-        if (data.GetType() != typeof(UpgradeObjectiveData) &&
-            data.GetType() != typeof(TutorialCompletedObjectiveData)) return;
-        _upgradeEnabled = true;
+        if (data.GetType() == typeof(CollectResourcesObjectiveData)) 
+        {
+            _interactionAllowed = true;
+        }
+        else if (data.GetType() == typeof(UpgradeObjectiveData) ||
+            data.GetType() == typeof(TutorialCompletedObjectiveData))
+        {
+            _upgradeEnabled = true;
+        }
+        
     }
 
     protected virtual void OnPlayerMove(float direction, float velocity)
@@ -76,8 +84,8 @@ public abstract class InteractableBaseComponent : MonoBehaviour
             _interactionButton1Holding = false;
         }
 
-        _interaction1Enabled = _isCollidingWithPlayer && (_interactionButton1Pressed || _interactionButton1Holding);
-        _interaction2Enabled = _isCollidingWithPlayer && _interactionButton2Pressed;
+        _interaction1Enabled = _interactionAllowed && _isCollidingWithPlayer && (_interactionButton1Pressed || _interactionButton1Holding);
+        _interaction2Enabled = _interactionAllowed && _isCollidingWithPlayer && _interactionButton2Pressed;
     }
 
     private void OnTriggerExit2D(Collider2D other) {
