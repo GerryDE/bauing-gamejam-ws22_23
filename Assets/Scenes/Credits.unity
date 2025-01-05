@@ -228,7 +228,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 360}
+  m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &40120177
 MonoBehaviour:
@@ -721,7 +721,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 172.1, y: 14}
+  m_AnchoredPosition: {x: 172.1, y: 40.5}
   m_SizeDelta: {x: 700, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1380777497
@@ -758,7 +758,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'CREDITS
+  m_text: '<b>CREDITS</b>
 
 
     Graphics<pos=25%>Feliza
@@ -766,10 +766,17 @@ MonoBehaviour:
     Programming<pos=25%>Gerry,
     erikando
 
+    Music<pos=25%>Dragona Mortoria
+
     <align="left">
 
-    External graphics
+    <b>Playtesters</b>
 
+    "Your
+    Chronicle" Discord Server
+
+
+    <b>External graphics</b>
 
     Player character<pos=25%>KusSv
 
@@ -782,9 +789,7 @@ MonoBehaviour:
     Boss<pos=25%>OneManArmyDev
 
 
-
-    External Audio
-
+    <b>External Audio</b>
 
     Wood cutting<pos=25%>mixkit.co
 
@@ -1006,6 +1011,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ui ESC key
       objectReference: {fileID: 0}
+    - target: {fileID: 5226334040673063166, guid: 6863795678173664bab99ef314388b6a, type: 3}
+      propertyPath: m_text
+      value: Back
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317007317389463071, guid: 6863795678173664bab99ef314388b6a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317007317389463071, guid: 6863795678173664bab99ef314388b6a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -29.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6588516351300804025, guid: 6863795678173664bab99ef314388b6a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 109
+      objectReference: {fileID: 0}
+    - target: {fileID: 6912639365226152398, guid: 6863795678173664bab99ef314388b6a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7320113771453107341, guid: 6863795678173664bab99ef314388b6a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1072,7 +1097,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7320113771453107341, guid: 6863795678173664bab99ef314388b6a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 155.5
+      value: 175
       objectReference: {fileID: 0}
     - target: {fileID: 7320113771453107341, guid: 6863795678173664bab99ef314388b6a, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1091,8 +1116,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7958548219387974541, guid: 6863795678173664bab99ef314388b6a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7958548219387974541, guid: 6863795678173664bab99ef314388b6a, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -4.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8658275994921859820, guid: 6863795678173664bab99ef314388b6a, type: 3}
+      propertyPath: m_text
+      value: Q
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

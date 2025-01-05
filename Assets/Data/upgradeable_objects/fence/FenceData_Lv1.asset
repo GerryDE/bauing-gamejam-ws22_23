@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FenceData_Lv1
   m_EditorClassIdentifier: 
   upgradeCost: {fileID: 11400000, guid: 43984b85622f94ec6941cd850acf2d67, type: 2}
-  maxHp: 30
+  maxHp: 50
   damage: 0
   defense: 1
   repairCost: {fileID: 11400000, guid: 9785aa8885effb4198823aeb3df275f5, type: 2}

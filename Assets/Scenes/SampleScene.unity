@@ -25662,11 +25662,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5426667541780081402, guid: 843bec4df2bff618a900c3232cba76d4, type: 3}
       propertyPath: startingPrayingDuration
-      value: 1
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: -5426667541780081402, guid: 843bec4df2bff618a900c3232cba76d4, type: 3}
       propertyPath: prayingDurationMultiplicator
-      value: 0.92
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 1785293164, guid: 843bec4df2bff618a900c3232cba76d4, type: 3}
       propertyPath: data.Array.data[1].woodCost

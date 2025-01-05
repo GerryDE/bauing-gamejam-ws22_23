@@ -41,5 +41,7 @@ public class ChangeVolumeUiComponent : MonoBehaviour
     private void OnDestroy() 
     {
         AudioVolumeData.OnVolumeChanged -= OnVolumeChanged;
+        MenuInputHandlerComponent.OnVolumeChangeTriggered -= OnVolumeChangeTriggered;
+        GameInputHandlerComponent.OnVolumeChangeCalled -= OnVolumeChangeTriggered;
     }
 }
