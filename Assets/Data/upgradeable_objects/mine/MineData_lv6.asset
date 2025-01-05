@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MineData_lv6
   m_EditorClassIdentifier: 
   upgradeCost: {fileID: 11400000, guid: 41620fe2d1d0ac2b79b1f3a838388aa4, type: 2}
-  miningDuaration: 0.4
-  dropAmount: 4
+  miningDuaration: 0.3
+  dropAmount: 3
   sprite: {fileID: 21300000, guid: 2b9387cdfef30e6bb9ad28855d326079, type: 3}
