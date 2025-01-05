@@ -291,7 +291,7 @@ public class DataProvider : MonoBehaviour
             {
                 _currentRemainingYears += value - _maxRemainingYears;
                 _maxRemainingYears = value;
-                OnCurrentRemainingYearsChanged?.Invoke(value);
+                OnCurrentRemainingYearsChanged?.Invoke(_currentRemainingYears);
                 OnPlayerMaxRemainingYearsChanged?.Invoke(value);
             }
         }
